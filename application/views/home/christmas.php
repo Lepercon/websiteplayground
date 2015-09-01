@@ -1,0 +1,1 @@
+<?php echo editable_area('home', 'christmas_page', is_admin()); ?>

@@ -1,0 +1,1 @@
+<p>Welcome to the finance section of the website, here you can view invoices and file online claims...</p>

@@ -1,0 +1,1 @@
+<h2>The JCR Archive</h2><p>Use the menu on the left to navigate.</p>

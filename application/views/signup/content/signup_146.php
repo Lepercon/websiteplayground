@@ -1,0 +1,1 @@
+<h2>Charity Formal&nbsp;Info</h2><p>Swapping Will Close At 7pm on Sunday.</p><p>Seating will be placed in the following arrangement:</p><p><img src="http://community.dur.ac.uk/butler.jcr/application/views/signup/table.png" alt="" width="676" height="414" /></p>

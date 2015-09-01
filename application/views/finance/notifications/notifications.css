@@ -1,0 +1,69 @@
+﻿.notifications-table{
+	width:100%;
+}
+
+.notifications-table td{
+	padding:2px;
+	font-size:12px;
+	vertical-align:middle!important;
+}
+
+tr.n-r{
+	background-color:#FFF8DC;
+}
+
+tr.n-r:hover, tr.row-checked{
+	background-color:#FFDEAD;
+}
+
+.notification-row-unread td{
+	font-weight:bold;
+}
+
+.admin-row td{
+	font-style:italic;
+}
+
+.n-checkbox{
+	 background-color:white;
+	 border:0;
+	 padding:5px;
+	 width:19px;
+}
+
+.n-cell{
+	cursor:pointer;
+}
+
+.n-date{
+	width:120px;
+}
+
+.n-category{
+	width:120px;
+}
+
+.hidden-info{
+	display:none;
+}
+
+.select-all{
+	font-size:12px;
+}
+
+.delete-selected, .read-selected{
+	vertical-align:middle!important;
+}
+
+.select-all-cell{
+	border:0;
+}
+
+.all-check{
+	margin:0;
+	margin-left:6px;
+}
+
+.ui-icon{
+	float:left;
+}

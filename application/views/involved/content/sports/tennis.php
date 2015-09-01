@@ -1,0 +1,1 @@
+<p>After a difficult year for the tennis club we are hoping to rebuild a strong team and get back to our consistently good premiership performances of previous years.&nbsp;</p><p>We will have regular training sessions on Saturdays and Wednesdays, on the MUGA. The intention is to split these into coaching and matchplay sessions depending on numbers and interest.&nbsp;</p>

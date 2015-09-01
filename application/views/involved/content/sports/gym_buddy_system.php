@@ -1,0 +1,1 @@
+<p>If you&nbsp;wish to find a Gym Buddy to use the gym with, click the gym tab above, and write mobile number and when you are&nbsp;available to go to the gym.</p>

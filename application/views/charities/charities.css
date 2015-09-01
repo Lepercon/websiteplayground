@@ -1,0 +1,80 @@
+﻿.charity-table {
+	width: 100%;
+}
+.charity-table-cell {
+	text-align:center;
+	padding: 4px 0px;
+}
+.charity-photo-block {
+	width:200px;
+	height:130px;
+	overflow:hidden;
+	margin: 0 auto;
+}
+#charity-total-price {
+	text-align:right;
+	font-weight:bold;
+}
+.charity-item-price {
+	border: 0px;
+	text-align:right;
+	padding:0px;
+	width: 20%;
+}
+.charity-item-qty {
+	width:12%;
+	border: 0px;
+	padding-left:0px;
+}
+.charity-item-description {
+	width:70%;
+	border: 0px;
+	padding: 0px;
+}
+#charity-photo-controls {
+	display: block;
+	margin: 0 auto;
+}
+.charity-photo-large {
+	display: table;
+	margin: 0 auto;
+}
+.evidence-image{
+	border:1px;
+	border-style:dashed;
+	max-width:250px;
+	max-height:250px;
+	width:auto;
+	height:auto;
+}
+.success{
+	border:1px;
+	background-color:#00FF00;
+	color:green;
+	border-color:green;
+}
+.dare-submit-confirm label{
+	vertical-align: top!important;
+}
+.dare-review-table td{
+	width:244px;
+	text-align:center;
+	vertical-align:top!important;
+	border:0;
+}
+.javascript-warning{
+	font-size:x-large;
+	color:blue;
+	font-weight:bold;
+}
+h1{
+	text-transform:none;
+}
+
+.ui-widget-content a{
+	color:#eeb300;
+}
+
+.bold-header{
+	text-transform:none;
+}

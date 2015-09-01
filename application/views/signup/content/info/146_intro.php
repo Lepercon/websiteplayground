@@ -1,0 +1,1 @@
+<p>Seats&nbsp;will be arranged as follows:</p><p><img src="http://community.dur.ac.uk/butler.jcr/application/views/signup/img/upload/001.jpg" alt="" width="446" height="273" /></p>

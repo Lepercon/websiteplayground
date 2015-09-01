@@ -1,0 +1,1 @@
+<p>Every poster that you have seen for every event was designed by somebody.&nbsp; The poster would have gone through various stages and edits, to reach the final version that you see.&nbsp; Who are these designers?&nbsp; Publicity Committee!</p><p>If you have a keen interest in designing posters and publicity, or even if you just want to learn how, get in touch.</p>

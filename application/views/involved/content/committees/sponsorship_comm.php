@@ -1,0 +1,1 @@
+<p>SPONC (or Sponsorship Committee) is a group of students who, along with the Student Community Development Officer, seek to increase the income of the JCR by attracting sponsorship.&nbsp; This then allows the JCR to spend more, to make our events and services even better!</p>

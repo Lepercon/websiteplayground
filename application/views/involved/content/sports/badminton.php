@@ -1,0 +1,1 @@
+<p>Badminton is a thriving sport at Butler, holding the best Men's, Women's and Mixed teams in the University. With all levels of talent and experience along with social badminton, everyone is welcome to play, improve and get involved!</p>

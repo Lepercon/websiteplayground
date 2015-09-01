@@ -1,0 +1,6 @@
+<h2>Requests</h2>
+<p>Under the projects tab there is a project management system for tracking and submitting requests within the college. Requests can also be submitted and tracked for a particular event from the event information page.<br/>The requests system was primarily set up for publicity requests but can be used for any other category. If submitting a publicity request, include extra details for the poster such as the theme, poster information and design suggestions, event location, time, date and entry price.</p>
+<h3>Submitting a request</h3>
+<p>Requests can be added from the event information page or from the projects page. Just set a request title and description and most importantly, a category. The system will send an email notifying the category leader of the fact that a request has been added to their category.</p>
+<h3>Viewing requests</h3>
+<p>On the projects page, requests can be viewed sorted by category or completeness. Clicking the title of each request shows more detail including comments and files associated with the request. The category progress can be updated too. Whenever a file or comment is added to a request, the category leader is notified by email along with anyone else who has already commented or added files to the request.</p>

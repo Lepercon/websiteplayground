@@ -1,0 +1,1 @@
+<p>Social Committee is the committee which organises events, mainly Formals.&nbsp; We also organise Newcastle Nights Out and day trips during the Summer.&nbsp; If you want to get involved drop me an email or come along to a meeting to find out what it's all about!</p>

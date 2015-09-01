@@ -1,0 +1,1 @@
+<p>Check that all the items you would like to order are in your basket. Then click on the Confirm Order button below.</p>

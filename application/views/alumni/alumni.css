@@ -1,0 +1,29 @@
+﻿.alumni-signup-info {
+	padding: 5px;
+	color:#4d4d4d;
+}
+td{
+	border:0px;
+}
+.alumni-signup-info * * td:nth-child(1){
+	text-align:right;
+}
+.alumni-signup-info * * td:nth-child(2){
+	font-weight:bold;
+}
+.alumni-signup-info * * td:nth-child(3){
+	font-weight:bold;
+}
+.alumni-guest-option-label{
+	font-weight:normal!important;
+	text-align:right;
+}
+
+.alumni-list-signups * th,td{
+	border:1px dashed black;
+	text-align:left;
+}
+.email-type span {
+	vertical-align:middle!important;
+	padding:10px!important;
+}

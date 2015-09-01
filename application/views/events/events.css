@@ -1,0 +1,10 @@
+﻿.hidden-event{
+	background-color:blue!important;
+}
+
+.event-poster{
+	max-height:800px;
+	max-width:100%;
+	width:auto;
+	height:auto;
+}

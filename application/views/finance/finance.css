@@ -1,0 +1,225 @@
+﻿
+.invoice-details td{
+	border:0;
+}
+
+.invoice-details td:nth-child(1){
+	font-weight:bold;
+}
+
+.table-of-claims td, .table-of-claims th{
+	font-size:12px;
+	padding:2px;
+}
+
+.table-of-claims th{
+	border:1px solid #FFDEAD;
+	background-color:#FFF8DC;
+}
+
+.table-of-claims tr td{
+	background-color:#FFF8DC;
+	border:1px solid #FFDEAD;
+}
+
+.table-of-claims tr:hover td{
+	background-color:#FFDEAD;
+	border:1px solid #FFF8DC;
+}
+
+td.claim-status{
+	min-width:80px;
+}
+
+.table-of-claims a{
+	color:#c80000;
+	text-decoration:underline;
+}
+
+td.claim-actions{
+	min-width:60px;
+}
+
+#claim-print{
+	border:2px solid black;
+	padding:25px;
+	background-color:white;
+}
+
+.claim-logo{
+	width:3cm;
+}
+
+.no-border td{
+	border:0;
+	vertical-align: bottom;
+	text-align:center;
+}
+
+#claim-title{
+	font-size:47px;
+	display: table-cell;
+	padding-bottom:5px;
+}
+
+.claim-table{
+	width:100%;
+}
+
+.claim-table-body td{
+	width:50%;
+}
+
+.claim-table td{
+	vertical-align:bottom!important;
+}
+
+.input::before{
+	content:' ';
+}
+
+.input{
+	font-weight:bold;
+	font-size:22px;
+}
+
+.claim-table-body img{
+	width:20px;
+}
+
+.body-text{
+	padding:5px;
+	font-size:20px;
+	min-height:22cm;
+}
+
+.note{
+	font-style:italic;
+}
+
+.double-line td{
+	width:50%;
+}
+
+.double-line td:first-child{
+	text-align:right;
+}
+
+.double-line td:nth-child(2){
+	text-align:center;
+	font-weight:bold;
+}
+
+.sign-row td{
+	height:50px;	
+}
+
+.bottom-row td{
+	font-weight:bold;	
+	text-align:center;
+}
+
+.claim-table-footer hr{
+	height:2px;
+	background-color:black;
+}
+
+.claim-image{
+	max-width:995px;
+    border:1px solid black;
+    margin:2px;
+}
+
+.is-admin:after, .marked-paid:after{
+	content:"*";
+}
+
+.members-tables td, .members-tables th, .members-tables a, .invoice-tables td, .invoice-tables th, .invoice-tables a{
+	padding:2px;
+	font-size:16px;
+}
+
+.invoice-tables th{
+	border:1px solid #FFDEAD;
+	background-color:#FFF8DC;
+}
+
+.invoice-tables td{
+	background-color:#FFF8DC;
+	border:1px solid #FFDEAD;
+}
+
+.invoice-tables tr:hover td{
+	background-color:#FFDEAD;
+	border:1px solid #FFF8DC;
+}
+
+th.no-border{
+	border:0;
+	background:transparent;
+}
+
+.totals-table td{
+	border:0;
+	text-align:right;
+	font-size:20px;
+}
+
+.negative-bal{
+	color:red;
+}
+
+.totals-table td:first-child{
+	font-weight:bold;
+}
+
+#transfer-details{
+	display:none;
+}
+
+.help-note{
+	font-size:12px;
+}
+
+#account-details-confirmation{
+	display:none;
+}
+
+.details-box{
+	width:100px;
+	background:rgba(255,0,0,.3);
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	font-family:"Courier New", Courier, monospace;
+	margin:auto;
+}
+
+input, textarea, select{
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+}
+
+
+input[type=text].sel:invalid, textarea.sel:invalid, select.sel:invalid{
+  box-shadow: 0 0 5px rgba(255, 0, 0, 1);
+  border: 1px solid rgba(255, 0, 0, 1);
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0);
+  border-color:rgba(0,0,0,0);
+}
+
+.unimportant-info{
+	display:none;
+}
+
+@media print {
+	.important-info{
+		display:none;
+	}
+	.unimportant-info{
+		display:inline-block;
+	}
+}

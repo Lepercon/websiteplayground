@@ -1,0 +1,71 @@
+﻿.message-scroll{
+	height:50px;
+	padding:5px;
+	overflow:hidden;
+	width:2000px;
+}
+.message-scroll span{
+	font-size:25px;
+	position:absolute;
+	line-height:50px;
+	float:left;
+	height:50px;
+	width:990px;
+	overflow:hidden;
+}
+.outer-box{
+	overflow:hidden;
+}
+input.message-input{
+	width:220px;
+}
+
+.set-messages{
+	width:100%;
+}
+
+.set-messages tr td:first-child, .set-messages tr th:first-child{
+	border:0;
+	background-color:white;
+}
+
+.new-row{
+	background-color:#CCFFFF;
+}
+
+
+.row-selected{
+	background:#FFDEAD;
+}
+
+.all-check{
+	margin-left:12px;
+}
+
+.ui-icon{
+	float:left;
+}
+
+.ui-widget-content a.jcr-button{
+	color:#fff;
+}
+
+#users-list{
+	display:none;
+}
+
+.in-level-table td, .in-level-table th{
+	border:1px dashed gray;
+}
+
+.in-level-table a{
+	color:#eeb300;
+}
+
+.levels li{
+    margin:5px 0;
+}
+
+label.top{
+    vertical-align:top!important;
+}

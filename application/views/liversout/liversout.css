@@ -1,0 +1,19 @@
+﻿.housing-review-table td{
+	border:0;
+}
+.housing-review-table td:nth-child(1){
+	font-weight:bold;
+	text-align:right;
+}
+
+.sponsor-container img{
+	width:100%;
+}
+
+.search-form input[type=search]{
+	width:113px;
+}
+
+.search-form input[type=submit]{
+	margin-left:5px;
+}

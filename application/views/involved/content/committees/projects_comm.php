@@ -1,0 +1,1 @@
+<p>Projects Committee encourages and enables Butler students to get involved in the local community through volunteering.&nbsp; Over 30 Butler students volunteer in local primary schools and the like, from helping children with reading, to running after-school language and sports clubs.</p><p>Interested?</p>

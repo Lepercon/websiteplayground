@@ -1,0 +1,18 @@
+﻿#prospective-spinner img{
+	margin:auto;
+	display:block;
+	vertical-align:middle;
+	margin-top:200px;
+}
+
+#prospective-spinner{
+	min-height:300px;
+}
+
+.anchor-selected p::before{
+	content: ">>";
+}
+
+.no-border td{
+    border:0;
+}

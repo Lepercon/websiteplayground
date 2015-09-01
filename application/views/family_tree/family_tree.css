@@ -1,0 +1,12 @@
+.child-delete{
+	margin: 2px 10px;
+}
+
+.child-add {
+	margin-left: 514px;
+}
+
+input[type=submit]{
+	display: block;
+	clear: both;
+}

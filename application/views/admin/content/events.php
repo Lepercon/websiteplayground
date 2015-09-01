@@ -1,0 +1,8 @@
+<h2>Viewing Events</h2>
+<p>On the events tab, the calendar shows the events sorted by month. Any event can be clicked on from this calendar to show the event information page. The event information page shows the title, description and time of the event along with twitter and facebook links for the event. Further down the page there are spaces for signups, news, photos and requests related to the event.<br />Information on adding signups, photos and requests can be found on separate helpsheets. To add a news item, just enter a title and the news content. This news item will be shown on this event information page and also on the homepage.</p>
+
+<h2>Adding Events</h2>
+<p>Below the calendar is a link for admin to add an event. On this page, you must enter an event name, date, time and category. Setting the time to 00:00 will show it as an all-day event with no specific time. If the category selected is bar, alumni, welfare or liversout then the event will be shown in the event feed on the respective page. You can also optionally enter a description and location for the event, as well as a Twitter hashtag (e.g: #butlerbestcollege) or Twitter handle (e.g: @butlerjcr) and a Facebook link to an event, group or individual.<br />Clicking save will take you to the newly created event's information page, clicking save and add another will save the event but return to the add event page. When doing this, the information that you just entered will be left in because when entering events in sequence, it is common for some fields to be the same.</p>
+
+<h2>Editing Events</h2>
+<p>In the first box on the event information page there is a link to edit an event. You can change all the information as described in the adding events section.</p>

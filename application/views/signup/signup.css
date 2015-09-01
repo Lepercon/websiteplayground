@@ -1,0 +1,88 @@
+﻿#reservation-details label {
+	width: 20%;
+}
+#reservation-details select {
+	max-width: 200px;
+}
+.signup-table {
+	min-width: 150px;
+	width: 19%;
+	text-align: center;
+}
+.signup-table h3 {
+	margin: 0.5em auto;
+	max-width: 100px;
+}
+.signup-table ul {
+	margin: 0 5px !important;
+	overflow: hidden;
+	max-width: 140px;
+}
+.signup-table ul li {
+	position: relative;
+}
+.signup-table ul li:hover .signup-delete-button {
+	display: block;
+}
+.signup-delete-button {
+	display: none;
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -3px;
+	height: 10px;
+	width: 10px;
+	background-image: url(../common/img/cross2.png);
+}
+.delete-conf-box {
+	text-align: center;
+}
+#signup-spinner {
+	text-align: center;
+}
+#signup-spinner * {
+	vertical-align: middle;
+}
+#signup-spinner div {
+	width: 0px;
+}
+#reservation-details input[name=cancel] {
+	margin-top: 10px;
+}
+#item-details label{
+	width: 130px;
+}
+#item-details li div{
+	width: 80%;
+	display: inline-block;
+}
+.signup-group-delete {
+	cursor: pointer;
+}
+.signup-group-add {
+	cursor: pointer;
+}
+
+.swap-list{
+	padding-left:10px;
+}
+
+.swap-list li{
+	text-align:left;
+}
+.attempts-table td, .attempts-table th{	
+	border-width:2px;
+	border-bottom-width:0px;
+}
+.attempts-table{
+	border-bottom:2px solid black;
+}
+.no-border td{
+	border-top:1px dashed black;
+	border-bottom-width:0px;
+}
+
+.my-reservation{
+	color:blue;
+	font-style:italic;
+}

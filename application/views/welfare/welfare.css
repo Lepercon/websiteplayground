@@ -1,0 +1,16 @@
+﻿.navigation-pane h2{
+	text-transform:none;
+}
+
+.selected::before{
+	content:'>>'
+}
+
+a.page-link.jcr-button{
+	display: inline-block;
+}
+
+.notification p{
+	float: left;
+	padding-right: 10px;
+}

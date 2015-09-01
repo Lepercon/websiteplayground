@@ -1,0 +1,1 @@
+<p>Technical Committee are working behind the scenes at most events and activities that go on within Butler. Being a new College, we have loads of modern, innovative equipment (and we're always buying more!). If you want to learn how to use this equipment, and are keen to help out with putting on different events, please get in touch:</p>

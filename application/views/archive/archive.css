@@ -1,0 +1,33 @@
+﻿.archive-arrow {
+	background-image: url(../common/img/common-sprite.png?v=122013);
+	background-repeat: no-repeat;
+	background-position: -20px -200px;
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	margin-right: 4px;
+}
+.archive-rotate {
+	background-position: 0px -80px;
+}
+#archive-upload-form label {
+	width:150px;
+}
+@media screen and (max-width: 767px) {
+	#archive-upload-form label {
+		width:100%;
+		text-align:left;
+	}
+}
+
+.selected:before{
+	content:">>";
+}
+
+#archive-docs p{
+	margin-left:40px;
+}
+
+.admin-delete-button{
+	margin-right: -30px;
+}

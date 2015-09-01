@@ -1,0 +1,170 @@
+﻿#whoswho {
+	text-align: center;
+}
+
+#whoswho li {
+	width: 120px;
+	margin: 0 2px 15px;
+}
+
+#whoswho a {
+	display: block;
+	background-position:center top;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	padding-top: 5px;
+	text-align: center;
+	text-decoration: none;
+	width: 100px;
+	overflow: visible;
+}
+
+#whoswho a div {
+	width:100px;
+	height:100px;
+	display:block;
+	margin:auto;
+}
+#whoswho a p {
+	width: 90%;
+	font-size: 8pt;
+	line-height: 1.2em;
+	margin:auto;
+	display:block;
+	margin-top:3px;
+}
+#whoswho a p b{
+	font-size:12px;
+}
+#whoswho a:hover p {
+	text-decoration: underline;
+}
+
+#whoswho-mem img {
+	margin: 10px;
+}
+
+.whoswho-desc {
+	overflow: hidden;
+	display: inline;
+}
+
+.whoswho-placeholder {
+	border: 2px dashed #eee;
+	height: 101px;
+	width: 86px !important;
+}
+
+.whoswho-id {
+	display: none;
+}
+
+#narrow-menu{
+	display:none;
+}
+
+.selected p:before{
+	content:">>";
+}
+
+#page-navigation{
+	margin:auto;
+	display:block;
+	width:240px;
+    margin-bottom:10px;
+}
+
+#page-navigation li{
+	display:table-cell;
+	width:120px;
+	text-align:center;
+	background-color:#eeb300;
+	color:white;
+	height:30px;
+	border-right:1px solid white;
+}
+
+#page-navigation li.current-page{
+	background-color:#800f25;
+}
+
+#page-navigation a{
+	color:white;
+	line-height:30px;
+}
+
+#page-navigation li:first-child{
+	border-top-left-radius:15px;
+	border-bottom-left-radius:15px;
+}
+
+
+#page-navigation li:last-child{
+	border-top-right-radius:15px;
+	border-bottom-right-radius:15px;
+}
+
+.list-of-roles div{
+	display:none;
+}
+
+
+.list-of-roles h3{
+	cursor:pointer;
+}
+
+.role-description img{
+	float:left;
+	display:inline-block;
+	width:200px;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+
+.role-description p{
+	display:block;
+	width:100%;
+	margin-top:0;
+}
+
+.role-description div{
+	display:block;
+	width:100%;
+	margin-bottom:5px;
+	float:left;
+}
+
+.role-description hr{
+	margin:5px;
+	width:calc(100% - 10px);
+	width:-moz-calc(100% - 10px);
+}
+
+.spacer{
+	margin:0;
+}
+
+.top-link{
+	display:none;
+	text-align:center;
+}
+
+.whoswho-mem-details{
+	
+}
+
+.whoswho-image{
+	float:left;
+}
+
+@media screen and (max-width: 767px) {
+	#narrow-menu{
+		display:block;
+	}
+	#ww-nav{
+		display:none;
+	}
+	.top-link{
+		display:block;
+	}
+}

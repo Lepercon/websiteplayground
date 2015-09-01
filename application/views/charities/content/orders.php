@@ -1,0 +1,1 @@
+<p>All profits made from selling these photos go to supporting Grace House Hospice. Choose an album below to view photos. You can order photos in the following formats:</p>

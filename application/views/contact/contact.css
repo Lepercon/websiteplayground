@@ -1,0 +1,30 @@
+﻿/*Email Form*/
+#contact-form label{
+	width:15%;
+}
+#contact-form select{
+	width:60%;
+}
+#contact-form input[type=text],input[type=email]{
+	width:50%;
+}
+#contact-form textarea,#reply-msg{
+	width:80%;
+	max-width: 80%;
+}
+.msg-label{
+	vertical-align:top !important;
+}
+
+@media screen and (max-width: 767px) {
+	#contact-form label {
+		width: 100%;
+	}
+	#contact-form textarea,#reply-msg{
+		width: 100%;
+		max-width: 100%;
+	}
+	#contact-form input[type=text],input[type=email]{
+		width:100%;
+	}
+}

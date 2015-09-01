@@ -1,0 +1,127 @@
+.editable-error {
+	font-weight: bold;
+	color: #f00;
+}
+/* image display */
+.editable-image-create-content {
+	text-align: center;
+	vertical-align: middle;
+}
+/* existing image */
+.editable-image-create-addexisting {
+	max-height: 400px;
+	width: 100%;
+	overflow: auto;
+	padding-bottom: 4px;
+}
+.editable-image-create-addexisting ul {
+	margin: 0 !important;
+}
+.editable-image-create-addexisting li {
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	padding: 5px;
+	margin: 1px 6px;
+	position: relative;
+	text-align: center;
+	list-style: none outside none;
+	overflow: visible;
+}
+.editable-image-create-addexisting li:hover {
+	border: 1px solid #000;
+	margin: 0 5px;
+	cursor: pointer;
+}
+.editable-image-create-addexisting > ul > li > div {
+	height: 100%;
+	display: inline-block;
+	position: static;
+	vertical-align: middle !important;
+}
+.editable-image-create-dummy-div {
+	height: 100%;
+	width: 0;
+	display: inline-block;
+	vertical-align: middle !important;
+}
+.editable-image-create-addexisting img {
+	display: inline-block;
+	vertical-align: middle !important;
+}
+.editable-image-create-remove {
+	display: none;
+}
+.editable-image-create-addexisting li:hover .editable-image-create-remove {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 16px;
+	width: 16px;
+	background-image: url('icons/remove.png');
+}
+/* doc */
+.editable-doc-add {
+	text-align: center;
+	vertical-align: middle;
+}
+.editable-doc-create {
+	max-height: 400px;
+	width: 100%;
+	overflow: auto;
+	text-align: left;
+}
+.editable-doc-create li {
+	display: inline-block;
+	zoom: 1;
+	width: 300px;
+	padding: 1px;
+	margin: 1px 6px;
+	position: relative;
+	list-style: none outside none;
+	overflow: visible;
+	vertical-align: middle;
+}
+.editable-doc-create li:hover {
+	border: 1px solid #000;
+	margin: 0 5px;
+	cursor: pointer;
+}
+.editable-doc-create-icon {
+	display: inline-block;
+	zoom: 1;
+	margin-right: 10px;
+}
+.editable-doc-create-details {
+	display: inline-block;
+	zoom: 1;
+	text-align: left;
+}
+.editable-doc-create-url, .editable-doc-create-full-filename {
+	display: none;
+}
+.editable-doc-create-modified, .editable-doc-create-size {
+	color: #aaa;
+	font-size: 10px;
+}
+.editable-doc-create li:hover .editable-doc-create-remove {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 16px;
+	width: 16px;
+	background-image: url('icons/remove.png');
+}
+/* insert function */
+.editable-function-insert-params li {
+	list-style: none outside none;
+}
+.editable-function-insert-params li input {
+	display: block;
+}
+#editable-image-iframe, #editable-doc-iframe {
+	height: 50px;
+	width: 100%;
+}

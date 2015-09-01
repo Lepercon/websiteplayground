@@ -1,0 +1,14 @@
+﻿/*From Details*/
+input[value=Crop] {
+	margin-top:20px;
+}
+#crop-large {
+	margin-right:20px;
+}
+/*From Directory*/
+#usr-profile-img{
+	margin: 15px;
+}
+.jcr-form li > textarea{
+	width:600px;
+}
