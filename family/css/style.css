@@ -1,0 +1,120 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+g.node:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+body {
+	line-height: 1;
+	color: black;
+	background: white;
+	font-family: "Trebuchet MS", "Helvetica", sans-serif;
+	text-align: center;
+}
+a, a:visited{
+	outline:none;
+	text-decoration: none;
+}
+#header {
+	width:100%;
+	padding: 10px 0;
+	border-bottom: 4px solid #eeb300;
+	background-color: #dc0000;
+	margin-bottom: 4px;
+	position: fixed;
+	overflow-x: auto;
+}
+#nav {
+	width: 750px;
+	margin:  0 auto;
+}
+#header li {
+	width: 100px;
+	display: inline-block;
+	height: 30px;
+	vertical-align: top;
+}
+#headerForm {
+	width: 330px !important;
+	background-color: #eeb300;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+#header a{
+	color: white;
+	line-height: 30px;
+	display: block;
+	background-color: #eeb300;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+#header a:hover, #header a:focus {
+	background-color: #ffbe00;
+}
+#header a:active {
+	background-color: #800f25;
+}
+#header li:first-of-type a{
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-left: 0px;
+}
+#header li:last-of-type a{
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-right: 0px;
+}
+#surnameForm {
+	display: block;
+	width: 330px;
+	color: white;
+}
+input[type=submit] {
+	margin: 2px;
+	padding:3px;
+	border:2px solid white;
+	background-color: #dc0000;
+	color: white;
+	cursor:pointer;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+}
+input[type=submit]:hover {
+	background-color: #ffbe00;
+	border-color: #dc0000;
+}
+#surname {
+	width: 150px;
+}
+#helpContent, #js-warning, #ms-warning {
+	color: white;
+	margin-top: 10px;
+}
+#helpContent h2 {
+	font-size: 120%;
+}
+#tree {
+	padding-top: 75px;
+}
+#backLink {
+	width: 200px !important;
+}
