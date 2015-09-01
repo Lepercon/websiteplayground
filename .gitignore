@@ -4,3 +4,9 @@
 */cache/*
 */cache/!index.html
 */cache/!.htaccess
+application/views/charities/dare_night/images/*
+application/views/archive/doc/*
+application/views/events/photos/*
+application/views/events/posters/*
+application/views/photos/images/*
+application/views/finance/files/*
