@@ -10,3 +10,4 @@ application/views/events/photos/*
 application/views/events/posters/*
 application/views/photos/images/*
 application/views/finance/files/*
+*.htaccess
