@@ -20,7 +20,7 @@
 		} else {
 			echo '<script type="text/javascript" src="./js/jquery.min.js?v=20130909"></script>';
 		}?>
-		<script type="text/javascript" src="./js/js.min.js?v=20131009"></script>
+		<script type="text/javascript" src="./js/js.js?v=20131009"></script>
 		<script type="text/javascript" src="./js/viz.js?v=20130909"></script>
 	</head>
 	<body>

@@ -204,8 +204,17 @@ function make_dot(&$nodes) {
 	}
 
 	$dot .= "node[fillcolor=linen];";							// style for the years
-	$dot .= "2005->2006->2007->2008->2009->2010->2011->2012->2013;";	// add years to top of graph
+	$dates = range(2005, date("Y"));
+	$count = count($dates);
 
+	foreach ($dates as $key => $val) {
+	    if (--$count <= 0) {
+		    $dot .= $val;
+	        break;
+	    }
+	    $dot .= $val . "->";
+	}
+	
 	$ranksame = array();
 	foreach ($nodes as $nid => $node) {							// order nodes by yeargroup
 		$year = 0;
