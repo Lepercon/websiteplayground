@@ -87,6 +87,7 @@ class Markets extends CI_Controller {
 			return;
 		} else {
 			$this->load->library('cart');
+			
 			if(validate_form_token('market_order') && $this->input->post('groceries') != false) {
 				$this->load->library('form_validation');
 				$this->form_validation->set_rules('spend', 'Spending cap', 'required|numeric');
@@ -118,6 +119,7 @@ class Markets extends CI_Controller {
 				}
 			}
 			$vegetables = $this->markets_model->get_items();
+			$meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
 			$categories = array();
 			foreach($vegetables as $v) {
 				if(!in_array($v['category'], $categories)) {
@@ -141,6 +143,7 @@ class Markets extends CI_Controller {
 			$this->load->view('markets/groceries', array(
 				'vegetables' => $vegetables,
 				'categories' => $categories,
+				'meal_name' => $meal_name[0],
 				'cart' => $cart,
 				'errors' => $errors,
 				'favourites' => $favourites
@@ -164,8 +167,9 @@ class Markets extends CI_Controller {
 			$this->groceries();
 			return;
 		} else {
+			$meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
 			$this->load->library('cart');
-			$this->load->view('markets/confirm');
+			$this->load->view('markets/confirm', array('meal_name' =>$meal_name[0]));
 		}
 	}
 
@@ -187,6 +191,9 @@ class Markets extends CI_Controller {
 				$data[$v] = $this->session->userdata('market_'.$v);
 			}
 			$data['veg'] = array();
+			
+			//creates order number
+			$ordernumber = random_string('alnum', 10);
 
 			// Message is on one line to avoid formatting issues
 			$message = 'A Durham Markets order has been placed by '.$data['name'].' ({unwrap}'.$data['email'].'{/unwrap}), with phone number '.$data['phone'].'.'."\r\n";
@@ -198,21 +205,18 @@ class Markets extends CI_Controller {
 			} else {
 				$message .= 'The user was not logged in when they submitted the order.'."\r\n";
 			}
-			if($data['college'] == 'Josephine Butler') {
-				//$this->email->to('c.o.n.edgar@durham.ac.uk');
-				$this->email->to('butler.jcr@durham.ac.uk');
+			
+			//$this->email->to('rupert.maspero@durham.ac.uk');
+			$this->email->to($data['email'], $data['name']);
 
-			} else if($data['college'] == 'Ustinov') {
-				//$this->email->to('c.o.n.edgar@durham.ac.uk');
-				$this->email->to('eco.ustinovgcr@durham.ac.uk');
-			} else {
-				//$this->email->to('rupert.maspero@durham.ac.uk');
-				$this->email->to('butler.jcr@durham.ac.uk');
-			}
 			$message .= 'Delivery is requested on '.$data['delivery'].' to '.$data['college'].'. Order details follow:'."\r\n\r\n";
-			$this->email->cc($data['email'], $data['name']);
-			$this->email->subject('Durham Markets - Butler JCR website');
-			$message .= 'Meal pack: '.$data['meal']."\r\n";
+
+			$this->email->subject('Durham Markets '. $ordernumber.'  - Butler JCR website');
+			
+			//meal pack info
+			$get_meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
+			$meal_name = $get_meal_name[0];
+			$message .= 'Meal pack: '.$meal_name['name']."\r\n";
 			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
 			$message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
 
@@ -230,6 +234,36 @@ class Markets extends CI_Controller {
 			$this->email->message($message);
 			$this->email->send();
 
+			//move to model??
+			if(logged_in() && !empty($cart)) {
+				$insert = array();
+				$user_id = $this->session->userdata('id');
+				$unix_date = time();
+				foreach($cart as $c) {
+					$insert[] = array(
+						'order' => $ordernumber,
+						'item' => $c['id'],
+						'qty' => $c['amount'],
+						'user' => $user_id,
+						'time' => $unix_date
+					);
+				}
+				$this->db->insert_batch('market_orders', $insert);
+				
+				if($data['meal'] != 'no meal'){
+					$meal = intval($data['meal']);
+					$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date
+					);
+				$this->db->insert('market_orders', $insert);
+				}
+				
+			}
+			
 			// show confirmation page
 			$this->load->view('markets/success');
 
@@ -237,20 +271,6 @@ class Markets extends CI_Controller {
 			$this->cart->destroy();
 			foreach($session_variables as $v) {
 				$this->session->unset_userdata('market_'.$v);
-			}
-
-			if(logged_in() && !empty($cart)) {
-				$insert = array();
-				$user_id = $this->session->userdata('id');
-				$unix_date = time();
-				foreach($cart as $c) {
-					$insert[] = array(
-						'item' => $c['id'],
-						'user' => $user_id,
-						'time' => $unix_date
-					);
-				}
-				$this->db->insert_batch('market_orders', $insert);
 			}
 		}
 	}

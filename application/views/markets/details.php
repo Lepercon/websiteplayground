@@ -54,7 +54,7 @@ echo form_open('markets/details'); ?>
 		</li>
 		<li>
 			<label>College *</label><select name="college" required="required">
-				<?php foreach(array('Josephine Butler', 'Ustinov') as $coll){
+				<?php foreach(array('Josephine Butler', 'Market Pick Up') as $coll){
 					echo '<option value="'.$coll.'" '.($errors != FALSE ? set_select('college', $coll) : ($this->session->userdata('market_college') == $coll ? 'selected="selected"' : '')).'>'.$coll.'</option>';
 				}?>
 			</select>

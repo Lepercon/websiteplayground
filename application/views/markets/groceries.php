@@ -20,7 +20,7 @@ $this->load->view('markets/nav', array('page_match' => 2)); ?>
 	<div class="jcr-box narrow-hide">
 		<h3>Meal</h3>
 		<ul class="nolist">
-			<li><?php echo ucfirst($this->session->userdata('market_meal')); ?></li>
+			<li><?php echo $meal_name['name']; ?></li>
 			<li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
 		</ul>
 		<h3>Groceries</h3>

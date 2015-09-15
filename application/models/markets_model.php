@@ -15,9 +15,16 @@ class Markets_model extends CI_Model {
 
 	function get_meals()
 	{
-		$this->db->order_by('name');
+		$this->db->order_by('id', 'desc');
 		return $this->db->get('meals')->result_array();
 	}
+
+	function get_meal_name($meal_id)
+	{
+		$this->db->where('id', $meal_id);
+		return $this->db->get('meals')->result_array();
+	}
+
 
 	function get_favourites()
 	{
