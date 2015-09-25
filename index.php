@@ -20,12 +20,13 @@ if(file_exists('offline_full')) {
  * This can be set to anything, but default usage is:
  *
  *     development
+ *     testing
  *     production
  *
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'production');
+	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -34,6 +35,8 @@ if(file_exists('offline_full')) {
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
+ 
+ 
 
 if (defined('ENVIRONMENT'))
 {
@@ -42,6 +45,8 @@ if (defined('ENVIRONMENT'))
 		case 'development':
 			error_reporting(E_ALL);
 		break;
+
+		case 'testing':
 		case 'production':
 			error_reporting(0);
 		break;
@@ -168,8 +173,13 @@ if (defined('ENVIRONMENT'))
 	// The name of THIS file
 	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
+	// The PHP file extension
+	// this global constant is deprecated.
+	define('EXT', '.php');
+
 	// Path to the system folder
 	define('BASEPATH', str_replace("\\", "/", $system_path));
+	
 
 	// Path to the front controller (this file)
 	define('FCPATH', str_replace(SELF, '', __FILE__));
@@ -201,6 +211,7 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+ 
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

@@ -14,8 +14,8 @@ if(isset($_GET['altcss'])){
 }
 
 $js_urls = array(
-	'jquery' => (ENVIRONMENT == 'local' ? VIEW_URL.'common/local_cdn_resources/jquery.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'),
-	'jquery_ui' => (ENVIRONMENT == 'local' ? VIEW_URL.'common/local_cdn_resources/jquery-ui.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'),
+	'jquery' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/local_cdn_resources/jquery.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'),
+	'jquery_ui' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/local_cdn_resources/jquery-ui.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'),
 	'history' => VIEW_URL.'common/jquery.history.js?v='.VERSION,
 	'jcrop' => VIEW_URL.'common/jcrop/jcrop.js?v=99'
 );

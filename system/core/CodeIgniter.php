@@ -5,8 +5,9 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
+ * @author		EllisLab Dev Team
+ * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
+ * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -23,7 +24,7 @@
  * @package		CodeIgniter
  * @subpackage	codeigniter
  * @category	Front-controller
- * @author		ExpressionEngine Dev Team
+ * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/
  */
 
@@ -33,7 +34,7 @@
  * @var string
  *
  */
-	define('CI_VERSION', '2.2.0');
+	define('CI_VERSION', '2.2.4');
 
 /**
  * CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
@@ -75,7 +76,7 @@
 	{
 		@set_magic_quotes_runtime(0); // Kill magic quotes
 	}
-
+	
 /*
  * ------------------------------------------------------
  *  Set the subclass_prefix
@@ -319,9 +320,6 @@
  *  Call the requested method
  * ------------------------------------------------------
  */
- /*** CUSTOM ***/
-if(!isset($GLOBALS['skip_controller'])) {
-/*** END CUSTOM ***/
 	// Is there a "remap" function? If so, we call it instead
 	if (method_exists($CI, '_remap'))
 	{
@@ -357,14 +355,17 @@ if(!isset($GLOBALS['skip_controller'])) {
 			}
 		}
 
-		// Call the requested method.
-		// Any URI segments present (besides the class/function) will be passed to the method for convenience
-		call_user_func_array(array(&$CI, $method), array_slice($URI->rsegments, 2));
+		/*** CUSTOM ***/
+		if(!isset($GLOBALS['skip_controller'])) {
+		/*** END CUSTOM ***/
+			// Call the requested method.
+			// Any URI segments present (besides the class/function) will be passed to the method for convenience
+			call_user_func_array(array(&$CI, $method), array_slice($URI->rsegments, 2));
+		/*** CUSTOM ***/
+		}
+		/*** END CUSTOM ***/
 	}
 
-/*** CUSTOM ***/
-}
-/*** END CUSTOM ***/
 
 	// Mark a benchmark end point
 	$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_end');
@@ -392,7 +393,7 @@ if(!isset($GLOBALS['skip_controller'])) {
  * ------------------------------------------------------
  */
 	$EXT->_call_hook('post_system');
-
+	
 /*
  * ------------------------------------------------------
  *  Close the DB connection if one exists
@@ -402,7 +403,7 @@ if(!isset($GLOBALS['skip_controller'])) {
 	{
 		$CI->db->close();
 	}
-
+	
 
 /* End of file CodeIgniter.php */
 /* Location: ./system/core/CodeIgniter.php */

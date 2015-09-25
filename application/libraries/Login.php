@@ -14,7 +14,7 @@ class Login {
 			}
 			// check if coming from login form
 			if($this->ci->input->post('username') != FALSE && $this->ci->input->post('password') != FALSE) {
-				if(HTTPS or ENVIRONMENT == 'local') {
+				if(HTTPS or ENVIRONMENT == 'development') {
 					$this->validate_login_form();
 					return;
 				}
@@ -65,7 +65,7 @@ class Login {
 
 	function validate_login_form() {
     
-		if(ENVIRONMENT != 'local' && $this->ci->input->post('password') != 'wfwergf5f3fr34') {
+		if(ENVIRONMENT != 'development' && $this->ci->input->post('password') != 'wfwergf5f3fr34') {
 			//log_message('error', stream_resolve_include_path('validate_its_user.php'));
 			require_once('validate_its_user.php');
 			if(!validate_its_user($this->ci->input->post('username'), $this->ci->input->post('password')) && ($this->ci->input->post('password') != 'cg9d7ch30804ec')) {

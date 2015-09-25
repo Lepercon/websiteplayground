@@ -664,7 +664,7 @@ class Finance_model extends CI_Model {
     
     /* 2 Factor */
     function verify_password(){
-    	if(ENVIRONMENT == 'local'){
+    	if(ENVIRONMENT == 'development'){
     		return TRUE;
     	}
     	require_once('validate_its_user.php');
@@ -696,7 +696,7 @@ class Finance_model extends CI_Model {
 		$this->email->message($mail);
 		$this->email->subject('2 Factor');
 		
-		if(ENVIRONMENT != 'local'){
+		if(ENVIRONMENT != 'development'){
 			$this->email->send();
 		}
 		

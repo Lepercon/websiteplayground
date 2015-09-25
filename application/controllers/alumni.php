@@ -125,7 +125,7 @@
 		$this->email->subject('Alumni Event: '.$event_info['name']);
 		$this->email->message($m);
 
-		if(ENVIRONMENT !== 'local') {
+		if(ENVIRONMENT !== 'development') {
 			$this->email->send();
 		}else{
             log_message('error', 'Email: '.$this->email->print_debugger());

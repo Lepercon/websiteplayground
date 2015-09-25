@@ -146,7 +146,7 @@ class Whoswho extends CI_Controller {
 			$this->email->message($mail);
 			$this->email->subject('JCR Feedback');
 			
-			if(ENVIRONMENT != 'local'){
+			if(ENVIRONMENT != 'development'){
 				$this->email->send();
 			}
 		}		

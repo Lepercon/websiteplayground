@@ -116,7 +116,7 @@
 							<?php if(!$this->session->userdata('current')) echo '<li>'.anchor('alumni', 'Alumni').'</li>'; ?>
 							<li><?php echo anchor('home/logout', 'Logout'); ?></li>
 						<?php } else { ?>
-							<form id="login-mob" class="no-jsify"  action="<?php echo str_replace('http://', (ENVIRONMENT == 'local' ? 'http://' : 'https://'), get_last_location()); ?>" method="post">
+							<form id="login-mob" class="no-jsify"  action="<?php echo str_replace('http://', (ENVIRONMENT == 'development' ? 'http://' : 'https://'), get_last_location()); ?>" method="post">
 								<div id="login-top" class="login-block">
 									<input type="text" id="username" name="username" maxlength="8" tabindex="1" placeholder="Username" required class="input-help" title="Use your Durham University CIS username to login to Josephine Butler JCR" />
 								</div>
@@ -143,7 +143,7 @@
 									<p><?php echo anchor('details/profile', user_pref_name($this->session->userdata('firstname'),$this->session->userdata('prefname'))).'<br />'.(is_admin() ? anchor('admin', 'Website Admin').'<br />' : '').($this->session->userdata('current') ? '' : anchor('alumni', 'Alumni').'<br />').anchor('home/logout', 'Logout'); ?></p>
 								</div>
 							<?php } else { ?>
-								<form id="login-form" class="no-jsify" action="<?php echo str_replace('http://', (ENVIRONMENT == 'local' ? 'http://' : 'https://'), get_last_location()); ?>" method="post">
+								<form id="login-form" class="no-jsify" action="<?php echo str_replace('http://', (ENVIRONMENT == 'development' ? 'http://' : 'https://'), get_last_location()); ?>" method="post">
 									<div id="login-top" class="login-block">
 										<div id="login-user"></div>
 										<input type="text" id="username" name="username" maxlength="8" tabindex="1" placeholder="Username" required class="input-help" title="Use your Durham University CIS username to login to Josephine Butler JCR" />
