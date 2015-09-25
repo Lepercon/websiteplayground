@@ -2,7 +2,7 @@ addhandler x-httpd-php5 .inc
 
 RewriteEngine on
 
-RewriteBase /
+RewriteBase /butler.jcr/
 
 #Removes access to the system folder by users.
 RewriteCond %{REQUEST_URI} ^system.*
