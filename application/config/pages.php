@@ -403,5 +403,18 @@ $pages = array(
 		'js' => array(),
 		'keep_cache' => FALSE,
 		'editable' => TRUE
+	),
+	'ballot' => array(
+		'id' => 31,
+		'title' => 'Ballot',
+		'big_title' => NULL,
+		'description' => '',
+		'requires_login' => TRUE,
+	    'allow_non-butler' => FALSE,
+        'require-secure' => FALSE,
+		'css' => array('ballot/ballot'),
+		'js' => array('ballot/ballot'),
+		'keep_cache' => FALSE,
+		'editable' => TRUE
 	)
 );
