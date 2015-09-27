@@ -70,6 +70,59 @@
 					title:'Anonymous Feedback'
 				});
 			});
+                        
+                        $('#whoswho').children().each(function(){
+                            $.whoswho.getDataUri($(this));
+                        });
+                        
+                        $('#whoswho-print').click(function(event){
+                            event.preventDefault();
+                            var imgData = '';
+                            var doc = new jsPDF();
+                            
+                            var specialElementHandlers = {
+                                '#editor': function(element, renderer){
+                                    return true;
+                                }
+                            };
+                            
+                            i = 1;
+                            $('#whoswho').children().each(function(){
+                                var name = $(this).find('p').eq(0).children().html();
+                                var role = $(this).find('p').eq(1).html();
+                                var email = $(this).find('p').eq(2).html();
+                                imgData = $(this).children('span').attr('data-uri');
+
+                                doc.setFontType("bold");
+                                doc.setFontSize(10);
+                                x = 40 + 65 * ((i+1) % 3);
+                                y = 70 + Math.ceil(i/3) * 80 - 70;
+                                doc.centerText(x, y, name);
+                                
+                                doc.setFontType("normal");
+                                doc.setFontSize(8);
+                                doc.centerText(x, y+4, role);
+                                doc.addImage(imgData, 'JPEG', x-25, y - 55, 50, 50);
+                                doc.setDrawColor(200, 0, 0);
+                                doc.rect(x - 30, y - 60, 60, 70);
+                                
+                                doc.setFontType("italic");
+                                doc.centerText(x, y+8, email);
+                                doc.addImage(imgData, 'JPEG', x-25, y - 55, 50, 50);
+                                doc.setDrawColor(200, 0, 0);
+                                doc.rect(x - 30, y - 60, 60, 70);
+                                i++;
+                                if(i % 10 === 0){
+                                    doc.addPage('a4','l');
+                                    i = 1;
+                                }
+                            });
+                            
+                            d = new Date();
+                            var name = 'Whoswho - ' + $('.page').html() + ' - ' +d.toDateString();
+                            doc.save(name+'.pdf');
+                            //doc.addImage(imgData, 'JPEG', 15, 40, 180, 160);
+                        });
 			
 		},
 
@@ -157,6 +210,26 @@
 			$.whoswho.scroll();
 			$('#whoswho-spinner').hide();
 			$('#whoswho-mem-content').show();
-		}
+		},
+                
+                getDataUri: function(obj) {
+                    var url = obj.find('div').eq(1).css('background-image').substr(4);
+                    url = url.substring(0, url.length-1);
+                    var image = new Image();
+
+                    image.onload = function () {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+                        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+                        canvas.getContext('2d').drawImage(this, 0, 0);
+
+                        // ... or get as Data URI
+                        obj.children('span').attr('data-uri', canvas.toDataURL('image/jpeg'));
+                    };
+
+                    image.src = url;
+                }
+
 	};
 })(jQuery);
