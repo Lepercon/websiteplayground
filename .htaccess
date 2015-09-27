@@ -3,6 +3,8 @@ addhandler x-httpd-php5 .inc
 RewriteEngine on
 
 RewriteBase /butler.jcr/
+<<<<<<< HEAD
+=======
 
 #Removes access to the system folder by users.
 RewriteCond %{REQUEST_URI} ^system.*
@@ -21,9 +23,8 @@ RewriteRule ^(.*)$ /offline/$1 [L]
 # allow access to password
 RewriteCond %{REQUEST_URI} ^password.*
 RewriteRule ^(.*)$ /password/$1 [L]
+>>>>>>> master
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
-
-Redirect 302  /frame_redirect.html/:80/ http://butlerjcr.co.uk/

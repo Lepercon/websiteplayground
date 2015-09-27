@@ -404,14 +404,24 @@ $pages = array(
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	),
+<<<<<<< HEAD
+	'bookings' => array(
+		'id' => 31,
+		'title' => '<span class="big-text-small">Room Bookings</span>',
+=======
 	'ballot' => array(
 		'id' => 31,
 		'title' => 'Ballot',
+>>>>>>> master
 		'big_title' => NULL,
 		'description' => '',
 		'requires_login' => TRUE,
 	    'allow_non-butler' => FALSE,
         'require-secure' => FALSE,
+<<<<<<< HEAD
+		'css' => array(),
+		'js' => array('bookings/bookings'),
+=======
 		'css' => array('ballot/ballot'),
 		'js' => array('ballot/ballot'),
 		'keep_cache' => FALSE,
@@ -427,7 +437,9 @@ $pages = array(
         'require-secure' => FALSE,
 		'css' => array(),
 		'js' => array(),
+>>>>>>> master
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	)
+
 );
