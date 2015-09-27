@@ -397,47 +397,48 @@ $pages = array(
 		'big_title' => NULL,
 		'description' => 'Just some generally useful information',
 		'requires_login' => FALSE,
-	    'allow_non-butler' => FALSE,
-        'require-secure' => FALSE,
+                'allow_non-butler' => FALSE,
+                'require-secure' => FALSE,
 		'css' => array(),
 		'js' => array(),
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	),
-<<<<<<< HEAD
 	'bookings' => array(
 		'id' => 31,
 		'title' => '<span class="big-text-small">Room Bookings</span>',
-=======
+                'description' => '',
+		'requires_login' => TRUE,
+                'allow_non-butler' => FALSE,
+                'require-secure' => FALSE,
+		'css' => array(),
+		'js' => array('bookings/bookings'),
+		'keep_cache' => FALSE,
+		'editable' => TRUE
+	),
 	'ballot' => array(
-		'id' => 31,
+		'id' => 32,
 		'title' => 'Ballot',
->>>>>>> master
 		'big_title' => NULL,
 		'description' => '',
 		'requires_login' => TRUE,
-	    'allow_non-butler' => FALSE,
-        'require-secure' => FALSE,
-<<<<<<< HEAD
-		'css' => array(),
-		'js' => array('bookings/bookings'),
-=======
+                'allow_non-butler' => TRUE,
+                'require-secure' => FALSE,
 		'css' => array('ballot/ballot'),
 		'js' => array('ballot/ballot'),
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	),
 	'volunteering' => array(
-		'id' => 32,
+		'id' => 33,
 		'title' => 'Volunteering Projects',
 		'big_title' => '<span class="big-text-medium">Projects</span>',
 		'description' => 'Butler JCR is involved in many volunteering project, find out more.',
 		'requires_login' => FALSE,
-        'allow_non-butler' => TRUE,
-        'require-secure' => FALSE,
+                'allow_non-butler' => TRUE,
+                'require-secure' => FALSE,
 		'css' => array(),
 		'js' => array(),
->>>>>>> master
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	)
