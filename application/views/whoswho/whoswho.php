@@ -47,9 +47,12 @@ $this->load->view('whoswho/banner');
 	<?php echo editable_area('whoswho', 'content/'.$page, $access_rights); ?>
 	<div id="whoswho-icons">
 	<?php
-	if($access_rights && !empty($all_whoswho)) { ?>
+	if($access_rights) { ?>
 		<a href="" class="jcr-button inline-block" id="whoswho-order" title="Admin: Change Order">
 			<span class="ui-icon ui-icon-gear inline-block"></span>Change order
+		</a>
+                <a href="<?php echo site_url('whoswho/print_profiles'); ?>" class="jcr-button inline-block">
+			<span class="ui-icon ui-icon-print inline-block"></span>Printable Version
 		</a>
 	<?php } ?>
 	
