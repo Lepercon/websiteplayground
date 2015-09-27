@@ -10,3 +10,11 @@ application/views/events/photos/*
 application/views/events/posters/*
 application/views/photos/images/*
 application/views/finance/files/*
+application/config/constants.php
+*.htaccess
+index.php
+.htaccess
+
+.htaccess
+
+application/config/constants.php

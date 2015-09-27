@@ -35,7 +35,7 @@
 			$this->email->message($mail);
 			$this->email->subject('Bar Feedback');
 			
-			if(ENVIRONMENT != 'local'){
+			if(ENVIRONMENT != 'development'){
 				$this->email->send();
 			}
 			$_POST['feedback-success'] = TRUE;

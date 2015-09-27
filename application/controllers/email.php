@@ -22,7 +22,7 @@ class Email extends CI_Controller {
 			$this->email->subject($_POST['subject']);
 			$_POST['submit'] = TRUE;
 			
-			if(ENVIRONMENT != 'local'){
+			if(ENVIRONMENT != 'development'){
 				$this->email->send();
 			}
 			

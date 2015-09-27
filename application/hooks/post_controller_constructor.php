@@ -140,7 +140,7 @@ class Post_controller_constructor {
 			}
 		}
 		
-		if(!isset($GLOBALS['skip_controller']) && $page['require-secure'] && !HTTPS && ENVIRONMENT != 'local'){
+		if(!isset($GLOBALS['skip_controller']) && $page['require-secure'] && !HTTPS && ENVIRONMENT != 'development'){
 			cshow_error('You need to access this page using a secure connection, please click <a href="'.str_replace('http:', 'https:', site_url($this->ci->uri->uri_string())).'">here</a>.', 401, 'Access denied');
 			$GLOBALS['skip_controller'] = TRUE;
 		}
@@ -151,7 +151,7 @@ class Post_controller_constructor {
 			$GLOBALS['skip_controller'] = TRUE;
 		}
 		
-		if(logged_in() && ENVIRONMENT !== 'local' && $this->ci->uri->segment(2) !== 'logout' && (!$this->ci->session->userdata('confirmed_email') || $this->ci->session->userdata('temporary_password'))){
+		if(logged_in() && ENVIRONMENT !== 'development' && $this->ci->uri->segment(2) !== 'logout' && (!$this->ci->session->userdata('confirmed_email') || $this->ci->session->userdata('temporary_password'))){
 			
 			$this->ci->users_model->update_session();
 			

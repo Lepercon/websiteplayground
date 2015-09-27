@@ -150,10 +150,10 @@ $pages = array(
 		'big_title' => '<span class="big-text-medium">who\'s who</span>',
 		'description' => 'Find out who does what around college',
 		'requires_login' => FALSE,
-        'allow_non-butler' => TRUE,
-        'require-secure' => FALSE,
+                'allow_non-butler' => TRUE,
+                'require-secure' => FALSE,
 		'css' => array('whoswho/whoswho'),
-		'js' => array('whoswho/whoswho'),
+		'js' => array('whoswho/whoswho', 'whoswho/jsPDF/jspdf', 'whoswho/jsPDF/jspdf.plugin.addimage', 'whoswho/jsPDF/libs/FileSaver.js/FileSaver.min', 'whoswho/jsPDF/jspdf.plugin.from_html', 'whoswho/jsPDF/jspdf.plugin.split_text_to_size', 'whoswho/jsPDF/jspdf.plugin.standard_fonts_metrics'),
 		'keep_cache' => FALSE,
 		'editable' => FALSE
 	),
@@ -384,8 +384,8 @@ $pages = array(
 		'big_title' => NULL,
 		'description' => '',
 		'requires_login' => FALSE,
-        'allow_non-butler' => TRUE,
-        'require-secure' => FALSE,
+                'allow_non-butler' => TRUE,
+                'require-secure' => FALSE,
 		'css' => array(''),
 		'js' => array(),
 		'keep_cache' => FALSE,
@@ -395,7 +395,7 @@ $pages = array(
 		'id' => 30,
 		'title' => 'Useful Info',
 		'big_title' => NULL,
-		'description' => 'Just some generally useful infomation',
+		'description' => 'Just some generally useful information',
 		'requires_login' => FALSE,
 	    'allow_non-butler' => FALSE,
         'require-secure' => FALSE,
@@ -404,16 +404,40 @@ $pages = array(
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	),
+<<<<<<< HEAD
 	'bookings' => array(
 		'id' => 31,
 		'title' => '<span class="big-text-small">Room Bookings</span>',
+=======
+	'ballot' => array(
+		'id' => 31,
+		'title' => 'Ballot',
+>>>>>>> master
 		'big_title' => NULL,
 		'description' => '',
 		'requires_login' => TRUE,
 	    'allow_non-butler' => FALSE,
         'require-secure' => FALSE,
+<<<<<<< HEAD
 		'css' => array(),
 		'js' => array('bookings/bookings'),
+=======
+		'css' => array('ballot/ballot'),
+		'js' => array('ballot/ballot'),
+		'keep_cache' => FALSE,
+		'editable' => TRUE
+	),
+	'volunteering' => array(
+		'id' => 32,
+		'title' => 'Volunteering Projects',
+		'big_title' => '<span class="big-text-medium">Projects</span>',
+		'description' => 'Butler JCR is involved in many volunteering project, find out more.',
+		'requires_login' => FALSE,
+        'allow_non-butler' => TRUE,
+        'require-secure' => FALSE,
+		'css' => array(),
+		'js' => array(),
+>>>>>>> master
 		'keep_cache' => FALSE,
 		'editable' => TRUE
 	)

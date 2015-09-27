@@ -22,7 +22,7 @@ class Post_controller {
 			}
 		
 			$ci->load->view('common/foot', array('big_title' => (isset($ci->page_details['big_title']) ? $ci->page_details['big_title'] : 'HOME')));
-			if(ENVIRONMENT === 'local') {
+			if(ENVIRONMENT === 'development') {
 				$ci->output->enable_profiler(TRUE);
 			}
 		}

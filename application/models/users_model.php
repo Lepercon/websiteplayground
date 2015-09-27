@@ -224,7 +224,7 @@ class Users_model extends CI_Model {
 		$this->email->message($mail);
 		$this->email->subject('Butler JCR: Email Confirmation');
 		
-		if(ENVIRONMENT != 'local'){
+		if(ENVIRONMENT != 'development'){
 			$this->email->send();
 		}else{
             log_message('error', 'Email: '.$this->email->print_debugger());

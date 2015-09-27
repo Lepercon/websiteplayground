@@ -48,7 +48,7 @@ class Welfare extends CI_Controller {
 			$this->email->message($mail);
 			$this->email->subject('Welfare Feedback');
 			
-			if(ENVIRONMENT != 'local'){
+			if(ENVIRONMENT != 'development'){
 				$this->email->send();
 			}
 			$_POST['feedback-success'] = TRUE;
@@ -107,7 +107,7 @@ class Welfare extends CI_Controller {
 			}else{
 				$this->email->subject('Supplies request from the Butler JCR website');
 			}
-			if(ENVIRONMENT != 'local'){
+			if(ENVIRONMENT != 'development'){
 				$this->email->send();
 			}else{
                 log_message('error', 'Email: '.$this->email->print_debugger());
