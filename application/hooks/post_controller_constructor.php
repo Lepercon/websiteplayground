@@ -277,7 +277,11 @@ class Post_controller_constructor {
             }
             // standard include
             else {
-                if(file_exists(VIEW_PATH.$style_sheet.'.css')) $css_links[] = VIEW_URL.$style_sheet.'.css';
+                if(file_exists(VIEW_PATH.$style_sheet.'.min.css')){
+                    $css_links[] = VIEW_URL.$style_sheet.'.min.css';
+                }elseif(file_exists(VIEW_PATH.$style_sheet.'.css')){
+                    $css_links[] = VIEW_URL.$style_sheet.'.css';
+                }
             }
 
             if(!empty($query_string)) {
@@ -334,7 +338,11 @@ class Post_controller_constructor {
             }
             // standard include
             else {
-                if(file_exists(VIEW_PATH.$script.'.js')) $js_files[] = VIEW_URL.$script.'.js';
+                if(file_exists(VIEW_PATH.$script.'.min.js')){
+                    $js_files[] = VIEW_URL.$script.'.min.js';
+                }elseif(file_exists(VIEW_PATH.$script.'.js')){
+                    $js_files[] = VIEW_URL.$script.'.js';
+                }
             }
 
             if(!empty($query_string)) {
