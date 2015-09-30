@@ -21,6 +21,16 @@ class Involved extends CI_Controller {
             $this->information();
             return;
         }
+        
+        /* Poster Uploading */
+        $config['upload_path'] = VIEW_PATH.'involved/img/posters/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['file_name'] = $this->uri->rsegment(4);
+        $config['overwrite'] = TRUE;
+        $this->load->library('upload', $config);
+        $this->upload->do_upload(); 
+        
+        /* Page construction */        
         $sections = $this->get_sections($page);
         $section = $this->uri->rsegment(4);
         $teams = array();
@@ -56,6 +66,23 @@ class Involved extends CI_Controller {
         } else {
             $this->load->view('involved/gym');
         }
+    }
+    
+    function poster(){
+        
+        $this->load->library('page_edit_auth');
+        
+        $page = $this->get_page();
+        $sections = $this->get_sections($page);
+        $section = $this->uri->rsegment(4);
+        $details = $this->get_section_by_name($section, $page);
+        $a_r = $this->page_edit_auth->authenticate('involved') || has_level($details['associateexec']);
+        
+        $this->load->view('involved/poster', array(
+            'access_rights' => $a_r,
+            'details' => $details,
+            'page' => $page
+        ));
     }
 
     function information() {
