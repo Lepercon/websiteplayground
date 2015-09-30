@@ -21,6 +21,13 @@ class Ballot_model extends CI_Model {
 		
 		$this->db->where('ballot_id', $id);
 		$this->db->where('created_by', $u_id);
+		$this->db->or_where('ballot_id', $id);
+		$this->db->where('user_id', $u_id);
+                $bal = $this->db->get('ballot_people')->row_array(0);
+                
+                $this->db->where('ballot_id', $id);
+		$this->db->where('created_by', $bal['created_by']);
+		
 		$ballot['people'] = $this->db->get('ballot_people')->result_array();
 		
 		return $ballot;

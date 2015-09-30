@@ -68,6 +68,7 @@ $route['profile'] = 'details';
 
 
 $route['posters'] = 'home/banner';
+$route['JBs'] = 'services';
 
 
 

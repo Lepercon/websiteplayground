@@ -45,15 +45,11 @@ class Whoswho extends CI_Controller {
         $title = $this->users_model->get_levels_of_user($member, TRUE, ', ', FALSE);
         
 
-        if($this->input->post('profile') !== FALSE){
-            $this->load->view('whoswho/users', array('mem' => $mem));
-        }else{
-            $this->load->view('whoswho/whoswho_print', array(
-                'page' => $page, 
-                'all_whoswho' => $this->all_whoswho($page),
-                'access_rights' => $this->page_edit_auth->authenticate('whoswho')
-            ));
-        }
+        $this->load->view('whoswho/whoswho_print', array(
+            'page' => $page, 
+            'all_whoswho' => $this->users_model->get_users_on_page($page),
+            'access_rights' => $this->page_edit_auth->authenticate('whoswho')
+        ));
     }
     
     function get_page() {

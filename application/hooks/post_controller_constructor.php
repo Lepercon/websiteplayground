@@ -42,6 +42,7 @@ class Post_controller_constructor {
         if(isset($_GET['_escaped_fragment_'])) {
             $this->ci->uri->uri_string = $_GET['_escaped_fragment_'];
         }
+        //log_message('error', 'Hook Started ##'.($_SERVER['HTTPS']));
         // log in the user
         if(!logged_in()) {
             $this->ci->load->library('login');
@@ -338,11 +339,11 @@ class Post_controller_constructor {
             }
             // standard include
             else {
-                if(file_exists(VIEW_PATH.$script.'.min.js')){
-                    $js_files[] = VIEW_URL.$script.'.min.js';
-                }elseif(file_exists(VIEW_PATH.$script.'.js')){
+                if(file_exists(VIEW_PATH.$script.'.js')){
                     $js_files[] = VIEW_URL.$script.'.js';
-                }
+                }/*elseif(file_exists(VIEW_PATH.$script.'.js')){
+                    $js_files[] = VIEW_URL.$script.'.js';
+                }*/
             }
 
             if(!empty($query_string)) {
