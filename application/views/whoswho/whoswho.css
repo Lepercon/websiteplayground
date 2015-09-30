@@ -1,11 +1,11 @@
-﻿#whoswho {
+#whoswho{
     text-align: center;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-around;
 }
 
-#whoswho li {
+#whoswho li{
     width: 120px;
     margin: 0 2px 15px;
     page-break-after: always;
@@ -205,4 +205,4 @@
         display: none!important;
     }
     
-}
+} 
