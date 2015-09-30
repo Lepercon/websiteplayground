@@ -2,8 +2,8 @@
 
 class Volunteering_model extends CI_Model {
 
-	function Volunteering_model() {
-		parent::__construct();
-	}
+    function Volunteering_model() {
+        parent::__construct();
+    }
 
 }

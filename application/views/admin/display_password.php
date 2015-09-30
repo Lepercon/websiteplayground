@@ -7,5 +7,5 @@ echo back_link('admin');
 <p>Username: <b><?php echo $user['username']; ?></b></p>
 <p>Durham Email: <b><?php echo $user['email']; ?></b></p>
 <?php if($_POST['reset-type'] == 'display'){ ?>
-	<p>New Password: <b><?php echo $user['password']; ?></b></p>
+    <p>New Password: <b><?php echo $user['password']; ?></b></p>
 <?php }?>

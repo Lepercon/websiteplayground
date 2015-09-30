@@ -4,7 +4,7 @@
 <p>This will delete all associated responses.</p>
 <br />
 <?php echo form_open('questionnaire/cancel/'.$q_id, array('class' => 'jcr-form'));
-	echo token_ip('cancel_questionnaire'); ?>
-	<input type="submit" name="cancel" value="Cancel Questionnaire" />
-	<input type="submit" value="Don't Cancel" />
+    echo token_ip('cancel_questionnaire'); ?>
+    <input type="submit" name="cancel" value="Cancel Questionnaire" />
+    <input type="submit" value="Don't Cancel" />
 <?php echo form_close(); ?>

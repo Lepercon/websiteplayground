@@ -7,6 +7,6 @@ echo back_link('liversout');
 </div>
 <div class="width-66 content-right narrow-full">
 <div class="jcr-box">
-	<?php echo editable_area('liversout', 'content/'.$page, $access_rights); ?>
+    <?php echo editable_area('liversout', 'content/'.$page, $access_rights); ?>
 </div>
 </div>

@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Scheduling_model extends CI_Model {	
+class Scheduling_model extends CI_Model {    
 
-    function Scheduling_model() {		
-        parent::__construct(); // Call the Model constructor	
-    }	
+    function Scheduling_model() {        
+        parent::__construct(); // Call the Model constructor    
+    }    
     
-    function send_email($subject, $message, $from_email, $from_name, $to, $cc=NULL, $bcc=NULL) {				
+    function send_email($subject, $message, $from_email, $from_name, $to, $cc=NULL, $bcc=NULL) {                
         
         $this->load->library('email');
         $this->email->clear();
@@ -30,20 +30,20 @@ class Scheduling_model extends CI_Model {
             return $this->email->print_debugger();
         }else{
         
-        	$email = array(
-        		'subject' => $subject,
-        		'to' => $to,
-        		'from' => array(
-        			'email' => $from_email,
-        			'name' => $from_name
-        		),
-        		'cc' => $cc,
-        		'bcc' => $bcc,
-        		'message' => $message
-        	);
+            $email = array(
+                'subject' => $subject,
+                'to' => $to,
+                'from' => array(
+                    'email' => $from_email,
+                    'name' => $from_name
+                ),
+                'cc' => $cc,
+                'bcc' => $bcc,
+                'message' => $message
+            );
         
-        	log_message('error', 'The following email can not be sent using local environment:');
-        	log_message('error', var_export($email, true));
+            log_message('error', 'The following email can not be sent using local environment:');
+            log_message('error', var_export($email, true));
         }
         
         return -1;
@@ -62,5 +62,5 @@ class Scheduling_model extends CI_Model {
             }
         }
         return 0;
-    }	
+    }    
 }

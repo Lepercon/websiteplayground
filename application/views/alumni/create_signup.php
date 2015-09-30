@@ -50,67 +50,67 @@
 
 
 
-	echo form_label('Select Event:');
+    echo form_label('Select Event:');
 
-    echo form_dropdown('event', $events, '', 'id="event"').'<br>';	
+    echo form_dropdown('event', $events, '', 'id="event"').'<br>';    
 
 
 
-    echo form_label('Cost:');	
+    echo form_label('Cost:');    
 
-    echo form_radio(array('name'=>'cost', 'id'=>'cost-free', 'value'=>'free', 'checked'=>TRUE, 'style'=>'margin:10px', 'class'=>'cost-free')).'<span class="cost-free" style="vertical-align:middle!important;">Free</span><br>';	
+    echo form_radio(array('name'=>'cost', 'id'=>'cost-free', 'value'=>'free', 'checked'=>TRUE, 'style'=>'margin:10px', 'class'=>'cost-free')).'<span class="cost-free" style="vertical-align:middle!important;">Free</span><br>';    
 
     echo form_label('');
 
-	echo form_radio(array('name'=>'cost', 'id'=>'cost-not-free', 'value'=>'not-free', 'checked'=>FALSE, 'style'=>'margin:10px', 'class'=>'custom-price'));
+    echo form_radio(array('name'=>'cost', 'id'=>'cost-not-free', 'value'=>'not-free', 'checked'=>FALSE, 'style'=>'margin:10px', 'class'=>'custom-price'));
 
-	echo form_input(array('name'=>'input-cost', 'id'=>'create-signup-cost', 'value'=>'', 'size'=>10, 'placeholder'=>'Custom Price', 'class'=>'custom-price')).'<br>';
+    echo form_input(array('name'=>'input-cost', 'id'=>'create-signup-cost', 'value'=>'', 'size'=>10, 'placeholder'=>'Custom Price', 'class'=>'custom-price')).'<br>';
 
 
 
-	echo form_label('Details:', 'create-signup-details', array('style'=>'vertical-align: top!important;'));
+    echo form_label('Details:', 'create-signup-details', array('style'=>'vertical-align: top!important;'));
 
-	echo form_textarea(array('name'=>'create-signup-details', 'id'=>'create-signup-details', 'value'=>'', 'placeholder'=>'Details specific to this event. Users will see this info before signing up.', 'style'=>'height:100px;')).'<br>';
+    echo form_textarea(array('name'=>'create-signup-details', 'id'=>'create-signup-details', 'value'=>'', 'placeholder'=>'Details specific to this event. Users will see this info before signing up.', 'style'=>'height:100px;')).'<br>';
 
 
 
     echo form_label('Deadline');
 
-	echo '<span style="vertical-align:middle!important;">Date: '.form_input(array(
+    echo '<span style="vertical-align:middle!important;">Date: '.form_input(array(
 
-		'name' => 'date',
+        'name' => 'date',
 
-		'value' => (isset($e) ? date("d/m/Y", $e['time']) : (isset($errors) ? set_value('date') : $this->input->get('start') === FALSE ? '' : str_replace('-','/',$this->input->get('start')))),
+        'value' => (isset($e) ? date("d/m/Y", $e['time']) : (isset($errors) ? set_value('date') : $this->input->get('start') === FALSE ? '' : str_replace('-','/',$this->input->get('start')))),
 
-		'placeholder' => 'DD/MM/YYYY',
+        'placeholder' => 'DD/MM/YYYY',
 
-		'maxlength' => '10',
+        'maxlength' => '10',
 
-		'class' => 'datepicker input-help narrow-full',
+        'class' => 'datepicker input-help narrow-full',
 
-		'title' => 'Please select the event date from the dropdown calendar. If no calendar shows then please enable javascript and try again or enter the date in DD/MM/YYYY format.',
+        'title' => 'Please select the event date from the dropdown calendar. If no calendar shows then please enable javascript and try again or enter the date in DD/MM/YYYY format.',
 
-		'required' => 'required'
+        'required' => 'required'
 
-	)).'<br>';
+    )).'<br>';
 
-	$hours = array();
+    $hours = array();
 
-	$minutes = array();
+    $minutes = array();
 
-	for($i=0;$i<=23;$i++) $hours[] = sprintf('%02d', $i);
+    for($i=0;$i<=23;$i++) $hours[] = sprintf('%02d', $i);
 
-	for($i=0;$i<=59;$i++) $minutes[] = sprintf('%02d', $i);
+    for($i=0;$i<=59;$i++) $minutes[] = sprintf('%02d', $i);
 
-	echo form_label('').'Time: ';
+    echo form_label('').'Time: ';
 
-	echo form_dropdown('create-signup-hour', $hours, '0', 'id="create-signup-hour"').':';
+    echo form_dropdown('create-signup-hour', $hours, '0', 'id="create-signup-hour"').':';
 
-	echo form_dropdown('create-signup-minute', $minutes, '0', 'id="create-signup-minute"');
+    echo form_dropdown('create-signup-minute', $minutes, '0', 'id="create-signup-minute"');
 
-	echo '</span><br>';
+    echo '</span><br>';
 
-	
+    
 
     echo form_label('Ticket Limit:', 'create-signup-guestlimit');
 
@@ -130,13 +130,13 @@
 
 
 
-    echo form_label('Guest Limit:', 'create-signup-guestlimit');	
+    echo form_label('Guest Limit:', 'create-signup-guestlimit');    
 
-    $options = range(0,20);	
+    $options = range(0,20);    
 
     array_unshift($options, 'No Limit');
 
-    echo form_dropdown('create-signup-guestlimit', $options, '', 'id="create-signup-guestlimit"').'<br>';	
+    echo form_dropdown('create-signup-guestlimit', $options, '', 'id="create-signup-guestlimit"').'<br>';    
 
 
 
@@ -146,28 +146,28 @@
 
 <span id="option-0" style="display:none;">
     <span id="option-COUNT" style="padding:10px">
-		<label for="optionname-COUNT">Dropdown COUNT:</label>
-		<input type="text" name="optionname-COUNT" id="optionname-COUNT" placeholder="Dropdown Menu Title">
-		<font id="optionname-COUNT-helper" color="red" size="2"></font><br>		
-		<span id="suboptions" style="display:none;">2</span>
-		<span id="option-number" style="display:none;">COUNT</span>
-		<span id="option-COUNT-0" style="display:none;">
-			<span id="option-COUNT-SUB">
-				<label></label>
-				<label for="option-value-COUNT-SUB">Option SUB:</label>
-				<input type="text" name="option-value-COUNT-SUB" id="option-value-COUNT-SUB" placeholder="Option SUB" style="width:100px">                
+        <label for="optionname-COUNT">Dropdown COUNT:</label>
+        <input type="text" name="optionname-COUNT" id="optionname-COUNT" placeholder="Dropdown Menu Title">
+        <font id="optionname-COUNT-helper" color="red" size="2"></font><br>        
+        <span id="suboptions" style="display:none;">2</span>
+        <span id="option-number" style="display:none;">COUNT</span>
+        <span id="option-COUNT-0" style="display:none;">
+            <span id="option-COUNT-SUB">
+                <label></label>
+                <label for="option-value-COUNT-SUB">Option SUB:</label>
+                <input type="text" name="option-value-COUNT-SUB" id="option-value-COUNT-SUB" placeholder="Option SUB" style="width:100px">                
                 <?php
                     $options = range(0,999);    
                     array_unshift($options, 'No Limit');
                     echo form_dropdown('option-value-COUNT-SUB-limit', $options, '', 'id="option-value-COUNT-SUB-limit"').'<br>';
                 ?>
-				<font id="option-COUNT-sub-SUB-helper" color="red" size="2"></font><br>
-			</span>
-		</span>
-		<label></label><label></label>
-		<span class="add"><a class="jcr-button inline-block" id="add-suboption-COUNT"><span class="inline-block ui-icon ui-icon-plus"></span>Add Option</a></span>
-		<span class="remove" style="display:none;"><a class="jcr-button inline-block remove" id="remove-suboption-COUNT"><span class="inline-block ui-icon ui-icon-minus"></span>Remove Option</a></span><br>
-	</span>
+                <font id="option-COUNT-sub-SUB-helper" color="red" size="2"></font><br>
+            </span>
+        </span>
+        <label></label><label></label>
+        <span class="add"><a class="jcr-button inline-block" id="add-suboption-COUNT"><span class="inline-block ui-icon ui-icon-plus"></span>Add Option</a></span>
+        <span class="remove" style="display:none;"><a class="jcr-button inline-block remove" id="remove-suboption-COUNT"><span class="inline-block ui-icon ui-icon-minus"></span>Remove Option</a></span><br>
+    </span>
 </span>
 
 <label></label>
@@ -184,43 +184,43 @@
 
 
 
-    echo form_label('Email Message:', 'create-signup-email-message', array('style'=>'vertical-align: top!important;'));	
+    echo form_label('Email Message:', 'create-signup-email-message', array('style'=>'vertical-align: top!important;'));    
 
     echo form_textarea(array('name'=>'create-signup-email-message', 'id'=>'create-signup-email-message', 'value'=>'', 'placeholder'=>'A message that will be emailed to the user once they have signed up.', 'style'=>'height:100px;')).'<br>';
 
 
 
-    echo form_label('RSVP Info:');	
+    echo form_label('RSVP Info:');    
 
     echo form_checkbox(array('name'=>'email-scdo', 'id'=>'email-scdo', 'value'=>'email-scdo', 'checked'=>FALSE, 'style'=>'margin:10px',));
 
     echo '<span style="vertical-align:middle!important;">Email SCDO</span><br>';
 
-	echo form_label('');	
+    echo form_label('');    
 
-	echo form_checkbox(array('name'=>'email-user', 'id'=>'email-user', 'value'=>'email-user', 'checked'=>TRUE, 'style'=>'margin:10px'));
+    echo form_checkbox(array('name'=>'email-user', 'id'=>'email-user', 'value'=>'email-user', 'checked'=>TRUE, 'style'=>'margin:10px'));
 
-	echo '<span style="vertical-align:middle!important;">Email Yourself (<a href="mailto:'.$user_email.'">'.$user_email.'</a>)</span><br>';
+    echo '<span style="vertical-align:middle!important;">Email Yourself (<a href="mailto:'.$user_email.'">'.$user_email.'</a>)</span><br>';
 
-	echo form_label('');	
+    echo form_label('');    
 
     echo form_checkbox(array('name'=>'email-other', 'id'=>'email-other', 'value'=>'email-other', 'checked'=>FALSE, 'style'=>'margin:10px', 'class'=>'custom-email'));
 
     echo '<span style="vertical-align:middle!important;" class="custom-email">Email Other: </span>';
 
-	echo form_input(array('name'=>'create-signup-rsvp-email', 'id'=>'create-signup-rsvp-email', 'value'=>'', 'placeholder'=>'Email Address', 'class'=>'custom-email')).'<br>';
+    echo form_input(array('name'=>'create-signup-rsvp-email', 'id'=>'create-signup-rsvp-email', 'value'=>'', 'placeholder'=>'Email Address', 'class'=>'custom-email')).'<br>';
 
-	echo form_label('Email Type:');
-	echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-daily', 'checked'=>TRUE, 'style'=>'margin:10px')).'Daily Digest</span><br>';
-	echo form_label('');
-	echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-weekly', 'checked'=>FALSE, 'style'=>'margin:10px')).'Weekly Digest</span><br>';	
-	echo form_label('');
-	echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-instant', 'checked'=>FALSE, 'style'=>'margin:10px')).'Instant</span><br>';
+    echo form_label('Email Type:');
+    echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-daily', 'checked'=>TRUE, 'style'=>'margin:10px')).'Daily Digest</span><br>';
+    echo form_label('');
+    echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-weekly', 'checked'=>FALSE, 'style'=>'margin:10px')).'Weekly Digest</span><br>';    
+    echo form_label('');
+    echo '<span class="email-type">'.form_radio(array('name'=>'email-type', 'id'=>'email-type', 'value'=>'email-type-instant', 'checked'=>FALSE, 'style'=>'margin:10px')).'Instant</span><br>';
 
 
-	echo form_label('');
+    echo form_label('');
 
-	echo form_submit('submit', 'Create Signup');
+    echo form_submit('submit', 'Create Signup');
 
     echo form_close();
 

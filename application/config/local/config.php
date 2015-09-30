@@ -8,10 +8,10 @@
 | URL to your CodeIgniter root. Typically this will be your base URL,
 | WITH a trailing slash:
 |
-|	http://example.com/
+|    http://example.com/
 |
 */
-$config['base_url']	= BASE_URL; //defined in constants
+$config['base_url']    = BASE_URL; //defined in constants
 
 /*
 |--------------------------------------------------------------------------
@@ -34,14 +34,14 @@ $config['index_page'] = "";
 | URI string.  The default setting of "AUTO" works for most servers.
 | If your links do not seem to work, try one of the other delicious flavors:
 |
-| 'AUTO'			Default - auto detects
-| 'PATH_INFO'		Uses the PATH_INFO
-| 'QUERY_STRING'	Uses the QUERY_STRING
-| 'REQUEST_URI'		Uses the REQUEST_URI
-| 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
+| 'AUTO'            Default - auto detects
+| 'PATH_INFO'        Uses the PATH_INFO
+| 'QUERY_STRING'    Uses the QUERY_STRING
+| 'REQUEST_URI'        Uses the REQUEST_URI
+| 'ORIG_PATH_INFO'    Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= "REQUEST_URI";
+$config['uri_protocol']    = "REQUEST_URI";
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ $config['url_suffix'] = "";
 | than english.
 |
 */
-$config['language']	= "english";
+$config['language']    = "english";
 
 /*
 |--------------------------------------------------------------------------
@@ -148,11 +148,11 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\=+-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
+$config['allow_get_array']        = TRUE;
 $config['enable_query_strings'] = FALSE;
-$config['controller_trigger'] 	= 'c';
-$config['function_trigger'] 	= 'm';
-$config['directory_trigger'] 	= 'd'; // experimental not currently in use
+$config['controller_trigger']     = 'c';
+$config['function_trigger']     = 'm';
+$config['directory_trigger']     = 'd'; // experimental not currently in use
 
 /*
 |--------------------------------------------------------------------------
@@ -164,11 +164,11 @@ $config['directory_trigger'] 	= 'd'; // experimental not currently in use
 | You can enable error logging by setting a threshold over zero. The
 | threshold determines what gets logged. Threshold options are:
 |
-|	0 = Disables logging, Error logging TURNED OFF
-|	1 = Error Messages (including PHP errors)
-|	2 = Debug Messages
-|	3 = Informational Messages
-|	4 = All Messages
+|    0 = Disables logging, Error logging TURNED OFF
+|    1 = Error Messages (including PHP errors)
+|    2 = Debug Messages
+|    3 = Informational Messages
+|    4 = All Messages
 |
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
@@ -229,18 +229,18 @@ $config['encryption_key'] = 'nh,59Ei\3Ud?ETdCaA?JGg$mp"D~4<>v';
 | 'encrypt_sess_cookie' = TRUE/FALSE (boolean).  Whether to encrypt the cookie
 | 'session_expiration'  = the number of SECONDS you want the session to last.
 |  by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
-| 'time_to_update'		= how many seconds between CI refreshing Session Information
+| 'time_to_update'        = how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'JBJCR3';
-$config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
-$config['sess_use_database']	= TRUE;
-$config['sess_table_name']		= 'ci_sessions';
-$config['sess_match_ip']		= FALSE;
-$config['sess_match_useragent']	= FALSE;
-$config['sess_time_to_update'] 	= 300;
+$config['sess_cookie_name']        = 'JBJCR3';
+$config['sess_expiration']        = 7200;
+$config['sess_expire_on_close']    = FALSE;
+$config['sess_encrypt_cookie']    = FALSE;
+$config['sess_use_database']    = TRUE;
+$config['sess_table_name']        = 'ci_sessions';
+$config['sess_match_ip']        = FALSE;
+$config['sess_match_useragent']    = FALSE;
+$config['sess_time_to_update']     = 300;
 
 /*
 |--------------------------------------------------------------------------
@@ -252,10 +252,10 @@ $config['sess_time_to_update'] 	= 300;
 | 'cookie_path'   =  Typically will be a forward slash
 |
 */
-$config['cookie_prefix']	= "";
-$config['cookie_domain']	= "";
-$config['cookie_path']		= dirname($_SERVER['SCRIPT_NAME']);
-$config['cookie_secure']	= FALSE;
+$config['cookie_prefix']    = "";
+$config['cookie_domain']    = "";
+$config['cookie_path']        = dirname($_SERVER['SCRIPT_NAME']);
+$config['cookie_secure']    = FALSE;
 
 /*
 |--------------------------------------------------------------------------

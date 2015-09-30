@@ -4,26 +4,26 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="" lang="en"> <!--<![endif]-->
-	<head>
-		<meta name="robots" content="noindex, nofollow">
-		<title>Josephine Butler College Family Tree</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="author" content="David Burn" />
-		<meta name="author" content="Courtney Edgar" />
-		<meta name="Keywords" content="Josephine, Butler, College, Durham, University, Family, Tree" />
-		<meta name="Description" content="Josephine Butler College Family Tree" />
-		<link href="favicon.ico" rel="shortcut icon" type="image/ico" />
-		<link rel="stylesheet" href="./css/style.min.css?v=20131009" />
-		<?php if(strpos($_SERVER['SERVER_NAME'], 'butlerjcr.co.uk') > 0) {
- 			echo '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>';
-		} else {
-			echo '<script type="text/javascript" src="./js/jquery.min.js?v=20130909"></script>';
-		}?>
-		<script type="text/javascript" src="./js/js.js?v=20131009"></script>
-		<script type="text/javascript" src="./js/viz.js?v=20130909"></script>
-	</head>
-	<body>
+    <head>
+        <meta name="robots" content="noindex, nofollow">
+        <title>Josephine Butler College Family Tree</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="David Burn" />
+        <meta name="author" content="Courtney Edgar" />
+        <meta name="Keywords" content="Josephine, Butler, College, Durham, University, Family, Tree" />
+        <meta name="Description" content="Josephine Butler College Family Tree" />
+        <link href="favicon.ico" rel="shortcut icon" type="image/ico" />
+        <link rel="stylesheet" href="./css/style.min.css?v=20131009" />
+        <?php if(strpos($_SERVER['SERVER_NAME'], 'butlerjcr.co.uk') > 0) {
+             echo '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>';
+        } else {
+            echo '<script type="text/javascript" src="./js/jquery.min.js?v=20130909"></script>';
+        }?>
+        <script type="text/javascript" src="./js/js.js?v=20131009"></script>
+        <script type="text/javascript" src="./js/viz.js?v=20130909"></script>
+    </head>
+    <body>
 <div id="header">
 <ul id="nav"><li id="backLink">
 <a href="butlerjcr.co.uk">Go Back to Butler JCR</a>

@@ -125,18 +125,18 @@ class fpdi_pdf_parser extends pdf_parser
      */
     protected function _getPageResources($obj)
     {
-    	$obj = $this->resolveObject($obj);
+        $obj = $this->resolveObject($obj);
 
         // If the current object has a resources
-    	// dictionary associated with it, we use
-    	// it. Otherwise, we move back to its
-    	// parent object.
+        // dictionary associated with it, we use
+        // it. Otherwise, we move back to its
+        // parent object.
         if (isset($obj[1][1]['/Resources'])) {
-    		$res = $this->resolveObject($obj[1][1]['/Resources']);
-    		if ($res[0] == pdf_parser::TYPE_OBJECT)
+            $res = $this->resolveObject($obj[1][1]['/Resources']);
+            if ($res[0] == pdf_parser::TYPE_OBJECT)
                 return $res[1];
             return $res;
-    	}
+        }
 
         if (!isset($obj[1][1]['/Parent'])) {
             return false;
@@ -299,13 +299,13 @@ class fpdi_pdf_parser extends pdf_parser
      */
     protected function _getPageRotation($obj)
     {
-    	$obj = $this->resolveObject($obj);
-    	if (isset($obj[1][1]['/Rotate'])) {
-    		$res = $this->resolveObject($obj[1][1]['/Rotate']);
-    		if ($res[0] == pdf_parser::TYPE_OBJECT)
+        $obj = $this->resolveObject($obj);
+        if (isset($obj[1][1]['/Rotate'])) {
+            $res = $this->resolveObject($obj[1][1]['/Rotate']);
+            if ($res[0] == pdf_parser::TYPE_OBJECT)
                 return $res[1];
             return $res;
-    	}
+        }
 
         if (!isset($obj[1][1]['/Parent'])) {
             return false;
@@ -328,7 +328,7 @@ class fpdi_pdf_parser extends pdf_parser
     protected function _readPages(&$pages, &$result)
     {
         // Get the kids dictionary
-    	$_kids = $this->resolveObject($pages[1][1]['/Kids']);
+        $_kids = $this->resolveObject($pages[1][1]['/Kids']);
 
         if (!is_array($_kids)) {
             throw new Exception('Cannot find /Kids in current /Page-Dictionary');
@@ -341,14 +341,14 @@ class fpdi_pdf_parser extends pdf_parser
         $kids = $_kids[1];
 
         foreach ($kids as $v) {
-    		$pg = $this->resolveObject($v);
+            $pg = $this->resolveObject($v);
             if ($pg[1][1]['/Type'][1] === '/Pages') {
                 // If one of the kids is an embedded
-    			// /Pages array, resolve it as well.
+                // /Pages array, resolve it as well.
                 $this->_readPages($pg, $result);
-    		} else {
-    			$result[] = $pg;
-    		}
-    	}
+            } else {
+                $result[] = $pg;
+            }
+        }
     }
 }

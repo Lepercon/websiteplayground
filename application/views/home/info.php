@@ -22,4 +22,4 @@
 <p>A plugin for jQuery which enables deep linking.  The pages on this site are loaded via ajax (if you have javascript enabled).  However, this means that the url doesn't change when you change page.  If you sent someone a link to the page you are currently viewing, they would be taken to the first page you viewed. History.js dynamically updates the url as you browse through the site. This way, it knows what to load when you try to visit the url next time. It also enables the back/forward buttons in the browser.</p>
 
 <h3><a href="http://www.tinymce.com/">TinyMCE</a></h3>
-<p>This is used on the page content editor.</p>	
+<p>This is used on the page content editor.</p>    
