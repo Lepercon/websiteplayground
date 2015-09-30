@@ -1,7 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-$path = 'involved/img/posters/'.$details['short'].'.png';
-if(!file_exists(VIEW_PATH.$path)){
-    $path = 'involved/img/posters/default.png';
+$path = 'involved/img/posters/default.png';
+$ext = array('png', 'jpg');
+$path_start = 'involved/img/posters/'.$details['short'].'.';
+foreach($ext as $e){
+    if(file_exists(VIEW_PATH.$path_start.$e)){
+        $path = $path_start.$e;
+        break;
+    }
 }
 ?>
 <div class="jcr-box square-box">

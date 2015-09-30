@@ -24,11 +24,16 @@ class Involved extends CI_Controller {
         
         /* Poster Uploading */
         $config['upload_path'] = VIEW_PATH.'involved/img/posters/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['file_name'] = $this->uri->rsegment(4);
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
-        $this->upload->do_upload(); 
+        if($this->upload->do_upload()){
+            log_message('error', 'worked');
+        }else{
+            log_message('error', 'didn\'t work');
+        }
+        log_message('error', var_export($_FILES, true));
         
         /* Page construction */        
         $sections = $this->get_sections($page);
