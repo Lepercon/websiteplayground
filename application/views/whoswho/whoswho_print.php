@@ -25,19 +25,20 @@
     <?php
         echo '<span class="page" style="display:none;">'.$page.'</span>';
         //var_dump($all_whoswho);
-    if($access_rights) { ?>
+    ?>
         <a href="" class="jcr-button inline-block" id="whoswho-print" title="">
             <span class="ui-icon ui-icon-print inline-block"></span>Download Printable
         </a>
-    <?php } ?>
+        <p><a href="#" class="select-all">Select All</a>&nbsp;&nbsp;<a href="#" class="select-none">Select None</a></p>
     
     <ul id="whoswho" class="nolist">
     <?php foreach($all_whoswho as $who){ ?><li class="inline-block">
-        <div class="whoswho-id"><?php echo $who['id']; ?></div>
-        <span class="no-jsify whoswho-jsify"><div style="background-image: url(<?php echo get_usr_img_src($who['uid'], array('medium', 'small')); ?>);"></div>
+        <span class="selected-user user-icon">
+            <div style="background-image: url(<?php echo get_usr_img_src($who['uid'], array('medium', 'small')); ?>);"></div>
             <p><b><?php echo user_pref_name($who['firstname'], $who['prefname'], $who['surname']); ?></b></p>
             <p><?php echo $who['full']; ?></p>
-                        <p style="display:none;"><?php echo $who['email']; ?></p>
+            <p style="display:none;"><?php echo $who['email']; ?></p>
+            <p><input class="users-select" type="checkbox" name="person" value="checked" checked="TRUE"></p>
         </span>
     </li><?php } ?>
     </ul>

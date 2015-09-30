@@ -31,7 +31,7 @@
 			});
 			
 			$('.top-link').click(function(){
-				event.preventDefault();
+                            event.preventDefault();
 				$('html, body').stop().animate({
 			        'scrollTop': 0
 			    });
@@ -75,6 +75,26 @@
                             $.whoswho.getDataUri($(this));
                         });
                         
+                        $('.users-select').change(function(){
+                            if($(this).is(':checked')){
+                                $(this).parent().parent().addClass('selected-user');
+                            }else{
+                                $(this).parent().parent().removeClass('selected-user');
+                            }
+                        });
+                        
+                        $('.select-all').click(function(event){
+                            event.preventDefault();
+                            $('.users-select').prop('checked', true);
+                            $('.user-icon').addClass('selected-user');
+                        });
+                        
+                        $('.select-none').click(function(event){
+                            event.preventDefault();
+                            $('.users-select').prop('checked', false);
+                            $('.selected-user').removeClass('selected-user');
+                        });
+                        
                         $('#whoswho-print').click(function(event){
                             event.preventDefault();
                             var imgData = '';
@@ -87,7 +107,7 @@
                             };
                             
                             i = 1;
-                            $('#whoswho').children().each(function(){
+                            $('#whoswho .selected-user').parent().each(function(){
                                 var name = $(this).find('p').eq(0).children().html();
                                 var role = $(this).find('p').eq(1).html();
                                 var email = $(this).find('p').eq(2).html();
@@ -213,7 +233,7 @@
 		},
                 
                 getDataUri: function(obj) {
-                    var url = obj.find('div').eq(1).css('background-image').substr(4);
+                    var url = obj.find('div').css('background-image').substr(4);
                     url = url.substring(0, url.length-1);
                     var image = new Image();
 

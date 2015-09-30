@@ -163,6 +163,14 @@
     float:left;
 }
 
+.user-icon div{
+    opacity:.5;
+}
+
+.selected-user div{
+    opacity:1;
+}
+
 @media screen and (max-width: 767px) {
     #narrow-menu{
         display:block;
@@ -206,3 +214,4 @@
     }
     
 } 
+
