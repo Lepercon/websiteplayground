@@ -23,14 +23,16 @@ $this->load->view('markets/nav', array('page_match' => 3)); ?>
     </a>
 </div>
 <div class="jcr-box">
-    <h3>Meals</h3>
-    <ul class="nolist">
-        <li><?php echo ucfirst($this->session->userdata('market_meal')); ?></li>
-        <li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
-    </ul>
-    <a href="<?php echo site_url('markets/meals'); ?>" class="jcr-button inline-block" title="Edit your meal choice">
-        <span class="ui-icon ui-icon-pencil inline-block"></span>Edit
-    </a>
+
+	<h3>Meals</h3>
+	<ul class="nolist">
+		<li><?php echo $meal_name['name']; ?></li>
+		<li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
+	</ul>
+	<a href="<?php echo site_url('markets/meals'); ?>" class="jcr-button inline-block" title="Edit your meal choice">
+		<span class="ui-icon ui-icon-pencil inline-block"></span>Edit
+	</a>
+
 </div>
 <div class="jcr-box">
     <h3>Groceries</h3>

@@ -3,36 +3,36 @@
     <div class="jcr-box wotw-outer">
         <h3 class="wotw-day">Durham Markets</h3>
 
-<?php
-
-
-$this->load->view('markets/nav', array('page_match' => 2)); ?>
-
+		<?php $this->load->view('markets/nav', array('page_match' => 2)); ?>
+	</div>
 <div class="content-left width-33 narrow-full">
-    <div class="jcr-box">
-        <h3>Search</h3>
-        <ul class="nolist">
-            <li>
-                <input class="inline-block narrow-full" type="text" name="s" id="grocery-search" placeholder="Search" autocomplete="off">
-            </li>
-        </ul>
-    </div>
-    <div class="jcr-box narrow-hide">
-        <h3>Meal</h3>
-        <ul class="nolist">
-            <li><?php echo ucfirst($this->session->userdata('market_meal')); ?></li>
-            <li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
-        </ul>
-        <h3>Groceries</h3>
-        <ul id="grocery-order" class="nolist">
-            <li>Enable javascript to see your order summary</li>
-        </ul>
-    </div>
+
+	<div class="jcr-box">
+		<h3 class="wotw-day">Search</h3>
+		<ul class="nolist">
+			<li>
+				<input class="inline-block narrow-full" type="text" name="s" id="grocery-search" placeholder="Search" autocomplete="off">
+			</li>
+		</ul>
+	</div>
+	<div class="jcr-box narrow-hide">
+		<h3 class="wotw-day">Meal</h3>
+		<ul class="nolist">
+			<li><?php echo $meal_name['name']; ?></li>
+			<li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
+		</ul>
+	</div>
+	<div class="jcr-box narrow-hide">
+		<h3 class="wotw-day">Groceries</h3>
+		<ul id="grocery-order" class="nolist">
+			<li>Enable javascript to see your order summary</li>
+		</ul>
+	</div>
 </div>
 
-<div class="content-right width-66 narrow-full">
-    <?php eval(error_code()); ?>
-
+<div class="content-right width-66 jcr-box narrow-full">
+	<h3 class="wotw-day">Select Your Groceries</h3>
+	<?php eval(error_code()); ?>
     <?php echo form_open('markets/groceries', array('class' => 'jcr-form')); ?>
     <ul class="nolist">
         <li><p>Because the price of fruit and veg varies on a daily basis, please select a spending cap for your total order of fruit and veg.</p></li>

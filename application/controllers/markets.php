@@ -73,148 +73,152 @@ class Markets extends CI_Controller {
         }
     }
 
-    function groceries($errors = false) {
-        if($this->session->userdata('market_name') === false or
-        $this->session->userdata('market_email') === false or
-        $this->session->userdata('market_phone') === false or
-        $this->session->userdata('market_delivery') === false or
-        $this->session->userdata('market_college') === false) {
-            $this->details();
-            return;
-        } else if($this->session->userdata('market_meal') === false or
-        $this->session->userdata('market_vegetarians') === false) {
-            $this->meals();
-            return;
-        } else {
-            $this->load->library('cart');
-            if(validate_form_token('market_order') && $this->input->post('groceries') != false) {
-                $this->load->library('form_validation');
-                $this->form_validation->set_rules('spend', 'Spending cap', 'required|numeric');
-                if($this->form_validation->run()) {
-                    $this->session->set_userdata(array(
-                        'market_spend' => $this->input->post('spend')
-                    ));
-                    $groceries = array();
-                    foreach($_POST['veg'] as $k => $v) {
-                        if(!empty($v['amount'])) {
-                            $groceries[] = array(
-                                'id' => $v['id'],
-                                'qty' => 1,
-                                'price' => 1,
-                                'name' => $v['name'],
-                                'unit' => $v['unit'],
-                                'amount' => $v['amount']
-                            );
-                        }
-                    }
-                    $this->cart->destroy();
-                    if(!empty($groceries)) {
-                        $this->cart->insert($groceries);
-                    }
-                    $this->confirm();
-                    return;
-                } else {
-                    $errors = true;
-                }
-            }
-            $vegetables = $this->markets_model->get_items();
-            $categories = array();
-            foreach($vegetables as $v) {
-                if(!in_array($v['category'], $categories)) {
-                    $categories[] = $v['category'];
-                }
-            }
-            sort($categories);
-            $cart = $this->cart->contents();
-            if(!empty($cart)) {
-                $cart_made = array();
-                foreach($cart as $c) {
-                    $cart_made[$c['id']] = $c['amount'];
-                }
-                $cart = $cart_made;
-                unset($cart_made);
-            }
-            $favourites = array();
-            if(logged_in()) {
-                $favourites = $this->markets_model->get_favourites();
-            }
-            $this->load->view('markets/groceries', array(
-                'vegetables' => $vegetables,
-                'categories' => $categories,
-                'cart' => $cart,
-                'errors' => $errors,
-                'favourites' => $favourites
-            ));
-        }
-    }
+	function groceries($errors = false) {
+		if($this->session->userdata('market_name') === false or
+		$this->session->userdata('market_email') === false or
+		$this->session->userdata('market_phone') === false or
+		$this->session->userdata('market_delivery') === false or
+		$this->session->userdata('market_college') === false) {
+			$this->details();
+			return;
+		} else if($this->session->userdata('market_meal') === false or
+		$this->session->userdata('market_vegetarians') === false) {
+			$this->meals();
+			return;
+		} else {
+			$this->load->library('cart');
+			
+			if(validate_form_token('market_order') && $this->input->post('groceries') != false) {
+				$this->load->library('form_validation');
+				$this->form_validation->set_rules('spend', 'Spending cap', 'required|numeric');
+				if($this->form_validation->run()) {
+					$this->session->set_userdata(array(
+						'market_spend' => $this->input->post('spend')
+					));
+					$groceries = array();
+					foreach($_POST['veg'] as $k => $v) {
+						if(!empty($v['amount'])) {
+							$groceries[] = array(
+								'id' => $v['id'],
+								'qty' => 1,
+								'price' => 1,
+								'name' => $v['name'],
+								'unit' => $v['unit'],
+								'amount' => $v['amount']
+							);
+						}
+					}
+					$this->cart->destroy();
+					if(!empty($groceries)) {
+						$this->cart->insert($groceries);
+					}
+					$this->confirm();
+					return;
+				} else {
+					$errors = true;
+				}
+			}
+			$vegetables = $this->markets_model->get_items();
+			$meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
+			$categories = array();
+			foreach($vegetables as $v) {
+				if(!in_array($v['category'], $categories)) {
+					$categories[] = $v['category'];
+				}
+			}
+			sort($categories);
+			$cart = $this->cart->contents();
+			if(!empty($cart)) {
+				$cart_made = array();
+				foreach($cart as $c) {
+					$cart_made[$c['id']] = $c['amount'];
+				}
+				$cart = $cart_made;
+				unset($cart_made);
+			}
+			$favourites = array();
+			if(logged_in()) {
+				$favourites = $this->markets_model->get_favourites();
+			}
+			$this->load->view('markets/groceries', array(
+				'vegetables' => $vegetables,
+				'categories' => $categories,
+				'meal_name' => $meal_name[0],
+				'cart' => $cart,
+				'errors' => $errors,
+				'favourites' => $favourites
+			));
+		}
+	}
 
-    function confirm() {
-        if($this->session->userdata('market_name') === false or
-        $this->session->userdata('market_email') === false or
-        $this->session->userdata('market_phone') === false or
-        $this->session->userdata('market_delivery') === false or
-        $this->session->userdata('market_college') === false) {
-            $this->details();
-            return;
-        } else if($this->session->userdata('market_meal') === false or
-        $this->session->userdata('market_vegetarians') === false) {
-            $this->meals();
-            return;
-        } else if($this->session->userdata('market_spend') === false) {
-            $this->groceries();
-            return;
-        } else {
-            $this->load->library('cart');
-            $this->load->view('markets/confirm');
-        }
-    }
+	function confirm() {
+		if($this->session->userdata('market_name') === false or
+		$this->session->userdata('market_email') === false or
+		$this->session->userdata('market_phone') === false or
+		$this->session->userdata('market_delivery') === false or
+		$this->session->userdata('market_college') === false) {
+			$this->details();
+			return;
+		} else if($this->session->userdata('market_meal') === false or
+		$this->session->userdata('market_vegetarians') === false) {
+			$this->meals();
+			return;
+		} else if($this->session->userdata('market_spend') === false) {
+			$this->groceries();
+			return;
+		} else {
+			$meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
+			$this->load->library('cart');
+			$this->load->view('markets/confirm', array('meal_name' =>$meal_name[0]));
+		}
+	}
 
-    function order() {
-        if($this->session->userdata('market_name') === false or
-        $this->session->userdata('market_email') === false or
-        $this->session->userdata('market_phone') === false or
-        $this->session->userdata('market_delivery') === false or
-        $this->session->userdata('market_college') === false or
-        $this->session->userdata('market_meal') === false or
-        $this->session->userdata('market_vegetarians') === false or
-        $this->session->userdata('market_spend') === false) {
-            $this->confirm();
-            return;
-        } else {
-            $data = array();
-            $session_variables = array('name', 'email', 'phone', 'delivery', 'college', 'meal', 'vegetarians', 'spend');
-            foreach($session_variables as $v) {
-                $data[$v] = $this->session->userdata('market_'.$v);
-            }
-            $data['veg'] = array();
+	function order() {
+		if($this->session->userdata('market_name') === false or
+		$this->session->userdata('market_email') === false or
+		$this->session->userdata('market_phone') === false or
+		$this->session->userdata('market_delivery') === false or
+		$this->session->userdata('market_college') === false or
+		$this->session->userdata('market_meal') === false or
+		$this->session->userdata('market_vegetarians') === false or
+		$this->session->userdata('market_spend') === false) {
+			$this->confirm();
+			return;
+		} else {
+			$data = array();
+			$session_variables = array('name', 'email', 'phone', 'delivery', 'college', 'meal', 'vegetarians', 'spend');
+			foreach($session_variables as $v) {
+				$data[$v] = $this->session->userdata('market_'.$v);
+			}
+			$data['veg'] = array();
+			
+			//creates order number
+			$ordernumber = random_string('alnum', 10);
 
-            // Message is on one line to avoid formatting issues
-            $message = 'A Durham Markets order has been placed by '.$data['name'].' ({unwrap}'.$data['email'].'{/unwrap}), with phone number '.$data['phone'].'.'."\r\n";
-            // send email for order
-            $this->load->library('email');
-            $this->email->from($data['email'], $data['name']);
-            if(logged_in()) {
-                $message .= 'This came from the Butler JCR account of '.user_pref_name($this->session->userdata('firstname'),$this->session->userdata('prefname'),$this->session->userdata('surname')).' ({unwrap}'.$this->session->userdata('email').'{/unwrap}).'."\r\n";
-            } else {
-                $message .= 'The user was not logged in when they submitted the order.'."\r\n";
-            }
-            if($data['college'] == 'Josephine Butler') {
-                //$this->email->to('c.o.n.edgar@durham.ac.uk');
-                $this->email->to('butler.jcr@durham.ac.uk');
+			// Message is on one line to avoid formatting issues
+			$message = 'A Durham Markets order has been placed by '.$data['name'].' ({unwrap}'.$data['email'].'{/unwrap}), with phone number '.$data['phone'].'.'."\r\n";
+			// send email for order
+			$this->load->library('email');
+			$this->email->from($data['email'], $data['name']);
+			if(logged_in()) {
+				$message .= 'This came from the Butler JCR account of '.user_pref_name($this->session->userdata('firstname'),$this->session->userdata('prefname'),$this->session->userdata('surname')).' ({unwrap}'.$this->session->userdata('email').'{/unwrap}).'."\r\n";
+			} else {
+				$message .= 'The user was not logged in when they submitted the order.'."\r\n";
+			}
+			
+			//$this->email->to('rupert.maspero@durham.ac.uk');
+			$this->email->to($data['email'], $data['name']);
 
-            } else if($data['college'] == 'Ustinov') {
-                //$this->email->to('c.o.n.edgar@durham.ac.uk');
-                $this->email->to('eco.ustinovgcr@durham.ac.uk');
-            } else {
-                //$this->email->to('rupert.maspero@durham.ac.uk');
-                $this->email->to('butler.jcr@durham.ac.uk');
-            }
-            $message .= 'Delivery is requested on '.$data['delivery'].' to '.$data['college'].'. Order details follow:'."\r\n\r\n";
-            $this->email->cc($data['email'], $data['name']);
-            $this->email->subject('Durham Markets - Butler JCR website');
-            $message .= 'Meal pack: '.$data['meal']."\r\n";
-            $message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
-            $message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
+			$message .= 'Delivery is requested on '.$data['delivery'].' to '.$data['college'].'. Order details follow:'."\r\n\r\n";
+
+			$this->email->subject('Durham Markets '. $ordernumber.'  - Butler JCR website');
+			
+			//meal pack info
+			$get_meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
+			$meal_name = $get_meal_name[0];
+			$message .= 'Meal pack: '.$meal_name['name']."\r\n";
+			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
+			$message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
 
             $this->load->library('cart');
             $cart = $this->cart->contents();
@@ -230,30 +234,79 @@ class Markets extends CI_Controller {
             $this->email->message($message);
             $this->email->send();
 
-            // show confirmation page
-            $this->load->view('markets/success');
+			//move to model??
+			
+			$insert = array();
+			$user_id = $this->session->userdata('id');
+			$unix_date = time();
+				
+			if(logged_in() && !empty($cart)) {
+				foreach($cart as $c) {
+					$insert[] = array(
+						'order' => $ordernumber,
+						'item' => $c['id'],
+						'qty' => $c['amount'],
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 0
+					);
+				}
+				$this->db->insert_batch('market_orders', $insert);
+			}
+			if(logged_in() && !empty($data)) {
+					
+				if($meal_name['name'] != 'No Meal'){
+					
+					$meal = intval($data['meal']);
+					
+					if($meal_name['name'] == '10 Week Veg Box £40'){
+						$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 1,
+						'repeats' => 10
+						);	
+					}
+					elseif($meal_name['name'] == '5 Week Veg Box £30'){
+						$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 1,
+						'repeats' => 5
+						);	
+					}
+					else{
+						$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 1
+						);	
+					}
+					
+				$this->db->insert('market_orders', $insert);
+				}
+				
+			}
+			
+			// show confirmation page
+			$this->load->view('markets/success');
 
-            // destroy cart information
-            $this->cart->destroy();
-            foreach($session_variables as $v) {
-                $this->session->unset_userdata('market_'.$v);
-            }
-
-            if(logged_in() && !empty($cart)) {
-                $insert = array();
-                $user_id = $this->session->userdata('id');
-                $unix_date = time();
-                foreach($cart as $c) {
-                    $insert[] = array(
-                        'item' => $c['id'],
-                        'user' => $user_id,
-                        'time' => $unix_date
-                    );
-                }
-                $this->db->insert_batch('market_orders', $insert);
-            }
-        }
-    }
+			// destroy cart information
+			$this->cart->destroy();
+			foreach($session_variables as $v) {
+				$this->session->unset_userdata('market_'.$v);
+			}
+		}
+	}
 
     function manage() {
         if(!(is_admin() or has_level('Green Committee Rep'))) {
@@ -311,28 +364,56 @@ class Markets extends CI_Controller {
         $this->manage();
     }
 
-    function add_recipe()
-    {
-        if(!(is_admin() or has_level('Green Committee Rep'))) {
-            $this->index();
-            return;
-        }
-        $m = $this->uri->rsegment(3);
-        if($m !== FALSE && is_numeric($m)) {
-            if(validate_form_token('add_item')) {
-                $config = array(
-                    'upload_path'    => VIEW_PATH.'markets/recipes/',
-                    'allowed_types'    => 'pdf',
-                    'overwrite'        => TRUE, // if file of same name already exists, overwrite it
-                    'max_size'        => '8192', // 8MB
-                    'file_name'        => $m,
-                    'max_width'        => '0', // No limit on width
-                    'max_height'    => '0' // No limit on height
-                );
-                $this->load->library('upload', $config);
-                $this->upload->do_upload();
-            }
-        }
-        $this->manage();
-    }
+	function add_recipe()
+	{
+		if(!(is_admin() or has_level('Green Committee Rep'))) {
+			$this->index();
+			return;
+		}
+		$m = $this->uri->rsegment(3);
+		if($m !== FALSE && is_numeric($m)) {
+			if(validate_form_token('add_item')) {
+				$config = array(
+					'upload_path'	=> VIEW_PATH.'markets/recipes/',
+					'allowed_types'	=> 'pdf',
+					'overwrite'		=> TRUE, // if file of same name already exists, overwrite it
+					'max_size'		=> '8192', // 8MB
+					'file_name'		=> $m,
+					'max_width'		=> '0', // No limit on width
+					'max_height'	=> '0' // No limit on height
+				);
+				$this->load->library('upload', $config);
+				$this->upload->do_upload();
+			}
+		}
+		$this->manage();
+	}
+	
+	function past_orders() {
+		$past_orders = array(
+			'orders' => $this->markets_model->get_past_orders()
+		);
+		$this->load->view('markets/past_orders', $past_orders);
+	}
+	
+	function this_weeks_orders() {
+		$due_orders = $this->markets_model->get_orders();
+		$orders = array();
+		foreach ($due_orders as $row)
+		{
+			$orders[] = $this->markets_model->ready_order($row['order'], $row['time']);
+			
+		}
+		$send = array(
+			'orders' => $due_orders,
+			'order_content' => $orders
+		);
+		$this->load->view('markets/this_weeks_orders', $send);
+	}
+	
+	function delivered() {
+		$this->markets_model->mark_orders_delivered();
+		$this->this_weeks_orders();
+	}
+
 }
