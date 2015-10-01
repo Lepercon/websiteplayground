@@ -442,6 +442,6 @@ $pages = array(
         'js' => array(),
         'keep_cache' => FALSE,
         'editable' => TRUE
-	)
+    )
 
 );

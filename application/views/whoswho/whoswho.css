@@ -1,11 +1,11 @@
-﻿#whoswho {
+#whoswho{
     text-align: center;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-around;
 }
 
-#whoswho li {
+#whoswho li{
     width: 120px;
     margin: 0 2px 15px;
     page-break-after: always;
@@ -163,6 +163,14 @@
     float:left;
 }
 
+.user-icon div{
+    opacity:.5;
+}
+
+.selected-user div{
+    opacity:1;
+}
+
 @media screen and (max-width: 767px) {
     #narrow-menu{
         display:block;
@@ -205,4 +213,5 @@
         display: none!important;
     }
     
-}
+} 
+
