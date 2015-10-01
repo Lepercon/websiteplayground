@@ -373,7 +373,6 @@ $pages = array(
         'requires_login' => TRUE,
         'allow_non-butler' => FALSE,
         'require-secure' => FALSE,
-<<<<<<< HEAD
         'css' => array(''),
         'js' => array('faults/faults'),
         'keep_cache' => FALSE,
@@ -405,6 +404,7 @@ $pages = array(
         'keep_cache' => FALSE,
         'editable' => TRUE
     ),
+
     'bookings' => array(
         'id' => 31,
         'title' => '<span class="big-text-small">Room Bookings</span>',
@@ -442,39 +442,6 @@ $pages = array(
         'js' => array(),
         'keep_cache' => FALSE,
         'editable' => TRUE
-    )
-
-=======
-		'css' => array(''),
-		'js' => array('faults/faults'),
-		'keep_cache' => FALSE,
-		'editable' => FALSE
-	),
-	'scheduling' => array(
-		'id' => 29,
-		'title' => 'Scheduling',
-		'big_title' => NULL,
-		'description' => '',
-		'requires_login' => FALSE,
-        'allow_non-butler' => TRUE,
-        'require-secure' => FALSE,
-		'css' => array(''),
-		'js' => array(),
-		'keep_cache' => FALSE,
-		'editable' => FALSE
-	),
-	'useful' => array(
-		'id' => 30,
-		'title' => 'Useful Info',
-		'big_title' => NULL,
-		'description' => 'Just some generally useful infomation',
-		'requires_login' => FALSE,
-	    'allow_non-butler' => FALSE,
-        'require-secure' => FALSE,
-		'css' => array(),
-		'js' => array(),
-		'keep_cache' => FALSE,
-		'editable' => TRUE
 	)
->>>>>>> parent of d723000... Ballot Updates v1.0
+
 );
