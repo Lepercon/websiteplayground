@@ -2,76 +2,76 @@
 
 class Markets extends CI_Controller {
 
-	function Markets() {
-		parent::__construct();
-		$this->load->model('markets_model');
-	}
+    function Markets() {
+        parent::__construct();
+        $this->load->model('markets_model');
+    }
 
-	function index() {
-		$this->load->library('page_edit_auth');
-		$this->load->view('markets/markets', array(
-			'access_rights' => $this->page_edit_auth->authenticate('markets')
-		));
-	}
+    function index() {
+        $this->load->library('page_edit_auth');
+        $this->load->view('markets/markets', array(
+            'access_rights' => $this->page_edit_auth->authenticate('markets')
+        ));
+    }
 
-	function details($errors = FALSE) {
-		if(validate_form_token('market_order') && $this->input->post('details') != FALSE) {
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('name', 'Name', 'required|trim|max_length[100]|xss_clean');
-			$this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[100]|xss_clean|valid_email');
-			$this->form_validation->set_rules('phone', 'Phone', 'required|trim|max_length[20]|xss_clean');
-			$this->form_validation->set_rules('delivery', 'Delivery day', 'required|trim|xss_clean');
-			$this->form_validation->set_rules('college', 'College', 'required|trim|xss_clean');
-			if($this->form_validation->run()) {
-				$market_session = array(
-					'market_name' => $this->input->post('name'),
-					'market_email' => $this->input->post('email'),
-					'market_phone' => $this->input->post('phone'),
-					'market_delivery' => $this->input->post('delivery'),
-					'market_college' => $this->input->post('college')
-				);
-				$this->session->set_userdata($market_session);
-				$this->meals();
-				return;
-			} else {
-				$errors = TRUE;
-			}
-		}
-		$this->load->view('markets/details', array(
-			'errors' => $errors
-		));
-	}
+    function details($errors = FALSE) {
+        if(validate_form_token('market_order') && $this->input->post('details') != FALSE) {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('name', 'Name', 'required|trim|max_length[100]|xss_clean');
+            $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[100]|xss_clean|valid_email');
+            $this->form_validation->set_rules('phone', 'Phone', 'required|trim|max_length[20]|xss_clean');
+            $this->form_validation->set_rules('delivery', 'Delivery day', 'required|trim|xss_clean');
+            $this->form_validation->set_rules('college', 'College', 'required|trim|xss_clean');
+            if($this->form_validation->run()) {
+                $market_session = array(
+                    'market_name' => $this->input->post('name'),
+                    'market_email' => $this->input->post('email'),
+                    'market_phone' => $this->input->post('phone'),
+                    'market_delivery' => $this->input->post('delivery'),
+                    'market_college' => $this->input->post('college')
+                );
+                $this->session->set_userdata($market_session);
+                $this->meals();
+                return;
+            } else {
+                $errors = TRUE;
+            }
+        }
+        $this->load->view('markets/details', array(
+            'errors' => $errors
+        ));
+    }
 
-	function meals($errors = false) {
-		if($this->session->userdata('market_name') === false or
-		$this->session->userdata('market_email') === false or
-		$this->session->userdata('market_phone') === false or
-		$this->session->userdata('market_delivery') === false or
-		$this->session->userdata('market_college') === false) {
-			$this->details();
-			return;
-		} else {
-			if(validate_form_token('market_order') && $this->input->post('meals') != false) {
-				$this->load->library('form_validation');
-				$this->form_validation->set_rules('meal', 'Meal option', 'required|trim');
-				$this->form_validation->set_rules('vegetarians', 'Number of vegetarians', 'required|integer');
-				if($this->form_validation->run()) {
-					$this->session->set_userdata(array(
-						'market_meal' => $this->input->post('meal'),
-						'market_vegetarians' => $this->input->post('vegetarians')
-					));
-					$this->groceries();
-					return;
-				} else {
-					$errors = true;
-				}
-			}
-			$this->load->view('markets/meals', array(
-				'meals' => $this->markets_model->get_meals(),
-				'errors' => $errors
-			));
-		}
-	}
+    function meals($errors = false) {
+        if($this->session->userdata('market_name') === false or
+        $this->session->userdata('market_email') === false or
+        $this->session->userdata('market_phone') === false or
+        $this->session->userdata('market_delivery') === false or
+        $this->session->userdata('market_college') === false) {
+            $this->details();
+            return;
+        } else {
+            if(validate_form_token('market_order') && $this->input->post('meals') != false) {
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('meal', 'Meal option', 'required|trim');
+                $this->form_validation->set_rules('vegetarians', 'Number of vegetarians', 'required|integer');
+                if($this->form_validation->run()) {
+                    $this->session->set_userdata(array(
+                        'market_meal' => $this->input->post('meal'),
+                        'market_vegetarians' => $this->input->post('vegetarians')
+                    ));
+                    $this->groceries();
+                    return;
+                } else {
+                    $errors = true;
+                }
+            }
+            $this->load->view('markets/meals', array(
+                'meals' => $this->markets_model->get_meals(),
+                'errors' => $errors
+            ));
+        }
+    }
 
 	function groceries($errors = false) {
 		if($this->session->userdata('market_name') === false or
@@ -220,19 +220,19 @@ class Markets extends CI_Controller {
 			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
 			$message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
 
-			$this->load->library('cart');
-			$cart = $this->cart->contents();
-			if(!empty($cart)) {
-				foreach($cart as $c) {
-					$message .= $c['amount'].' '.$c['unit'].' of '.$c['name']."\r\n";
-				}
-			} else {
-				$message .= 'No fruit or veg ordered';
-			}
-			$message .= "\r\n_____________________\r\n";
-			$message .= 'This email was created by the Butler JCR Website ({unwrap}http://www.butlerjcr.com{/unwrap})';
-			$this->email->message($message);
-			$this->email->send();
+            $this->load->library('cart');
+            $cart = $this->cart->contents();
+            if(!empty($cart)) {
+                foreach($cart as $c) {
+                    $message .= $c['amount'].' '.$c['unit'].' of '.$c['name']."\r\n";
+                }
+            } else {
+                $message .= 'No fruit or veg ordered';
+            }
+            $message .= "\r\n_____________________\r\n";
+            $message .= 'This email was created by the Butler JCR Website ({unwrap}http://www.butlerjcr.com{/unwrap})';
+            $this->email->message($message);
+            $this->email->send();
 
 			//move to model??
 			
@@ -308,61 +308,61 @@ class Markets extends CI_Controller {
 		}
 	}
 
-	function manage() {
-		if(!(is_admin() or has_level('Green Committee Rep'))) {
-			$this->index();
-			return;
-		}
-		$errors = FALSE;
-		if(validate_form_token('add_item')) {
-			$this->load->library('form_validation');
-			if(isset($_POST['add_item'])) {
-				$this->form_validation->set_rules('item', 'Item name', 'trim|required|max_length[200]');
-				$this->form_validation->set_rules('category', 'Category', 'required|trim|max_length[100]');
-				$this->form_validation->set_rules('unit', 'Unit', 'required|trim|max_length[20]');
-				if($this->form_validation->run()) {
-					$this->markets_model->add_item();
-				}
-				else $errors = TRUE;
-			}
-			elseif(isset($_POST['add_meal'])) {
-				$this->form_validation->set_rules('meal', 'Meal name', 'trim|required|max_length[200]');
-				if($this->form_validation->run()) {
-					$this->markets_model->add_meal();
-				}
-				else $errors = TRUE;
-			}
-		}
-		$items = $this->markets_model->get_items();
-		$meals = $this->markets_model->get_meals();
-		$this->load->view('markets/manage', array('items' => $items, 'meals' => $meals, 'errors' => $errors));
-	}
+    function manage() {
+        if(!(is_admin() or has_level('Green Committee Rep'))) {
+            $this->index();
+            return;
+        }
+        $errors = FALSE;
+        if(validate_form_token('add_item')) {
+            $this->load->library('form_validation');
+            if(isset($_POST['add_item'])) {
+                $this->form_validation->set_rules('item', 'Item name', 'trim|required|max_length[200]');
+                $this->form_validation->set_rules('category', 'Category', 'required|trim|max_length[100]');
+                $this->form_validation->set_rules('unit', 'Unit', 'required|trim|max_length[20]');
+                if($this->form_validation->run()) {
+                    $this->markets_model->add_item();
+                }
+                else $errors = TRUE;
+            }
+            elseif(isset($_POST['add_meal'])) {
+                $this->form_validation->set_rules('meal', 'Meal name', 'trim|required|max_length[200]');
+                if($this->form_validation->run()) {
+                    $this->markets_model->add_meal();
+                }
+                else $errors = TRUE;
+            }
+        }
+        $items = $this->markets_model->get_items();
+        $meals = $this->markets_model->get_meals();
+        $this->load->view('markets/manage', array('items' => $items, 'meals' => $meals, 'errors' => $errors));
+    }
 
-	function delete_item()
-	{
-		if(!(is_admin() or has_level('Green Committee Rep'))) {
-			$this->index();
-			return;
-		}
-		$d = $this->uri->rsegment(3);
-		if($d !== FALSE && is_numeric($d)) {
-			$this->markets_model->delete_item($d);
-		}
-		$this->manage();
-	}
+    function delete_item()
+    {
+        if(!(is_admin() or has_level('Green Committee Rep'))) {
+            $this->index();
+            return;
+        }
+        $d = $this->uri->rsegment(3);
+        if($d !== FALSE && is_numeric($d)) {
+            $this->markets_model->delete_item($d);
+        }
+        $this->manage();
+    }
 
-	function delete_meal()
-	{
-		if(!(is_admin() or has_level('Green Committee Rep'))) {
-			$this->index();
-			return;
-		}
-		$d = $this->uri->rsegment(3);
-		if($d !== FALSE && is_numeric($d)) {
-			$this->markets_model->delete_meal($d);
-		}
-		$this->manage();
-	}
+    function delete_meal()
+    {
+        if(!(is_admin() or has_level('Green Committee Rep'))) {
+            $this->index();
+            return;
+        }
+        $d = $this->uri->rsegment(3);
+        if($d !== FALSE && is_numeric($d)) {
+            $this->markets_model->delete_meal($d);
+        }
+        $this->manage();
+    }
 
 	function add_recipe()
 	{
@@ -415,4 +415,5 @@ class Markets extends CI_Controller {
 		$this->markets_model->mark_orders_delivered();
 		$this->this_weeks_orders();
 	}
+
 }

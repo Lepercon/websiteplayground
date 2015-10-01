@@ -1,24 +1,24 @@
 <html>
-	<head>
-		<title>Butler's Got Talent - Main Display</title>
-		<script type="text/javascript" src="jquery.min.js"></script>
-		<script type="text/javascript" src="main.js"></script>
-		<style>
-			.name-row{
-				text-align:center;
-				color:white;
-				font-size:70;
-			}
-			.image-row img{
-				width:100%;
-			}
-		</style>
-	</head>
-	<body style="font-family: Trebuchet MS; background-color: #000; color: #fff; font-size: 4em; text-align: center;">
-	<h1>Butler's Got Talent</h1>
-	<h1 id="result"></h1>
-	<img style="display:none;" src="blank.png"/>
-	<img style="display:none;" src="cross.png"/>
+    <head>
+        <title>Butler's Got Talent - Main Display</title>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <style>
+            .name-row{
+                text-align:center;
+                color:white;
+                font-size:70;
+            }
+            .image-row img{
+                width:100%;
+            }
+        </style>
+    </head>
+    <body style="font-family: Trebuchet MS; background-color: #000; color: #fff; font-size: 4em; text-align: center;">
+    <h1>Butler's Got Talent</h1>
+    <h1 id="result"></h1>
+    <img style="display:none;" src="blank.png"/>
+    <img style="display:none;" src="cross.png"/>
     <table style="width:100%">
         <tr class="image-row">
             <td>
@@ -27,7 +27,7 @@
             <td>
                 <img id="image-2" class="cross-image" src="blank.png"/>
             </td>
-            <td>	
+            <td>    
                 <img id="image-3" class="cross-image" src="blank.png"/>
             </td>
         </tr>
@@ -38,11 +38,11 @@
             <td>
                 Perlina
             </td>
-            <td>	
+            <td>    
                 Cameron
             </td>
 
         </tr>
     </table>
-	</body>
+    </body>
 </html>

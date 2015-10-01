@@ -579,7 +579,7 @@ class pdf_parser
 
                 return array(self::TYPE_STREAM, $v);
 
-            default	:
+            default    :
                 if (is_numeric($token)) {
                     // A numeric token. Make sure that
                     // it is not part of something else.

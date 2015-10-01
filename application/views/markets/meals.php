@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <div class="width-66 narrow-full content-left">
-	<div class="jcr-box wotw-outer">
-		<h3 class="wotw-day">Durham Markets</h3>
+    <div class="jcr-box wotw-outer">
+        <h3 class="wotw-day">Durham Markets</h3>
 
 <?php
 
@@ -39,16 +39,16 @@ echo form_open('markets/meals'); ?>
 </ul>
 <?php echo token_ip('market_order'); ?>
 <?php echo form_close(); ?>
-	</div>
+    </div>
 </div>
 <div class="content-right width-33 narrow-full">
-	<div class="jcr-box wotw-outer">
-		<h3 class="wotw-day">Get In Contact</h3>
-		<?php $this->load->view('utilities/users_contact', array(
-			'level_ids'=>array(3),
-			'title_before'=>'If you would like more information then contact your ',
-			'title_after'=>':',
-			'title_level'=>'p'
-		)); ?>
-	</div>
+    <div class="jcr-box wotw-outer">
+        <h3 class="wotw-day">Get In Contact</h3>
+        <?php $this->load->view('utilities/users_contact', array(
+            'level_ids'=>array(3),
+            'title_before'=>'If you would like more information then contact your ',
+            'title_after'=>':',
+            'title_level'=>'p'
+        )); ?>
+    </div>
 </div>

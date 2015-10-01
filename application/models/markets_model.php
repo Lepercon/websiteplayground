@@ -2,16 +2,16 @@
 
 class Markets_model extends CI_Model {
 
-	function Markets_model()
-	{
-		parent::__construct();
-	}
+    function Markets_model()
+    {
+        parent::__construct();
+    }
 
-	function get_items()
-	{
-		$this->db->order_by('name');
-		return $this->db->get('vegetables')->result_array();
-	}
+    function get_items()
+    {
+        $this->db->order_by('name');
+        return $this->db->get('vegetables')->result_array();
+    }
 
 	function get_meals()
 	{
@@ -47,30 +47,30 @@ class Markets_model extends CI_Model {
 		return $orders;
 	}
 
-	// Admin Functions
+    // Admin Functions
 
-	function add_meal()
-	{
-		$submit['name'] = $this->input->post('meal');
-		$this->db->set($submit);
-		$this->db->insert('meals');
-	}
+    function add_meal()
+    {
+        $submit['name'] = $this->input->post('meal');
+        $this->db->set($submit);
+        $this->db->insert('meals');
+    }
 
-	function delete_meal($item_id)
-	{
-		$this->db->where('id', $item_id);
-		$this->db->delete('meals');
-		unlink(VIEW_PATH.'markets/recipes/'.$item_id.'.pdf');
-	}
+    function delete_meal($item_id)
+    {
+        $this->db->where('id', $item_id);
+        $this->db->delete('meals');
+        unlink(VIEW_PATH.'markets/recipes/'.$item_id.'.pdf');
+    }
 
-	function add_item()
-	{
-		$submit['name'] = $this->input->post('item');
-		$submit['category'] = $this->input->post('category');
-		$submit['unit'] = $this->input->post('unit');
-		$this->db->set($submit);
-		$this->db->insert('vegetables');
-	}
+    function add_item()
+    {
+        $submit['name'] = $this->input->post('item');
+        $submit['category'] = $this->input->post('category');
+        $submit['unit'] = $this->input->post('unit');
+        $this->db->set($submit);
+        $this->db->insert('vegetables');
+    }
 
 	function delete_item($item_id)
 	{
@@ -126,4 +126,5 @@ class Markets_model extends CI_Model {
 		}
 		$this->db->update_batch('market_orders', $to_be_marked_orders, 'id'); 
 	}
+
 }

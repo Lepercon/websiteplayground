@@ -20,15 +20,16 @@
 			<span class="ui-icon ui-icon-arrowthick-1-e inline-block"></span>View Past Orders
 		</a>	
 	</div>
+
 </div>
 <div class="content-right width-33 narrow-full">
-	<div class="jcr-box wotw-outer">
-		<h3 class="wotw-day">Get In Contact</h3>
-		<?php $this->load->view('utilities/users_contact', array(
-			'level_ids'=>array(3),
-			'title_before'=>'If you would like more information then contact your ',
-			'title_after'=>':',
-			'title_level'=>'p'
-		)); ?>
-	</div>
+    <div class="jcr-box wotw-outer">
+        <h3 class="wotw-day">Get In Contact</h3>
+        <?php $this->load->view('utilities/users_contact', array(
+            'level_ids'=>array(3),
+            'title_before'=>'If you would like more information then contact your ',
+            'title_after'=>':',
+            'title_level'=>'p'
+        )); ?>
+    </div>
 </div>

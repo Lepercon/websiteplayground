@@ -7,8 +7,15 @@
 </div>
 
 <div id="involved-left" class="content-left width-33 narrow-full">
-	<div class="jcr-box wotw-outer">
-		<?php 
+	<?php 
+		echo '<div class="poster-outline">';
+		if(isset($details['full'])){
+			$this->load->view('involved/poster', array(
+				'access_rights' => $access_rights,
+				'details' => $details
+			));
+		}else{
+			echo '<div class="jcr-box wotw-outer">';
 			if(isset($levels[$page])){
 				$this->load->view('utilities/users_contact', array(
 					'level_ids'=>array($levels[$page]),
@@ -18,15 +25,17 @@
 					'title_class'=>'wotw-day'
 				)); 
 			}
-		?>
+			echo '</div>';
+		}
+		echo '</div>';
+	?>
+	<div class="jcr-box wotw-outer">
+		<h2 class="wotw-day"><?php echo ucfirst($page); ?> at Butler:</h2>
 		<?php if(is_admin()) { ?>
 			<a href="<?php echo site_url('involved/manage/'.$page); ?>" class="jcr-button inline-block" title="Manage the sections on this page">
 				<span class="ui-icon ui-icon-gear inline-block"></span>Manage
 			</a>
 		<?php } ?>
-	</div>
-	<div class="jcr-box wotw-outer">
-		<h2 class="wotw-day"><?php echo ucfirst($page); ?> at Butler:</h2>
 		<ul class="nolist soc-list">
 			<?php foreach($sections as $s){ ?>
 			<li class="invmenu">

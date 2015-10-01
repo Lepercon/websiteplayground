@@ -6,9 +6,9 @@ echo back_link('admin');
 <img src="<?php echo get_usr_img_src($user['uid'], 'large'); ?>">
 <h3>Upload New</h3>
 <?php
-	echo form_open_multipart('', 'class="jcr-form no-jsify image-upload"');
-	echo form_hidden(array('user-id'=>$user['id']));
-	echo form_upload('file-upload');
-	echo form_submit('upload-img', 'Upload Image');
-	echo form_close();
+    echo form_open_multipart('', 'class="jcr-form no-jsify image-upload"');
+    echo form_hidden(array('user-id'=>$user['id']));
+    echo form_upload('file-upload');
+    echo form_submit('upload-img', 'Upload Image');
+    echo form_close();
 ?>

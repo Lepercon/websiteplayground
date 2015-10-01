@@ -20,6 +20,16 @@
 			$.involved.page = url_parts[0];
 			$.involved.section = url_parts[1];
 			$.post(this.href, [{ 'name': 'ajax', 'value': 'none'}], $.involved.load, 'json');
+			url = this.href.split('/index/').join('/poster/');
+			var new_spinner = $('#spinner').html()
+			$('.poster-outline').html('<div class="jcr-box square-box">'+new_spinner+'</div>');
+			$.ajax({
+				type: "POST",
+				url: url,
+				success: function(e) {
+					$('.poster-outline').html(JSON.parse(e).html);
+				}
+			});
 		},
 
 		load: function (data) {

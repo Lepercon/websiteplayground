@@ -1,0 +1,9 @@
+addhandler x-httpd-php5 .inc 
+
+RewriteEngine on
+
+RewriteBase /butler.jcr/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]

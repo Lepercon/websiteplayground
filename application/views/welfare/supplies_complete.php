@@ -8,9 +8,9 @@ echo back_link('welfare');
 
 <h3>You requested:</h3>
 <ul style="padding-left:20px;">
-	<?php foreach($supplies as $s) : ?>
-		<li><?php echo $s['name']; ?></li>
-	<?php endforeach; ?>
+    <?php foreach($supplies as $s) : ?>
+        <li><?php echo $s['name']; ?></li>
+    <?php endforeach; ?>
 </ul>
 
 <h3>Anonymous code:</h3>

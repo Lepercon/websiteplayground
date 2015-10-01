@@ -6,8 +6,8 @@ $page_admin = ($this->finance_model->finance_permissions());?>
 <h3>Invoicing System</h3>
 <?php
 
-	var_dump($group);
-	var_dump($this_group);
-	var_dump($members);
+    var_dump($group);
+    var_dump($this_group);
+    var_dump($members);
 
 ?>

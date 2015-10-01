@@ -4,7 +4,7 @@
 <p>This will delete all associated bookings.</p>
 <br />
 <?php echo form_open('signup/cancel_signup/'.$e_id);
-	echo token_ip('cancel_signup');
-	echo form_submit('cancel', 'Cancel Signup');
-	echo form_submit('dont', 'Don\'t Cancel');
+    echo token_ip('cancel_signup');
+    echo form_submit('cancel', 'Cancel Signup');
+    echo form_submit('dont', 'Don\'t Cancel');
 echo form_close();
