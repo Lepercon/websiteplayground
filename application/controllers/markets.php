@@ -235,30 +235,63 @@ class Markets extends CI_Controller {
 			$this->email->send();
 
 			//move to model??
+			
+			$insert = array();
+			$user_id = $this->session->userdata('id');
+			$unix_date = time();
+				
 			if(logged_in() && !empty($cart)) {
-				$insert = array();
-				$user_id = $this->session->userdata('id');
-				$unix_date = time();
 				foreach($cart as $c) {
 					$insert[] = array(
 						'order' => $ordernumber,
 						'item' => $c['id'],
 						'qty' => $c['amount'],
 						'user' => $user_id,
-						'time' => $unix_date
+						'time' => $unix_date,
+						'meal' => 0
 					);
 				}
 				$this->db->insert_batch('market_orders', $insert);
-				
-				if($data['meal'] != 'no meal'){
+			}
+			if(logged_in() && !empty($data)) {
+					
+				if($meal_name['name'] != 'No Meal'){
+					
 					$meal = intval($data['meal']);
-					$insert = array(
+					
+					if($meal_name['name'] == '10 Week Veg Box £40'){
+						$insert = array(
 						'order' => $ordernumber,
 						'item' => $meal,
 						'qty' => 1,
 						'user' => $user_id,
-						'time' => $unix_date
-					);
+						'time' => $unix_date,
+						'meal' => 1,
+						'repeats' => 10
+						);	
+					}
+					elseif($meal_name['name'] == '5 Week Veg Box £30'){
+						$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 1,
+						'repeats' => 5
+						);	
+					}
+					else{
+						$insert = array(
+						'order' => $ordernumber,
+						'item' => $meal,
+						'qty' => 1,
+						'user' => $user_id,
+						'time' => $unix_date,
+						'meal' => 1
+						);	
+					}
+					
 				$this->db->insert('market_orders', $insert);
 				}
 				
@@ -354,5 +387,32 @@ class Markets extends CI_Controller {
 			}
 		}
 		$this->manage();
+	}
+	
+	function past_orders() {
+		$past_orders = array(
+			'orders' => $this->markets_model->get_past_orders()
+		);
+		$this->load->view('markets/past_orders', $past_orders);
+	}
+	
+	function this_weeks_orders() {
+		$due_orders = $this->markets_model->get_orders();
+		$orders = array();
+		foreach ($due_orders as $row)
+		{
+			$orders[] = $this->markets_model->ready_order($row['order'], $row['time']);
+			
+		}
+		$send = array(
+			'orders' => $due_orders,
+			'order_content' => $orders
+		);
+		$this->load->view('markets/this_weeks_orders', $send);
+	}
+	
+	function delivered() {
+		$this->markets_model->mark_orders_delivered();
+		$this->this_weeks_orders();
 	}
 }
