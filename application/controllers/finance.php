@@ -1011,6 +1011,7 @@
     }
     
     function payments(){
+        $this->load->library('GoCardless');
         $user_id = $this->session->userdata('id');
         $in = $this->finance_model->get_invoices($user_id);
         $gr = $this->finance_model->get_groups();

@@ -18,13 +18,13 @@ if(!empty($invoices)) {
     foreach($invoices as $i) {
         if($i['paid'] == 0){
             if(!$foundany){?>
-                <tr><!--<th></th>--><th>Group</th><th>Name</th><th style="min-width:120px;">Date</th><th>Amount</th><th style="min-width:145px;">Actions</th></tr>
+                <tr><th></th><th>Group</th><th>Name</th><th style="min-width:120px;">Date</th><th>Amount</th><th style="min-width:145px;">Actions</th></tr>
             <?php } 
             foreach($groups as $g) {
             if($g['id'] === $i['group_id'])
                 break;
             }?><tr>
-            <!--<td><?php //echo form_checkbox('invoices[]', $i['id'], TRUE); ?></td>-->
+            <td><?php echo form_checkbox('invoices[]', $i['id'], TRUE); ?></td>
             <th><?php echo ($g['budget_name']==$lastname?'':$g['budget_name']); $lastname = $g['budget_name']; ?></th>
             <td class="<?php echo $i['marked_paid']?'marked-paid':''; ?>"><?php echo $i['name']; ?></td>
             <td><?php echo date('jS F Y',$i['date']); ?></td>
@@ -42,7 +42,7 @@ if(!empty($invoices)) {
     }
     
     ?><th class="no-border"></th><th class="no-border"></th><th class="no-border"></th><td><b>£<?php echo number_format($total, 2); ?></b></td></table><?php
-    //echo form_submit('make-payment', 'Pay Selected');
+    echo form_submit('make-payment', 'Pay Selected');
     echo form_close();
     if(!$foundany){
         ?><p>You have no unpaid invoices.</p><?php
