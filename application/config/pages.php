@@ -442,6 +442,4 @@ $pages = array(
         'keep_cache' => FALSE,
         'editable' => TRUE
     )
-
->>>>>>> master
 );
