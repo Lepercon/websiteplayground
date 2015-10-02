@@ -1,5 +1,4 @@
 <?php
-    exit();
     $hookSecret = 'cAZQB2VJs6NKF6k5seWhvaxk';  # set NULL to disable check
 
     set_error_handler(function($severity, $message, $file, $line) {
