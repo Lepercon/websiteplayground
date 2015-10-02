@@ -134,7 +134,7 @@ class Questionnaire_model extends CI_Model {
 	}
 
 	function alert($section, $q) {
-		if(ENVIRONMENT !== 'local') {
+		if(ENVIRONMENT !== 'development') {
 			$this->db->select('email');
 			$this->db->where('id', $q['created_by']);
 			$email = $this->db->get('users')->row_array(0);

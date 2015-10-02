@@ -384,7 +384,7 @@ class Photos_model extends CI_Model {
 		$this->email->message($mail);
 		$this->email->subject('JCR Photo Orders');
 		
-		if(ENVIRONMENT != 'local'){
+		if(ENVIRONMENT != 'development'){
 			$this->email->send();
 		}
 		

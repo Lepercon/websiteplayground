@@ -23,7 +23,17 @@ class Bookings extends CI_Controller {
 	}
 	
 	function book(){
-		
+		if ($this->input->post('main_details') == FALSE){
+			$this->load->view('bookings/book_room', array(
+				'rooms' => $this->bookings_model->get_rooms(), 
+				'reservations' => $this->bookings_model->get_bookings(),
+				'layouts' => $this->bookings_model->get_layouts(),
+				'equiptment' => $this->bookings_model->get_equiptment()
+				));
+		}
+		else{
+			$this->load->view('bookings/successful');
+		}
 	}
 	
 	function book_old() {

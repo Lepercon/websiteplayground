@@ -25,7 +25,7 @@ class Scheduling_model extends CI_Model {
         $this->email->subject($subject);
         $this->email->message($message);
         
-        if(ENVIRONMENT !== 'local') {
+        if(ENVIRONMENT !== 'development') {
             $this->email->send();
             return $this->email->print_debugger();
         }else{

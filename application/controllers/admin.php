@@ -397,7 +397,7 @@ class Admin extends CI_Controller {
 					$this->email->message($mail);
 					$this->email->subject('Password Reset');
 					
-					if(ENVIRONMENT != 'local'){
+					if(ENVIRONMENT != 'development'){
 						$this->email->send();
 					}else{
                         log_message('error', 'Email: '.$this->email->print_debugger());

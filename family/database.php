@@ -1,15 +1,15 @@
 <?php
 
-if(strpos($_SERVER['SERVER_NAME'], 'butlerjcr.co.uk') > 0) {
+if($_SERVER['SERVER_NAME'] == 'butlerjcr.co.uk') {
 	$server = "mysql.dur.ac.uk";
 	$username = "djb8jcr";
 	$password = "VP4GL6dhF3rYdUGB";
 	$database = "Xdjb8jcr_family";
 } else {
 	$server = "localhost";
-	$username = "familyUol4i";
-	$password = "bk)}k)};J1lL";
-	$database = "family";
+	$username = "root";
+	$password = "root";
+	$database = "xdjb8jcr_family";
 }
 
 $db = mysql_connect($server,$username,$password);

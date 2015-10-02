@@ -5,8 +5,9 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
+ * @author		EllisLab Dev Team
+ * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
+ * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -27,7 +28,7 @@
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Encryption
- * @author		ExpressionEngine Dev Team
+ * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/zip.html
  */
 class CI_Zip  {
@@ -88,11 +89,8 @@ class CI_Zip  {
 	function _get_mod_time($dir)
 	{
 		// filemtime() will return false, but it does raise an error.
-		//$date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now);
-		// CUSTOM TO AVOID ERROR LOGS FILLING WITH FILEMTIME ERROR
-		$date = (file_exists($dir)) ? filemtime($dir): getdate($this->now);
-		// END CUSTOM
-		
+		$date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now);
+
 		$time['file_mtime'] = ($date['hours'] << 11) + ($date['minutes'] << 5) + $date['seconds'] / 2;
 		$time['file_mdate'] = (($date['year'] - 1980) << 9) + ($date['mon'] << 5) + $date['mday'];
 

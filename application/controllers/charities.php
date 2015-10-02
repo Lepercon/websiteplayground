@@ -358,7 +358,7 @@
 			$this->email->cc($cc);
 			$this->email->subject('Charity Photo Order '.$order_time.$this->session->userdata('id'));
 			$this->email->message($message);
-			if(ENVIRONMENT !== 'local') {
+			if(ENVIRONMENT !== 'development') {
 				$this->email->send();
 			}
 			$this->cart->destroy();
