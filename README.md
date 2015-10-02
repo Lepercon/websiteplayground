@@ -8,3 +8,5 @@ This repository contains all of the files used at http://butlerjcr.co.uk.
 ##To Do
 * Write the HowTo (above).
 * Write the ToDo (here).
+
+See documentation folder for more extensive ToDo
