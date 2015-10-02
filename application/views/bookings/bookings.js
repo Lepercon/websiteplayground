@@ -21,7 +21,7 @@
 			
 		},
 		frequency_change : function(frequency){
-			if(frequency.val() == 'No repeat'){
+			if(frequency.val() == 0){
 				$('.last-date').hide();
 			}else{
 				$('.last-date').show();
