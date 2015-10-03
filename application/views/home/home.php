@@ -82,7 +82,7 @@
         </ul>
     </div>
     <div class="jcr-box">
-        <iframe width="306" height="172" src="https://www.youtube.com/embed/JmIgny_FvQs" frameborder="0" allowfullscreen></iframe>
+        <iframe width="306" height="172" src="https://www.youtube.com/embed/A7khiZFSZKI" frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="jcr-box no-padding-box">
         <a class="twitter-timeline" href="https://twitter.com/butlerjcr" data-widget-id="250249192499453952">Tweets by @butlerjcr</a>
