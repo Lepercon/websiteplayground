@@ -64,14 +64,19 @@ class Bookings_model extends CI_Model {
 				$end = $this->epoch_convert($hour, $min, $date);
 			}
 		}
+                $equipt = $this->input->post('equipt')!==FALSE?$this->input->post('equipt'):array();
+		$equiptment = implode(', ', array_keys($equipt));
 		$details = array(
-			'room_id' => $this->input->post('room_id'),
+			'user_id' => $this->session->userdata('id'),
+                        'room_id' => $this->input->post('room_id'),
 			'booking_start' => $start,
 			'booking_end' => $end,
 			'frequency' => $this->input->post('Frequency_of_bookings'),
 			'number_of_people' => $this->input->post('Number_of_People'),
 			'Phone_number' => $this->input->post('Phone_number'),
-			'Title' => $this->input->post('Title')
+			'Title' => $this->input->post('Title'),
+                        'Equiptment' => $equiptment,
+                        'Layout' => $this->input->post('Room_Layout')==FALSE?' ':$this->input->post('Room_Layout'),
 		);
 		return $details;	
 	}
@@ -79,49 +84,6 @@ class Bookings_model extends CI_Model {
 	function get_room_id(){
 		$details = array('room_id' => $this->input->post('room_id'));
 		return $details;
-	}
-	
-	function input_equipt_layout(){
-		$equiptment = array();
-		$equipt = $this->input->post('equipt');
-		array_keys($equipt);
-		$equiptment = implode(', ', $equipt);
-		$details = array(
-						'room_id' => $this->input->post('room_id'),
-						'Equiptment' => $equiptment,
-						'Layout' => $this->input->post('Room_Layout')==FALSE?' ':$this->input->post('Room_Layout'),
-						'booking_start' => $this->input->post('booking_start'),
-						'booking_end' => $this->input->post('booking_end'),
-						'frequency' => $this->input->post('frequency'),
-						'number_of_people' => $this->input->post('number_of_people'),
-						'Phone_number' => $this->input->post('Phone_number'),
-						'Title' => $this->input->post('Title')
-						);
-		return $details;
-	}
-	
-	function confirm_details(){
-		$details = array(
-			'room_id' => $this->input->post('room_id'),
-			'user_id' => $this->session->userdata('id'),
-			'booking_start' => $this->input->post('booking_start'),
-			'booking_end' => $this->input->post('booking_end'),
-			'frequency' => $this->input->post('frequency'),
-			'number_of_people' => $this->input->post('number_of_people'),
-			'Phone_number' => $this->input->post('Phone_number'),
-			'Title' => $this->input->post('Title'),
-			'Equiptment' => $this->input->post('Equiptment'),
-			'Layout' => $this->input->post('Layout')
-		);
-		return $details;
-	}
-
-	function error_check($details){
-		$error = array();
-		if ($details['booking_start'] > $details['booking_end']){
-			$error[] = 'Last date is not after start date';
-		}
-		return $error;
 	}
 	
 	function enter_data($details){
@@ -180,6 +142,25 @@ class Bookings_model extends CI_Model {
 		$this->email->message($message); 
 		$this->email->send();
 	}
+        
+        function check_clash ($details){
+            $ins = $this->db->get('bookings_instances')->result_array();
+            $rooms = $this->db->get('bookings_rooms')->result_array();
+            $instances = array();
+            foreach ($rooms as $r){
+                    $instances[$r['id']] = array();
+            }
+            foreach ($ins as $i){
+                if ($i['room_id'] == $this->input->post('room_id')){
+                    if ($i['time_start'] < $details['booking_start'] && $details['booking_start'] < $i['time_end']){
+                        $GLOBALS['errors'][] = 'The start time clashes with another bookings. Please view the availabilty page to see when the clash is';
+                    }
+                    if ($i['time_start'] < $details['booking_end'] && $details['booking_end'] < $i['time_end']){
+                        $GLOBALS['error'][] = 'The end time clashes with another bookings. Please view the availabilty page to see when the clash is';
+                    }    
+                }
+            }
+        }
 }
 
 

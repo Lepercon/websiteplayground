@@ -23,17 +23,39 @@ class Bookings extends CI_Controller {
 	}
 	
 	function book(){
-		if ($this->input->post('main_details') == FALSE){
-			$this->load->view('bookings/book_room', array(
-				'rooms' => $this->bookings_model->get_rooms(), 
-				'reservations' => $this->bookings_model->get_bookings(),
-				'layouts' => $this->bookings_model->get_layouts(),
-				'equiptment' => $this->bookings_model->get_equiptment()
-				));
-		}
-		else{
-			$this->load->view('bookings/successful');
-		}
+            $booking_screen = $this->input->post('Phone_number') == FALSE;
+            if(!$booking_screen){
+                $details = $this->bookings_model->get_submitted_details();
+                if ($this->input->post('booking_start') > $this->input->post('booking_end')){
+                    $GLOBALS['errors'][] = 'Start date after end date';
+                    $booking_screen = TRUE;
+                }
+                $s_time = $this->input->post('s_hour') * 60 + $this->input->post('s_min');
+                $e_time = $this->input->post('e_hour') * 60 + $this->input->post('e_min');
+                if ($s_time > $s_time){  
+                        $GLOBALS['errors'][] = 'Start time after end time';
+                }
+                $this->bookings_model->check_clash($details);
+            }
+            if ($booking_screen || isset($GLOBALS['errors'])){
+                    $this->load->view('bookings/book_room', array(
+                            'rooms' => $this->bookings_model->get_rooms(), 
+                            'reservations' => $this->bookings_model->get_bookings(),
+                            'layouts' => $this->bookings_model->get_layouts(),
+                            'equiptment' => $this->bookings_model->get_equiptment()
+                            ));
+            }
+            else{
+                $id = $this->bookings_model->enter_data($details);
+		$message = $this->load->view('bookings/Email', array(
+                                                                    'b' => $this->bookings_model->get_booking($id),
+                                                                    'room' => $this->bookings_model->get_rooms(),
+                                                                    'layout' => $this->bookings_model->get_layouts(),
+                                                                    'equiptment' => $this->bookings_model->get_equiptment()
+                                                                    ), true);
+                //$this->bookings_model->send_email($message, $details);
+                $this->load->view('bookings/successful');
+            }
 	}
 	
 	function book_old() {

@@ -57,6 +57,7 @@ class Post_controller_constructor {
 		$page = (isset($pages[$class]) ? $pages[$class] : $pages['default']);
 		$this->ci->page_details = $page;
 		$title = (is_null($page['title']) ? $page['full'] : $page['title']);
+		log_message('error', var_export($page, true));
 		$this->ci->page_details['big_title'] = (is_null($page['big_title']) ? $title : $page['big_title']);
 		
 		$this->ci->common_model->update_page_count();
