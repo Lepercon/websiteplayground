@@ -33,7 +33,7 @@ class Bookings_model extends CI_Model {
 	function epoch_convert($hour, $min, $date){
 		$epoch = mktime ($hour, $min, 0, $date['month'], $date['day'], $date['year'] );
 		return $epoch;
-	}
+	} 
 	
 	function get_submitted_details(){
 		$re = "/(?<day>[0-9]{2})\\/(?<month>[0-9]{2})\\/(?<year>[0-9]{4})/";
