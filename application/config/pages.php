@@ -305,7 +305,7 @@ $pages = array(
         'title' => 'Markets',
         'big_title' => '<span class="big-text-small">Durham Markets</span>',
         'description' => 'Request deliveries from Durham Market',
-        'requires_login' => FALSE,
+        'requires_login' => TRUE,
         'allow_non-butler' => TRUE,
         'require-secure' => FALSE,
         'css' => array(),
