@@ -1,7 +1,6 @@
 <?php
 
 class Bookings extends CI_Controller {
-<<<<<<< HEAD
     
     function Bookings() {
         parent::__construct();
@@ -30,19 +29,6 @@ class Bookings extends CI_Controller {
             ));
         }
     }
-    function room(){
-    }
-=======
-	
-	function Bookings() {
-		parent::__construct();
-		$this->load->model('bookings_model');
-	}
-	
-	function index(){
-		$this->load->view('bookings/home');
-	}
-	
 	function calender() {
 		$year = $this->uri->segment(3, date('Y'));
 		$month = $this->uri->segment(4, date('m'));
@@ -141,5 +127,4 @@ class Bookings extends CI_Controller {
 				'equiptment' => $this->bookings_model->get_equiptment()
 			));
 	}
->>>>>>> Room-Booking
 }

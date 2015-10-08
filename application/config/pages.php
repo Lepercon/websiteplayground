@@ -404,18 +404,11 @@ $pages = array(
         'keep_cache' => FALSE,
         'editable' => TRUE
     ),
-<<<<<<< HEAD
-
-    'bookings' => array(
-        'id' => 31,
-        'title' => '<span class="big-text-small">Room Bookings</span>',
-=======
     'bookings' => array(
         'id' => 31,
         'title' => '<span class="big-text-small">Room Bookings</span>',
         'big_title' => NULL,
->>>>>>> Room-Booking
-		'description' => '',
+        'description' => '',
         'requires_login' => TRUE,
 		'allow_non-butler' => FALSE,
 		'require-secure' => FALSE,
