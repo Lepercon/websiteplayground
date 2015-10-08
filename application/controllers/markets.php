@@ -288,7 +288,8 @@ class Markets extends CI_Controller {
 						'qty' => 1,
 						'user' => $user_id,
 						'time' => $unix_date,
-						'meal' => 1
+						'meal' => 1,
+						'veg' => $data['vegetarians']
 						);	
 					}
 					
