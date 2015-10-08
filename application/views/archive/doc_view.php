@@ -1,5 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+if($section == 'finance_decisions'){
+    $this->load->view('archive/finance_decisions');
+    return;
+}
+
 $months = array(1=>'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
 function add_ordinal($day) {

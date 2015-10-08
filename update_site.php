@@ -34,44 +34,48 @@
     
     try{ rename('offline_fully', 'offline_full'); }catch (Exception $e){}
    
-    $contents_url = 'https://api.github.com/repos/butlerjcr/butlerjcr.co.uk/contents/';
-    //$files = array('README.md', 'phpinfo.php', 'offline/logo.png');
-    $token = '?access_token=954697c93c9a0871b824aa369ff4947cb41a7cbb';
-    
-    
-    foreach($files['download'] as $f){
-        $url = $contents_url.$f.$token;
-        //var_dump($f);
-        //$fh = fopen(basename($url), "wb");
-        $ch = curl_init($url);
-        //curl_setopt($ch, CURLOPT_FILE, $fh);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Test App');
-        $json = curl_exec($ch);
-        curl_close($ch);
-        //var_dump($json);
-        $data = json_decode($json, true);
-        $url = $data['download_url'];
-        
-        $path = $f;
-        try{
-            mkdir(dirname($path), 0755, true);
-        }catch (Exception $e){
-            
-        }
-        var_dump($path);
-        $fh = fopen($path, "w");
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_FILE, $fh);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Test App');
-        curl_exec($ch);
-        curl_close($ch);
-        
-    }
-    
-    foreach($files['delete'] as $f){
-        unlink($f);
-    }
+	try{
+		$contents_url = 'https://api.github.com/repos/butlerjcr/butlerjcr.co.uk/contents/';
+		//$files = array('README.md', 'phpinfo.php', 'offline/logo.png');
+		$token = '?access_token=954697c93c9a0871b824aa369ff4947cb41a7cbb';
+		
+		
+		foreach($files['download'] as $f){
+			$url = $contents_url.$f.$token;
+			//var_dump($f);
+			//$fh = fopen(basename($url), "wb");
+			$ch = curl_init($url);
+			//curl_setopt($ch, CURLOPT_FILE, $fh);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_USERAGENT, 'Test App');
+			$json = curl_exec($ch);
+			curl_close($ch);
+			//var_dump($json);
+			$data = json_decode($json, true);
+			$url = $data['download_url'];
+			
+			$path = $f;
+			try{
+				mkdir(dirname($path), 0755, true);
+			}catch (Exception $e){
+				
+			}
+			var_dump($path);
+			$fh = fopen($path, "w");
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_FILE, $fh);
+			curl_setopt($ch, CURLOPT_USERAGENT, 'Test App');
+			curl_exec($ch);
+			curl_close($ch);
+			
+		}
+		
+		foreach($files['delete'] as $f){
+			unlink($f);
+		}
+	}catch(Exception $e){
+		echo $e->getMessage();
+	}
     
     try{ rename('offline_full', 'offline_fully'); }catch (Exception $e){}
 ?>

@@ -61,4 +61,5 @@ class archive_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->delete('steering_pages');
     }
+    
 }

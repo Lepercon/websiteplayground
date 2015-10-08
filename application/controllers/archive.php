@@ -13,6 +13,7 @@ class Archive extends CI_Controller {
         $this->load->library('page_edit_auth');
         
         $sections = $this->archive_model->get_sections();
+        
         $section = $this->uri->rsegment(3);
         if($section === FALSE) $section = null;
         $section_id = $this->archive_model->get_section_id($section, $sections);
@@ -66,6 +67,10 @@ class Archive extends CI_Controller {
         }
         $sections = $this->archive_model->get_sections();
         $this->load->view('archive/manage', array('sections' => $sections, 'errors' => $errors, 'other_errors' => $other_errors, 'success' => $success));
+    }
+    
+    function finance(){
+        
     }
     
     function add_new_doc() {

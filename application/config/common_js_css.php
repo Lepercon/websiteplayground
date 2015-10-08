@@ -14,10 +14,17 @@ if(isset($_GET['altcss'])){
 }
 
 $js_urls = array(
+<<<<<<< HEAD
     'jquery' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/jquery.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'),
     'jquery_ui' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/jquery-ui.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'),
     'history' => VIEW_URL.'common/jquery.history.js?v='.VERSION,
     'jcrop' => VIEW_URL.'common/jcrop/jcrop.js?v=99'
+=======
+	'jquery' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/jquery.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'),
+	'jquery_ui' => (ENVIRONMENT == 'development' ? VIEW_URL.'common/jquery-ui.min.js' : 'http'.(HTTPS ? 's' : '').'://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'),
+	'history' => VIEW_URL.'common/jquery.history.js?v='.VERSION,
+	'jcrop' => VIEW_URL.'common/jcrop/jcrop.js?v=99'
+>>>>>>> Room-Booking
 );
 
 $css_urls = array(
