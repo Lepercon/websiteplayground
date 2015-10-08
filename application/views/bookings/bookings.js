@@ -22,7 +22,7 @@
 						$(this).attr('disabled', 'disabled');
 					}else{
 						$(this).removeAttr('disabled');
-					}
+					} 
 				});
 			});
 			$.bookings.rooms_change($('.rooms'));
