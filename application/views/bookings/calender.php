@@ -1,4 +1,4 @@
-<div class="width-66 narrow-full content-left" style="width:79%">
+<div class="width-66 narrow-full content-left" style="width:79%"> 
 <?php 
 	$times = range(6, 23);
 	$next_day = $date + (60*60*24);
