@@ -8,7 +8,7 @@
 
 .calender-view col:nth-child(2n+3) {
 	background: #FF0;
-}
+} 
 
 .calendar-view td{
 	width:37px;

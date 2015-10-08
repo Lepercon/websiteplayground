@@ -84,7 +84,7 @@ class Bookings_model extends CI_Model {
 		$details = array('room_id' => $this->input->post('room_id'));
 		return $details;
 	}
-	
+                        
 	function enter_data($details){
 		$this->db->insert('bookings_reservations', $details);
 		$id = $this->db->insert_id();

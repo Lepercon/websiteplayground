@@ -7,7 +7,7 @@ class Bookings extends CI_Controller {
         $this->load->model('bookings_model');
     }
     function index() {
-       $this->load->view('bookings/home');
+       $this->load->view('bookings/home'); 
     }
 	function calender() {
 		$year = $this->uri->segment(3, date('Y'));

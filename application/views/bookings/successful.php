@@ -7,5 +7,5 @@ echo 'Your request has been submitted to the College staff and should be prosese
 	If you have any queeries please click '.anchor('contact/user/jcr', 'HERE').' or contact: butler.jcr@durham.ac.uk<br><br>
 	Thank you for booking through the JCR website!';
 	
-	echo '<br><br><br>'.anchor('bookings/index', 'Return to bookings home', 'class="jcr-button"');
+	echo '<br><br><br>'.anchor('bookings/index', 'Return to bookings home', 'class="jcr-button"'); 
 
