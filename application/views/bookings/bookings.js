@@ -50,13 +50,16 @@
                                 <td>First date</td><td>'+$(".start-date").children('input').val()+'</td>\n\
                                 <tr><td>Phone number</td><td>'+$(".phone").val()+'</td>\n\
                                 <td style="border:0"></td>\n\
-                                <td>Frequency</td><td>'+$(".frequency").children('[value='+$(".frequency").val()+']').html()+'</td>\n\
+                                <td>Start time</td><td>'+$(".start-hour").val()+":"+$(".start-min").val()+'</td>\n\
                                 <tr><td>Room</td><td>'+$(".rooms").children('[value='+$(".rooms").val()+']').html()+'</td>\n\
                                 <td style="border:0"></td>\n\
-                                <td>Last date</td><td>'+$(".last-date").children('input').val()+'</td>\n\
+                                <td>End time</td><td>'+$(".end-hour").val()+":"+$(".end-min").val()+'</td>\n\
                                 <tr><td>Number of people</td><td>'+$(".people").val()+'</td>\n\
                                 <td style="border:0"></td>\n\
+                                <td>Frequency</td><td>'+$(".frequency").children('[value='+$(".frequency").val()+']').html()+'</td>\n\
                                 <tr><td>Layout</td><td>'+$(".layouts").children('[value='+$(".layouts").val()+']').html()+'</td>\n\
+                                <td style="border:0"></td>\n\
+                                <td>Last date</td><td>'+$(".last-date").children('input').val()+'</td>\n\
                                 <tr><td>Equiptment</td><td>'+$('input[room-id='+$(".rooms").val()+']:checked').map(function(){ return $(this).val() }).get().join(', ')+'</td>\n\
                                 </table>'
                             ).dialog({
