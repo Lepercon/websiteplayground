@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 echo back_link('ballot');
 
+echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
+
     function get_value($b, $name, $num, $option_num=NULL){
         if(isset($_POST[$name])){
             return $_POST[$name];
