@@ -57,7 +57,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             <p>Signup Has Closed</p>
         <?php } ?>
         <p>Max Group Size: <b><?php echo $b['max_group']; ?></b></p>
-        <p>Guests Allowed: <b><?php echo $b['allow_guests']?'Yes':'No'; ?></b></p>
+        <p>Guests Allowed: <b><?php echo $b['allow_guests']?'Yes (Max '.$b['max_guests'].')':'No'; ?></b></p>
         <p>Price: <b>£<?php echo ($min_price==$max_price)?$min_price:$min_price.' - £'.$max_price; ?></b></p>
         <p>Total Spaces: <b><?php $num = 0; foreach(explode(';', $b['tables']) as $t){ $num += $t; } echo $num; ?></b></p>
     </div>

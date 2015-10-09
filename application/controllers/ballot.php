@@ -29,10 +29,17 @@ class Ballot extends CI_Controller {
             
                 $i = 1;
                 $user = array();
+                $num_guests = 0;
                 while(isset($_POST['person-'.$i]) && $i <= $ballot['max_group']){
                     if($_POST['person-'.$i] !== ''){
                         if($_POST['id-'.$i] == -1){
                             $index = 'id-'.$i;
+                            if($num_guests >= $ballot['max_guests']){
+                                $_SESSION['errors'][] = 'You have already signed up the maximum number of guests.';
+                                $i++;
+                                continue;
+                            }
+                            $num_guests++;
                         }else{
                             $index = $_POST['id-'.$i];
                             if(empty($index)){
