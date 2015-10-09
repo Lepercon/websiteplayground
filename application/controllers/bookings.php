@@ -51,7 +51,7 @@ class Bookings extends CI_Controller {
                                                                     'layout' => $this->bookings_model->get_layouts(),
                                                                     'equiptment' => $this->bookings_model->get_equiptment()
                                                                     ), true);
-                //$this->bookings_model->send_email($message, $details);
+                $this->bookings_model->send_email($message, $details);
                 $this->load->view('bookings/successful');
             }
 	}
