@@ -1,7 +1,7 @@
 <link href='https://fonts.googleapis.com/css?family=Monsieur+La+Doulaise' rel='stylesheet' type='text/css'>
 
 <style>
-table{
+table{ 
 	border-collapse:collapse;
 }
 td{
