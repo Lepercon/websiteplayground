@@ -45,7 +45,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
     $max_price = number_format($max_price, 2);
 
 ?>
-<div id="accordion">
+<div id="ballot_accordion">
     <h3><?php echo $b['name'].' - '.$b['signup_name']; ?></h3>
     <div>
         <p><?php echo $b['name']; ?> is at <b><?php echo date('H:i \o\n l, d/m/Y', $b['time']); ?></b></p>
@@ -113,7 +113,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 
                 echo '<br></span>';
             }
-            if($b['people'][0]['created_by'] == $user_id){
+            if(!isset($b['people'][0]) || $b['people'][0]['created_by'] == $user_id){
                 echo form_label().form_label().form_submit('', 'Submit');
             }
             
@@ -154,3 +154,4 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
     }
 ?>
 </span>
+<span id="active-tab" style="display: none;"><?php echo empty($b['people'])?0:3; ?></span>

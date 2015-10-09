@@ -21,46 +21,50 @@ class Ballot extends CI_Controller {
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         $_SESSION['errors'] = array();
+        $this->ballot_model->signup_check($ballot['id']);
     
         if($ballot['open_time'] < time() && $ballot['close_time'] > time()){
             
-            $i = 1;
-            $user = array();
-            while(isset($_POST['person-'.$i])){
-                if($_POST['person-'.$i] !== ''){
-                    if($_POST['id-'.$i] == -1){
-                        $index = 'id-'.$i;
-                    }else{
-                        $index = $_POST['id-'.$i];
-                        if(empty($index)){
-                            $i++;
-                            if($ballot['allow_guests']){
-                                $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box';
-                            }else{
-                                $_SESSION['errors'][] = 'You must enter select a name from the drop down list after you have started typing.';
-                            }
-                            continue;
-                        }else{
-                            
-                        }
-                    }
-                    $user[$index]['name'] = $_POST['person-'.$i];
-                    $user[$index]['user_id'] = $_POST['id-'.$i];
-                    $j = 0;
-                    $user[$index]['options'] = '';
-                    while(isset($_POST['option-'.$i.'-'.$j])){
-                        $user[$index]['options'] .= ($user[$index]['options']==''?'':';').$_POST['option-'.$i.'-'.$j];
-                        $j++;
-                    }
-                    $user[$index]['created_by'] = $u_id;
-                    $user[$index]['ballot_id'] = $id;
-                    $user[$index]['split_group'] = $_POST['split-group'];
-                }
-                $i++;
-            }
+            if($this->ballot_model->signup_check($ballot['id'])){
             
-            if(!empty($user)){
-                $this->ballot_model->update_ballot($id, $u_id, $user);
+                $i = 1;
+                $user = array();
+                while(isset($_POST['person-'.$i]) && $i <= $ballot['max_group']){
+                    if($_POST['person-'.$i] !== ''){
+                        if($_POST['id-'.$i] == -1){
+                            $index = 'id-'.$i;
+                        }else{
+                            $index = $_POST['id-'.$i];
+                            if(empty($index)){
+                                $i++;
+                                if($ballot['allow_guests']){
+                                    $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box';
+                                }else{
+                                    $_SESSION['errors'][] = 'You must enter select a name from the drop down list after you have started typing.';
+                                }
+                                continue;
+                            }else{
+                                
+                            }
+                        }
+                        $user[$index]['name'] = $_POST['person-'.$i];
+                        $user[$index]['user_id'] = $_POST['id-'.$i];
+                        $j = 0;
+                        $user[$index]['options'] = '';
+                        while(isset($_POST['option-'.$i.'-'.$j])){
+                            $user[$index]['options'] .= ($user[$index]['options']==''?'':';').$_POST['option-'.$i.'-'.$j];
+                            $j++;
+                        }
+                        $user[$index]['created_by'] = $u_id;
+                        $user[$index]['ballot_id'] = $id;
+                        $user[$index]['split_group'] = $_POST['split-group'];
+                    }
+                    $i++;
+                }
+
+                if(!empty($user)){
+                    $this->ballot_model->update_ballot($id, $u_id, $user);
+                }
             }
         
         }
