@@ -22,7 +22,7 @@ echo form_open('markets/meals'); ?>
 		echo '<input id="meal'.$mealcount.'" type="radio" name="meal" value="'.strtolower($m['id']).'" '.($this->session->userdata('market_meal') == strtolower($m['id']) ? 'checked="checked"' : set_radio('meal', strtolower($m['id']))).'><label class="radio-label" for="meal'.$mealcount.'">'.$m['name'].(!file_exists(VIEW_PATH.'markets/recipes/'.$m['id'].'.pdf') ? '' : ' - <a href="'.VIEW_URL.'markets/recipes/'.$m['id'].'.pdf" class="no-jsify">View the recipe</a>').'</label>';
 		echo '</li>';
 		
-		if($m['name']=='No Meal' || $m['name']=='5 Week Veg Box £30'){
+		if($m['name']=='No Meal' || $m['name']=='5 Week Veg Box £20'){
 			echo '<br /><hr><br />';
 		}
 	} ?>
