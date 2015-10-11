@@ -15,13 +15,14 @@
 			  echo "<p>Date Ordered: ".gmdate("l dS F Y", $row["time"])."</p>";
 			  
 			  echo "<table>";
-			  echo "<tr><th>Item</th><th>Qty</th><th>Weeks Ordered For</th></tr>";
+			  echo "<tr><th>Item</th><th>Qty</th><th>Weeks Ordered For</th><th>No. Veggies</th></tr>";
 				  	foreach ($order_content[$i] as $row)
 					{
 						echo "<tr>";
 						echo "<td>".$row['name']."</td>";
 						echo "<td>".$row['qty']."</td>";
 						echo "<td>".$row['repeats']."</td>";
+						echo "<td>".$row['veg']."</td>";
 						echo "</tr>";
 					}
 				echo "</table>";
