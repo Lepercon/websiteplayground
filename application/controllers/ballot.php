@@ -15,9 +15,14 @@ class Ballot extends CI_Controller {
         ));
     }
     
-    function view_ballot(){
+    function view_ballot(){        
             
         $id = $this->uri->segment(3);
+        
+        if($id == 4 && $this->session->userdata('year_group') == 1){
+            cshow_error('Sorry, freshers are unable to sign up to this formal.', 401, 'Access denied');
+            return;
+        }
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         $_SESSION['errors'] = array();
@@ -55,6 +60,7 @@ class Ballot extends CI_Controller {
                             }
                         }
                         $user[$index]['name'] = $_POST['person-'.$i];
+                        $user[$index]['requirements'] = $_POST['requirements-'.$i];
                         $user[$index]['user_id'] = $_POST['id-'.$i];
                         $j = 0;
                         $user[$index]['options'] = '';
@@ -99,6 +105,22 @@ class Ballot extends CI_Controller {
         
         
         
+    }
+    
+    function view_signups(){
+        $id = $this->uri->segment(3);
+        $u_id = $this->session->userdata('id'); 
+        $ballot = $this->ballot_model->get_ballot($id, $u_id);
+        
+        if(is_admin()){
+            $people = $this->ballot_model->get_people($id, $this->uri->segment(4));
+            $this->load->view('ballot/view_people', array(
+                'b' => $ballot,
+                'people' => $people
+            ));
+        }else{
+            redirect('ballot');
+        }
     }
     
     function get_tables(){

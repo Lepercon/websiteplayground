@@ -11,6 +11,8 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 return $b['people'][$num]['name'];
             }elseif(strrpos($name, 'id') !== FALSE){
                 return $b['people'][$num]['user_id'];
+            }elseif(strrpos($name, 'requirements') !== FALSE){
+                return $b['people'][$num]['requirements'];
             }else{
                 $options = explode(';', $b['people'][$num]['options']);
                 return $options[$option_num];
@@ -111,6 +113,8 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                     echo '<p>'.form_label().form_label($o['title'].':').form_dropdown('option-'.$r.'-'.$k, $o['options']['names'], get_value($b, 'option-'.$r.'-'.$k, $r-1, $k), 'style="min-width:167px"').'</p>';
                 }
                 
+                echo '<p>'.form_label().form_label('Special Requirements:').form_input('requirements-'.$r, get_value($b, 'requirements-'.$r, $r-1), 'placeholder="Special Requirements"').'</p>';
+                
                 echo '<br></span>';
             }
             if(!isset($b['people'][0]) || $b['people'][0]['created_by'] == $user_id){
@@ -142,6 +146,12 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
         <?php } ?>
         </table>
     </div>
+    <?php if(is_admin()){ ?>
+        <h3>Admin</h3>
+        <div>
+            <a href="<?php echo site_url('ballot/view_signups/'.$b['id']); ?>"><p>View Sign Ups</p></a>
+        </div>
+    <?php } ?>
 </div>
 
 <span id="users-list">

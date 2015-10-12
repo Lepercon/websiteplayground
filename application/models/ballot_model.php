@@ -200,7 +200,7 @@ class Ballot_model extends CI_Model {
         $this->db->update('ballot', array('calc_token'=>'complete'), array('id' => $id));
     }*/
     
-    function shuffle_sort2($list) { 
+    function shuffle_sort2($seed, $list) { 
         
         //Sort array into sepeate lists by value
         $sorted_list = array();
@@ -213,7 +213,7 @@ class Ballot_model extends CI_Model {
         
         $master = array();
         
-        mt_srand(333);
+        mt_srand($seed);
         foreach($sorted_list as $k => $v){
             $keys = array_keys($v); 
             
@@ -232,6 +232,79 @@ class Ballot_model extends CI_Model {
         
         return $master; 
     } 
+    
+    function get_people($id, $printing=FALSE){
+        
+        if($printing){
+            $this->db->order_by('ISNULL(users.surname), users.surname');
+        }else{
+            $this->db->order_by('ISNULL(table_num), table_num');
+        }
+        $this->db->where('table_num IS NOT NULL');
+        $this->db->join('users', 'users.id=ballot_people.user_id', 'left outer');
+        $this->db->where('ballot_id', $id);
+        $people = $this->db->get('ballot_people')->result_array();
+        $this->db->where('id', $id);
+        $ballot = $this->db->get('ballot')->row_array();
+        
+        $options = explode(':', $ballot['options']);
+        $op = array();
+
+        foreach($options as $k=>$o){
+            $temp = explode(';', $o);
+            $op[$k]['title'] = $temp[0];
+            $op[$k]['options'] = array();
+            foreach(array_slice($temp, 1) as $i => $t){
+                $name_price = explode('#', $t);
+                if(count($name_price) < 2){
+                    $name_price[1] = 0;
+                }
+                $op[$k]['options'][$i]['name'] = $name_price[0];
+                $op[$k]['options'][$i]['price'] = $name_price[1];
+            }
+        }
+        
+        $totals = array();
+        $table_totals = array();
+        
+        foreach($people as $k => $p){
+            $temp = explode(';', $p['options']);
+            $people[$k]['op_list'] = array();
+            foreach($temp as $kk => $t){
+                $people[$k]['op_list'][] = $op[$kk]['options'][$t];
+                if(!isset($totals[$kk][$t])){
+                    $totals[$kk][$t] = 0;
+                }
+                if(!isset($table_totals[$p['table_num']][$kk][$t])){
+                    $table_totals[$p['table_num']][$kk][$t] = 0;
+                }
+                $totals[$kk][$t]++;
+                $table_totals[$p['table_num']][$kk][$t]++;
+            }
+        }
+        
+        $this->db->where('ballot_id', $id);
+        $this->db->where('requirements != ', '');
+        $this->db->where('table_num IS NOT NULL');
+        $this->db->order_by('table_num');
+        $requirements = $this->db->get('ballot_people')->result_array();
+        
+        foreach($requirements as $k => $p){
+            $temp = explode(';', $p['options']);
+            $requirements[$k]['op_list'] = array();
+            foreach($temp as $kk => $t){
+                $requirements[$k]['op_list'][] = $op[$kk]['options'][$t];
+            }
+        }
+        
+        $data['people'] = $people;
+        $data['options'] = $op;
+        $data['totals'] = $totals;
+        $data['table_totals'] = $table_totals;
+        $data['requirements'] = $requirements;
+        
+        return $data;
+    }
 
     
     function table_assignment2($id){
@@ -259,7 +332,7 @@ class Ballot_model extends CI_Model {
             }
             krsort($num_sizes);
             
-            $sizes = $this->shuffle_sort2($sizes);
+            $sizes = $this->shuffle_sort2($ballot['calc_token'], $sizes);
             
             $t_sub = $t;
             foreach($t as $num => $spaces){
