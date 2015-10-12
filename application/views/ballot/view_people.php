@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
 echo back_link('ballot/view_ballot/'.$b['id']);
-
-var_dump($people['options']); ?>
+?>
 
 <h2>Options Totals</h2>
 <?php 
