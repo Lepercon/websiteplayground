@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 echo back_link('ballot');
 
+?>
+<div class="no-print">
+<?php
+
 echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 
     function get_value($b, $name, $num, $option_num=NULL){
@@ -165,3 +169,4 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 ?>
 </span>
 <span id="active-tab" style="display: none;"><?php echo empty($b['people'])?0:3; ?></span>
+</div>
