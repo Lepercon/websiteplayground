@@ -270,7 +270,7 @@ class Markets extends CI_Controller {
 						'repeats' => 10
 						);	
 					}
-					elseif($meal_name['name'] == '5 Week Veg Box £30'){
+					elseif($meal_name['name'] == '5 Week Veg Box £20'){
 						$insert = array(
 						'order' => $ordernumber,
 						'item' => $meal,
