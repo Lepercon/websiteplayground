@@ -134,8 +134,8 @@ class Bookings_model extends CI_Model {
 		$room = $this->room_id_to_name($details);
 		$this->load->library('email');
                 $config['mailtype'] = 'html';
-                $config['wordwrap'] = FALSE;
-                $this->emial->initialize($config);
+                $config['wordwrap'] = FALSE;    
+                $this->email->initialize($config);
 		$this->email->from($this->session->userdata('email'), $this->session->userdata('firstname').' '.$this->session->userdata('surname'));
 		$this->email->to('a.j.naylor@durham.ac.uk'); 
 		//$this->email->cc('a.j.naylor@durham.ac.uk'); 
