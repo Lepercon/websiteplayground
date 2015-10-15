@@ -1,7 +1,7 @@
 <?php
 
 var_dump($_POST);
-car_dump($details);
+var_dump($details);
 
 echo 'Your request has been submitted to the College staff and should be prosesed within 2 working days. You will recieve email confirmation once this is done.<br><br>
 	Please be aware that all bookings are subject to being overwritten by the University. You will recieve an email at the start of every week you have a booking detailing whether any changes have been made
