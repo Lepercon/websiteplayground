@@ -2,7 +2,9 @@
  
     if(isset($GLOBALS['errors'])){
         foreach($GLOBALS['errors'] as $e){
-            echo '<p class="validation-failure">'.$e.'</p>'; 
+            if ($e != FALSE) {
+                echo '<p class="validation-failure">'.$e.'</p>';
+            }
         }
     }
 	

@@ -24,18 +24,13 @@ class Bookings extends CI_Controller {
             $booking_screen = $this->input->post('Phone_number') == FALSE;
             if(!$booking_screen){
                 $details = $this->bookings_model->get_submitted_details();
-                if ($this->input->post('booking_start') > $this->input->post('booking_end')){
-                    $GLOBALS['errors'][] = 'Start date after end date';
-                    $booking_screen = TRUE;
-                }
-                $s_time = $this->input->post('s_hour') * 60 + $this->input->post('s_min');
-                $e_time = $this->input->post('e_hour') * 60 + $this->input->post('e_min');
-                if ($s_time > $s_time){  
-                        $GLOBALS['errors'][] = 'Start time after end time';
-                }
-                $this->bookings_model->check_clash($details);
+                $s_time = $details['booking_start'] % (60*60*24);
+                $e_time = $details['booking_end'] % (60*60*24);
+                $s_date = $details['booking_start'] - $s_time;
+                $e_date = $details['booking_end'] - $e_time;
+                //$booking_screen = $this->bookings_model->check_clash($details);
             }
-            if ($booking_screen || isset($GLOBALS['errors'])){
+            if ($booking_screen || isset ($GLOBALS['errors'])) {
                     $this->load->view('bookings/book_room', array(
                             'rooms' => $this->bookings_model->get_rooms(), 
                             'reservations' => $this->bookings_model->get_bookings(),
@@ -51,7 +46,7 @@ class Bookings extends CI_Controller {
                                                                     'layout' => $this->bookings_model->get_layouts(),
                                                                     'equiptment' => $this->bookings_model->get_equiptment()
                                                                     ), true);
-                //$this->bookings_model->send_email($message, $details);
+                $this->bookings_model->send_email($message, $details);
                 $this->load->view('bookings/successful', array('details'=>$details));
             }
 	}

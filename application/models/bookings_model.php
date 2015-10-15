@@ -36,33 +36,30 @@ class Bookings_model extends CI_Model {
 	} 
 	
 	function get_submitted_details(){
-		$re = "/(?<day>[0-9]{2})\\/(?<month>[0-9]{2})\\/(?<year>[0-9]{4})/";
-		$hour = $this->input->post('s_hour');
-		$min = $this->input->post('s_minute');
-		if($this->input->post('booking_start') !== FALSE){
-			$start = $this->input->post('booking_start');
-		}else{
-			$this->input->post('start_date');
-			$start = NULL;
-			if(preg_match($re, $this->input->post('start_date'), $date)){
-				preg_match($re, $this->input->post('start_date'), $date);
-				$start = $this->epoch_convert($hour, $min, $date);
-			}
-		}
-		$hour = $this->input->post('e_hour');
-		$min = $this->input->post('e_minute');
+		$re = "/(?P<day>[0-9]{2})\\/(?P<month>[0-9]{2})\\/(?P<year>[0-9]{4})/";
+		$s_hour = $this->input->post('s_hour');
+		$s_min = $this->input->post('s_minute');
+		$start = NULL;
+		if(preg_match($re, $this->input->post('start_date'), $s_date)){
+                    $start = $this->epoch_convert($s_hour, $s_min, $s_date);
+                }
+		$e_hour = $this->input->post('e_hour');
+		$e_min = $this->input->post('e_minute');
 		if ($this->input->post('Frequency_of_bookings') == 0){
-			preg_match($re, $this->input->post('start_date'), $date);
-			 $end = $this->epoch_convert($hour, $min, $date);
-		}elseif($this->input->post('booking_end') !== FALSE){
-			$end = $this->input->post('booking_end');
-		}else{
-			$end = NULL;
-			if(preg_match($re, $this->input->post('last_date'), $date)){
-				preg_match($re, $this->input->post('last_date'), $date);
-				$end = $this->epoch_convert($hour, $min, $date);
-			}
+			preg_match($re, $this->input->post('start_date'), $e_date);
+			$end = $this->epoch_convert($e_hour, $e_min, $e_date);
+                }else{
+                    $end = NULL;
+                    if(preg_match($re, $this->input->post('last_date'), $e_date)){
+                        $end = $this->epoch_convert($e_hour, $e_min, $e_date);
+                    }
 		}
+                if ($this->epoch_convert(0, 0, $s_date) > $this->epoch_convert(0, 0, $e_date)){
+                    $GLOBALS['errors']['date'] = 'Start date after end date';   
+                }
+                if ($start > $this->epoch_convert($e_hour, $e_min, $s_date)){  
+                        $GLOBALS['errors']['time'] = 'Start time after end time';
+                }
                 $equipt = $this->input->post('equipt')!==FALSE?$this->input->post('equipt'):array();
 		$equiptment = implode(', ', array_keys($equipt));
 		$details = array(
@@ -162,6 +159,8 @@ class Bookings_model extends CI_Model {
                     }    
                 }
             }
+            $booking_screen = TRUE;
+            return $booking_screen;
         }
 }
 
