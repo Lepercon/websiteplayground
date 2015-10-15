@@ -28,7 +28,7 @@
 			$.bookings.rooms_change($('.rooms'));
 
 			$('.people').change(function(){
-				cap = parseInt($(this).val())+1;
+				cap = parseInt($(this).val());
 				$('.rooms').children('option').each(function(){
 					if($(this).attr('capacity') < cap){
 						$(this).attr('disabled', 'disabled');
