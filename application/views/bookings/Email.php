@@ -80,7 +80,14 @@ td{
 			?></td>
 			<td><?php
 				if ($r['id'] == $b['room_id']){
-					echo "<b>".$b['Equiptment'];
+                                    $equip = explode ($b['Equiptment']);
+                                    foreach ($equiptment as $e){
+                                        foreach ($equip as $E){
+                                            if ($e['id'] == $E) {
+                                                echo "<b>".$e['e_name'];
+                                            }
+                                        }
+                                    }
 				}
 			?></td>
 		</tr>
