@@ -6,6 +6,3 @@ echo 'Your request has been submitted to the College staff and should be prosese
 	Thank you for booking through the JCR website!';
 	
 echo '<br><br><br>'.anchor('bookings/index', 'Return to bookings home', 'class="jcr-button"');
-        
-        
-echo '<br><br>'."<b>".$this->bookings_model->euiptment_id_2_name($b['Equiptment'])."</b>";

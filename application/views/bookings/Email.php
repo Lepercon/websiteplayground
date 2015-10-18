@@ -82,7 +82,7 @@ td{
 				if ($r['id'] == $b['room_id']){
                                     $E = explode(', ', $b['Equiptment']);
                                     foreach ($E as $e) {
-                                        echo "<b>".$this->bookings_model->euiptment_id_2_name($e)."</b>";
+                                        echo "<b>".$this->bookings_model->euiptment_id_2_name($e).', '."</b>";
                                     }
 				}
 			?></td>
