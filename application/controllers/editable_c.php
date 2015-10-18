@@ -9,9 +9,7 @@
         $this->load->library('editable', array('page' => $this->page));
         $this->editable->set_image_path(VIEW_PATH.$this->page.'/img/upload');
         $this->editable->set_doc_path(VIEW_PATH.$this->page.'/doc');
-        $this->page_info = array(
-            
-        );
+
     }
 
     function save_page() {
