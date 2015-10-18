@@ -122,15 +122,15 @@ class Bookings_model extends CI_Model {
 	}
 	
 	function room_id_to_name($details){
-		$this ->db->where('id',$details['room_id']);
-		$r = $this->db->get('bookings_rooms')->row_array();
-		return $r['name'];
+            $this ->db->where('id',$details['room_id']);
+            $r = $this->db->get('bookings_rooms')->row_array();
+            return $r['name'];
 	}
         
         function euiptment_id_2_name($id) {
             $this ->db->where('id',$id);
-            $r = $this->db->get('bookings_equiptment')->row_array();
-            return $r['name'];
+            $name = $this->db->get('bookings_equiptment')->row_array();
+            return $name;
         }
 	
 	function send_email($message, $details){
