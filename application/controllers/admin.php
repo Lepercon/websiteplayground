@@ -7,6 +7,19 @@ class Admin extends CI_Controller {
     function Admin() {
         parent::__construct();
         $this->load->model('admin_model');
+        $this->page_info = array(
+            'id' => 2,
+            'title' => 'Administration Panel',
+            'big_title' => '<span class="big-text-medium">Admin Panel</span>',
+            'description' => 'Admin panel',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array('admin/admin', 'details/details', 'jcrop'),
+            'js' => array('admin/admin', 'details/details', 'jcrop'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index($success = FALSE) {

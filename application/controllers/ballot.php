@@ -5,6 +5,19 @@ class Ballot extends CI_Controller {
     function Ballot () {
         parent::__construct();
         $this->load->model('ballot_model');
+        $this->page_info = array(
+            'id' => 32,
+            'title' => 'Ballot',
+            'big_title' => NULL,
+            'description' => '',
+            'requires_login' => TRUE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('ballot/ballot'),
+            'js' => array('ballot/ballot'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

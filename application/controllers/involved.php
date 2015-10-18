@@ -8,6 +8,19 @@ class Involved extends CI_Controller {
     {
         parent::__construct();
         $this->inv_pages = array('committees','societies','sports','gym','information');
+        $this->page_info = array(
+            'id' => 4,
+            'title' => 'Get Involved',
+            'big_title' => '<span class="big-text-medium">get involved</span>',
+            'description' => 'How you can get involved in the JCR',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('involved/involved'),
+            'js' => array('involved/involved'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index()

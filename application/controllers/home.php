@@ -2,6 +2,19 @@
 
     function Home() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 1,
+            'title' => 'Home',
+            'big_title' => NULL,
+            'description' => 'The Josephine Butler college JCR is the student run body of the newest college in Durham University, taking in roughly 230 new students each year.',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('home/home'),
+            'js' => array('home/home'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

@@ -6,6 +6,19 @@ class Family_tree extends CI_Controller {
         parent::__construct();
         $this->load->model('family_model');
         $this->load->library('form_validation');
+        $this->page_info = array(
+            'id' => 26,
+            'title' => 'Family Tree',
+            'big_title' => '<span class="big-text-small">Family Tree</span>',
+            'description' => 'JCR, Family Tree',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array('family_tree/family_tree'),
+            'js' => array('family_tree/family_tree'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index() {

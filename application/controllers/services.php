@@ -2,6 +2,19 @@
 
     function Services() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 17,
+            'title' => 'JBs',
+            'big_title' => '<span class="big-text-tiny">JBs</span>',
+            'description' => 'JBs Info',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

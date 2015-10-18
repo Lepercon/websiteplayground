@@ -4,6 +4,19 @@
         parent::__construct();
         $this->load->model('charities_model');
         $this->load->library('cart');
+        $this->page_info = array(
+            'id' => 25,
+            'title' => 'Charities',
+            'big_title' => NULL,
+            'description' => 'All things charitable, in the JCR',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('charities/charities'),
+            'js' => array('charities/charities', 'charities/dare_night/dare_night'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

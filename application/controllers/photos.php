@@ -9,6 +9,19 @@ class Photos extends CI_Controller {
         $this->path = VIEW_PATH.'photos/images/';
         $this->url = VIEW_URL.'photos/images/';
         $this->statuses = array('Waiting for Payment', 'Order Paid', 'Order Complete');
+        $this->page_info = array(
+            'id' => 5,
+            'title' => 'Media',
+            'big_title' => '<span class="big-text-tiny">Photos & Videos</span>',
+            'description' => 'Photos of us!',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('photos/photos'),
+            'js' => array('photos/photos'),
+            'keep_cache' => array('photos', 'photos/videos'),
+            'editable' => FALSE
+        );
     }
     
     function index(){

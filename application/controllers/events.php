@@ -6,6 +6,19 @@ class Events extends CI_Controller {
         parent::__construct();
         $this->load->model('events_model');
         $this->load->library('form_validation');
+        $this->page_info = array(
+            'id' => 3,
+            'title' => 'Calendar',
+            'big_title' => NULL,
+            'description' => 'Butler JCR Event Calendar',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('events/events'),
+            'js' => array('events/events'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     public function index($now = FALSE) {

@@ -4,6 +4,19 @@ class Details extends CI_Controller {
 
     function Details() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 15,
+            'title' => 'User Details',
+            'big_title' => '<span class="big-text-small">User </span><span class="big-text-medium">Details</span>',
+            'description' => 'View and edit user details',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array('details/details', 'jcrop'),
+            'js' => array('details/details', 'jcrop'),
+            'keep_cache' => array('details'),
+            'editable' => FALSE
+        );
     }
 
     function index() {

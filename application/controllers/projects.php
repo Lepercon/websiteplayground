@@ -6,6 +6,19 @@ class Projects extends CI_Controller {
         parent::__construct();
         foreach(array('projects_model', 'events_model', 'users_model') as $m) $this->load->model($m);
         $this->load->library('form_validation');
+        $this->page_info = array(
+            'id' => 22,
+            'title' => 'Projects',
+            'big_title' => '<span class="big-text-medium">Projects</span>',
+            'description' => 'A hub for requests and documentation within the JCR',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index($incomplete = FALSE, $category = 'all') {

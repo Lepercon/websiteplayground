@@ -7,6 +7,19 @@ class Whoswho extends CI_Controller {
     function Whoswho() {
         parent::__construct();
         $this->pages = array('exec', 'assistants', 'sports', 'societies', 'committees', 'support', 'services', 'staff');
+        $this->page_info = array(
+            'id' => 11,
+            'title' => 'Who\'s Who',
+            'big_title' => '<span class="big-text-medium">who\'s who</span>',
+            'description' => 'Find out who does what around college',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('whoswho/whoswho'),
+            'js' => array('whoswho/whoswho', 'whoswho/jsPDF/jspdf', 'whoswho/jsPDF/jspdf.plugin.addimage', 'whoswho/jsPDF/libs/FileSaver.js/FileSaver.min', 'whoswho/jsPDF/jspdf.plugin.from_html', 'whoswho/jsPDF/jspdf.plugin.split_text_to_size', 'whoswho/jsPDF/jspdf.plugin.standard_fonts_metrics'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index() {

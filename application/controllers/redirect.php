@@ -4,6 +4,9 @@ class Redirect extends CI_Controller {
 
     function Redirect() {
         parent::__construct();        
+        $this->page_info = array(
+            
+        );
     }
 
     function index() {

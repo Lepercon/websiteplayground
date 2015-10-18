@@ -4,6 +4,19 @@ class Jcr extends CI_Controller {
 
     function Jcr() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 18,
+            'title' => 'The JCR',
+            'big_title' => '<span class="big-text-small">What is the JCR?</span>',
+            'description' => 'What is Butler College JCR?',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

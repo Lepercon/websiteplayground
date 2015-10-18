@@ -4,6 +4,9 @@ class Email extends CI_Controller {
 
     function Email() {
         parent::__construct();
+        $this->page_info = array(
+            
+        );
     }
 
     function index() {

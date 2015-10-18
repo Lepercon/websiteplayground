@@ -5,6 +5,19 @@
         $this->load->model('finance_model');
         //$this->load->view('finance/feedback');
         $this->finance_model->setup_gocardless();
+        $this->page_info = array(
+            'id' => 27,
+            'title' => 'Finance',
+            'big_title' => '<span class="big-text-small">My Finances</span>',
+            'description' => 'JCR, Sports and Society finances',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => TRUE,
+            'css' => array('finance/finance', 'finance/notifications/notifications'),
+            'js' => array('finance/finance', 'finance/invoices/invoices', 'finance/notifications/notifications'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

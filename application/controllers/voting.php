@@ -2,6 +2,19 @@
 
     function Voting() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 21,
+            'title' => 'Voting',
+            'big_title' => NULL,
+            'description' => 'Vote in Butler JCR or Durham University elections',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('voting/voting'),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

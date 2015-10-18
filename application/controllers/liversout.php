@@ -5,6 +5,19 @@ class Liversout extends CI_Controller {
     function Liversout()
     {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 13,
+            'title' => 'Livers Out',
+            'big_title' => '<span class="big-text-small">livers </span><span class="big-text-medium">out</span>',
+            'description' => 'Information for livers out',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array('liversout/liversout'),
+            'js' => array('liversout/liversout'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

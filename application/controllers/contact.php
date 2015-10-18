@@ -10,6 +10,19 @@ class Contact extends CI_Controller {
         $this->db->where('time <', time() - 14*24*60*60); // clear out old anonymous emails
         $this->db->delete('anon_emails');
         $this->load->library('form_validation');
+        $this->page_info = array(
+            'id' => 7,
+            'title' => 'Contact Us',
+            'big_title' => '<span class="big-text-medium">Contact Us</span>',
+            'description' => 'How to contact us',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('contact/contact'),
+            'js' => array('contact/contact'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index($errors = FALSE, $success = FALSE) {

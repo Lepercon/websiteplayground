@@ -4,6 +4,19 @@ class Game extends CI_Controller {
 
     function Game() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 24,
+            'title' => 'Games',
+            'big_title' => NULL,
+            'description' => 'Play a game against the JCR',
+            'requires_login' => TRUE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array('game/game'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
 
     function index() {

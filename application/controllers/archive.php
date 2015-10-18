@@ -5,6 +5,19 @@ class Archive extends CI_Controller {
     function Archive()
     {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 14,
+            'title' => 'Archive',
+            'big_title' => NULL,
+            'description' => 'Committee Documents and JCR Awards',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array('archive/archive'),
+            'js' => array('archive/archive'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index()

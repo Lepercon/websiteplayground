@@ -2,6 +2,19 @@
 
     function Prospective($authenticated = FALSE) {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 8,
+            'title' => 'Prospective',
+            'big_title' => '<span class="big-text-tiny">Prospective students</span>',
+            'description' => 'Information for prespective students',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('prospective/prospective'),
+            'js' => array('prospective/prospective'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

@@ -6,6 +6,19 @@ class Volunteering extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('volunteering_model');
+        $this->page_info = array(
+            'id' => 33,
+            'title' => 'Volunteering Projects',
+            'big_title' => '<span class="big-text-medium">Projects</span>',
+            'description' => 'Butler JCR is involved in many volunteering project, find out more.',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index()

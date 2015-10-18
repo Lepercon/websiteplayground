@@ -2,6 +2,19 @@
 
     function Bar() {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 16,
+            'title' => 'Bar',
+            'big_title' => NULL,
+            'description' => 'Information about the bar',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

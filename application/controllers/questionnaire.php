@@ -7,6 +7,19 @@ class Questionnaire extends CI_Controller {
         parent::__construct();
         $this->load->model('questionnaire_model');
         $this->questionnaire_model->delete_old_questionnaires();
+        $this->page_info = array(
+            'id' => 6,
+            'title' => 'Questionnaire',
+            'big_title' => '<span class="big-text-medium">Questions</span>',
+            'description' => 'Answer JCR Questionnaires',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array('questionnaire/questionnaire'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
 
     function index() {

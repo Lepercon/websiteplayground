@@ -55,7 +55,7 @@ class Post_controller_constructor {
         // get the class name
         $class = $this->ci->router->fetch_class();
 
-        $page = (isset($pages[$class]) ? $pages[$class] : $pages['default']);
+        $page = (isset($this->ci->page_info) ? $this->ci->page_info : $pages['default']);
         $this->ci->page_details = $page;
         $title = (is_null($page['title']) ? $page['full'] : $page['title']);
         $this->ci->page_details['big_title'] = (is_null($page['big_title']) ? $title : $page['big_title']);

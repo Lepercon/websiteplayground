@@ -5,6 +5,19 @@ class Welfare extends CI_Controller {
     function Welfare()
     {
         parent::__construct();
+        $this->page_info = array(
+            'id' => 12,
+            'title' => 'Welfare',
+            'big_title' => '<span class="big-text-medium">welfare</span>',
+            'description' => 'Get help and support on all matters through the welfare committee',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => TRUE,
+            'css' => array('welfare/welfare'),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index($section = NULL)

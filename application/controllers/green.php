@@ -6,6 +6,19 @@ class Green extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('green_model');
+        $this->page_info = array(
+            'id' => 19,
+            'title' => 'Green JCR',
+            'big_title' => '<span class="big-text-medium">Green JCR</span>',
+            'description' => 'Butler JCR is a green JCR, find out how to help keep it that way.',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array(),
+            'js' => array(),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index()

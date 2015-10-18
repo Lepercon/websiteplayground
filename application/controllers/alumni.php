@@ -4,7 +4,19 @@
 
         parent::__construct();
         $this->load->model('alumni_model');
-
+        $this->page_info = array(
+            'id' => 9,
+            'title' => 'Alumni',
+            'big_title' => NULL,
+            'description' => 'Information for Alumni',
+            'requires_login' => FALSE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('alumni/alumni'),
+            'js' => array('alumni/alumni'),
+            'keep_cache' => FALSE,
+            'editable' => TRUE
+        );
     }
 
     function index() {

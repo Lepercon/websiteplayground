@@ -5,6 +5,19 @@ class Faults extends CI_Controller {
     function Faults() {
         parent::__construct();
         $this->load->model('faults_model');
+        $this->page_info = array(
+            'id' => 28,
+            'title' => 'Faults',
+            'big_title' => NULL,
+            'description' => 'Report missing or damaged items',
+            'requires_login' => TRUE,
+            'allow_non-butler' => FALSE,
+            'require-secure' => FALSE,
+            'css' => array(''),
+            'js' => array('faults/faults'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
     
     function index($errors = FALSE) {

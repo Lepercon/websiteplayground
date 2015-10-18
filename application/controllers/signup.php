@@ -9,6 +9,19 @@ class Signup extends CI_Controller {
         $this->signup_model->delete_old_signups(); // maintenance
         $this->signup_model->remove_expired();
         $this->load->library('form_validation');
+        $this->page_info = array(
+            'id' => 10,
+            'title' => 'Sign Up',
+            'big_title' => NULL,
+            'description' => 'Signup to upcoming Butler events',
+            'requires_login' => TRUE,
+            'allow_non-butler' => TRUE,
+            'require-secure' => FALSE,
+            'css' => array('signup/signup'),
+            'js' => array('signup/signup'),
+            'keep_cache' => FALSE,
+            'editable' => FALSE
+        );
     }
 
     function index()
