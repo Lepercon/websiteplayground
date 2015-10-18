@@ -4,5 +4,5 @@
 		You cannot make a booking which crosses between term and holiday time.<br><br>
 		The University and Josephine Butler College reserve the right to reject any booking applications and to overwrite any accepted bookings at a later date.'.'<br><br><br>';
 	//echo anchor('bookings/book_old', 'Old system', 'class="jcr-button"');
-	//echo ' '.anchor('bookings/calender', 'View availability', 'class="jcr-button"');
+	echo ' '.anchor('bookings/calender', 'View availability', 'class="jcr-button"');
 	echo ' '.anchor('bookings/book', 'Make a booking', 'class="jcr-button"'); 
