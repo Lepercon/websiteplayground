@@ -129,8 +129,8 @@ class Bookings_model extends CI_Model {
         
         function euiptment_id_2_name($id) {
             $this ->db->where('id',$id);
-            $name = $this->db->get('bookings_equiptment')->row_array();
-            return $name;
+            $equipment = $this->db->get('bookings_equiptment')->row_array();
+            return $equipment['e_name'];
         }
 	
 	function send_email($message, $details){
