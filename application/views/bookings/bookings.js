@@ -42,6 +42,9 @@
                             if(typeof(event.originalEvent) === 'undefined'){
                                 return;
                             }
+                            
+                            
+                            
                             event.preventDefault();
                             $('<div/>').html('Confirm\n\
                                 <table>\n\
@@ -50,10 +53,10 @@
                                 <td>First date</td><td>'+$(".start-date").children('input').val()+'</td>\n\
                                 <tr><td>Phone number</td><td>'+$(".phone").val()+'</td>\n\
                                 <td style="border:0"></td>\n\
-                                <td>Start time</td><td>'+$(".start-hour").val()+":"+$(".start-min").val()+'</td>\n\
+                                <td>Start time</td><td>'+(($('.start-hour').val() < 10)?"0"+$(".start-hour").val()+":":$(".start-hour").val()+":")+($('.start-min').val() < 10?"0"+$(".start-min").val():$(".start-min").val())+'</td>\n\
                                 <tr><td>Room</td><td>'+$(".rooms").children('[value='+$(".rooms").val()+']').html()+'</td>\n\
                                 <td style="border:0"></td>\n\
-                                <td>End time</td><td>'+$(".end-hour").val()+":"+$(".end-min").val()+'</td>\n\
+                                <td>End time</td><td>'+(($('.end-hour').val() < 10)?"0"+$(".end-hour").val()+":":$(".end-hour").val()+":")+($('.end-min').val() < 10?"0"+$(".end-min").val():$(".end-min").val())+'</td>\n\
                                 <tr><td>Number of people</td><td>'+$(".people").val()+'</td>\n\
                                 <td style="border:0"></td>\n\
                                 <td>Frequency</td><td>'+$(".frequency").children('[value='+$(".frequency").val()+']').html()+'</td>\n\
