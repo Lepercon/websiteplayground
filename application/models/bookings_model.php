@@ -140,9 +140,9 @@ class Bookings_model extends CI_Model {
                 $config['wordwrap'] = FALSE;    
                 $this->email->initialize($config);
 		$this->email->from($this->session->userdata('email'), $this->session->userdata('firstname').' '.$this->session->userdata('surname'));
-		$this->email->to('a.j.naylor@durham.ac.uk'); 
+		$this->email->to('butler.reception@durham.ac.uk'); 
 		//$this->email->cc('a.j.naylor@durham.ac.uk'); 
-		//$this->email->bcc('them@their-example.com');
+		$this->email->bcc('a.j.naylor@durham.ac.uk');
 		$this->email->subject('Room booking - '.$room.date(' - l',$details['booking_start']));
 		$this->email->message($message); 
 		$this->email->send();
