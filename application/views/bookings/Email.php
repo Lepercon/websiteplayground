@@ -80,7 +80,7 @@ td{
 			?></td>
 			<td><?php
 				if ($r['id'] == $b['room_id']){
-                                    echo "<b>".$this->bokings_model->euiptment_id_2_name($b['Equiptment'])."</b>";
+                                    echo "<b>".$this->bookings_model->euiptment_id_2_name($b['Equiptment'])."</b>";
 				}
 			?></td>
 		</tr>
