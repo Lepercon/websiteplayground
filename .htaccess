@@ -1,4 +1,4 @@
-addhandler x-httpd-php5 .inc 
+Require all granted
 
 RewriteEngine on
 

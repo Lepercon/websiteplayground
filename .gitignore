@@ -18,3 +18,4 @@ index.php
 .htaccess
 
 application/config/constants.php
+*.htaccess
