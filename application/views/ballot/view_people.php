@@ -65,7 +65,7 @@ echo back_link('ballot/view_ballot/'.$b['id']);
 </table>
 </div>
 <div id="tabs-4">
-<a href="<?php echo $this->uri->segment(4)?site_url('ballot/view_signups/'.$b['id']):site_url('ballot/view_signups/'.$b['id'].'/1'); ?>"><p>Show by <?php echo $this->uri->segment(4)?'Table Number':'Surname'; ?></p></a>
+<a class="no-print" href="<?php echo $this->uri->segment(4)?site_url('ballot/view_signups/'.$b['id']):site_url('ballot/view_signups/'.$b['id'].'/1'); ?>"><p>Show by <?php echo $this->uri->segment(4)?'Table Number':'Surname'; ?></p></a>
 <table>
 <?php 
     echo '<tr><th>Name</th><th>Table Number</th><th>Requirements</th>';
