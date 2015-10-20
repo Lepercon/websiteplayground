@@ -25,6 +25,8 @@
                         heightStyle:"content",
                         active:+$('#active-tab').html()?+$('#active-tab').html():0
                     });
+                    
+                    $( "#tabs" ).tabs();
 		    
 		},
 		

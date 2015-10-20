@@ -2,17 +2,25 @@
 
 echo back_link('ballot/view_ballot/'.$b['id']);
 ?>
-
-<h2>Options Totals</h2>
-<?php 
-    foreach($people['totals'] as $k => $t){
-        echo '<h3>'.$people['options'][$k]['title'].'</h3>';
-        foreach($t as $kk => $n){
-            echo '<p>'.$people['options'][$k]['options'][$kk]['name'].' - <b>'.$n.'</b></p>';
+<div id="tabs">
+    <ul class="no-print">
+        <li><a href="#tabs-1">Options Totals</a></li>
+        <li><a href="#tabs-2">Special Requirements</a></li>
+        <li><a href="#tabs-3">Totals By Table</a></li>
+        <li><a href="#tabs-4">All Preferences</a></li>
+    </ul>
+<h2></h2>
+<div id="tabs-1">
+    <?php 
+        foreach($people['totals'] as $k => $t){
+            echo '<h3>'.$people['options'][$k]['title'].'</h3>';
+            foreach($t as $kk => $n){
+                echo '<p>'.$people['options'][$k]['options'][$kk]['name'].' - <b>'.$n.'</b></p>';
+            }
         }
-    }
-?>
-<h2>Special Requirements</h2>
+    ?>
+</div>
+<div id="tabs-2">
 <table>
 <?php 
     echo '<tr><th>Name</th><th>Table Number</th><th>Requirements</th>';
@@ -32,8 +40,8 @@ echo back_link('ballot/view_ballot/'.$b['id']);
     }
 ?>
 </table>
-
-<h2>Totals By Table</h2>
+</div>
+<div id="tabs-3">
 <table>
 <?php 
     echo '<tr><th>Table Number</th>';
@@ -55,8 +63,8 @@ echo back_link('ballot/view_ballot/'.$b['id']);
     }
 ?>
 </table>
-
-<h2>All Preferences</h2>
+</div>
+<div id="tabs-4">
 <a href="<?php echo $this->uri->segment(4)?site_url('ballot/view_signups/'.$b['id']):site_url('ballot/view_signups/'.$b['id'].'/1'); ?>"><p>Show by <?php echo $this->uri->segment(4)?'Table Number':'Surname'; ?></p></a>
 <table>
 <?php 
@@ -80,3 +88,5 @@ echo back_link('ballot/view_ballot/'.$b['id']);
     }
 ?>
 </table>
+</div>
+</div>
