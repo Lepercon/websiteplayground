@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-if($this->ballot_admin){
-echo '<p>'.anchor('ballot/create', '<span class="ui-icon ui-icon-pencil" style="display:inline-block;"></span>&nbsp;Create New', 'class="jcr-button"').'</p><br>';
-}
+
+
 foreach($ballots as $b){
     
     $options = explode(':', $b['options']);

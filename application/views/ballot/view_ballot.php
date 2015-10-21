@@ -150,7 +150,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
         <?php } ?>
         </table>
     </div>
-    <?php if($this->ballot_admin){ ?>
+    <?php if(is_admin()){ ?>
         <h3>Admin</h3>
         <div>
             <a href="<?php echo site_url('ballot/view_signups/'.$b['id']); ?>"><p>View Sign Ups</p></a>

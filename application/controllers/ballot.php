@@ -18,8 +18,6 @@ class Ballot extends CI_Controller {
             'keep_cache' => FALSE,
             'editable' => TRUE
         );
-        $this->ballot_admin = is_admin();
-        $this->load->helper('html');
     }
 
     function index() {
@@ -118,14 +116,7 @@ class Ballot extends CI_Controller {
     
     function create(){
         
-        if(!$this->ballot_admin){
-            redirect('ballot');
-            return;
-        }
         
-        $this->load->view('ballot/create', array(
-            'events' => array()
-        ));
         
     }
     
@@ -134,7 +125,7 @@ class Ballot extends CI_Controller {
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         
-        if($this->ballot_admin){
+        if(is_admin()){
             $people = $this->ballot_model->get_people($id, $this->uri->segment(4));
             $this->load->view('ballot/view_people', array(
                 'b' => $ballot,
@@ -167,5 +158,5 @@ class Ballot extends CI_Controller {
         
 }
 
-/* End of file ballot.php */
-/* Location: ./application/controllers/ballot.php */
+/* End of file admin.php */
+/* Location: ./application/controllers/admin.php */

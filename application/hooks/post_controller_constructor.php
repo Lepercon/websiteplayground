@@ -286,8 +286,8 @@ class Post_controller_constructor {
             }
 
             if(!empty($query_string)) {
-                $last = sizeof($css_links) - 1;
-                $css_links[$last] .= '?'.$query_string;
+                $last = array_pop($css_links) - 1;
+                $css_links[] = $last.'?'.$query_string;
             }
         }
         return $css_links;
