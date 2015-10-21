@@ -7,8 +7,8 @@ class Bookings extends CI_Controller {
         $this->load->model('bookings_model');
         $this->page_info = array(
             'id' => 31,
-            'title' => '<span class="big-text-small">Room Bookings</span>',
-            'big_title' => NULL,
+            'title' => 'Room Bookings',
+            'big_title' => '<span class="big-text-small">Room Bookings</span>',
             'description' => '',
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
