@@ -325,9 +325,7 @@
             if (method_exists($CI, '_remap'))
             {
                     $CI->_remap($method, array_slice($URI->rsegments, 2));
-            }
-            else
-            {
+            }else{
                     // is_callable() returns TRUE on some versions of PHP 5 for private and protected
                     // methods, so we'll use this workaround for consistent behavior
                     if ( ! in_array(strtolower($method), array_map('strtolower', get_class_methods($CI))))
