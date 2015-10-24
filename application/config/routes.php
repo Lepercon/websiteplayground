@@ -49,6 +49,7 @@ $route['sports'] = 'involved/index/sports';
 $route['societies'] = 'involved/index/societies';
 $route['committees'] = 'involved/index/committees';
 $route['charity'] = 'charities';
+$route['darenight'] = 'charities/darenight';
 
 // calendar
 $route['calendar/(:num)/(:num)'] = 'events/index/$1/$2';
