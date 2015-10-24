@@ -246,7 +246,7 @@ class Post_controller_constructor {
 
     private function validate_css_files($css) {
         // create a blank css_links array
-        log_message('error', var_export($css, true));
+        //log_message('error', var_export($css, true));
         $css_links = array();
         // loop through all defined css includes and check they exist.  Some may have browser-specific versions.
         foreach($css as $k => $style_sheet) {

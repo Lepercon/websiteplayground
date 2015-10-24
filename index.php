@@ -207,6 +207,7 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+define('BASE_PATH', getcwd().'/');
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
