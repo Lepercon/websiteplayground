@@ -68,22 +68,25 @@ echo back_link('ballot/view_ballot/'.$b['id']);
 <a class="no-print" href="<?php echo $this->uri->segment(4)?site_url('ballot/view_signups/'.$b['id']):site_url('ballot/view_signups/'.$b['id'].'/1'); ?>"><p>Show by <?php echo $this->uri->segment(4)?'Table Number':'Surname'; ?></p></a>
 <table class="user-list">
 <?php 
-    echo '<tr><th>Name</th><th>Table Number</th><th>Requirements</th>';
+    echo '<tr><th>Name</th><th>Price</th><th>Table Number</th><th>Requirements</th>';
     foreach($people['options'] as $o){
         echo '<th>'.$o['title'].'</th>';
     }
-    echo '<th>Price</th></tr>';
+    echo '<th>Signed Up By</th></tr>';
     foreach($people['people'] as $k => $p){
         echo '<tr>';
         echo '<td>'.($p['user_id']==-1?'Guest: '.$p['name'].' ('.$p['creator_name'].')':$p['name']).'</td>';
-        echo '<td>'.$p['table_num'].'</td>';
-        echo '<td>'.$p['requirements'].'</td>';
         $price = $b['price'];
+        $ops = '';
         foreach($p['op_list'] as $o){
-            echo '<td>'.$o['name'].'</td>';
+            $ops .= '<td>'.$o['name'].'</td>';
             $price += $o['price'];
         }
         echo '<td>£'.number_format($price, 2).'</td>';
+        echo '<td>'.$p['table_num'].'</td>';
+        echo '<td>'.$p['requirements'].'</td>';
+        echo $ops;
+        echo '<td>'.$p['creator_name'].'</td>';
         echo '</tr>';
     }
 ?>

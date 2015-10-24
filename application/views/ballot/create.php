@@ -6,6 +6,7 @@ $group_sizes = range(0,99);
 unset($group_sizes[0]);
 
 echo back_link('ballot');
+echo editable_area('ballot', 'content/create');
 
 echo heading('Create a New Ballot', 2);
 echo form_open('', 'class="jcr-form no-jsify"');
