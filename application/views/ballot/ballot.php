@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-
+if($this->ballot_admin){
+    echo '<p>'.anchor('ballot/create', '<span class="ui-icon ui-icon-pencil" style="display:inline-block;"></span>&nbsp;Create New', 'class="jcr-button"').'</p><br>';
+}
 
 foreach($ballots as $b){
     
@@ -14,16 +16,18 @@ foreach($ballots as $b){
         $temp = explode(';', $o);
         $op[$k]['title'] = $temp[0];
         $op[$k]['options'] = array();
+        $op[$k]['options']['price'] = array();
         foreach(array_slice($temp, 1) as $i => $t){
             $name_price = explode('#', $t);
             if(count($name_price) < 2){
                 $name_price[1] = 0;
             }
-            $op[$k]['options']['names'][$i] = $name_price[0].' (Â£'.number_format($name_price[1], 2).')';
             $op[$k]['options']['price'][$i] = $name_price[1];
         }
-        $min_price += min($op[$k]['options']['price']);
-        $max_price += max($op[$k]['options']['price']);
+        if(!empty($op[$k]['options']['price'])){
+            $min_price += min($op[$k]['options']['price']);
+            $max_price += max($op[$k]['options']['price']);
+        }
     }
     $min_price = number_format($min_price, 2);
     $max_price = number_format($max_price, 2);
@@ -41,7 +45,7 @@ foreach($ballots as $b){
                 <p>Signup Has Closed</p>
             <?php } ?>
             <p>Max Group Size: <b><?php echo $b['max_group']; ?></b></p>
-            <p>Price: <b><?php echo '£'.$min_price.' - '.'£'.$max_price; ?></b></p>
+            <p>Price: <b><?php echo '£'.$min_price.($max_price!=$min_price?' - '.'£'.$max_price:''); ?></b></p>
             <p>Spaces: <b><?php $num = 0; foreach(explode(';', $b['tables']) as $t){ $num += $t; } echo $num; ?></b></p>
         </div>
     </div>

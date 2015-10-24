@@ -66,7 +66,7 @@ echo back_link('ballot/view_ballot/'.$b['id']);
 </div>
 <div id="tabs-4">
 <a class="no-print" href="<?php echo $this->uri->segment(4)?site_url('ballot/view_signups/'.$b['id']):site_url('ballot/view_signups/'.$b['id'].'/1'); ?>"><p>Show by <?php echo $this->uri->segment(4)?'Table Number':'Surname'; ?></p></a>
-<table>
+<table class="user-list">
 <?php 
     echo '<tr><th>Name</th><th>Table Number</th><th>Requirements</th>';
     foreach($people['options'] as $o){
@@ -75,7 +75,7 @@ echo back_link('ballot/view_ballot/'.$b['id']);
     echo '<th>Price</th></tr>';
     foreach($people['people'] as $k => $p){
         echo '<tr>';
-        echo '<td>'.$p['name'].'</td>';
+        echo '<td>'.($p['user_id']==-1?'Guest: '.$p['name'].' ('.$p['creator_name'].')':$p['name']).'</td>';
         echo '<td>'.$p['table_num'].'</td>';
         echo '<td>'.$p['requirements'].'</td>';
         $price = $b['price'];

@@ -246,6 +246,7 @@ class Post_controller_constructor {
 
     private function validate_css_files($css) {
         // create a blank css_links array
+        log_message('error', var_export($css, true));
         $css_links = array();
         // loop through all defined css includes and check they exist.  Some may have browser-specific versions.
         foreach($css as $k => $style_sheet) {
@@ -282,14 +283,17 @@ class Post_controller_constructor {
                     $css_links[] = VIEW_URL.$style_sheet.'.min.css';
                 }elseif(file_exists(VIEW_PATH.$style_sheet.'.css')){
                     $css_links[] = VIEW_URL.$style_sheet.'.css';
+                }else{
+                    //log_message('error', 'File Not Found: ('.VIEW_PATH.$style_sheet.'.css)');
                 }
             }
 
             if(!empty($query_string)) {
-                $last = array_pop($css_links) - 1;
+                $last = array_pop($css_links);
                 $css_links[] = $last.'?'.$query_string;
             }
         }
+        //log_message('error', var_export($css_links, true));
         return $css_links;
     }
 

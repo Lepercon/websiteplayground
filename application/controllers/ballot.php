@@ -18,6 +18,8 @@ class Ballot extends CI_Controller {
             'keep_cache' => FALSE,
             'editable' => TRUE
         );
+        $this->ballot_admin = is_admin();
+        $this->load->helper('html');
     }
 
     function index() {
@@ -72,7 +74,11 @@ class Ballot extends CI_Controller {
                                 
                             }
                         }
-                        $user[$index]['name'] = $_POST['person-'.$i];
+                        if($_POST['id-'.$i] == -1){
+                            $user[$index]['name'] = $_POST['guestname-'.$i];
+                        }else{
+                            $user[$index]['name'] = $_POST['person-'.$i];
+                        }
                         $user[$index]['requirements'] = $_POST['requirements-'.$i];
                         $user[$index]['user_id'] = $_POST['id-'.$i];
                         $j = 0;
@@ -116,7 +122,21 @@ class Ballot extends CI_Controller {
     
     function create(){
         
+        if(!$this->ballot_admin){
+            redirect('ballot');
+            return;
+        }
         
+        if($this->input->post('submit') != FALSE){
+            log_message('error', var_export($_POST, true));
+            $id = $this->ballot_model->create_signup();
+            redirect('ballot/view_ballot/'.$id);
+            return;
+        }
+        
+        $this->load->view('ballot/create', array(
+            'events' => $this->ballot_model->get_events()
+        ));
         
     }
     
@@ -125,7 +145,7 @@ class Ballot extends CI_Controller {
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         
-        if(is_admin()){
+        if($this->ballot_admin){
             $people = $this->ballot_model->get_people($id, $this->uri->segment(4));
             $this->load->view('ballot/view_people', array(
                 'b' => $ballot,
@@ -144,7 +164,7 @@ class Ballot extends CI_Controller {
         $ballot_open = $ballot['close_time'] > time();
         
         if(!$ballot_open){
-            $tables = $this->ballot_model->table_assignment2($id);
+            $this->ballot_model->table_assignment2($id);
             $tables = $this->ballot_model->get_tables($id, $ballot_open, $ballot_open);
             
             $this->load->view('ballot/view_tables', array(

@@ -20,3 +20,8 @@ div.tables div{
 .jcr-form span > p > select{
 	width:200px;
 }
+
+.user-list{
+    font-size: 80%;
+    width:100%;    
+}

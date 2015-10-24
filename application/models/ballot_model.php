@@ -10,6 +10,7 @@ class Ballot_model extends CI_Model {
     function get_ballots(){
         $this->db->select('ballot.*, events.name, events.time');
         $this->db->join('events', 'ballot.event_id=events.id');
+        $this->db->order_by('close_time desc');
         return $this->db->get('ballot')->result_array();
     }
     
@@ -240,8 +241,10 @@ class Ballot_model extends CI_Model {
         }else{
             $this->db->order_by('ISNULL(table_num), table_num');
         }
+        $this->db->select('ballot_people.*, CONCAT(u2.firstname, \' \', u2.surname) as creator_name', false);
         $this->db->where('table_num IS NOT NULL');
         $this->db->join('users', 'users.id=ballot_people.user_id', 'left outer');
+        $this->db->join('users as u2', 'u2.id=ballot_people.created_by', 'left outer');
         $this->db->where('ballot_id', $id);
         $people = $this->db->get('ballot_people')->result_array();
         $this->db->where('id', $id);
@@ -311,6 +314,8 @@ class Ballot_model extends CI_Model {
         
         $this->db->where('id', $id);
         $ballot = $this->db->get('ballot')->row_array(0);
+        if($ballot['done_sorting'])
+            return;
         $t = explode(';', $ballot['tables']);
         asort($t);
         //log_message('error', var_export($t, true));
@@ -333,6 +338,7 @@ class Ballot_model extends CI_Model {
             krsort($num_sizes);
             
             $sizes = $this->shuffle_sort2($ballot['calc_token'], $sizes);
+            mt_srand($ballot['calc_token']);
             
             $t_sub = $t;
             foreach($t as $num => $spaces){
@@ -349,8 +355,13 @@ class Ballot_model extends CI_Model {
                 
                 $min = array_search(min($counts), $counts);
                 if($counts[$min] > 0){
-                    $res[$min] = $A[$min][0];
-                    foreach($A[$min][0] as $a){
+                    
+                    $ind = 0;
+                    if(mt_rand(0, 10) > 7)
+                        $ind = mt_rand(0, count($A[$min])-1);
+                    log_message('error', $ind.' '.var_export($A[$min], true));
+                    $res[$min] = $A[$min][$ind];
+                    foreach($A[$min][$ind] as $a){
                         //log_message('error', '##Reducing '.$a.' '.var_export($num_sizes, true));
                         $num_sizes[$a]--;
                         //log_message('error', '##Reduced '.$a.' '.var_export($num_sizes, true));
@@ -382,6 +393,9 @@ class Ballot_model extends CI_Model {
             if(!empty($data)){
                 $this->db->update_batch('ballot_people', $data, 'id');
             }
+            $this->db->where('id', $id);
+            $this->db->set('done_sorting', 1);
+            $this->db->update('ballot');
             $this->db->trans_complete();
             
         }else{
@@ -434,6 +448,57 @@ class Ballot_model extends CI_Model {
         $this->db->where('created_by != ', $user_id);
         $res = $this->db->get('ballot_people')->result_array();
         return empty($res);
+    }
+    
+    function get_events(){
+        $this->db->select('id, name, time');
+        $this->db->where('time > ', time());
+        $this->db->order_by('time');
+        $ev = $this->db->get('events')->result_array();
+        $events = array();
+        foreach($ev as $e){
+            $events[$e['id']] = $e['name'].' ('.date('d/m/Y', $e['time']).')';
+        }
+        return $events;
+    }
+    
+    function create_signup(){
+        $inputs = array('event_id', 'signup_name', 'max_group', 'price', 'allow_guests');
+        $data = array();
+        foreach($inputs as $i){
+            $data[$i] = $this->input->post($i, true);
+        }
+        $re = '/(?P<day>[0-9]{2})\\/(?P<month>[0-9]{2})\\/(?P<year>[0-9]{4})/';
+        $data['open_time'] = time();
+        $data['close_time'] = time();
+        if(preg_match($re, $this->input->post('date-open'), $date)){
+            $data['open_time'] = mktime($this->input->post('open-hour'), $this->input->post('open-minute'), 0, $date['month'], $date['day'], $date['year'] );
+        }
+        if(preg_match($re, $this->input->post('date-close'), $date)){
+            $data['close_time'] = mktime($this->input->post('close-hour'), $this->input->post('close-minute'), 0, $date['month'], $date['day'], $date['year'] );
+        }
+        $data['tables'] = implode(';', $this->input->post('table'));
+        $data['created_by'] = $this->session->userdata('id');
+        $data['calc_token'] = rand_num(0, 2000);
+        
+        $data['options'] = '';
+        foreach($this->input->post('option') as $option){
+            if($data['options'] != ''){
+                $data['options'] .= ':';
+            }
+            foreach($option as $k=>$o){
+                $data['options'] .= $o;
+                if($k % 2 == 0){
+                    $data['options'] .= ';';
+                }else{
+                    $data['options'] .= '#';
+                }
+            }
+            $data['options'] = rtrim($data['options'], ";");
+        }
+        
+        $this->db->insert('ballot', $data);
+        return $this->db->insert_id();
     }
 
         

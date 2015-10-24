@@ -12,11 +12,16 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             return $_POST[$name];
         }elseif(isset($b['people'][$num])){
             if(strrpos($name, 'person') !== FALSE){
+                if($b['people'][$num]['user_id'] == -1){
+                    return 'Guest';
+                }
                 return $b['people'][$num]['name'];
             }elseif(strrpos($name, 'id') !== FALSE){
                 return $b['people'][$num]['user_id'];
             }elseif(strrpos($name, 'requirements') !== FALSE){
                 return $b['people'][$num]['requirements'];
+            }elseif(strrpos($name, 'guestname') !== FALSE){
+                return $b['people'][$num]['name'];
             }else{
                 $options = explode(';', $b['people'][$num]['options']);
                 return $options[$option_num];
@@ -25,8 +30,10 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             return '';
         }
     }
-    
-    $options = explode(':', $b['options']);
+    $options = array();
+    if($b['options'] != ''){
+        $options = explode(':', $b['options']);
+    }
     $op = array();
     
     $min_price = $b['price'];
@@ -44,8 +51,10 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             $op[$k]['options']['names'][$i] = $name_price[0].' (£'.number_format($name_price[1], 2).')';
             $op[$k]['options']['price'][$i] = $name_price[1];
         }
-        $min_price += min($op[$k]['options']['price']);
-        $max_price += max($op[$k]['options']['price']);
+        if(!empty($op[$k]['options']['price'])){
+            $min_price += min($op[$k]['options']['price']);
+            $max_price += max($op[$k]['options']['price']);
+        }
     }
     $min_price = number_format($min_price, 2);
     $max_price = number_format($max_price, 2);
@@ -111,7 +120,10 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             echo form_label('Split Group:').form_dropdown('split-group', array(0=>'No',1=>'Yes'), isset($b['people'][0])?$b['people'][0]['split_group']:'').' Would you like your group to be split if you can not fit as a full group?<br><br>';
             foreach(range(1,$b['max_group']) as $r){
                 echo '<span class="person-option">';
-                echo '<p>'.form_label('Person '.$r.':').form_input(array('name'=>'person-'.$r, 'placeholder'=>'Name', 'value'=>get_value($b, 'person-'.$r, $r-1), 'class'=>'name-selection')).form_input(array('name'=>'id-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'id-'.$r, $r-1), 'class'=>'user-id')).'</p>';
+                echo '<p>'.form_label('Person '.$r.':');
+                echo form_input(array('name'=>'person-'.$r, 'placeholder'=>'Name', 'value'=>get_value($b, 'person-'.$r, $r-1), 'class'=>'name-selection')).' ';
+                echo form_input(array('name'=>'guestname-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'guestname-'.$r, $r-1), 'class'=>'guest-name', 'placeholder'=>'Guest Full Name'));
+                echo form_input(array('name'=>'id-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'id-'.$r, $r-1), 'class'=>'user-id')).'</p>';
                 
                 foreach($op as $k=>$o){
                     echo '<p>'.form_label().form_label($o['title'].':').form_dropdown('option-'.$r.'-'.$k, $o['options']['names'], get_value($b, 'option-'.$r.'-'.$k, $r-1, $k), 'style="min-width:167px"').'</p>';
@@ -150,7 +162,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
         <?php } ?>
         </table>
     </div>
-    <?php if(is_admin()){ ?>
+    <?php if($this->ballot_admin){ ?>
         <h3>Admin</h3>
         <div>
             <a href="<?php echo site_url('ballot/view_signups/'.$b['id']); ?>"><p>View Sign Ups</p></a>
