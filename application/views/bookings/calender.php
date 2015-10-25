@@ -6,7 +6,9 @@
 	$next_week = $date + (60*60*24*7);
 	$prev_week = $date - (60*60*24*7);
 	
+        $this->db->join('bookings_reservations', 'bookings_reservations.id=bookings_instances.booking_id');
 	$ins = $this->db->get('bookings_instances')->result_array();
+        $u_id = $this->session->userdata('id');
 	$rooms = $this->db->get('bookings_rooms')->result_array();
 	$instances = array();
 	foreach ($rooms as $r){
@@ -54,7 +56,7 @@
 						$length = $i['time_end'] - $i['time_start'];
 						$width = ($length / (60 * 60)) * 37;
 						$start = 119 + 37 * (($i['time_start'] % (60*60*24))/(60*60) - 6);
-						echo '<span class="booking-instance" style="width:'.($width).'px;left:'.$start.'px"></span>';
+						echo '<span class="booking-instance '.($i['user_id']==$u_id?'my-booking':'').'" style="width:'.($width).'px;left:'.$start.'px" title="Event: '.$i['Title'].'"></span>';
 					}
 				?>
                         </td>

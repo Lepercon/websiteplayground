@@ -6,6 +6,10 @@
     position:absolute;
 }
 
+.my-booking{
+    background-color:#00FF00;
+}
+
 .calender-view col:nth-child(2n+3) {
 	background: #FF0;
 } 
