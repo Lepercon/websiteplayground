@@ -107,12 +107,17 @@ class Bookings extends CI_Controller {
 		}
 	}
 	function email(){
-		$id = $this->uri->segment(3);
-		$this->load->view('bookings/Email', array(
-				'b' => $this->bookings_model->get_booking($id),
-				'room' => $this->bookings_model->get_rooms(),
-				'layout' => $this->bookings_model->get_layouts(),
-				'equiptment' => $this->bookings_model->get_equiptment()
-			));
+            $id = $this->uri->segment(3);
+            $this->load->view('bookings/Email', array(
+                'b' => $this->bookings_model->get_booking($id),
+                'room' => $this->bookings_model->get_rooms(),
+                'layout' => $this->bookings_model->get_layouts(),
+                'equiptment' => $this->bookings_model->get_equiptment()
+            ));
 	}
+        
+        function excel(){
+            $this->load->library('PHPExcel');
+            $this->load->view('bookings/read_excel');
+        }
 }
