@@ -90,6 +90,7 @@ class Ballot extends CI_Controller {
                         $user[$index]['created_by'] = $u_id;
                         $user[$index]['ballot_id'] = $id;
                         $user[$index]['split_group'] = $_POST['split-group'];
+                        $user[$index]['timestamp'] = time();
                     }
                     $i++;
                 }
