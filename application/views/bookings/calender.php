@@ -38,7 +38,7 @@
 
 <table class="calendar-view">
 	<tr>
-		<td></td>
+		<td></td><td></td>
 		<?php foreach($times as $t){ ?>
 			<td><?php echo $t.':00'; ?></td>
 		<?php } ?>
@@ -48,6 +48,7 @@
 			<td>
 				<p class="room_name"><?php echo $r['name']; ?></p>
 			</td>
+                        <td>
 				<?php
 					foreach($instances[$r['id']] as $i){
 						$length = $i['time_end'] - $i['time_start'];
@@ -56,6 +57,7 @@
 						echo '<span class="booking-instance" style="width:'.($width).'px;left:'.$start.'px"></span>';
 					}
 				?>
+                        </td>
 			<?php foreach($times as $t){ ?>
 				<?php
 					//if ($r['id'] == $b['room_id'] && $t == date('G', $b['booking_start'])){

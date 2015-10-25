@@ -1,9 +1,9 @@
-﻿.booking-instance{ 	
-	margin-top: 5px;
-	height:27px;
-	background-color:red;
-	display:block;
-	position:absolute;
+.booking-instance{ 	
+    margin-top: 5px;
+    height:27px;
+    background-color:red;
+    display:block;
+    position:absolute;
 }
 
 .calender-view col:nth-child(2n+3) {

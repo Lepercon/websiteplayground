@@ -13,7 +13,7 @@ class Bookings extends CI_Controller {
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
             'require-secure' => FALSE,
-            'css' => array(),
+            'css' => array('bookings/bookings'),
             'js' => array('bookings/bookings'),
             'keep_cache' => FALSE,
             'editable' => TRUE
