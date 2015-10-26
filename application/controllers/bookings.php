@@ -22,7 +22,12 @@ class Bookings extends CI_Controller {
     function index() {
        $this->load->view('bookings/home'); 
     }
-	function calender() {
+	
+        function forms() {
+        $this->load->view('bookings/bookings_forms');
+        }
+    
+        function calender() {
 		$year = $this->uri->segment(3, date('Y'));
 		$month = $this->uri->segment(4, date('m'));
 		$day = $this->uri->segment(5, date('d'));
