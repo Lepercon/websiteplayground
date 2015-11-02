@@ -21,8 +21,8 @@ if($show_tables){
     <?php foreach($tables as $k=>$t){ ?>
         <div>
             <p><b><?php echo ($b['close_time'] > time())?'Group '.$i++:'Table '.$k; ?>:</b></p>
-            <?php foreach($t as $key=>$p){ ?>
-                <p><?php echo ($key+1).'. '.($p['firstname']==''?$p['name']:($p['prefname']==''?$p['firstname']:$p['prefname']).' '.$p['surname']).($p['user_id']==-1?' ('.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn'].')':''); ?></p>
+            <?php foreach($t as $key=>$p){  ?>
+                <p title="<?php echo 'Signed Up By: '.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn']; ?>"><?php echo ($key+1).'. '.($p['firstname']==''?$p['name']:($p['prefname']==''?$p['firstname']:$p['prefname']).' '.$p['surname']).($p['user_id']==-1?' ('.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn'].')':''); ?></p>
             <?php } ?>
         </div>
     <?php } ?>
