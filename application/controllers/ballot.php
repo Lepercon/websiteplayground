@@ -176,8 +176,15 @@ class Ballot extends CI_Controller {
         }
         
     }
+    
+    function email(){
+        $id = $this->uri->segment(3);
+        $u_id = $this->session->userdata('id'); 
+        $ballot = $this->ballot_model->get_ballot($id, $u_id);
+        $this->load->view('ballot/email', array('ballot'=>$ballot));
+    }
         
 }
 
-/* End of file admin.php */
-/* Location: ./application/controllers/admin.php */
+/* End of file ballot.php */
+/* Location: ./application/controllers/ballot.php */
