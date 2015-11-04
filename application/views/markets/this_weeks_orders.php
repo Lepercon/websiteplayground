@@ -13,6 +13,7 @@
 			  echo "<h3 class='wotw-day'>Order Number: ".$row['order']."</h3>";
 			  echo "<p>Order For: ".$row['firstname']." ".$row['surname']."";
 			  echo "<p>Date Ordered: ".gmdate("l dS F Y", $row["time"])."</p>";
+			  echo "<p>Cap: £".number_format($row["cap"], 2, '.', ',')."</p>";
 			  
 			  echo "<table>";
 			  echo "<tr><th>Item</th><th>Qty</th><th>Weeks Ordered For</th><th>No. Veggies</th></tr>";

@@ -261,7 +261,8 @@ class Markets extends CI_Controller {
 						'qty' => $c['amount'],
 						'user' => $user_id,
 						'time' => $unix_date,
-						'meal' => 0
+						'meal' => 0,
+						'cap' => $data['spend']
 					);
 				}
 				$this->db->insert_batch('market_orders', $insert);
@@ -280,7 +281,8 @@ class Markets extends CI_Controller {
 						'user' => $user_id,
 						'time' => $unix_date,
 						'meal' => 1,
-						'repeats' => 10
+						'repeats' => 10,
+						'cap' => $data['spend']
 						);	
 					}
 					elseif($meal_name['name'] == '5 Week Veg Box £20'){
@@ -291,7 +293,8 @@ class Markets extends CI_Controller {
 						'user' => $user_id,
 						'time' => $unix_date,
 						'meal' => 1,
-						'repeats' => 5
+						'repeats' => 5,
+						'cap' => $data['spend']
 						);	
 					}
 					else{
@@ -302,7 +305,8 @@ class Markets extends CI_Controller {
 						'user' => $user_id,
 						'time' => $unix_date,
 						'meal' => 1,
-						'veg' => $data['vegetarians']
+						'veg' => $data['vegetarians'],
+						'cap' => $data['spend']
 						);	
 					}
 					
