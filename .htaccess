@@ -1,5 +1,3 @@
-addhandler x-httpd-php5 .inc 
-
 RewriteEngine on
 
 RewriteBase /butler.jcr/
