@@ -1,6 +1,8 @@
+addhandler x-httpd-php5 .inc 
+
 RewriteEngine on
 
-RewriteBase /butler.jcr/
+RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
