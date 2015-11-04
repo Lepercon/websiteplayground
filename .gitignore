@@ -15,6 +15,7 @@ application/views/ballot/content/*
 application/config/constants.php
 *.htaccess
 index.php
+.htaccess
 
 application/config/constants.php
 *.htaccess
