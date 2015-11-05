@@ -18,6 +18,11 @@
             'keep_cache' => FALSE,
             'editable' => TRUE
         );
+        if($this->uri->segment(2) == 'view_claim' && $this->finance_model->finance_permissions()){
+            $id = $this->uri->segment(3);
+            $claim = $this->finance_model->get_claim($id);
+            $this->page_info['title'] .= ' - '.$this->uri->segment(3).' - '.$claim['pay_to'];
+        }
     }
 
     function index() {

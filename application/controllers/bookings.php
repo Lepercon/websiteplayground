@@ -13,7 +13,7 @@ class Bookings extends CI_Controller {
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
             'require-secure' => FALSE,
-            'css' => array(),
+            'css' => array('bookings/bookings'),
             'js' => array('bookings/bookings'),
             'keep_cache' => FALSE,
             'editable' => TRUE
@@ -22,7 +22,12 @@ class Bookings extends CI_Controller {
     function index() {
        $this->load->view('bookings/home'); 
     }
-	function calender() {
+	
+        function forms() {
+        $this->load->view('bookings/bookings_forms');
+        }
+    
+        function calender() {
 		$year = $this->uri->segment(3, date('Y'));
 		$month = $this->uri->segment(4, date('m'));
 		$day = $this->uri->segment(5, date('d'));

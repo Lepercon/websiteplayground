@@ -38,9 +38,39 @@ class Ballot_model extends CI_Model {
     }
     
     function update_ballot($id, $u_id, $users){
+        $this->db->where( array('created_by' => $u_id, 'ballot_id'=>$id));
+        $u_ids = $this->db->get('ballot_people')->result_array();
         $this->db->delete('ballot_people', array('created_by' => $u_id, 'ballot_id'=>$id)); 
         $this->db->insert_batch('ballot_people', $users);
+        $email_list = array();
+        foreach($users as $u){
+            $email_list[$u['user_id']] = TRUE;
+        }        
+        foreach($u_ids as $u){
+            if(isset($email_list[$u['user_id']])){
+                unset($email_list[$u['user_id']]);
+            }
+        }
         $_POST = array();
+    }
+    
+    function get_priority($ballot_id, $user_id){
+        if($user_id == -1){
+            return 0;
+        }
+        
+        $this->db->where('ballot_id !=', $ballot_id);
+        $this->db->where('user_id', $user_id);
+        $this->db->where('table_num IS NULL');
+        $num = $this->db->get('ballot_people')->num_rows();
+        $this->db->where('ballot_id !=', $ballot_id);
+        $this->db->where('user_id', $user_id);
+        $this->db->where('table_num IS NOT NULL');
+        $num -= $this->db->get('ballot_people')->num_rows();
+        if($num < 0){
+            return 0;
+        }
+        return $num;
     }
     
     function get_tables($id, $not_assigned=true, $group=false){

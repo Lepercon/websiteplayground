@@ -7,7 +7,7 @@
 				$.bookings.frequency_change($(this));
 			});
 			$.bookings.frequency_change($('.frequency'));
-			
+			 $( '.booking-instance').tooltip();
 			$('.rooms').change(function(){
 				$.bookings.rooms_change($(this));
 				$('.equiptment_selection').children('option').each(function(){
