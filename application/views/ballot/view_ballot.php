@@ -21,14 +21,15 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             }elseif(strrpos($name, 'requirements') !== FALSE){
                 return $b['people'][$num]['requirements'];
             }elseif(strrpos($name, 'guestname') !== FALSE){
-                return $b['people'][$num]['name'];
+                if($b['people'][$num]['user_id'] == -1){
+                    return $b['people'][$num]['name'];
+                }
             }else{
                 $options = explode(';', $b['people'][$num]['options']);
                 return $options[$option_num];
             }
-        }else{
-            return '';
         }
+        return '';
     }
     $options = array();
     if($b['options'] != ''){
@@ -122,7 +123,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 echo '<span class="person-option">';
                 echo '<p>'.form_label('Person '.$r.':');
                 echo form_input(array('name'=>'person-'.$r, 'placeholder'=>'Name', 'value'=>get_value($b, 'person-'.$r, $r-1), 'class'=>'name-selection')).' ';
-                echo form_input(array('name'=>'guestname-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'guestname-'.$r, $r-1), 'class'=>'guest-name', 'placeholder'=>'Guest Full Name'));
+                echo form_input(array('name'=>'guestname-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'guestname-'.$r, $r-1), 'class'=>'guest-name', 'placeholder'=>'Guest Full Name', 'title'=>'Please enter the full name of your guest.', 'pattern'=>''));
                 echo form_input(array('name'=>'id-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'id-'.$r, $r-1), 'class'=>'user-id')).'</p>';
                 
                 foreach($op as $k=>$o){

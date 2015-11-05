@@ -70,8 +70,6 @@ class Ballot extends CI_Controller {
                                     $_SESSION['errors'][] = 'You must enter select a name from the drop down list after you have started typing.';
                                 }
                                 continue;
-                            }else{
-                                
                             }
                         }
                         if($_POST['id-'.$i] == -1){
@@ -91,6 +89,7 @@ class Ballot extends CI_Controller {
                         $user[$index]['ballot_id'] = $id;
                         $user[$index]['split_group'] = $_POST['split-group'];
                         $user[$index]['timestamp'] = time();
+                        $user[$index]['priority_score'] = $this->ballot_model->get_priority($id, $user[$index]['user_id']);
                     }
                     $i++;
                 }
