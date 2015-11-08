@@ -85,8 +85,14 @@ class Ballot_model extends CI_Model {
         $people = $this->db->get('ballot_people')->result_array();
         $tables = array();
         if($group){
+            $totals = array();
             foreach($people as $p){
                 $tables[$p['created_by']][] = $p;
+                if(isset($tables[$p['created_by']]['score'])){
+                    $tables[$p['created_by']]['score'] += $p['priority_score'];
+                }else{
+                    $tables[$p['created_by']]['score'] = $p['priority_score'];
+                }
             }
         }else{
             foreach($people as $p){
@@ -231,8 +237,10 @@ class Ballot_model extends CI_Model {
         $this->db->update('ballot', array('calc_token'=>'complete'), array('id' => $id));
     }*/
     
-    function shuffle_sort2($seed, $list) { 
+    function shuffle_sort2($seed, $list, $scores){ 
         
+        //log_message('error', var_export($list, true));
+        //log_message('error', var_export($scores, true));
         //Sort array into sepeate lists by value
         $sorted_list = array();
         foreach($list as $k => $v){
@@ -250,10 +258,23 @@ class Ballot_model extends CI_Model {
             
             $n = count($keys);
             for($i=0; $i<=$n-2; $i++){
-                   $j = mt_rand($i, $n-1);
-                   $temp = $keys[$i];
-                   $keys[$i] = $keys[$j];
-                   $keys[$j] = $temp;
+                $j = mt_rand($i, $n-1);
+                $temp = $keys[$i];
+                $keys[$i] = $keys[$j];
+                $keys[$j] = $temp;
+            }
+            
+            $done_swap = true;
+            while($done_swap){
+                $done_swap = false;
+                for($i=1; $i<$n; $i++){
+                    if($scores[$keys[$i]] > $scores[$keys[$i-1]]){
+                        $temp = $keys[$i];
+                        $keys[$i] = $keys[$i-1];
+                        $keys[$i-1] = $temp;
+                        $done_swap = true;
+                    }
+                }
             }
             
             foreach ($keys as $key) { 
@@ -352,13 +373,17 @@ class Ballot_model extends CI_Model {
         
         $data = array();
         $sizes = array();
+        $scores = array();
         
         if($ballot['close_time'] < time()){
             $tables = $this->get_tables($id, true, true);
             
             $num_sizes = array();
             foreach($tables as $key => $table){
-                $sizes[$key] = count($table);
+                //log_message('error', $key.': '.var_export($table, true));
+                $sizes[$key] = count($table)-1;
+                $scores[$key] = $table['score'];
+                unset($tables[$key]['score']);
                 if(isset($num_sizes[$sizes[$key]])){
                     $num_sizes[$sizes[$key]]++;
                 }else{
@@ -367,7 +392,7 @@ class Ballot_model extends CI_Model {
             }
             krsort($num_sizes);
             
-            $sizes = $this->shuffle_sort2($ballot['calc_token'], $sizes);
+            $sizes = $this->shuffle_sort2($ballot['calc_token'], $sizes, $scores);
             mt_srand($ballot['calc_token']);
             
             $t_sub = $t;
@@ -387,9 +412,9 @@ class Ballot_model extends CI_Model {
                 if($counts[$min] > 0){
                     
                     $ind = 0;
-                    if(mt_rand(0, 10) > 7)
+                    if(mt_rand(0, 10) > 6)
                         $ind = mt_rand(0, count($A[$min])-1);
-                    log_message('error', $ind.' '.var_export($A[$min], true));
+                    //log_message('error', $ind.' '.var_export($A[$min], true));
                     $res[$min] = $A[$min][$ind];
                     foreach($A[$min][$ind] as $a){
                         //log_message('error', '##Reducing '.$a.' '.var_export($num_sizes, true));
