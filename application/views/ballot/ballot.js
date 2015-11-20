@@ -49,7 +49,7 @@
                     if(($('#green-formal-alert').attr('done') != 'done')){
                         sel = $(this);
                         if(sel.val() == '1'){
-                            $('#green-formal-alert').children().dialog({
+                            $('#green-formal-alert').children().clone().dialog({
                                 title: 'Are you sure?',
                                 buttons:{
                                     "Ok!": function(){

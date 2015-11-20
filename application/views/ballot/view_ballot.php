@@ -3,7 +3,7 @@ echo back_link('ballot');
 
 
 if($b['id'] == 7){
-    echo '<span id="green-formal-alert" style="display:none;">';
+    echo '<span id="green-formal-alert" style="">';
     echo '<div>'.editable_area('ballot', 'content/popup_'.$b['id'], is_admin()).'</div>';
     echo '</span>';
 }
