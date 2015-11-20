@@ -11,7 +11,6 @@ application/views/events/posters/*
 application/views/photos/images/*
 application/views/finance/files/*
 application/views/involved/img/*
-application/views/ballot/content/*
 application/config/constants.php
 *.htaccess
 index.php

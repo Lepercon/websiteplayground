@@ -49,7 +49,7 @@
                     if(($('#green-formal-alert').attr('done') != 'done')){
                         sel = $(this);
                         if(sel.val() == '1'){
-                            $('<div/>').html('<h2>Please pick vegetarian!</h2>Meat and dairy consumption alone is responsible for 8% of the UK’s greenhouse emissions. This guardian article also has a lot more information about it:<br><a href="http://www.theguardian.com/lifeandstyle/2010/jul/18/vegetarianism-save-planet-environment" target="_blank">http://www.theguardian.com/lifeandstyle/2010/jul/18/vegetarianism-save-planet-environment</a>').dialog({
+                            $('#green-formal-alert').children().dialog({
                                 title: 'Are you sure?',
                                 buttons:{
                                     "Ok!": function(){
