@@ -43,6 +43,31 @@
                 $('#tables').children().last().remove();
                 }
             });
+            
+            if(($('#green-formal-alert').length > 0)){
+                $("select[name$=0]").change(function(){
+                    if(($('#green-formal-alert').attr('done') != 'done')){
+                        sel = $(this);
+                        if(sel.val() == '1'){
+                            $('<div/>').html('<h2>Please pick vegetarian!</h2>Meat and dairy consumption alone is responsible for 8% of the UK’s greenhouse emissions. This guardian article also has a lot more information about it:<br><a href="http://www.theguardian.com/lifeandstyle/2010/jul/18/vegetarianism-save-planet-environment" target="_blank">http://www.theguardian.com/lifeandstyle/2010/jul/18/vegetarianism-save-planet-environment</a>').dialog({
+                                title: 'Are you sure?',
+                                buttons:{
+                                    "Ok!": function(){
+                                        sel.val('0');
+                                        $(this).dialog("close");
+                                    },
+                                    "No Thanks!": function(){
+                                        $('#green-formal-alert').attr('done', 'done');
+                                        $(this).dialog("close");
+                                    }
+                                },
+                                modal: true,
+                                width: 800
+                            });
+                        }
+                    }
+                });
+            }
 
         },
 

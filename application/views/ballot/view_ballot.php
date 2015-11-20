@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 echo back_link('ballot');
 
+
+if($b['id'] == 6){
+    echo '<span id="green-formal-alert"></span>';
+}
 ?>
 <div class="no-print">
 <?php
