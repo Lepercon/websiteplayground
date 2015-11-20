@@ -2,7 +2,7 @@
 echo back_link('ballot');
 
 
-if($b['id'] == 6){
+if($b['id'] == 7){
     echo '<span id="green-formal-alert"></span>';
 }
 ?>
