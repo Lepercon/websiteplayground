@@ -13,7 +13,7 @@ application/views/finance/files/*
 application/views/involved/img/*
 application/config/constants.php
 *.htaccess
-index.php
+
 .htaccess
 /.htaccess
 
