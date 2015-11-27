@@ -4,14 +4,14 @@ class Takemeout extends CI_Controller {
 
     function Takemeout() {
         parent::__construct();
-        $this->load->model('admin_model');
+        //$this->load->model('admin_model');
         $this->page_info = array(
             'id' => 2,
             'title' => 'Take Me Out',
             'big_title' => '<span class="big-text-medium">Take Me Out</span>',
             'description' => 'Take Me Out',
             'requires_login' => TRUE,
-            'allow_non-butler' => TRUE,
+            'allow_non-butler' => FALSE,
             'require-secure' => FALSE,
             'css' => array(),
             'js' => array(),
