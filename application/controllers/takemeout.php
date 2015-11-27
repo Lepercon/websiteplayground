@@ -11,7 +11,7 @@ class Takemeout extends CI_Controller {
             'big_title' => '<span class="big-text-medium">Take Me Out</span>',
             'description' => 'Take Me Out',
             'requires_login' => TRUE,
-            'allow_non-butler' => FALSE,
+            'allow_non-butler' => TRUE,
             'require-secure' => FALSE,
             'css' => array(),
             'js' => array(),
