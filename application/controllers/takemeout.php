@@ -4,9 +4,8 @@ class Takemeout extends CI_Controller {
 
     function Takemeout() {
         parent::__construct();
-        
         $this->page_info = array(
-            'id' => 2,
+            'id' => 206,
             'title' => 'Take Me Out',
             'big_title' => '<span class="big-text-medium">Take Me Out</span>',
             'description' => 'Take Me Out',
