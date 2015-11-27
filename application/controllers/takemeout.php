@@ -4,7 +4,7 @@ class Takemeout extends CI_Controller {
 
     function Takemeout() {
         parent::__construct();
-        //$this->load->model('admin_model');
+        
         $this->page_info = array(
             'id' => 2,
             'title' => 'Take Me Out',
