@@ -47,7 +47,7 @@ $methods = array('1'=>'Cheque', '2'=>'Bank Transfer');
     <table class="claim-table claim-table-footer">
         <tr class="double-line">
             <td colspan="3">Paid On:</td>
-            <td colspan="3">/&nbsp;&nbsp;&nbsp;/</td>
+            <td colspan="3" style="font-size: 150%;padding:4px;">/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/</td>
         </tr>
         <tr class="double-line">
             <td colspan="3">Cheque Number:</td>
