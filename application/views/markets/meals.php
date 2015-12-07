@@ -33,6 +33,9 @@ echo form_open('markets/meals'); ?>
 			}?>
 		</select>
 	</li>
+	<p>
+	*Christmas meal packs include choice of meat and vegetables including potatoes, parsnips, onions and carrots for roasting.
+	</p>
 	<li>
 		<?php echo form_submit('meals', 'Continue'); ?>
 	</li>
