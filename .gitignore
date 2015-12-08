@@ -21,3 +21,4 @@ index.php
 application/config/constants.php
 *.htaccess
 index.php
+application/views/bookings/files/*

@@ -24,7 +24,7 @@ class Bookings extends CI_Controller {
     }
 	
         function forms() {
-        $this->load->view('bookings/bookings_forms');
+            $this->load->view('bookings/bookings_forms');
         }
     
         function calender() {
@@ -37,6 +37,10 @@ class Bookings extends CI_Controller {
 			'date'=>$date
 		));
 	}
+        
+        function tsandcs() {
+            $this->load->view('bookings/tsandcs');
+        }
 	
 	function book(){
             $booking_screen = $this->input->post('Phone_number') == FALSE;
@@ -59,12 +63,16 @@ class Bookings extends CI_Controller {
             else{
                 $id = $this->bookings_model->enter_data($details);
 		$message = $this->load->view('bookings/Email', array(
-                                                                    'b' => $this->bookings_model->get_booking($id),
-                                                                    'room' => $this->bookings_model->get_rooms(),
-                                                                    'layout' => $this->bookings_model->get_layouts(),
-                                                                    'equiptment' => $this->bookings_model->get_equiptment()
-                                                                    ), true);
-                $this->bookings_model->send_email($message, $details);
+                    'b' => $this->bookings_model->get_booking($id),
+                    'room' => $this->bookings_model->get_rooms(),
+                    'layout' => $this->bookings_model->get_layouts(),
+                    'equiptment' => $this->bookings_model->get_equiptment()
+                ), true);
+                $this->db->where('id', $id);
+                $room = $this->db->get('bookings_rooms')->result_array();
+                if ($room['JCR_owned'] == 0){
+                    $this->bookings_model->send_email($message, $details);
+                }
                 $this->load->view('bookings/successful', array('details'=>$details));
             }
 	}
@@ -125,4 +133,29 @@ class Bookings extends CI_Controller {
             $this->load->library('PHPExcel');
             $this->load->view('bookings/read_excel');
         }
+        
+        function upload()
+	{
+            $config['upload_path'] = 'application/views/bookings/files/';
+            $config['allowed_types'] = 'xlsx';
+            //$config['file_name'] = date('Excel Upload Y.m.d H:i:s').'.xlsx';
+            $config['encrypt_name'] = True;
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload())
+            {
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('bookings/excel_upload_form', $error);
+            }
+            else
+            {
+                $data = array('upload_data' => $this->upload->data());
+                $this->load->view('bookings/excel_upload_success', $data);
+                $this->load->library('PHPExcel');
+                $this->load->view('bookings/read_excel', array(
+                    'path' => $data['upload_data']['full_path']
+                ));
+            }
+	}
 }

@@ -142,7 +142,7 @@ class Bookings_model extends CI_Model {
 		$this->email->from($this->session->userdata('email'), $this->session->userdata('firstname').' '.$this->session->userdata('surname'));
 		$this->email->to('butler.reception@durham.ac.uk'); 
 		//$this->email->cc('a.j.naylor@durham.ac.uk'); 
-		$this->email->bcc('a.j.naylor@durham.ac.uk');
+		//$this->email->bcc('a.j.naylor@durham.ac.uk');
 		$this->email->subject('Room booking - '.$room.date(' - l',$details['booking_start']));
 		$this->email->message($message); 
 		$this->email->send();
@@ -167,6 +167,15 @@ class Bookings_model extends CI_Model {
             }
             $booking_screen = TRUE;
             return $booking_screen;
+        }
+        function room_name2id($name){
+            
+            $this->db->like('spreadsheet_name', $name, 'none');
+            $this->db->or_like('name', $name, 'none');
+            $room = $this->db->get('bookings_rooms')->row_array(0);
+            if(!empty($room))
+                return $room['id'];
+            return NULL;
         }
 }
 

@@ -6,4 +6,5 @@
 	//echo anchor('bookings/book_old', 'Old system', 'class="jcr-button"');
 	echo ' '.anchor('bookings/calender', 'View availability', 'class="jcr-button"');
 	echo ' '.anchor('bookings/book', 'Make a booking', 'class="jcr-button"');
+        echo ' '.anchor('bookings/tsandcs', 'Term and Conditions', 'class="jcr-button"');
         //echo ' '.anchor('bookings/forms', 'Download a Booking Form', 'class="jcr-button"'); 
