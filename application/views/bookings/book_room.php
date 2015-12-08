@@ -33,7 +33,7 @@
 	echo '<div class="layout_selection">';
 		echo form_label('Layout');
 		$layout_list=array(''=>'Please Select');
-		echo '<select name="Room_Layout" required class="layouts"><option value="">Please Select</option>';
+		echo '<select name="Room_Layout" class="layouts"><option value="">Please Select</option>';
 		foreach ($layouts as $l) {
 			//if ($l['which_room'] == $details['room_id']){ 
 				echo "\n";

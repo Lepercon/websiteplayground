@@ -51,14 +51,14 @@
 				<p class="room_name"><?php echo $r['name']; ?></p>
 			</td>
                         <td>
-				<?php
-					foreach($instances[$r['id']] as $i){
-						$length = $i['time_end'] - $i['time_start'];
-						$width = ($length / (60 * 60)) * 37;
-						$start = 119 + 37 * (($i['time_start'] % (60*60*24))/(60*60) - 6);
-						echo '<span class="booking-instance '.($i['user_id']==$u_id?'my-booking':'').'" style="width:'.($width).'px;left:'.$start.'px" title="Event: '.$i['Title'].'"></span>';
-					}
-				?>
+                            <?php
+                                foreach($instances[$r['id']] as $i){
+                                    $length = $i['time_end'] - $i['time_start'];
+                                    $width = ($length / (60 * 60)) * 37;
+                                    $start = 119 + 37 * (($i['time_start'] % (60*60*24))/(60*60) - 6);
+                                    echo '<span class="booking-instance '.($i['user_id']==$u_id?'my-booking':'').'" style="width:'.($width).'px;left:'.$start.'px" title="Event: '.$i['Title'].'"></span>';
+                                }
+                            ?>
                         </td>
 			<?php foreach($times as $t){ ?>
 				<?php
