@@ -292,7 +292,7 @@ class Ballot_model extends CI_Model {
         }else{
             $this->db->order_by('ISNULL(table_num), table_num');
         }
-        $this->db->select('ballot_people.*, CONCAT(u2.firstname, \' \', u2.surname) as creator_name', false);
+        $this->db->select('ballot_people.*, CONCAT(u2.firstname, \' \', u2.surname) as creator_name, users.email', false);
         $this->db->where('table_num IS NOT NULL');
         $this->db->join('users', 'users.id=ballot_people.user_id', 'left outer');
         $this->db->join('users as u2', 'u2.id=ballot_people.created_by', 'left outer');

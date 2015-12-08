@@ -1,6 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 echo back_link('ballot');
 
+
+if($b['id'] == 7){
+    echo '<span id="green-formal-alert" style="">';
+    echo '<div>'.editable_area('ballot', 'content/popup_'.$b['id'], is_admin()).'</div>';
+    echo '</span>';
+}
 ?>
 <div class="no-print">
 <?php
@@ -106,6 +112,10 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             <p>Please enter your signup details below, you do not need to fill all of the availible places.</p>
             <p>For each person you must type a few letters of the first name or surname, then select them from the list.</p>
         <?php
+            if($b['allow_guests']){
+                echo '<p>If you are trying to sign up a guest, please type "Guest" in the box.</p>';
+            }
+            echo '<p>If the box glows red around a name then you have done something wrong and they <b>won\'t</b> be entered into the ballot</p>';
             if(!empty($b['people'])){
                 if($b['people'][0]['created_by'] == $user_id){
                     echo '<p class="validation_success"><span class="ui-icon ui-icon-check inline-block green-icon"></span> Successfully stored '.sizeof($b['people']).(sizeof($b['people'])==1?' person':' people').' in the ballot database</p>';

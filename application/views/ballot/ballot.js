@@ -10,8 +10,10 @@
                 change: function(event, user){
                     if(user.item == null){
                         $(this).siblings('.user-id').val('');
+                        $(this).addClass('invalid');
                     }else{
                         $(this).siblings('.user-id').val(user.item.id);
+                        $(this).removeClass('invalid');
                     }
                     $.ballot.guest_name();
                 }
@@ -43,6 +45,31 @@
                 $('#tables').children().last().remove();
                 }
             });
+            
+            if(($('#green-formal-alert').length > 0)){
+                $("select[name$=0]").change(function(){
+                    if(($('#green-formal-alert').attr('done') != 'done')){
+                        sel = $(this);
+                        if(sel.val() == '1'){
+                            $('#green-formal-alert .page-content-area').clone().dialog({
+                                title: 'Are you sure?',
+                                buttons:{
+                                    "Ok!": function(){
+                                        sel.val('0');
+                                        $(this).dialog("close");
+                                    },
+                                    "No Thanks!": function(){
+                                        $('#green-formal-alert').attr('done', 'done');
+                                        $(this).dialog("close");
+                                    }
+                                },
+                                modal: true,
+                                width: 800
+                            });
+                        }
+                    }
+                });
+            }
 
         },
 
