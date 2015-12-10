@@ -2,7 +2,7 @@
 <?php
 echo 'Please note this availability is not 100% accurate. For more reliable availability please contact reception at:<br><br>0191 334 7260    OR    butler.reception@durham.ac.uk<br><br>
         The University and Josephine Butler College reserve the right to overwrite any bookings.'.'<br>';
-?>
+?> 
     
     <?php 
 	$times = range(6, 23);
