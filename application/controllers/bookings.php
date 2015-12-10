@@ -134,6 +134,28 @@ class Bookings extends CI_Controller {
             $this->load->view('bookings/read_excel');
         }
         
+        function add_booking(){
+            $booking_screen = $this->input->post('Title') == FALSE;
+            if(!$booking_screen){
+                $details = $this->bookings_model->get_submitted_details();
+                $s_time = $details['booking_start'] % (60*60*24);
+                $e_time = $details['booking_end'] % (60*60*24);
+                $s_date = $details['booking_start'] - $s_time;
+                $e_date = $details['booking_end'] - $e_time;
+            }
+            if ($booking_screen){
+            $this->load->view('bookings/definite_upload', array(
+                            'rooms' => $this->bookings_model->get_rooms(), 
+                            'reservations' => $this->bookings_model->get_bookings()
+                            ));
+            }
+            else{
+                $this->bookings_model->enter_data($details);
+                $this->load->view('bookings/definite_upload_done', array('details'=>$details));
+            }
+            
+        }
+        
         function upload()
 	{
             $config['upload_path'] = 'application/views/bookings/files/';
