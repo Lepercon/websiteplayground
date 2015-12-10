@@ -1,5 +1,10 @@
 <div class="width-66 narrow-full content-left" style="width:79%">  
-<?php 
+<?php
+echo 'Please note this availability is not 100% accurate. For more reliable availability please contact reception.<br><br>
+        The University and Josephine Butler College reserve the right to overwrite any bookings.'.'<br>';
+?>
+    
+    <?php 
 	$times = range(6, 23);
 	$next_day = $date + (60*60*24);
 	$prev_day = $date - (60*60*24);
