@@ -130,12 +130,20 @@ class Bookings extends CI_Controller {
 	}
         
         function excel(){
+            if(!(has_level(array(164, 166)) OR is_admin())){
+                redirect('bookings');
+                return;
+            }
             $this->load->library('PHPExcel');
             $this->load->view('bookings/read_excel');
         }
         
         function upload()
 	{
+            if(!is_admin()){
+                redirect('bookings');
+                return;
+            }
             $config['upload_path'] = 'application/views/bookings/files/';
             $config['allowed_types'] = 'xlsx';
             //$config['file_name'] = date('Excel Upload Y.m.d H:i:s').'.xlsx';
