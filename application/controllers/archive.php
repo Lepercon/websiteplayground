@@ -12,7 +12,7 @@ class Archive extends CI_Controller {
             'description' => 'Committee Documents and JCR Awards',
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
-            'require-secure' => FALSE,
+            'require-secure' => TRUE,
             'css' => array('archive/archive'),
             'js' => array('archive/archive'),
             'keep_cache' => FALSE,

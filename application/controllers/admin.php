@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
             'description' => 'Admin panel',
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
-            'require-secure' => FALSE,
+            'require-secure' => TRUE,
             'css' => array('admin/admin', 'details/details', 'jcrop'),
             'js' => array('admin/admin', 'details/details', 'jcrop'),
             'keep_cache' => FALSE,

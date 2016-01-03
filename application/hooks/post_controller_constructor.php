@@ -142,7 +142,9 @@ class Post_controller_constructor {
         }
         
         if(!isset($GLOBALS['skip_controller']) && $page['require-secure'] && !HTTPS && ENVIRONMENT != 'development'){
-            cshow_error('You need to access this page using a secure connection, please click <a href="'.str_replace('http:', 'https:', site_url($this->ci->uri->uri_string())).'">here</a>.', 401, 'Access denied');
+            $url = str_replace('http:', 'https:', site_url($this->ci->uri->uri_string()));
+            $js = "<script> window.loc.href = '$url'; </script>";
+            cshow_error('You need to access this page using a secure connection, please click <a href="'.$url.'">here</a>.'.$js, 401, 'Access denied');
             $GLOBALS['skip_controller'] = TRUE;
         }
         

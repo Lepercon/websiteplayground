@@ -11,7 +11,7 @@ class Details extends CI_Controller {
             'description' => 'View and edit user details',
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
-            'require-secure' => FALSE,
+            'require-secure' => TRUE,
             'css' => array('details/details', 'jcrop'),
             'js' => array('details/details', 'jcrop'),
             'keep_cache' => array('details'),
