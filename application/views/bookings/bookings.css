@@ -1,54 +1,20 @@
-.booking-instance{ 	
-    margin-top: 5px;
-    height:27px;
-    background-color:red;
-    display:block;
-    position:absolute;
-}
+.booking-instance { margin-top: 5px; height: 27px; background-color: red; display: block; position: absolute; }
 
-.my-booking{
-    background-color:#00FF00;
-}
+.my-booking { background-color: #00FF00; }
 
-.calender-view col:nth-child(2n+3) {
-	background: #FF0;
-} 
+.calender-view col:nth-child(2n+3) { background: #FF0; }
+.calender-view td { width: 34px; height: 33px; padding: 1px; font-size: 80%; }
+.calender-view tr:first-of-type td { height: auto; text-align: center; font-size: 75%; }
+.calender-view tr:first-of-type td:first-of-type, .calender-view tr:first-of-type td:nth-of-type(2) { border-width: 0 0 1px 0; }
+.calender-view td:nth-of-type(1) { width: 125px; padding: 2px; }
+.calender-view td:nth-of-type(2) { width: 0; border-left: 0; padding: 0; border-left: 0; }
 
-.calendar-view td{
-	width:37px;
-	height:33px;
-	padding:1px;
-	font-size: 80%;
-}
+.navigation-bar { width: 100%; }
 
-.calendar-view td:nth-of-type(1){
-	width:125px;
-	padding:2px;
-}
+.navigation-bar td { border: 0; }
 
-.calendar-view td:nth-of-type(2){
-	width:0;
-	border-left:0;
-	padding:0;
-	border-left:0;
-}
+#content { min-width: 750px; }
 
-.calendar-view tr:nth-of-type(1) td{
-	
-}
+.room_name { font-size: 95%; }
 
-.navigation-bar{
-	width:100%;
-}
-
-.navigation-bar td{
-	border:0;
-}
-
-#content{
-	min-width:750px;
-}
-
-.room_name{
-	font-size: 95%;
-}
+/*# sourceMappingURL=bookings.css.map */

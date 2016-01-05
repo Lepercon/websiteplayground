@@ -1,31 +1,39 @@
 <div class="width-66 narrow-full content-left" style="width:79%">  
 <?php
-echo '<b>Please note this availability is not 100% accurate.</b> For more reliable availability please contact reception at:<br><br>0191 334 7260    OR    butler.reception@durham.ac.uk<br><br>
-        The University and Josephine Butler College reserve the right to overwrite any bookings.'.'<br>';
+    echo '<p><b>Please note this availability is not 100% accurate.</b></p>';
+    echo '<p>For more reliable availability please contact reception at: 0191 334 7260 OR <a href="mailto:butler.reception@durham.ac.uk">butler.reception@durham.ac.uk</a></p>';
+    echo '<p>The University and Josephine Butler College reserve the right to overwrite any bookings.</p>';
 ?> 
     
-    <?php 
-	$times = range(6, 23);
-	$next_day = $date + (60*60*24);
-	$prev_day = $date - (60*60*24);
-	$next_week = $date + (60*60*24*7);
-	$prev_week = $date - (60*60*24*7);
-	
-        $this->db->join('bookings_reservations', 'bookings_reservations.id=bookings_instances.booking_id');
-	$ins = $this->db->get('bookings_instances')->result_array();
-        $u_id = $this->session->userdata('id');
-	$rooms = $this->db->get('bookings_rooms')->result_array();
-	$instances = array();
-	foreach ($rooms as $r){
-		$instances[$r['id']] = array();
-	}
-	
-	foreach ($ins as $i){
-		$day_end = $date + 60*60*24;
-		if($date <= $i['time_start'] && $i['time_start'] <= $day_end){
-			$instances[$i['room_id']][] = $i;
-		}
-	}
+<?php 
+    $times = range(6, 23);
+    $next_day = $date + (60*60*24);
+    $prev_day = $date - (60*60*24);
+    $next_week = $date + (60*60*24*7);
+    $prev_week = $date - (60*60*24*7);
+
+    $this->db->join('bookings_reservations', 'bookings_reservations.id=bookings_instances.booking_id');
+    $ins = $this->db->get('bookings_instances')->result_array();
+    $u_id = $this->session->userdata('id');
+    $rooms = $this->db->get('bookings_rooms')->result_array();
+    $instances = array();
+    foreach ($rooms as $r){
+        $instances[$r['id']] = array();
+    }
+
+    //var_dump($ins);
+    
+    $day_start = $date - 60*60*12;
+    $day_end = $date + 60*60*12;
+    foreach ($ins as $i){
+        if($day_start <= $i['time_end'] || $i['time_start'] <= $day_end){
+            if($i['time_start'] < $day_start)
+                $i['time_start'] = $day_start;
+            if($i['time_end'] > $day_end)
+                $i['time_end'] = $day_end;
+            $instances[$i['room_id']][] = $i;
+        }
+    }
 ?>
 <table class="navigation-bar">
 	<tr><td style="border:0"><?php	
@@ -61,19 +69,13 @@ echo '<b>Please note this availability is not 100% accurate.</b> For more reliab
                                     $length = $i['time_end'] - $i['time_start'];
                                     $width = ($length / (60 * 60)) * 37;
                                     $start = 119 + 37 * (($i['time_start'] % (60*60*24))/(60*60) - 6);
-                                    echo '<span class="booking-instance '.($i['user_id']==$u_id?'my-booking':'').'" style="width:'.($width).'px;left:'.$start.'px" title="Event: '.$i['Title'].'"></span>';
+                                    $title = 'Event: '.$i['Title'].' ('.date('H:i', $i['time_start']).' until '.date('H:i', $i['time_end']).')';
+                                    echo '<span class="booking-instance '.($i['user_id']==$u_id?'my-booking':'').'" style="width:'.($width).'px;left:'.$start.'px" title="'.$title.'"></span>';
                                 }
                             ?>
                         </td>
 			<?php foreach($times as $t){ ?>
-				<?php
-					//if ($r['id'] == $b['room_id'] && $t == date('G', $b['booking_start'])){
-						// put close php here <td bgcolor="#FF0000"><?php
-					//}
-					//else{
-						?><td><?php
-					//}
-				?></td>
+				<td></td>
 			<?php } ?>
 		</tr>
 	<?php } ?>

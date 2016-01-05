@@ -124,7 +124,9 @@ class Bookings_model extends CI_Model {
         function euiptment_id_2_name($id) {
             $this ->db->where('id',$id);
             $equipment = $this->db->get('bookings_equiptment')->row_array();
-            return $equipment['e_name'];
+            if(!empty($equipment))
+                return $equipment['e_name'];
+            return NULL;
         }
 	
 	function send_email($message, $details){
@@ -139,7 +141,8 @@ class Bookings_model extends CI_Model {
 		//$this->email->bcc('a.j.naylor@durham.ac.uk');
 		$this->email->subject('Room booking - '.$room.date(' - l',$details['booking_start']));
 		$this->email->message($message); 
-		$this->email->send();
+                if(ENVIRONMENT == 'production')
+                    $this->email->send();
 	}
         
 

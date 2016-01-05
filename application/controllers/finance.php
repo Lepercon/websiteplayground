@@ -737,7 +737,7 @@
         $claim['account-number'] = $this->finance_model->decrypt_data($claim['account-number']);
         $claim['sort-code'] = $this->finance_model->decrypt_data($claim['sort-code']);
         
-        if($admin){
+        if($admin || ($u_id == $claim['user_id'])){
             $this->load->view('finance/claims/view_claim', array(
                 'admin' => $admin,
                 'claim' => $claim
@@ -1049,6 +1049,101 @@
     
     function payment_complete(){
         $this->load->view('finance/payments/payment_complete');
+    }
+    
+    function claim(){
+        
+        $budgets = $this->finance_model->get_budgets();
+        foreach($budgets as $b){
+            $budgets_list[$b['id']] = $b['budget_name'];
+
+        }
+        
+        if(isset($_POST['budget_id'])){
+            
+            $amount = 0;
+            $item = '';
+            $prices = $this->input->post('price');
+            $items = $this->input->post('item');
+            $shops = $this->input->post('shop');
+            foreach($prices as $k=>$p){
+                if(is_numeric($k)){
+                    $amount += (substr($prices[$k], 2)+0);
+                    $item .= ($item==''?'':', ').$items[$k];
+                }
+            }
+            
+            $files = '';
+            $config = array(
+                'upload_path'=>'./application/views/finance/files/',
+                'allowed_types'=>'jpeg|jpg|png|pdf',
+                'max_size'=>8192,
+                'encrypt_name'=>TRUE
+            );
+            $this->load->library('upload', $config);
+            foreach($_FILES as $k=>$f){
+                if($k !== 'upload_NUMBER'){
+                    
+                    if($this->upload->do_upload($k)){
+                        $data = $this->upload->data();
+                        if($data['file_ext'] == '.pdf'){
+                            //$cmd = 'convert -density 300 '.$data['file_name'].' '.$data['raw_name'].'.png';                    
+                            //shell_exec($cmd);
+
+                            $imagick = new Imagick(); 
+                            $imagick->setResolution(150, 150);
+                            $imagick->readImage($data['full_path']);
+                            $imagick->writeImages($data['file_path'].$data['raw_name'].'.png', false); 
+                            if(file_exists($data['file_path'].$data['raw_name'].'.png')){
+                                $data['file_name'] = $data['raw_name'].'.png';
+                            }else{
+                                $data['file_name'] = '';
+                            }                    
+                            $i = 0;
+                            while(file_exists($data['file_path'].$data['raw_name'].'-'.$i.'.png')){
+                                $data['file_name'] .= ($data['file_name']==''?'':',').$data['raw_name'].'-'.$i.'.png';
+                                $i++;
+                            }
+                        }
+                        $files .= $data['file_name'].',';
+                    }
+                }
+            }
+            
+            $details = array(
+                'user_id' => $this->session->userdata('id'),
+                'pay_to' => $this->input->post('name'),
+                'account-number' => $this->finance_model->encrypt_data($this->input->post('account-number')),
+                'sort-code' => $this->finance_model->encrypt_data($this->input->post('sort-code')),
+                'payment_method' => $this->input->post('claim-type')=='Cheque'?0:1,
+                'amount' => $amount,
+                'item' => $item,
+                'budget_id' => $this->input->post('budget_id'),
+                'details' => $this->input->post('details'),
+                'files' => $files
+            );
+            
+            $this->db->insert('finance_claims', $details);
+            $id = $this->db->insert_id();
+            foreach($prices as $k => $p){
+                if(is_numeric($k)){
+                    $details = array(
+                        'claim_id' => $id,
+                        'item_name' => $items[$k],
+                        'store' => $shops[$k],
+                        'amount' => substr($prices[$k],2)
+                    );
+                    $this->db->insert('finance_claims_items', $details);
+                }
+            }
+            
+            redirect('finance/view_claim/'.$id);
+            return;
+        }
+            
+        $this->load->view('finance/claims/new_claim', array(
+            'budgets' => $budgets_list
+        ));
     }
 
 }

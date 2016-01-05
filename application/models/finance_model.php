@@ -366,6 +366,8 @@ class Finance_model extends CI_Model {
         foreach($levels as $l){
             $c['owners'] = array_merge($c['owners'], $this->users_model->get_users_with_level($l, 'users.id, users.firstname, users.prefname, users.surname')); 
         }
+        $this->db->where('claim_id', $c_id);
+        $c['items'] = $this->db->get('finance_claims_items')->result_array();
         return $c;
     }
     

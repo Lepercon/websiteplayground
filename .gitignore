@@ -21,3 +21,5 @@ application/config/constants.php
 *.htaccess
 index.php
 application/views/bookings/files/*
+*.key
+*.map
