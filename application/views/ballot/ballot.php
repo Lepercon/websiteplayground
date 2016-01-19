@@ -10,7 +10,7 @@ foreach($ballots as $b){
     $op = array();
     
     $min_price = $b['price'];
-    $max_price = $b['price'];
+    $max_price = $b['price'] + $b['guest_charge'];
     
     foreach($options as $k=>$o){
         $temp = explode(';', $o);

@@ -74,7 +74,23 @@
         },
 
         update_price: function(span_elem){
-            
+            var id = span_elem.find('.user-id').val();
+            console.log(id == -1);
+            if(id === ""){
+                price = 0;
+            }else{
+                var price = +$('.base-price').html();
+                if(id == -1)
+                    price += +$('.guest-price').html();
+                var re = /\(£([0-9.]+)\)/; 
+                span_elem.find('.options').each(function(){
+                    var text = $(this).find('option:selected').html();
+                    var r = re.exec(text);
+                    if(r !== null)
+                        price += +r[1];
+                });
+            }
+            span_elem.find('.user-price').html(price.toFixed(2));
         },
 
         creation_buttons: function(){
@@ -113,6 +129,7 @@
                 }else{
                     $(this).siblings('.guest-name').attr('type', 'hidden').prop("required", false).attr('pattern', '');
                 }
+                $.ballot.update_price($(this).closest('.person-option'));
             });
 
         }

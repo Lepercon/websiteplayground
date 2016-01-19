@@ -78,6 +78,8 @@ echo back_link('ballot/view_ballot/'.$b['id']);
         echo '<td>'.($p['user_id']==-1?'Guest: '.$p['name'].' ('.$p['creator_name'].')':$p['name']).'</td>';
         echo '<td>'.$p['email'].'</td>';
         $price = $b['price'];
+        if($p['user_id'] == -1)
+            $price += $b['guest_charge'];
         $ops = '';
         foreach($p['op_list'] as $o){
             $ops .= '<td>'.$o['name'].'</td>';

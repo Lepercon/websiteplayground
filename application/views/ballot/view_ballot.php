@@ -44,7 +44,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
     $op = array();
     
     $min_price = $b['price'];
-    $max_price = $b['price'];
+    $max_price = $b['price'] + $b['guest_charge'];
     
     foreach($options as $k=>$o){
         $temp = explode(';', $o);
@@ -93,7 +93,8 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 
     <h3>Options</h3>
     <div>
-        <p>Base Price: £<?php echo number_format($b['price'], 2); ?></p>
+        <p>Base Price: £<span class="base-price"><?php echo number_format($b['price'], 2); ?></span></p>
+        <p>Guest Charge: £<span class="guest-price"><?php echo number_format($b['guest_charge'], 2); ?></span></p>
         <ul class="options-list">
         <?php foreach($op as $o){ ?>
             <h3><?php echo $o['title']; ?></h3>
@@ -137,10 +138,11 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 echo form_input(array('name'=>'id-'.$r, 'type'=>'hidden', 'value'=>get_value($b, 'id-'.$r, $r-1), 'class'=>'user-id')).'</p>';
                 
                 foreach($op as $k=>$o){
-                    echo '<p>'.form_label().form_label($o['title'].':').form_dropdown('option-'.$r.'-'.$k, $o['options']['names'], get_value($b, 'option-'.$r.'-'.$k, $r-1, $k), 'style="min-width:167px"').'</p>';
+                    echo '<p class="options">'.form_label().form_label($o['title'].':').form_dropdown('option-'.$r.'-'.$k, $o['options']['names'], get_value($b, 'option-'.$r.'-'.$k, $r-1, $k), 'style="min-width:167px"').'</p>';
                 }
                 
                 echo '<p>'.form_label().form_label('Special Requirements:').form_input('requirements-'.$r, get_value($b, 'requirements-'.$r, $r-1), 'placeholder="Special Requirements"').'</p>';
+                echo '<p>'.form_label().form_label('Price:').'<b>£<span class="user-price">0.00</span></b></p>';
                 
                 echo '<br></span>';
             }
@@ -164,6 +166,8 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 echo '<tr><td>'.$p['name'].'</td>';
                 $options = explode(';', $p['options']);
                 $price = 0;
+                if($p['user_id'] == -1)
+                    $price += $b['guest_charge'];
                 foreach($options as $k=>$o){
                     echo '<td>'.$op[$k]['options']['names'][$o].'</td>';
                     $price += $op[$k]['options']['price'][$o];
