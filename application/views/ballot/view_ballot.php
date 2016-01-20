@@ -68,7 +68,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 
 ?>
 <div id="ballot_accordion">
-    <h3><?php echo $b['name'].' - '.$b['signup_name']; ?></h3>
+    <h3><?php echo (is_null($b['signup_name'])?$b['name']:$b['name'].' - '.$b['signup_name']); ?></h3>
     <div>
         <p><?php echo $b['name']; ?> is at <b><?php echo date('H:i \o\n l, d/m/Y', $b['time']); ?></b></p>
         <?php if($b['open_time'] > time()){ ?>

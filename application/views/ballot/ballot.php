@@ -34,7 +34,7 @@ foreach($ballots as $b){
 
 ?>
     <div class="jcr-box wotw-outer">
-        <a href="<?php echo site_url('ballot/view_ballot/'.$b['id'].'/'.url_title($b['name'].'-'.$b['signup_name'])); ?>"><h3 class="wotw-day"><?php echo $b['name'].' - '.$b['signup_name']; ?></h3></a>
+        <a href="<?php echo site_url('ballot/view_ballot/'.$b['id'].'/'.(is_null($b['signup_name'])?url_title($b['name']):url_title($b['name'].'-'.$b['signup_name']))); ?>"><h3 class="wotw-day"><?php echo (is_null($b['signup_name'])?$b['name']:$b['name'].' - '.$b['signup_name']); ?></h3></a>
         <div>
             <p><?php echo $b['name']; ?> is at <b><?php echo date('H:i \o\n l, d/m/Y', $b['time']); ?></b></p>
             <?php if($b['open_time'] > time()){ ?>
