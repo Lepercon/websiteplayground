@@ -70,7 +70,36 @@
                     }
                 });
             }
+            
+            $('.allow-guests input').change(function(){
+                $.ballot.allow_guests();
+            });
+            $.ballot.allow_guests();
+            
+            
+            $('.max-group select').change(function(){
+                $.ballot.max_group();
+            }); 
+            $.ballot.max_group();
 
+        },
+        
+        allow_guests: function(){
+            if($('.allow-guests input').prop('checked')){
+                $('.max-guests, .guests-price').show();
+                $('.guests-price input').attr('required', 'required');
+            }else{
+                $('.max-guests, .guests-price').hide();
+                $('.guests-price input').removeAttr('required');
+            }
+        },
+        
+        max_group: function(){
+            $('.max-guests select option').removeAttr('disabled')
+            $('.max-guests select option:gt(' + ($('.max-group select').val() - 1) + ')').attr('disabled', 'disabled');
+            if($('.max-guests select').val() === null){
+                $('.max-guests select').val($('.max-group select').val());
+            }
         },
 
         update_price: function(span_elem){

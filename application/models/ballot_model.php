@@ -535,6 +535,9 @@ class Ballot_model extends CI_Model {
         $data['tables'] = implode(';', $this->input->post('table'));
         $data['created_by'] = $this->session->userdata('id');
         $data['calc_token'] = rand_num(0, 2000);
+        $data['allow_guests'] = $this->input->post('allow_guests');
+        $data['max_guests'] = $this->input->post('max_guests');
+        $data['guest_charge'] = $this->input->post('guest_price');
         
         $data['options'] = '';
         foreach($this->input->post('option') as $option){

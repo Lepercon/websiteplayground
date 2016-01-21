@@ -11,11 +11,11 @@ echo editable_area('ballot', 'content/create');
 echo heading('Create a New Ballot', 2);
 echo form_open('', 'class="jcr-form no-jsify"');
 
-echo '<p>'.form_label('Event: ').form_dropdown('event_id', $events).'</p>';
+echo '<p>'.form_label('Event: ').form_dropdown('event_id', $events, '', 'required="required"').'</p>';
 echo '<p>'.form_label('Ballot Name: ').form_input('signup_name', '', 'placeholder="Name" required="required" ').'</p>';
 echo '<p>'.form_label('Ballot Open: ').form_input('date-open', '', 'placeholder="Open Date" class="datepicker" required="required" ').' '.form_dropdown('open-hour', $hours).':'.form_dropdown('open-minute', $minutes).'</p>';
 echo '<p>'.form_label('Ballot Close: ').form_input('date-close', '', 'placeholder="Close Date" class="datepicker" required="required" ').' '.form_dropdown('close-hour', $hours).':'.form_dropdown('close-minute', $minutes).'</p>';
-echo '<p>'.form_label('Max Group: ').form_dropdown('max_group', $group_sizes, 6).'</p>';
+echo '<p class="max-group">'.form_label('Max Group: ').form_dropdown('max_group', $group_sizes, 6).'</p>';
 
 echo '<p>'.form_label('Tables: ').'<a href="#" class="remove-table jcr-button" title="Remove the last table.">&nbsp;-&nbsp;</a><a href="#" class="add-table jcr-button" title="Add a new table.">&nbsp;+&nbsp;</a></p>';
 
@@ -26,7 +26,9 @@ foreach(range(1, 5) as $t){
 echo '</div>';
 
 echo '<p>'.form_label('Base Price: ').form_input('price', '', 'placeholder="£0.00" required="required" pattern="[0-9]*\.{0,1}[0-9]*" title="The price of the meal (before any options are added)."').'</p>';
-echo '<p>'.form_label('Allow Guests: ').form_checkbox('allow_guests', '1', FALSE).'</p><br>';
+echo '<p class="allow-guests">'.form_label('Allow Guests: ').form_checkbox('allow_guests', '1', FALSE).'</p>';
+echo '<p class="max-guests">'.form_label('Max Guests Per Group: ').form_dropdown('max_guests', $group_sizes, 6).'</p>';
+echo '<p class="guests-price">'.form_label('Guest Charge: ').form_input('guest_price', '', 'placeholder="£0.00" pattern="[0-9]*\.{0,1}[0-9]*" title="The extra price for a guest ticket."').'</p><br>';
 echo '<p>'.form_label('Options: ').'<a href="#" class="remove-option jcr-button" title="Remove the last option.">&nbsp;-&nbsp;</a><a href="#" class="add-option jcr-button" title="Add a new option.">&nbsp;+&nbsp;</a></p>';
 
 echo '<div id="options">';

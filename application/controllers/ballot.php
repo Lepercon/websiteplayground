@@ -128,7 +128,6 @@ class Ballot extends CI_Controller {
         }
         
         if($this->input->post('submit') != FALSE){
-            log_message('error', var_export($_POST, true));
             $id = $this->ballot_model->create_signup();
             redirect('ballot/view_ballot/'.$id);
             return;

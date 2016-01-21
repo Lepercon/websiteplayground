@@ -67,6 +67,9 @@ $route['claim'] = 'finance/claims_form';
 // details
 $route['profile'] = 'details';
 
+//ballot
+$route['ballot/view/(.+)'] = 'ballot/view_ballot/$1';
+
 
 $route['posters'] = 'home/banner';
 $route['JBs'] = 'services';
