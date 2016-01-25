@@ -20,7 +20,7 @@ function table_of_claims($claims, $admin, $button_text = '', $button_class = '',
                 <?php
                     if($admin){
                 ?>
-                        <td><a href="<?php echo site_url('finance/view_claim/'.$c['id']); ?>"><?php echo $c['id']; ?></a></td>
+                        <td><a href="<?php echo site_url('finance/claims/view_claim/'.$c['id']); ?>"><?php echo $c['id']; ?></a></td>
                 <?php
                     }    
                 ?>
@@ -54,7 +54,7 @@ function table_of_claims($claims, $admin, $button_text = '', $button_class = '',
                     }
                     if($admin){
                 ?>
-                        <a href="<?php echo site_url('finance/edit_claim/'.$c['id']); ?>">Edit</a>
+                        <a href="<?php echo site_url('finance/claims/edit_claim/'.$c['id']); ?>">Edit</a>
                 <?php
                     }
                 ?>

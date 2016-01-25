@@ -35,7 +35,7 @@ $payment_details = array(
     'billing_postcode' => '',
     'country_code'     => 'GB'
   ),
-  'redirect_uri' => site_url('finance/payment_complete'),
+  'redirect_uri' => site_url('finance/payments/payment_complete'),
   'state' => $bill_id  
 );
 

@@ -111,10 +111,6 @@
 				event.preventDefault();
 				window.print();
 			});
-			$('.button-edit-claim').click(function(event){
-				event.preventDefault();
-				location.href = location.origin + '/butler.jcr/finance/edit_claim/' + $(this).siblings('#claim-id').html();
-			});
 			$('.edit-budgets-accordion').accordion({active: parseInt($('#index_select').html())});
 			$('.budgetholder').change(function(event){
 				holder = $(this).val();
@@ -136,7 +132,7 @@
 				
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/remove_file',
+					url: script_url + 'finance/claims/remove_file',
 					data: {
 						file: file,
 						claim_id:claim_id 
@@ -231,7 +227,7 @@
 				claimid = button.siblings('#claim-id').text();
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/change_claim_status',
+					url: script_url + 'finance/claims/change_claim_status',
 					data: {
 						claimid: claimid,
 						newstatus: (button[0].innerHTML == 'Unmark As Paid'?1:2)
@@ -251,7 +247,7 @@
 				claimid = button.siblings('#claim-id').text();
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/change_claim_status',
+					url: script_url + 'finance/claims/change_claim_status',
 					data: {
 						claimid: claimid,
 						newstatus: 1 
@@ -279,7 +275,7 @@
 					$('#error-message').html('');			
 					$.ajax({
 						type: "POST",
-						url: script_url + 'finance/add_budget',
+						url: script_url + 'finance/claims/add_budget',
 						data: {
 							newname: budgetname,
 							holdername: id
@@ -318,7 +314,7 @@
 				var status = button.siblings('.invoice-status').text();
 				$.ajax({
 					type:"POST",
-					url: script_url + 'finance/admin_mark_paid',
+					url: script_url + 'finance/claims/admin_mark_paid',
 					data: {
 						'payment_id': button.siblings('.invoice-id').text(),
 						'status': (status == '1' ? '0' : '1')
@@ -368,7 +364,7 @@
 						"Delete": function () {
 							$.ajax({
 								type: "POST",
-								url: script_url + 'finance/remove_invoice/' + button.siblings('.invoice-id').text(),
+								url: script_url + 'finance/claims/remove_invoice/' + button.siblings('.invoice-id').text(),
 								error: function() {
 									$.common.notify('The invoice could not be deleted');
 								},
@@ -399,7 +395,7 @@
 						"Delete": function () {
 							$.ajax({
 								type: "POST",
-								url: script_url + 'finance/remove_member/' + button.siblings('.invoice-id').text(),
+								url: script_url + 'finance/claims/remove_member/' + button.siblings('.invoice-id').text(),
 								error: function() {
 									$.common.notify('The member could not be removed');
 								},

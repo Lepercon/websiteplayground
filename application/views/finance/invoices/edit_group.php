@@ -10,7 +10,7 @@ echo back_link('finance/my_group/'.$group_info['id']);?>
         <?php
             echo validation_errors('<div class="validation_errors"><span class="inline-block ui-icon ui-icon-notice"></span>', '</div><br>');
             echo $messages;
-            echo form_open(site_url('finance/edit_group/'.$group_info['id']), array('class'=>'jcr-form inline-block no-jsify'));
+            echo form_open(site_url('finance/claims/edit_group/'.$group_info['id']), array('class'=>'jcr-form inline-block no-jsify'));
             echo form_hidden(array('group_id'=>$group_info['id']));
             
             $this->load->view('finance/invoices/group_form');

@@ -14,7 +14,7 @@ $this->load->model('finance_model');
     <h2 class="wotw-day">Budgets</h2>
     <div>
         <h3>Current Budgets</h3>
-        <a class="jcr-button inline-block" title="Edit" href="<?php echo site_url('finance/edit_budgets'); ?>">
+        <a class="jcr-button inline-block" title="Edit" href="<?php echo site_url('finance/claims/edit_budgets'); ?>">
             <span class="inline-block ui-icon ui-icon-pencil"></span>Edit
         </a>
         <ol id="budgets-list" style="padding-left:40px">
@@ -49,12 +49,12 @@ $this->load->model('finance_model');
         <?php
             if($claims_to_be_reviewed !== FALSE){
         ?>        
-                (<a href="<?php echo site_url('finance/view_claims/0/'.($claims_paid === FALSE?0:1)); ?>">Hide</a>)</h3>
+                (<a href="<?php echo site_url('finance/claims/view_claims/0/'.($claims_paid === FALSE?0:1)); ?>">Hide</a>)</h3>
                 <?php table_of_claims($claims_to_be_reviewed, $admin, 'Approve', 'button-approve-claim', array(0)) ?>        
         <?php
             }else{
         ?>
-                (<a href="<?php echo site_url('finance/view_claims/1/'.($claims_paid === FALSE?0:1)); ?>">Show</a>)</h3>
+                (<a href="<?php echo site_url('finance/claimsview_claims/1/'.($claims_paid === FALSE?0:1)); ?>">Show</a>)</h3>
                 <p>Claims Hidden</p>
         <?php
             }
@@ -63,12 +63,12 @@ $this->load->model('finance_model');
         <?php
             if($claims_paid !== FALSE){
         ?>        
-                (<a href="<?php echo site_url('finance/view_claims/'.($claims_to_be_reviewed === FALSE?0:1).'/0'); ?>">Hide</a>)</h3>
+                (<a href="<?php echo site_url('finance/claims/view_claims/'.($claims_to_be_reviewed === FALSE?0:1).'/0'); ?>">Hide</a>)</h3>
                 <?php table_of_claims($claims_paid, $admin, 'Unmark As Paid', 'button-mark-paid', array(2)); ?>        
         <?php
             }else{
         ?>
-                (<a href="<?php echo site_url('finance/view_claims/'.($claims_to_be_reviewed === FALSE?0:1).'/1'); ?>">Show</a>)</h3>
+                (<a href="<?php echo site_url('finance/claims/view_claims/'.($claims_to_be_reviewed === FALSE?0:1).'/1'); ?>">Show</a>)</h3>
                 <p>Claims Hidden</p>
         <?php
             }

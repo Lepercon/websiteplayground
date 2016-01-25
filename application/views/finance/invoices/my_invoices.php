@@ -32,7 +32,7 @@ if(!empty($invoices)) {
             <td>
                 <span style="display:none;" class="invoice-id"><?php echo $i['id'] ?></span>
                 <span style="display:none;" class="invoice-marked-status"><?php echo ($i['marked_paid']?'1':'0'); ?></span>
-                <a class="inline-block" title="See More Details About This Invoice." href="<?php echo site_url('finance/my_invoice/'.$i['id']); ?>">More Details</a>, 
+                <a class="inline-block" title="See More Details About This Invoice." href="<?php echo site_url('finance/invocies/my_invoice/'.$i['id']); ?>">More Details</a>, 
                 <a class="inline-block invoice-mark-paid" title="<?php echo ($i['marked_paid']?'Select this to undo.':'Select this once you have sent in the payment for this item.'); ?>" href="#"><?php echo ($i['marked_paid']?'Unm':'M'); ?>ark As Paid</a>
             </td>
             </tr><?php
@@ -70,7 +70,7 @@ if(!empty($invoices)) {
             <td><?php echo date('jS F Y',$i['date']); ?></td>
             <td>£<?php echo $i['amount']; ?></td>
             <td>
-                <a class="inline-block" title="See More Details About This Invoice." href="<?php echo site_url('finance/my_invoice/'.$i['id']); ?>">More Details</a>
+                <a class="inline-block" title="See More Details About This Invoice." href="<?php echo site_url('finance/invoices/my_invoice/'.$i['id']); ?>">More Details</a>
             </td>
             </tr><?php
             $printasterisk = $printasterisk || $i['marked_paid'];

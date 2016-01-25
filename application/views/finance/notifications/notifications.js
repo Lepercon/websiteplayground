@@ -5,7 +5,7 @@
 				id = $(this).siblings('.n-checkbox').children('.n-id').html();
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/notifications/status_change',
+					url: script_url + 'finance/notifications/change/status_change',
 					data:{
 						ids:id,
 						new_status:'1'
@@ -53,7 +53,7 @@
 				});
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/notifications/delete',
+					url: script_url + 'finance/notifications/change/delete',
 					data:{
 						ids:ids.join(',')
 					}
@@ -73,7 +73,7 @@
 				});
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/notifications/status_change',
+					url: script_url + 'finance/notifications/change/status_change',
 					data:{
 						ids:ids.join(','),
 						new_status:'1'
@@ -94,7 +94,7 @@
 				});
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/notifications/status_change',
+					url: script_url + 'finance/notifications/change/status_change',
 					data:{
 						ids:ids.join(','),
 						new_status:'0'

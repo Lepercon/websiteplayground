@@ -34,10 +34,10 @@
         <div>
             <?php
                 if($this->finance_model->finance_permissions()){?>
-                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/view_claims');?>">View Filed Claims</a><br><?php
+                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/view_claims');?>">View Filed Claims</a><br><?php
                 }
             ?>
-            <a class="jcr-button inline-block" href="<?php echo site_url('finance/my_claims');?>">View My Claims</a>
+            <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/my_claims');?>">View My Claims</a>
         </div>
     </div>
 </div>

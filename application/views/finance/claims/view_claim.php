@@ -5,7 +5,7 @@ $methods = array('1'=>'Cheque', '2'=>'Bank Transfer');
 ?>
 
 <a class="no-print" id="print-file" href="#">Save as PDF</a> | 
-<a class="no-print authorise-link no-jsify" href="<?php echo site_url('finance/authorise'); ?>">Authorise</a>
+<a class="no-print authorise-link no-jsify" href="<?php echo site_url('finance/claims/authorise'); ?>">Authorise</a>
 <div id="claim-print">
     <table class="claim-table claim-table-title">
         <tr class="no-border">

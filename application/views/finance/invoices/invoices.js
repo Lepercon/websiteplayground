@@ -24,7 +24,7 @@
 				var old_status = button.siblings('.invoice-marked-status').text()=='1';
 				$.ajax({
 					type: "POST",
-					url: script_url + 'finance/mark_paid/',
+					url: script_url + 'finance/invoices/mark_paid/',
 					data:{
 						id:button.siblings('.invoice-id').text(),
 						new_status: (old_status?'0':'1')
@@ -57,7 +57,7 @@
 						"Remove": function () {
 							$.ajax({
 								type: "POST",
-								url: script_url + 'finance/remove_member/',
+								url: script_url + 'finance/invoices/remove_member/',
 								data: {
 									user: button.siblings('.member-id').html(),
 									group: $('#group-id').html()
@@ -91,7 +91,7 @@
 						"Change": function () {
 							$.ajax({
 								type: "POST",
-								url: script_url + 'finance/change_permissions/',
+								url: script_url + 'finance/invoices/change_permissions/',
 								data: {
 									user: button.siblings('.member-id').html(),
 									group: $('#group-id').html(),

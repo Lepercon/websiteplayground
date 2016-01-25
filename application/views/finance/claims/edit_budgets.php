@@ -27,7 +27,7 @@
                                 echo '<div class="validation_success"><span class="ui-icon ui-icon-check inline-block"></span>Budget Infomation Updated.</div>';
                             }
                         }        
-                        echo form_open(site_url('finance/edit_budgets/'.$b['id']), array('class'=>'budget-edit jcr-form'), array('budget_id'=>$b['id']));
+                        echo form_open(site_url('finance/claims/edit_budgets/'.$b['id']), array('class'=>'budget-edit jcr-form'), array('budget_id'=>$b['id']));
                         echo '<p>'.form_label('Budget Name: ');
                         echo form_input(array('name' => 'budget_name', 'id' => 'budgetname', 'value' => $b['budget_name'])).'</p>';
                         
@@ -38,7 +38,7 @@
                         echo form_submit('edit-budget-submit', 'Submit').'</td></tr>';
                         echo form_close();
                         
-                        echo form_open(site_url('finance/edit_budgets/'.$b['id']), array('class'=>'budget-edit jcr-form'), array('budget_id'=>$b['id']));
+                        echo form_open(site_url('finance/claims/edit_budgets/'.$b['id']), array('class'=>'budget-edit jcr-form'), array('budget_id'=>$b['id']));
                     ?><p>Use the options below to remove levels:</p><?php
                         foreach($b['levels'] as $id => $name){
                             echo '<p>'.form_label($name).form_checkbox('remove_'.$id, $id, FALSE).'</p>';

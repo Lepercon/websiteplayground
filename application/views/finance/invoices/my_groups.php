@@ -10,12 +10,12 @@ if($permissions){
 
 if(!empty($groups)) {
     foreach($groups as $g){?>
-        <h3><a href="<?php echo site_url('finance/my_group/'.$g['group_id']); ?>"><?php echo $g['budget_name']; ?></a></h3>
+        <h3><a href="<?php echo site_url('finance/invoices/my_group/'.$g['group_id']); ?>"><?php echo $g['budget_name']; ?></a></h3>
     <?php }
 } else { ?>
     <p>You have no groups.</p>
 <?php } ?>
-<a class="jcr-button inline-block" title="Greate A New Group." href="<?php echo site_url('finance/create_group'); ?>">
+<a class="jcr-button inline-block" title="Greate A New Group." href="<?php echo site_url('finance/invoices/create_group'); ?>">
     <span class="ui-icon inline-block ui-icon-pencil"></span>
     Create New Group
 </a>

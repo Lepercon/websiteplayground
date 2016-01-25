@@ -10,7 +10,7 @@ if($success){ ?>
     <p>There seems to have been some kind of error, please try again, or contact the JCR Treasurer.</p>Response: <?php
     echo $response;
 }?>
-<a href="<?php echo site_url('finance/my_claims'); ?>">View your submitted claims.</a><br><br>
+<a href="<?php echo site_url('finance/claims/my_claims'); ?>">View your submitted claims.</a><br><br>
 <h3>Upload More Receipts</h3>
 <?php
 
