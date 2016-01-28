@@ -9,6 +9,7 @@ class Ballot_model extends CI_Model {
 
     function get_ballots(){
         $this->db->select('ballot.*, events.name, events.time');
+        $this->db->where('published != ', 'hidden');
         $this->db->join('events', 'ballot.event_id=events.id');
         $this->db->order_by('close_time desc');
         return $this->db->get('ballot')->result_array();
@@ -74,6 +75,11 @@ class Ballot_model extends CI_Model {
     }
     
     function get_tables($id, $not_assigned=true, $group=false){
+        
+        $this->db->where('id', $id);
+        $b = $this->db->get('ballot')->row_array(0);
+        $t = empty($b)?array():explode(';',$b['tables']);
+        
         $this->db->where('ballot_id', $id);
         if(!$not_assigned){
             $this->db->where('table_num is not null');
@@ -95,6 +101,11 @@ class Ballot_model extends CI_Model {
                 }
             }
         }else{
+            
+            foreach($t as $k=>$table){
+                $tables[$k+1] = array();
+            }
+            
             foreach($people as $p){
                 if(!is_null($p['table_num'])){
                     $tables[$p['table_num']][] = $p;
