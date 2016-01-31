@@ -39,3 +39,9 @@ input[type=input]:invalid, textarea:invalid, select:invalid{
 .green-button{
     background-color: #2be012;
 }
+
+.search-people{
+    height: 30px;
+    width: 400px;
+    font-size: 28px;
+}

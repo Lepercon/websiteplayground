@@ -108,9 +108,30 @@
                         cell.find('.mark-unpaid').hide();
                         cell.find('.mark-paid').show();
                         cell.prev().html('No')
+                        $('.search-people').select();
                     }
                 });
             });
+            
+            $('.search-people').click(function () {
+                $(this).select();
+             });
+            
+            $('.search-people').keyup(function(e){
+                var search_term = $('.search-people').val();
+                console.log(search_term);
+                if(search_term === ''){
+                    $('.name-search').parent().show();
+                }else{
+                    $('.name-search').each(function(){
+                        if($(this).html().toLowerCase().search(search_term.toLowerCase()) >= 0){
+                            $(this).parent().show();
+                        }else{
+                            $(this).parent().hide();
+                        }
+                    });
+                }
+            })
             
             $('.mark-paid').click(function(event){
                 event.preventDefault(); 
@@ -135,7 +156,8 @@
                     success: function(e) {
                         cell.find('.mark-paid').hide();
                         cell.find('.mark-unpaid').show();
-                        cell.prev().html('Yes (' + name + ')')
+                        cell.prev().html('Yes (' + name + ')');
+                        $('.search-people').select();
                     }
                 });
                 

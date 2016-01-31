@@ -21,11 +21,16 @@ if(!empty($payments['not_sent'])){
     echo form_close();
     echo '</div>';
 }else{
+    
+    echo form_open('', 'class="jcr-form"');
+    echo form_label('Search:').form_input('search', '', 'placeholder="Search..." class="search-people"');
+    echo form_close();
+    
     echo '<table>';
     echo '<tr><th>Name</th><th>Amount</th><th>Table Number</th><th>Paid</th><th>Actions</th></th>';
     foreach($payments['sent'] as $p){
         echo '<tr>';
-        echo '<td>'.$p['name'].($p['user_id']==-1?' ('.$p['creator_name'].')':'').'</td>';
+        echo '<td class="name-search">'.$p['name'].($p['user_id']==-1?' ('.$p['creator_name'].')':'').'</td>';
         echo '<td>£'.$p['amount'].'</td>';
         echo '<td>'.$p['table_num'].'</td>';
         echo '<td>'.($p['paid']?'Yes ('.$methods[$p['payment_method']].')':'No').'</td>';
