@@ -220,6 +220,7 @@ class Ballot extends CI_Controller {
             
             $data['paid'] = $this->input->post('mark_paid');
             $data['payment_method'] = $methods[$this->input->post('method')];
+            $data['marked_by'] = $this->session->userdata('id');
             $id = $this->input->post('id');
             $this->db->update('invoices', $data, array('id'=>$id));
         }
