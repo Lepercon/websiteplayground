@@ -18,7 +18,11 @@
             $show_tables = true;
 
             foreach($tables as $k=>$t){
-                $show_tables = $show_tables && ($tab[$k-1]-count($t))==0;
+                $table_correct = ($tab[$k-1]-count($t))==0;
+                if((!$table_correct) && $this->ballot_admin){
+                    echo '<p>Error on table '.$k.'</p>';
+                }
+                $show_tables = $show_tables && $table_correct;
             }
             break;
         case 'published':

@@ -181,6 +181,49 @@ class Ballot extends CI_Controller {
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         $this->load->view('ballot/email', array('ballot'=>$ballot));
     }
+    
+    function payments(){
+        $id = $this->uri->segment(3);
+        $u_id = $this->session->userdata('id'); 
+        $ballot = $this->ballot_model->get_ballot($id, $u_id);
+        
+        if($ballot['close_time'] < time()){
+            if($this->ballot_admin){
+                $payments = $this->ballot_model->get_payments($id);
+                
+                if(isset($_POST['send-invoices'])){
+                    $this->ballot_model->send_invoices($ballot, $payments['not_sent']);
+                    $payments = $this->ballot_model->get_payments($id);
+                }                
+                
+                $this->load->view('ballot/payments', array(
+                    'b' => $ballot,
+                    'payments' => $payments
+                ));
+            }else{
+                redirect('ballot');
+            }
+        }else{
+            redirect('ballot/view/'.$ballot['id']);
+        }
+    }
+    
+    function payment(){
+        if($this->ballot_admin){
+            
+            $methods = array(
+                '' => NULL,
+                'bank' => 'bank_transfer',
+                'cash' => 'cash', 
+                'cheque' => 'cheque'
+            );
+            
+            $data['paid'] = $this->input->post('mark_paid');
+            $data['payment_method'] = $methods[$this->input->post('method')];
+            $id = $this->input->post('id');
+            $this->db->update('invoices', $data, array('id'=>$id));
+        }
+    }
         
 }
 

@@ -81,6 +81,65 @@
                 $.ballot.max_group();
             }); 
             $.ballot.max_group();
+            
+            $('.click-to-send').click(function(event){
+                event.preventDefault();
+                $('.send-invoices').submit();
+            });
+            
+            $('.mark-unpaid').click(function(event){
+                event.preventDefault(); 
+                
+                var cell = $(this).parent();
+                var id = cell.attr('invoice-id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: $('.ajax-url').html(),
+                    data:{
+                        mark_paid: 0,
+                        method: '',
+                        id: id
+                    },
+                    error: function() {
+                        $.common.notify('Error...');
+                    },
+                    success: function(e) {
+                        cell.find('.mark-unpaid').hide();
+                        cell.find('.mark-paid').show();
+                        cell.prev().html('No')
+                    }
+                });
+            });
+            
+            $('.mark-paid').click(function(event){
+                event.preventDefault(); 
+                
+                var method = $(this).attr('method');
+                var name = $(this).html();
+                var cell = $(this).parent();
+                var id = cell.attr('invoice-id');
+                
+                
+                $.ajax({
+                    type: "POST",
+                    url: $('.ajax-url').html(),
+                    data:{
+                        mark_paid: 1,
+                        method: method,
+                        id: id
+                    },
+                    error: function() {
+                        $.common.notify('Error...');
+                    },
+                    success: function(e) {
+                        cell.find('.mark-paid').hide();
+                        cell.find('.mark-unpaid').show();
+                        cell.prev().html('Yes (' + name + ')')
+                    }
+                });
+                
+            });
 
         },
         
