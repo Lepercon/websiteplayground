@@ -23,19 +23,19 @@ if(!empty($payments['not_sent'])){
     echo '</div>';
 }else{
     
-    echo form_open('', 'class="jcr-form"');
+    echo form_open('', 'class="jcr-form no-print"');
     echo form_label('Search:').form_input('search', '', 'placeholder="Search..." class="search-people"');
     echo form_close();
     
     echo '<table>';
-    echo '<tr><th>Name</th><th>Amount</th><th>Table Number</th><th>Paid</th><th>Actions</th></th>';
+    echo '<tr><th>Name</th><th>Amount</th><th>Table Number</th><th>Paid</th><th class="no-print">Actions</th></th>';
     foreach($payments['sent'] as $p){
         echo '<tr>';
         echo '<td class="name-search">'.$p['name'].($p['user_id']==-1?' ('.$p['creator_name'].')':'').'</td>';
         echo '<td>£'.$p['amount'].'</td>';
         echo '<td>'.$p['table_num'].'</td>';
         echo '<td>'.($p['paid']?'Yes ('.$methods[$p['payment_method']].')':'No').'</td>';
-        echo '<td invoice-id="'.$p['inv_id'].'"><a href="#" class="mark-unpaid jcr-button green-button" style="font-size:50%;'.($p['paid']?'':'display:none;').'">Mark Unpaid</a>';
+        echo '<td invoice-id="'.$p['inv_id'].'" class="no-print"><a href="#" class="mark-unpaid jcr-button green-button" style="font-size:50%;'.($p['paid']?'':'display:none;').'">Mark Unpaid</a>';
         echo '<a href="#" class="mark-paid bank jcr-button" method="bank" style="font-size:50%;'.($p['paid']?'display:none;':'').'">Bank Transfer</a>';
         echo '<a href="#" class="mark-paid cheque jcr-button" method="cheque" style="font-size:50%;'.($p['paid']?'display:none;':'').'">Cheque to JCR</a>';
         echo '<a href="#" class="mark-paid cash jcr-button" method="cheque_college" style="font-size:50%;'.($p['paid']?'display:none;':'').'">Cheque to College</a>';
