@@ -215,7 +215,8 @@ class Ballot extends CI_Controller {
                 '' => NULL,
                 'bank' => 'bank_transfer',
                 'cash' => 'cash', 
-                'cheque' => 'cheque'
+                'cheque' => 'cheque',
+                'cheque_college' => 'cheque_college'
             );
             
             $data['paid'] = $this->input->post('mark_paid');
