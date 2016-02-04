@@ -65,9 +65,9 @@ class Ballot extends CI_Controller {
                             if(empty($index)){
                                 $i++;
                                 if($ballot['allow_guests']){
-                                    $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box';
+                                    $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box.';
                                 }else{
-                                    $_SESSION['errors'][] = 'You must enter select a name from the drop down list after you have started typing.';
+                                    $_SESSION['errors'][] = 'You must select a name from the drop down list after you have started typing.';
                                 }
                                 continue;
                             }
@@ -92,6 +92,15 @@ class Ballot extends CI_Controller {
                         $user[$index]['priority_score'] = $this->ballot_model->get_priority($id, $user[$index]['user_id']);
                     }
                     $i++;
+                }
+                
+                if((!empty($user)) && (count($user) < $ballot['min_group'])){
+                    $user = array();
+                    if($ballot['min_group'] === $ballot['max_group']){
+                        $_SESSION['errors'][] = 'You must sign up exactly '.$ballot['min_group'].' people.';
+                    }else{
+                        $_SESSION['errors'][] = 'You must sign up between '.$ballot['min_group'].' and '.$ballot['max_group'].' people.';
+                    }
                 }
 
                 if(!empty($user)){
