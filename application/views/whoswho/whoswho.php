@@ -35,7 +35,7 @@ $this->load->view('whoswho/banner');
             'support' => 'Student Support',
             'services' => 'Services',
         );
-        $names = array('exec'=>'Exec', 'sports'=>'Sports Presidents', 'societies'=>'Society Presidents', 'committees'=>'Committee Chairs', 'assistants'=>'Assistants', 'support'=>'Support', 'services'=>'Bar, Kitchen, Coffee Shop', 'staff'=>'College Staff');
+        $names = array('exec'=>'Exec', 'sports'=>'Sports Presidents', 'societies'=>'Society Presidents', 'committees'=>'Committee Chairs', 'assistants'=>'Assistants', 'support'=>'Support', 'services'=>"JB's", 'staff'=>'College Staff');
         
         foreach($sections as $k => $s){
             echo anchor('whoswho/index/'.$k, '<p>'.$s.'</p>', ($page==$k)?'class="selected"':'');
