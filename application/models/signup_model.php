@@ -214,7 +214,7 @@ class signup_model extends CI_Model {
         $seats = explode(",", $signup['seats']);
         $keys = array_keys($signup['tables']);
         //log_message('error', var_export($keys, true));
-        //shuffle($keys);
+        shuffle($keys);
         //log_message('error', var_export($keys, true));
         foreach($keys as $num) {
             $t = $signup['tables'][$num];
