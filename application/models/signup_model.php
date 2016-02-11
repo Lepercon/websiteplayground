@@ -391,10 +391,12 @@ class signup_model extends CI_Model {
             $this->db->join('signup_people AS u2', 'u1.reserved_by = u2.reserved_by AND u1.reserved_until = u2.reserved_until AND u1.table_num = u2.table_num', 'inner');
             $this->db->order_by('name1 ASC');
         }else{
-            $this->db->select('u1.id AS id1, u1.table_num AS table1, u1.name AS name1, u2.id AS id2, u2.name AS name2', FALSE);
+            $this->db->select('u1.id AS id1, u1.table_num AS table1, u1.name AS name1', FALSE);
+            //swap out these two lines and the join line below to allow singles to swap
+            //$this->db->select('u1.id AS id1, u1.table_num AS table1, u1.name AS name1, u2.id AS id2, u2.name AS name2', FALSE);
             $this->db->where('u1.signup_id', $e_id);
             $this->db->from('signup_people AS u1');
-            $this->db->join('signup_people AS u2', 'u1.reserved_by = u2.reserved_by AND u1.reserved_until = u2.reserved_until AND u1.table_num = u2.table_num AND u1.name != u2.name', 'inner');
+            //$this->db->join('signup_people AS u2', 'u1.reserved_by = u2.reserved_by AND u1.reserved_until = u2.reserved_until AND u1.table_num = u2.table_num AND u1.name != u2.name', 'inner');
             $this->db->order_by('name1 ASC');
         }
         return $this->db->get()->result_array();
@@ -443,7 +445,9 @@ class signup_model extends CI_Model {
         $c = $this->db->get('signup_people')->num_rows();
         $this->db->where(array('id' => $pair2[1], 'table_num' => $pair2[2], 'signup_id' => $signup['id']));
         $d = $this->db->get('signup_people')->num_rows();
-        if($a != 1 OR $b != 1 OR $c != 1 OR $d != 1) $errors[] = 'Someone else has just swapped one of these pairs.';
+        //if($a != 1 OR $b != 1 OR $c != 1 OR $d != 1) $errors[] = 'Someone else has just swapped one of these pairs.';
+        //chnage to error checking for single person swapping
+        if($a != 1 OR $c != 1) $errors[] = 'Someone else has just swapped one of these pairs.';
         //if($pair1[2] == $pair2[2]) $errors[] = 'The selected pairs are already on the same table so cannot be swapped.';
         if(empty($errors)) return TRUE;
         else return $errors;
