@@ -3,7 +3,19 @@
 	<?php echo back_link('markets');?>
 	<div class="jcr-box wotw-outer">
 		<h3 class="wotw-day">Orders For This Week</h3>
-
+<?php
+		if(is_admin() && !empty($orders)) { ?>
+			<a href="<?php echo site_url('markets/delivered'); ?>" class="jcr-button inline-block" title="Admin: Mark orders a delivered.">
+					Mark Delivered<span class="ui-icon ui-icon-check inline-block"></span>
+			</a>
+		<?php } 
+			
+		if(empty($orders)){
+			echo "<p>There are no orders</p>";
+		}
+			
+			
+		?>
 <?php
 	
 		$i=0;
@@ -31,19 +43,6 @@
 			$i++;
 			echo "</div>";
 		}
-		?>
-		<?php
-		if(is_admin() && !empty($orders)) { ?>
-			<a href="<?php echo site_url('markets/delivered'); ?>" class="jcr-button inline-block" title="Admin: Mark orders a delivered.">
-					Mark Delivered<span class="ui-icon ui-icon-check inline-block"></span>
-			</a>
-		<?php } 
-			
-		if(empty($orders)){
-			echo "<p>There are no orders</p>";
-		}
-			
-			
 		?>
 		
 	</div>

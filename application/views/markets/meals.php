@@ -12,7 +12,7 @@ eval(error_code());
 
 echo form_open('markets/meals'); ?>
 
-<p>Order the meal packs and veg boxes you want. Meal packs are designed for 6 to 8 people. Select the number of vegetarians you are ordering for to receive substitute dishes in your order.</p><br />
+<p>Order the Veg boxes you want. Please note you do NOT need to select loose vegetables if you are ordering a veg box!</p><br />
 <ul class="nolist jcr-form">
 	<?php
 	$mealcount = 1;
