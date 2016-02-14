@@ -3,7 +3,7 @@
 $this->load->model('finance_model');
 $g_id = $this_group['id'];
 
-echo back_link('finance/my_group/'.$this_group['id']);
+echo back_link('finance/invoices/my_group/'.$this_group['id']);
 ?>
 
 <h2><?php echo 'Add Invoice - '.$this_group['budget_name']; ?></h2>

@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
-echo back_link('finance/'.($admin?'view':'my').'_claims');
+echo back_link('finance/claims/'.($admin?'view':'my').'_claims');
 
 $methods = array('1'=>'Cheque', '2'=>'Bank Transfer');
 ?>

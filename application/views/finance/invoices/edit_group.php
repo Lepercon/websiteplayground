@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-echo back_link('finance/my_group/'.$group_info['id']);?>
+echo back_link('finance/invoices/my_group/'.$group_info['id']);?>
 <?php
     $this->load->view('finance/invoices/group_create_info');
 ?>

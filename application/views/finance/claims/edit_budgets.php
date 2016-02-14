@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/view_claims');?>
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/claims/view_claims');?>
 <h1>Edit Budgets</h1>
 
 <div id="accordion" class="edit-budgets-accordion" role="tablist">

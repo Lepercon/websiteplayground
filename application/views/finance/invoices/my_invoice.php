@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-echo back_link('finance/my_invoices');
+echo back_link('finance/invoices/my_invoices');
 $invoice_id = $this->uri->segment(3);
 ?>
 <h1>My Invoice</h1>

@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/my_claims');?>
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/claims/my_claims');?>
 <div class="width-66 content-left narrow-full">
     <div class="jcr-box wotw-outer">
         <h2 class="wotw-day">Edit JCR Claim</h2>

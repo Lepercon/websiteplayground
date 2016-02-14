@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-echo back_link('finance/my_group/'.$group['id']); 
+echo back_link('finance/invoices/my_group/'.$group['id']); 
 $total = array();
 ?>
 <h2><?php echo $group['budget_name']; ?></h2>

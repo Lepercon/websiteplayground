@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-echo back_link('finance/my_group/'.$group['id']); 
+echo back_link('finance/invoices/my_group/'.$group['id']); 
 $totals = array('total'=>0,'paid'=>0);
 if($sent_emails === TRUE){
     echo '<span class="validation_success" style="display:block;"><span class="ui-icon ui-icon-check green-icon"></span>Emails Sent</span>';
