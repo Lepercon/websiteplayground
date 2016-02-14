@@ -287,7 +287,7 @@ if ( ! function_exists('deleteAll')) {
 if(!function_exists('get_last_location')) {
     function get_last_location() {
         $ci =& get_instance();
-        return str_replace('https://', 'http://', BASE_URL).($ci->session->userdata('last_location') != FALSE ? $ci->session->userdata('last_location') : '');
+        return str_replace('https://', 'http://', site_url('')).'/'.($ci->session->userdata('last_location') != FALSE ? $ci->session->userdata('last_location') : '');
     }
 }
 

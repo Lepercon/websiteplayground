@@ -9,6 +9,7 @@ class Ballot_model extends CI_Model {
 
     function get_ballots(){
         $this->db->select('ballot.*, events.name, events.time');
+        $this->db->where('published != ', 'hidden');
         $this->db->join('events', 'ballot.event_id=events.id');
         $this->db->order_by('close_time desc');
         return $this->db->get('ballot')->result_array();
@@ -33,6 +34,9 @@ class Ballot_model extends CI_Model {
 
             $ballot['people'] = $this->db->get('ballot_people')->result_array();
         }
+        
+        $ballot['full_name'] = (is_null($ballot['signup_name'])?$ballot['name']:$ballot['name'].' - '.$ballot['signup_name']);
+        $ballot['url_name'] = url_title($ballot['full_name']);
         
         return $ballot;
     }
@@ -74,6 +78,11 @@ class Ballot_model extends CI_Model {
     }
     
     function get_tables($id, $not_assigned=true, $group=false){
+        
+        $this->db->where('id', $id);
+        $b = $this->db->get('ballot')->row_array(0);
+        $t = empty($b)?array():explode(';',$b['tables']);
+        
         $this->db->where('ballot_id', $id);
         if(!$not_assigned){
             $this->db->where('table_num is not null');
@@ -95,6 +104,11 @@ class Ballot_model extends CI_Model {
                 }
             }
         }else{
+            
+            foreach($t as $k=>$table){
+                $tables[$k+1] = array();
+            }
+            
             foreach($people as $p){
                 if(!is_null($p['table_num'])){
                     $tables[$p['table_num']][] = $p;
@@ -557,6 +571,69 @@ class Ballot_model extends CI_Model {
         
         $this->db->insert('ballot', $data);
         return $this->db->insert_id();
+    }
+    
+    function get_payments($b_id){
+        $this->db->select('ballot_people.*, invoices.amount, invoices.paid, invoices.id as inv_id, invoices.payment_method, CONCAT(u2.firstname, \' \', u2.surname) as creator_name', false);
+        $this->db->where('ballot_id', $b_id);
+        $this->db->join('invoices', 'invoices.id = ballot_people.invoice_id');
+        $this->db->join('users as u1', 'u1.id = ballot_people.user_id', 'left outer');
+        $this->db->join('users as u2', 'u2.id = ballot_people.created_by', 'left outer');
+        $this->db->order_by('user_id < 0, u1.surname, u1.firstname');
+        $this->db->where('table_num IS NOT NULL');
+        $payments['sent'] = $this->db->get('ballot_people')->result_array();
+        
+        $this->db->where('ballot_id', $b_id);
+        $this->db->where('invoice_id IS NULL');
+        $this->db->where('table_num IS NOT NULL');
+        $payments['not_sent'] = $this->db->get('ballot_people')->result_array();
+        return $payments;
+    }
+    
+    function send_invoices($ballot, $payments){
+        
+        $options = explode(':', $ballot['options']);
+        $op = array();
+        foreach($options as $k=>$o){
+            $temp = explode(';', $o);
+            $op[$k]['title'] = $temp[0];
+            $op[$k]['options'] = array();
+            foreach(array_slice($temp, 1) as $i => $t){
+                $name_price = explode('#', $t);
+                if(count($name_price) < 2){
+                    $name_price[1] = 0;
+                }
+                $op[$k]['options'][$i]['name'] = $name_price[0];
+                $op[$k]['options'][$i]['price'] = $name_price[1];
+            }
+        }
+        
+        foreach($payments as $p){
+            
+            $user = ($p['user_id'] == -1)?$p['created_by']:$p['user_id'];
+            
+            $price = $ballot['price'];
+            if($p['user_id'] == -1){
+                $price += $ballot['guest_charge'];
+            }
+            $options = explode(';', $p['options']);
+            foreach($options as $k => $o){
+                $price += $op[$k]['options'][$o]['price'];
+            }
+            
+            $data = array(
+                'date' => time(),
+                'name' => $ballot['full_name'],
+                'member_id' => $user,
+                'amount' => $price,
+                'group_id' => 1,
+                'details' => 'Attendance fee',
+            );
+            
+            $this->db->insert('invoices', $data);
+            $id = $this->db->insert_id();
+            $this->db->update('ballot_people', array('invoice_id'=>$id), array('id'=>$p['id']));
+        }
     }
 
         

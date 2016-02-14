@@ -54,6 +54,7 @@ class events_model extends CI_Model {
             $submit['event_poster'] = $_POST['file']['upload_data']['file_name'];
         }
         foreach(array('name', 'description', 'location', 'facebook_url', 'twitter_handle', 'category', 'hidden', 'event_poster_hidden') as $v) $submit[$v] = $this->input->post($v);
+        $submit['created_by'] = $this->session->userdata('id'); // Store user
         $this->db->set($submit);
         $this->db->insert('events');
         return $this->db->insert_id();

@@ -65,9 +65,9 @@ class Ballot extends CI_Controller {
                             if(empty($index)){
                                 $i++;
                                 if($ballot['allow_guests']){
-                                    $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box';
+                                    $_SESSION['errors'][] = 'If you are tying to sign up a guest, just type "Guest" in the box.';
                                 }else{
-                                    $_SESSION['errors'][] = 'You must enter select a name from the drop down list after you have started typing.';
+                                    $_SESSION['errors'][] = 'You must select a name from the drop down list after you have started typing.';
                                 }
                                 continue;
                             }
@@ -92,6 +92,15 @@ class Ballot extends CI_Controller {
                         $user[$index]['priority_score'] = $this->ballot_model->get_priority($id, $user[$index]['user_id']);
                     }
                     $i++;
+                }
+                
+                if((!empty($user)) && (count($user) < $ballot['min_group'])){
+                    $user = array();
+                    if($ballot['min_group'] === $ballot['max_group']){
+                        $_SESSION['errors'][] = 'You must sign up exactly '.$ballot['min_group'].' people.';
+                    }else{
+                        $_SESSION['errors'][] = 'You must sign up between '.$ballot['min_group'].' and '.$ballot['max_group'].' people.';
+                    }
                 }
 
                 if(!empty($user)){
@@ -180,6 +189,52 @@ class Ballot extends CI_Controller {
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         $this->load->view('ballot/email', array('ballot'=>$ballot));
+    }
+    
+    function payments(){
+        $id = $this->uri->segment(3);
+        $u_id = $this->session->userdata('id'); 
+        $ballot = $this->ballot_model->get_ballot($id, $u_id);
+        
+        if($ballot['close_time'] < time()){
+            if($this->ballot_admin){
+                $payments = $this->ballot_model->get_payments($id);
+                
+                if(isset($_POST['send-invoices'])){
+                    $this->ballot_model->send_invoices($ballot, $payments['not_sent']);
+                    $payments = $this->ballot_model->get_payments($id);
+                }                
+                
+                $this->load->view('ballot/payments', array(
+                    'b' => $ballot,
+                    'payments' => $payments
+                ));
+            }else{
+                redirect('ballot');
+            }
+        }else{
+            redirect('ballot/view/'.$ballot['id']);
+        }
+    }
+    
+    function payment(){
+        if($this->ballot_admin){
+            
+            $methods = array(
+                '' => NULL,
+                'bank' => 'bank_transfer',
+                'cash' => 'cash', 
+                'cheque' => 'cheque',
+                'cheque_college' => 'cheque_college',
+                'date_paid' => time()
+            );
+            
+            $data['paid'] = $this->input->post('mark_paid');
+            $data['payment_method'] = $methods[$this->input->post('method')];
+            $data['marked_by'] = $this->session->userdata('id');
+            $id = $this->input->post('id');
+            $this->db->update('invoices', $data, array('id'=>$id));
+        }
     }
         
 }

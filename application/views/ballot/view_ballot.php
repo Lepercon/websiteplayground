@@ -14,9 +14,7 @@ if($b['id'] == 7){
 echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 
     function get_value($b, $name, $num, $option_num=NULL){
-        if(isset($_POST[$name])){
-            return $_POST[$name];
-        }elseif(isset($b['people'][$num])){
+        if(isset($b['people'][$num])){
             if(strrpos($name, 'person') !== FALSE){
                 if($b['people'][$num]['user_id'] == -1){
                     return 'Guest';
@@ -34,6 +32,8 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
                 $options = explode(';', $b['people'][$num]['options']);
                 return $options[$option_num];
             }
+        }elseif(isset($_POST[$name])){
+            return $_POST[$name];
         }
         return '';
     }
@@ -68,7 +68,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
 
 ?>
 <div id="ballot_accordion">
-    <h3><?php echo (is_null($b['signup_name'])?$b['name']:$b['name'].' - '.$b['signup_name']); ?></h3>
+    <h3><?php echo $b['full_name']; ?></h3>
     <div>
         <p><?php echo $b['name']; ?> is at <b><?php echo date('H:i \o\n l, d/m/Y', $b['time']); ?></b></p>
         <?php if($b['open_time'] > time()){ ?>
@@ -119,7 +119,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
             echo '<p>If the box glows red around a name then you have done something wrong and they <b>won\'t</b> be entered into the ballot</p>';
             if(!empty($b['people'])){
                 if($b['people'][0]['created_by'] == $user_id){
-                    echo '<p class="validation_success"><span class="ui-icon ui-icon-check inline-block green-icon"></span> Successfully stored '.sizeof($b['people']).(sizeof($b['people'])==1?' person':' people').' in the ballot database</p>';
+                    echo '<p class="validation_success"><span class="ui-icon ui-icon-check inline-block green-icon"></span>You have signed up '.sizeof($b['people']).(sizeof($b['people'])==1?' person':' people').'. The result will be published after the ballot has closed.</p>';
                 }else{
                     echo '<p class="validation_success">Since the sign ups below were not created by yourself, you will not be able to make edits to them.</p>';
                 }
@@ -181,6 +181,7 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
         <h3>Admin</h3>
         <div>
             <a href="<?php echo site_url('ballot/view_signups/'.$b['id']); ?>"><p>View Sign Ups</p></a>
+            <a href="<?php echo site_url('ballot/payments/'.$b['id']); ?>"><p>Payments</p></a>
         </div>
     <?php } ?>
 </div>
@@ -195,5 +196,5 @@ echo editable_area('ballot', 'content/top_desc_'.$b['id'], is_admin());
     }
 ?>
 </span>
-<span id="active-tab" style="display: none;"><?php echo empty($b['people'])?0:3; ?></span>
+<span id="active-tab" style="display: none;"><?php echo (empty($b['people']) && empty($_SESSION['errors']))?0:3; ?></span>
 </div>

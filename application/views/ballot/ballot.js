@@ -81,6 +81,87 @@
                 $.ballot.max_group();
             }); 
             $.ballot.max_group();
+            
+            $('.click-to-send').click(function(event){
+                event.preventDefault();
+                $('.send-invoices').submit();
+            });
+            
+            $('.mark-unpaid').click(function(event){
+                event.preventDefault(); 
+                
+                var cell = $(this).parent();
+                var id = cell.attr('invoice-id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: $('.ajax-url').html(),
+                    data:{
+                        mark_paid: 0,
+                        method: '',
+                        id: id
+                    },
+                    error: function() {
+                        $.common.notify('Error...');
+                    },
+                    success: function(e) {
+                        cell.find('.mark-unpaid').hide();
+                        cell.find('.mark-paid').show();
+                        cell.prev().html('No')
+                        $('.search-people').select();
+                    }
+                });
+            });
+            
+            $('.search-people').click(function () {
+                $(this).select();
+             });
+            
+            $('.search-people').keyup(function(e){
+                var search_term = $('.search-people').val();
+                console.log(search_term);
+                if(search_term === ''){
+                    $('.name-search').parent().show();
+                }else{
+                    $('.name-search').each(function(){
+                        if($(this).html().toLowerCase().search(search_term.toLowerCase()) >= 0){
+                            $(this).parent().show();
+                        }else{
+                            $(this).parent().hide();
+                        }
+                    });
+                }
+            })
+            
+            $('.mark-paid').click(function(event){
+                event.preventDefault(); 
+                
+                var method = $(this).attr('method');
+                var name = $(this).html();
+                var cell = $(this).parent();
+                var id = cell.attr('invoice-id');
+                
+                
+                $.ajax({
+                    type: "POST",
+                    url: $('.ajax-url').html(),
+                    data:{
+                        mark_paid: 1,
+                        method: method,
+                        id: id
+                    },
+                    error: function() {
+                        $.common.notify('Error...');
+                    },
+                    success: function(e) {
+                        cell.find('.mark-paid').hide();
+                        cell.find('.mark-unpaid').show();
+                        cell.prev().html('Yes (' + name + ')');
+                        $('.search-people').select();
+                    }
+                });
+                
+            });
 
         },
         

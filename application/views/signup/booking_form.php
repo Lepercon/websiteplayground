@@ -52,9 +52,14 @@ if($num_reservations > 0) : ?>
         $pu = explode(',', $e['pickup']);
         if(!empty($pu[0])) : ?>
         <li>
-            <label class="narrow-full">Pickup Location</label>
+            <!--
+<label class="narrow-full">Pickup Location</label>
             <select name="pickup">
                 <option value="None">No transport</option>
+-->
+
+		<label class="narrow-full">Liver in or out?</label>
+            <select name="pickup">
                 <?php
                 foreach($pu as $opt) {
                     $opt = trim($opt);

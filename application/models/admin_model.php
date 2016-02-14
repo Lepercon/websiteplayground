@@ -117,7 +117,7 @@ class Admin_model extends CI_Model {
         $this->load->library('login');
         $pub = $this->load->database('public', TRUE);
         $pub->where('college', 'Josephine Butler College');
-        //$pub->or_where('college', "Trevelyan College");
+        $pub->or_where('college', "Van Mildert College");
         $pub->or_where('department', 'Josephine Butler College');
         $all_college = $pub->get('UserDetails')->result_array();
         foreach($all_college as $p) {
