@@ -15,7 +15,7 @@ class Invoices extends CI_Controller {
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
             'require-secure' => TRUE,
-            'css' => array('finance/finance', 'finance/notifications/notifications'),
+            'css' => array('finance/finance', 'finance/notifications/notifications', 'finance/invoices/invoices'),
             'js' => array('finance/finance', 'finance/invoices/invoices', 'finance/notifications/notifications'),
             'keep_cache' => FALSE,
             'editable' => TRUE
@@ -237,6 +237,34 @@ class Invoices extends CI_Controller {
         }
     }
 
-    
+    function ballot(){
+        
+        $this->load->model('ballot_model');
+        
+        $id = $this->uri->segment(4);
+        $u_id = $this->session->userdata('id'); 
+        $ballot = $this->ballot_model->get_ballot($id, $u_id);
+        log_message('error', var_export($ballot,true));
+        
+        if($ballot['close_time'] < time()){
+            if($this->ballot_model->admin()){
+                $payments = $this->ballot_model->get_payments($id);
+                
+                if(isset($_POST['send-invoices'])){
+                    $this->ballot_model->send_invoices($ballot, $payments['not_sent']);
+                    $payments = $this->ballot_model->get_payments($id);
+                }                
+                
+                $this->load->view('ballot/payments', array(
+                    'b' => $ballot,
+                    'payments' => $payments
+                ));
+            }else{
+                redirect('ballot');
+            }
+        }else{
+            redirect('ballot/view/'.$ballot['id']);
+        }
+    }
     
 }

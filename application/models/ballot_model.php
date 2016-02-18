@@ -635,6 +635,10 @@ class Ballot_model extends CI_Model {
             $this->db->update('ballot_people', array('invoice_id'=>$id), array('id'=>$p['id']));
         }
     }
+    
+    function admin(){
+        return is_admin();
+    }
 
         
 }

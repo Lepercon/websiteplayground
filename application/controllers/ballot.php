@@ -217,25 +217,6 @@ class Ballot extends CI_Controller {
         }
     }
     
-    function payment(){
-        if($this->ballot_admin){
-            
-            $methods = array(
-                '' => NULL,
-                'bank' => 'bank_transfer',
-                'cash' => 'cash', 
-                'cheque' => 'cheque',
-                'cheque_college' => 'cheque_college',
-                'date_paid' => time()
-            );
-            
-            $data['paid'] = $this->input->post('mark_paid');
-            $data['payment_method'] = $methods[$this->input->post('method')];
-            $data['marked_by'] = $this->session->userdata('id');
-            $id = $this->input->post('id');
-            $this->db->update('invoices', $data, array('id'=>$id));
-        }
-    }
         
 }
 
