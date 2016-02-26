@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-$path = 'involved/img/posters/default.png';
+$path = 'involved/img/posters/default.jpg';
 $ext = array('png', 'jpg');
 $path_start = 'involved/img/posters/'.$details['short'].'.';
 foreach($ext as $e){

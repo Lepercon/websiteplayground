@@ -37,7 +37,7 @@ echo editable_area('signup', 'content/info/'.$e['id'].'_intro', $permissions);
            
             $this->load->view('signup/clock');
         ?>
-            Choose two pairs of people to swap. You will be charged <?php echo (is_numeric($e['swap_price']) ? '£':'').$e['swap_price'];?> for each swap. You have made <?php echo $num_swaps;?> swap<?php echo ($num_swaps == 1 ? '':'s');?> so far.
+            Choose people to swap. You will be charged <?php echo (is_numeric($e['swap_price']) ? '£':'').$e['swap_price'];?> for each swap. You have made <?php echo $num_swaps;?> swap<?php echo ($num_swaps == 1 ? '':'s');?> so far.
             <?php eval(error_code()); ?>
             <ul id="reservation-details" class="nolist">
                 <li>
@@ -48,7 +48,9 @@ echo editable_area('signup', 'content/info/'.$e['id'].'_intro', $permissions);
                             if($e['id'] == 158){
                                 foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].'</option>'; 
                             }else{
-                                foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].' & '.$p['name2'].'</option>'; 
+	                            //changes to the lists for single person swapping
+                                //foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].' & '.$p['name2'].'</option>'; 
+                                foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].'</option>'; 
                             }
                         ?>
                     </select>
@@ -61,7 +63,9 @@ echo editable_area('signup', 'content/info/'.$e['id'].'_intro', $permissions);
                             if($e['id'] == 158){
                                 foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].'</option>'; 
                             }else{
-                                foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].' & '.$p['name2'].'</option>'; 
+	                            //changes to the lists for single person swapping
+                                //foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].' & '.$p['name2'].'</option>'; 
+                                foreach($pairs as $p) echo '<option value="'.$p['id1'].';'.$p['id2'].';'.$p['table1'].'">'.$p['name1'].'</option>';
                             }
                         ?>
                     </select>
