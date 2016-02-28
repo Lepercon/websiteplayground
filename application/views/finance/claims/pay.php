@@ -14,13 +14,30 @@ foreach($claims as $c){
     $cat[$types[$c['payment_method']]][] = $c;
 }
 
+if(count($cat['cheque']) > 0){
+?>
+<h2>Cheques</h2> 
+<p>Cheques to be paid:</p>
+<table><tr><th>Name</th></th><th>Budget</th><th>Item</th><th>Amount</tr>
+    <?php
+        foreach($cat['cheque'] as $c){
+            echo '<tr><td>'.$c['pay_to'].'</td>';
+            echo '<td>'.$c['budget_name'].'</td>';
+            echo '<td>'.$c['item'].'</td>';
+            echo '<td>£'.$c['amount'].'</td></tr>';
+        }
+    ?>
+</table><br>
+<?php
+}
+
 if(count($cat['bank_transfer']) > 0){
 ?>
-<a href="#" class="download no-print jcr-button">To PDF</a><a class="no-print authorise-link no-jsify jcr-button" href="<?php echo site_url('finance/claims/authorise'); ?>">Authorise</a>
 <div id="letter">
     
 
     <h2>Bank Transfer</h2>
+    <a href="#" class="download no-print jcr-button">To PDF</a><a class="no-print authorise-link no-jsify jcr-button" href="<?php echo site_url('finance/claims/authorise'); ?>">Authorise</a>
     <table class="hsbc-address-header">
         <tr>
             <td class="bank-address"><?php echo editable_area('finance', 'claims/editable/bank_address'); ?></td>

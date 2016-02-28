@@ -42,10 +42,6 @@
     border-bottom: 1px solid black;
 }
 
-#letter{
-    margin: 30px;
-}
-
 #letter *{
     font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
