@@ -29,10 +29,10 @@ echo back_link('finance');?>
         <div>
             <?php
                 if($this->finance_model->finance_permissions()){?>
-                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/view_claims');?>"><span class="inline-block ui-icon ui-icon-document"></span>View Filed Claims</a><br><?php
+                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/view_claims');?>"><span class="inline-block ui-icon ui-icon-document"></span>View Filed Claims</a><br><?php
                 }
             ?>
-            <a class="jcr-button inline-block" href="<?php echo site_url('finance/my_claims');?>"><span class="inline-block ui-icon ui-icon-folder-open"></span>View My Claims</a>
+            <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/my_claims');?>"><span class="inline-block ui-icon ui-icon-folder-open"></span>View My Claims</a>
         </div>
     </div>
     

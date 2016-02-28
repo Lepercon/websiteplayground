@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <?php
-echo back_link('finance/my_invoices');
+echo back_link('finance/invoices/my_invoices');
 var_dump(GoCardless::$environment);
 
 if(isset($_POST['invoices'])){
@@ -35,7 +35,7 @@ $payment_details = array(
     'billing_postcode' => '',
     'country_code'     => 'GB'
   ),
-  'redirect_uri' => site_url('finance/payment_complete'),
+  'redirect_uri' => site_url('finance/payments/payment_complete'),
   'state' => $bill_id  
 );
 

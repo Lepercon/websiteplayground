@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/my_claims');?>
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); echo back_link('finance/claims/my_claims');?>
 <div class="width-66 content-left narrow-full">
     <div class="jcr-box wotw-outer">
         <h2 class="wotw-day">Edit JCR Claim</h2>
@@ -34,10 +34,10 @@
         <div>
             <?php
                 if($this->finance_model->finance_permissions()){?>
-                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/view_claims');?>">View Filed Claims</a><br><?php
+                    <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/view_claims');?>">View Filed Claims</a><br><?php
                 }
             ?>
-            <a class="jcr-button inline-block" href="<?php echo site_url('finance/my_claims');?>">View My Claims</a>
+            <a class="jcr-button inline-block" href="<?php echo site_url('finance/claims/my_claims');?>">View My Claims</a>
         </div>
     </div>
 </div>

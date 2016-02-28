@@ -1,6 +1,8 @@
-<?php class Finance extends CI_Controller {
+<?php
 
-    function Finance() {
+class Claims extends CI_Controller {
+
+    function Claims() {
         parent::__construct();
         $this->load->model('finance_model');
         //$this->load->view('finance/feedback');
@@ -13,237 +15,35 @@
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
             'require-secure' => TRUE,
-            'css' => array('finance/finance', 'finance/notifications/notifications'),
-            'js' => array('finance/finance', 'finance/invoices/invoices', 'finance/notifications/notifications'),
+            'css' => array('finance/finance', 'finance/notifications/notifications', 'finance/claims/claims'),
+            'js' => array('finance/finance', 
+                'finance/invoices/invoices', 
+                'finance/notifications/notifications', 
+                'finance/claims/notifications', 
+                'finance/claims/claims',
+                'jsPDF/jspdf', 
+                'jsPDF/plugins/plugin/addimage', 
+                'jsPDF/libs/FileSaver.js/FileSaver.min', 
+                'jsPDF/plugins/from_html', 
+                'jsPDF/plugins/split_text_to_size', 
+                'jsPDF/plugins/standard_fonts_metrics'),
             'keep_cache' => FALSE,
             'editable' => TRUE
         );
-        if($this->uri->segment(2) == 'view_claim' && $this->finance_model->finance_permissions()){
-            $id = $this->uri->segment(3);
+        
+        if(($this->uri->segment(3) == 'pay') && $this->finance_model->finance_permissions()){
+            $this->page_info['js'][] = 'finance/claims/cr943c9r4ncvr408cu834c443c';
+        }
+        
+        if($this->uri->segment(3) == 'view_claim' && $this->finance_model->finance_permissions()){
+            $id = $this->uri->segment(4);
             $claim = $this->finance_model->get_claim($id);
-            $this->page_info['title'] .= ' - '.$this->uri->segment(3).' - '.$claim['pay_to'];
+            $this->page_info['title'] .= ' - '.$this->uri->segment(4).' - '.$claim['pay_to'];
         }
     }
 
     function index() {
-        $this->load->library('page_edit_auth');
         
-        $page_admin = $this->finance_model->finance_permissions();
-                
-        $this->load->view('finance/finance', array(
-            'page_admin'=>$page_admin
-        ));
-    }
-
-    function my_invoices() {
-        $user_id = $this->session->userdata('id');
-        $invoices = $this->finance_model->get_invoices($user_id);
-        $groups = $this->finance_model->get_groups();
-        $permissions = $this->finance_model->finance_permissions();
-        $this->load->view('finance/invoices/my_invoices',array(
-            'invoices'=>$invoices, 
-            'groups'=>$groups,
-            'permissions'=>$permissions
-        ));
-    }
-
-
-    function my_groups() {
-        $user_id = $this->session->userdata('id');
-        $groups = $this->finance_model->get_members_groups($user_id);
-        $this->load->view('finance/invoices/my_groups',array(
-            'groups'=>$groups,
-            'permissions' => $this->finance_model->finance_permissions()
-        ));
-    }
-
-
-    function my_group($group_id = NULL) {
-        if(is_null($group_id)){
-            $group_id = $this->uri->segment(3);
-        }
-        
-        $user_id = $this->session->userdata('id');
-        $permissions = $this->finance_model->finance_permissions();
-        
-        if($permissions || $this->finance_model->has_permission($group_id)){
-            $this_group = $this->finance_model->get_group($group_id);
-            $members = $this->finance_model->get_members($group_id);
-            $invoices = $this->finance_model->get_invoices_by_group($group_id);
-            $inv_tot = $this->finance_model->get_sorted_invoices_by_group($group_id);
-            $this->load->view('finance/invoices/my_group',array(
-                'group' => $this_group,
-                'members' => $members,
-                'invoices' => $invoices,
-                'inv_tot'=> $inv_tot
-            ));
-        }else{
-            $this->index();
-            return;
-        }
-    }
-
-    function mark_paid(){
-    
-        $i_id = $this->input->post('id', true);
-        $new_status = ($this->input->post('new_status', true)=='1'?'1':'0');
-        $user_id = $this->session->userdata('id');
-    
-        $invoice = $this->finance_model->get_invoice_by_id($i_id);
-        $budget = $this->finance_model->get_budget($invoice['group_id']);
-        
-        if($user_id === $invoice['member_id'] or ($this->finance_model->finance_permissions())){
-            $this->finance_model->update_invoice($i_id, $new_status);
-            foreach($budget['owners'] as $b){
-                $owners[] = $b['id'];
-            }
-            $this->finance_model->add_notification($owners, 'Invoices', $this->session->userdata('firstname').' '.$this->session->userdata('surname').' claims to have paid for '.$invoice['name'].'.', 'finance/my_group/'.$budget['id']);
-        }
-        $this->output->append_output(array('success' => FALSE));
-        return false;
-    }
-
-    function my_invoice(){
-        $i_id = $this->uri->segment(3);
-        $user_id = $this->session->userdata('id');
-        $invoice = $this->finance_model->get_invoice_by_id($i_id);
-        $group = $this->finance_model->get_group($invoice['group_id']);
-        if(empty($invoice) || ($user_id != $invoice['member_id'])) {
-            $this->index();
-            return;
-        }
-        $this->load->view('finance/invoices/my_invoice', array('invoice'=>$invoice, 'group'=>$group));
-    }
-
-    function add_members() {
-    
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        
-        $this->form_validation->set_rules('ids', 'New Members', 'required');
-        $this->form_validation->set_message('required', "You haven't selected any %s");
-
-        $group_id = $this->uri->segment(3);
-        $user_id = $this->session->userdata('id');
-        $group = $this->finance_model->get_group_member($group_id, $user_id);
-        $this_group = $this->finance_model->get_group($group_id);
-        $users = $this->users_model->get_all_user_ids_and_names();
-        $message = '';
-
-        if($this->finance_model->has_permission($group_id)){
-            $res = 0;
-            if($this->form_validation->run() !== FALSE){
-                $ids = explode(',',$this->input->post('ids', TRUE), -1);
-                $res = $this->finance_model->add_members($group_id, $ids);
-                if($res != sizeof($ids)){
-                    $message = 'One or more of your members is already in this group';
-                }
-            }
-            $this->load->view('finance/invoices/add_members',array('group'=>$this_group, 'users'=>$users, 'new_members'=>$res, 'message'=>$message));
-        }else{
-            $this->index();
-            return;
-        }
-
-    }
-
-    function add_invoice(){
-    
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        
-        $this->form_validation->set_rules('invoice_name', 'Invoice Name', 'required|min_length[3]|max_length[50]');
-        $this->form_validation->set_rules('details', 'Description', 'max_length[500]');
-        $this->form_validation->set_rules('amount', 'Amount', 'required|decimal');
-
-        $group_id = $this->uri->segment(3);
-        $user_id = $this->session->userdata('id');
-        $group = $this->finance_model->get_group_member($group_id, $user_id);
-        $users = $this->users_model->get_all_user_ids_and_names();
-        $members = $this->finance_model->get_members($group_id);
-        $this_group = $this->finance_model->get_group($group_id);
-        
-        $ids = array();
-        $run = false;
-        $no_ids = false;
-        $res = '';
-        
-        if(isset($_POST['amount'])){
-            $_POST['amount'] = substr($_POST['amount'],2);
-        }
-
-        if($this->finance_model->has_permission($group_id)){
-            if($this->form_validation->run() !== FALSE){
-                $run = true;        
-                foreach($_POST as $key => $value){
-                    if(strrpos($key, 'debtor_') === 0){
-                        $ids[] = $value;
-                    }
-                }
-                $date = (DateTime::createFromFormat('d/m/Y', $_POST['date'])->format('U'));
-                $name = $_POST['invoice_name'];
-                $amount = $_POST['amount'];                
-                $details = $_POST['details'];
-                if(!empty($ids)){
-                    $res = $this->finance_model->add_invoice($ids, $date, $name, $amount, $group_id, $details);
-                }else{
-                    $no_ids = true;
-                }
-            }
-            $this->load->view('finance/invoices/add_invoice',array(
-                'users'=>$users,
-                'members'=>$members,
-                'this_group'=>$this_group,
-                'run'=>$run,
-                'no_ids'=>$no_ids,
-                'result'=>$res
-            ));
-        } else {
-            $this->load->view('home/permission_denied');
-            return;
-        }
-        
-    }
-    
-    function adding_invoice(){
-
-        $group_id = $this->uri->segment(3);
-        $user_id = $this->session->userdata('id');
-        $group = $this->finance_model->get_group_member($group_id, $user_id);
-        if(!$this->finance_model->has_permission($group_id)){
-            $this->index();
-            return;
-        }
-        $invoice_name = $_POST['Invoice_Name'];        
-        
-        $this->load->view('finance/invoices/adding_invoice', array('invoice_name'=>$invoice_name, 'amount'=>$amount, 'date'=>$date, 'details'=>$details, 'users'=>$users));
-    }
-
-    function remove_invoice() {
-        $i_id = $this->uri->segment(3);
-        if($i_id != FALSE) {
-            $invoice = $this->finance_model->get_invoice_by_id($i_id);
-            if($this->finance_model->get_permissions($invoice['group_id'], $this->session->userdata('id')) == 1) {
-                $this->db->where('id', $i_id);
-                $this->db->delete('invoices');
-            }
-        }
-    }
-
-    function admin_mark_paid(){
-        $i_id = $_POST['payment_id'];
-        $invoice = $this->finance_model->get_invoice_by_id($i_id);
-        if($this->finance_model->get_permissions($invoice['group_id'], $this->session->userdata('id')) == 1) {
-            $this->db->where('id', $i_id);
-            $data = array('paid' => $_POST['status']);
-            if($_POST['status']){
-                $data['date_paid'] = time();
-            }
-            $this->db->update('invoices', $data);
-            $this->finance_model->add_notification($invoice['member_id'], 'Invoices', $_POST['status']?'Your invoice "'.$invoice['name'].'" has been marked as paid.':'Your invoice "'.$invoice['name'].'" has been marked as unpaid.', 'finance/my_invoices');
-        }else{
-            log_message('error', 'Permission Denied: '.$i_id.' - '.$this->session->userdata('id'));
-        }
     }
     
     function claims_form(){
@@ -353,29 +153,19 @@
         }
     }
     
-    function sortcode(){
-        $key = 'b1f9d5e9b273812925b63f5b840526ce';
-        $password = 'aBcDeFgH1!';
-        $sortcode = $this->input->post('sortcode');
-        $account = '';
-        $url = 'https://www.bankaccountchecker.com/listener.php?key='.$key.'&password='.$password.'&output=json&type=uk&sortcode='.$sortcode.'&bankaccount='.$account;
-        $data = file_get_contents($url);
-        $this->load->view('finance/claims/sortcode', array('data'=>$data));
-    }
-    
-    function claims(){
+    /*function claims(){
         $admin = $this->finance_model->finance_permissions();
         if($admin){
             $this->view_claims();
         }else{
             $this->my_claims();
         }
-    }
+    }*/
     
     function view_claims(){
     
-        $show_to_be_reviewed = $this->uri->segment(3);
-        $show_paid = $this->uri->segment(4);
+        $show_to_be_reviewed = $this->uri->segment(4);
+        $show_paid = $this->uri->segment(5);
         if($this->finance_model->finance_permissions()){
         
             $claims_waiting = $this->finance_model->get_claims_by_status(1);
@@ -525,7 +315,7 @@
         $this->load_validation();
 
         $user_id = $this->session->userdata('id'); 
-        $c_id = $this->uri->segment(3);
+        $c_id = $this->uri->segment(4);
         $old_claim = $this->finance_model->get_claim($c_id);
         $admin = $this->finance_model->finance_permissions();
         $budgets = $this->finance_model->get_budgets();
@@ -686,7 +476,7 @@
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         if(!$this->finance_model->has_permission($group_id)){
@@ -728,7 +518,7 @@
     function view_claim(){
         
         $admin = $this->finance_model->finance_permissions();
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         
         $file = getcwd();
         $priv_key = $this->finance_model->get_private_key();
@@ -748,141 +538,6 @@
         
     }
     
-    function claim_pdf(){
-    
-        if($this->finance_model->finance_permissions()){
-    
-            $this->load->library(array('pdf', 'pdfi'));
-            $this->load->helper('download');
-            $this->pdfi->fontpath = 'application/font/';
-            define('FPDF_FONTPATH','application/font/');
-            
-            $claim_id = $this->uri->segment(3);
-            $claim = $this->finance_model->get_claim($claim_id);
-            
-            $page_width = 188;
-            $page_height = 260;
-            
-            $this->pdfi->FPDF();
-            $this->pdfi->AddPage();
-            $this->pdfi->SetFont('Arial', '', 14);
-            $this->pdfi->SetTextColor(0,0,0);
-            
-            // Write something
-            $this->pdfi->Image('application\views\finance\claims/logo.png', $this->pdfi->GetX(), $this->pdfi->GetY(), $page_width/4);
-            $this->pdfi->Cell($page_width/4, 60, '', 0, 0);
-            $this->pdfi->SetFont('Arial', '', 30);
-            $this->pdfi->Cell($page_width/2, 60, 'JCR Claims Form', 0, 0, 'C');
-            $this->pdfi->Image('application\views\finance\claims/logo.png', $this->pdfi->GetX(), $this->pdfi->GetY(), $page_width/4);
-            $this->pdfi->Cell($page_width/4, 60, '', 0, 1);
-            $this->pdfi->Ln(10);
-            
-            $this->pdfi->SetFont('Arial', '', 14);
-            $this->pdfi->Cell($page_width/2, 7, 'Pay: '.$claim['pay_to'], 1, 0);
-            $this->pdfi->Cell($page_width/2, 7, 'The Sum Of: '.chr(163).$claim['amount'], 1, 1);
-            $this->pdfi->Cell($page_width, 7, 'Item: '.$claim['item'], 1, 1);
-            $this->pdfi->Cell($page_width/2, 7, 'Budget: '.$claim['budget_name'], 1, 0);
-            $this->pdfi->Cell($page_width/2, 7, 'Budget Holder: '.($claim['prefname']==''?$claim['firstname']:$claim['prefname']).' '.$claim['surname'], 1, 1);
-            $this->pdfi->Ln(10);
-            
-            $this->pdfi->SetFont('Arial', 'B', 24);
-            $this->pdfi->Write(6, 'Details:');
-            $this->pdfi->Ln(10);
-            $this->pdfi->SetFont('Arial', '', 12);
-            $this->pdfi->Write(6, $claim['details']);
-            
-            $this->pdfi->SetY(-77);
-            $this->pdfi->SetFont('Arial','I',8);
-            $this->pdfi->Write(6, 'For JCR Treasurer Use:');
-            $this->pdfi->Ln(5);
-            $this->pdfi->SetFont('Arial','',12);
-            $this->pdfi->Cell($page_width/2, 7, 'Paid On: ', 0, 0, 'R');
-            $this->pdfi->Cell($page_width/2, 7, '', 1, 1);
-            $this->pdfi->Cell($page_width/2, 7, 'Cheque Number: ', 0, 0, 'R');
-            $this->pdfi->Cell($page_width/2, 7, '', 1, 1);
-            
-            $this->pdfi->Cell($page_width/3, 30, '', 1, 0);
-            $this->pdfi->Cell($page_width/3, 30, '', 1, 0);
-            $this->pdfi->Cell($page_width/3, 30, '', 1, 1);
-            $this->pdfi->Cell($page_width/3, 7, 'JCR President', 1, 0, 'C');
-            $this->pdfi->Cell($page_width/3, 7, 'JCR Treasurer', 1, 0, 'C');
-            $this->pdfi->Cell($page_width/3, 7, 'College Bursar', 1, 1, 'C');
-            
-            $files = explode(',', $claim['files'],-1);
-            $n = 1;
-            $xmin = $this->pdfi->GetX();
-            foreach($files as $f){
-                if(strpos($f, '.pdf') === FALSE){
-                    $this->pdfi->AddPage();
-                    $size = getimagesize('application/views/finance/files/'.$f);
-                    if($size[0]/$size[1] > 1/sqrt(2)){
-                        if($size[0] > 700){
-                            $this->pdfi->Image('application/views/finance/files/'.$f, 10, 10, -$size[0] * 25.4/$page_width);
-                        }else{
-                            $this->pdfi->Image('application/views/finance/files/'.$f, 10, 10);
-                        }
-                    }else{
-                        if($size[1] > 900){
-                            $this->pdfi->Image('application/views/finance/files/'.$f, 10, 10, -$size[1] * 25.4/$page_height, -$size[1] * 25.4/$page_height);
-                        }else{
-                            $this->pdfi->Image('application/views/finance/files/'.$f, 10, 10);
-                        }
-                    }
-                }else{
-                    $pagecount = $this->pdfi->setSourceFile('application/views/finance/files/'.$f);  
-                    for($i=0; $i<$pagecount; $i++){
-                        $this->pdfi->AddPage();
-                        $tplidx = $this->pdfi->importPage($i+1, '/MediaBox');
-                        $this->pdfi->useTemplate($tplidx, 10, 10, 200); 
-                    }
-                }                
-            }
-                        
-            // Output
-            $filename = VIEW_PATH.'finance/claims/temp_pdf/claim_'.$claim_id.'.pdf';
-            $this->pdfi->Output($filename, 'F');
-            $this->output->set_content_type('application/pdf');
-            $data = file_get_contents($filename);
-            force_download('claim_'.$claim_id.'.pdf', $data);
-        
-        }
-    }
-    
-    function view_notifications(){
-        
-        $u_id = $this->session->userdata('id');
-        $admin = $this->finance_model->finance_permissions();
-        $notifications = $this->finance_model->get_notifications($u_id, $admin);
-        
-        $this->load->view('finance/notifications/view', array(
-            'notifications' => $notifications
-        ));
-    
-    }
-    
-    function notifications(){
-        //ajax requests
-        
-        $u_id = $this->session->userdata('id');
-        $change = $this->uri->segment(3);
-        $page_admin = $this->finance_model->finance_permissions();
-        
-        switch($change){
-            case 'status_change':
-                $ids = explode(',', $this->input->post('ids'));
-                $new_status = $this->input->post('new_status');
-                foreach($ids as $id){
-                    $this->finance_model->change_notification_status($id, $new_status, $u_id, $page_admin);
-                }
-                break;
-            case 'delete':
-                $ids = explode(',', $this->input->post('ids'));
-                foreach($ids as $id){
-                    $this->finance_model->remove_notification($id, $u_id, $page_admin);
-                }
-                break;
-        }
-    }
     
     function remove_member(){
     
@@ -908,7 +563,7 @@
     
     function view_group_totals($sent_emails=NULL){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -929,7 +584,7 @@
     
     function view_expected(){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -991,7 +646,7 @@
     
     function remind_invoice(){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -1028,28 +683,7 @@
     
     }
     
-    function payments(){
-        $this->load->library('GoCardless');
-        $user_id = $this->session->userdata('id');
-        $in = $this->finance_model->get_invoices($user_id);
-        $gr = $this->finance_model->get_groups();
-        $permissions = $this->finance_model->finance_permissions();
-        foreach($in as $i){
-            $invoices[$i['id']] = $i;
-        }
-        foreach($gr as $g){
-            $groups[$g['id']] = $g;
-        }
-        $this->load->view('finance/payments/merchant', array(
-            'invoices'=>$invoices, 
-            'groups'=>$groups,
-            'permissions'=>$permissions
-        ));
-    }
     
-    function payment_complete(){
-        $this->load->view('finance/payments/payment_complete');
-    }
     
     function claim(){
         
@@ -1145,8 +779,25 @@
             'budgets' => $budgets_list
         ));
     }
+    
+    function pay(){
+        $admin = $this->finance_model->finance_permissions();
+        if(!$admin){
+            redirect('finance');
+            return;
+        }
+        
+        $n = 4;
+        $ids = array();
+        while(($c = $this->uri->segment($n++)) !== FALSE)
+            $ids[] = $c;
+        
+        $claims = $this->finance_model->get_claims_by_ids($ids);
+        $this->load->view('finance/claims/pay', array(
+            'claims' => $claims
+        ));
+    }
 
+    
+    
 }
-
-/* End of file finance.php */
-/* Location: ./application/controllers/finance.php */

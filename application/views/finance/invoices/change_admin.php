@@ -6,7 +6,7 @@ $group_id = $this->uri->segment(3);
 $member_id = $this->uri->segment(4);
 $change_to = $this->uri->segment(5);
 $member = $this->invoice_model->get_group_member($group_id, $user_id);
-echo back_link('invoice/my_group/'.$group_id);
+echo back_link('finance/invoices/my_group/'.$group_id);
 ?><h2 id="Title">Changing Admin</h2><?php
 if($member['permissions']){
     if($member_id == $user_id){

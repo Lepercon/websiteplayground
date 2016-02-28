@@ -10,4 +10,4 @@
     echo '<p>'.form_label().' '.form_submit('authorise', 'Authorise').'</p>';
     echo form_close();
 ?>
-<p>If you need to setup the Google Authenticator app, please click <a href="<?php echo site_url('finance/show_qr_code'); ?>">here</a>.</p>
+<p>If you need to setup the Google Authenticator app, please click <a href="<?php echo site_url('finance/claims/show_qr_code'); ?>">here</a>.</p>

@@ -5,7 +5,7 @@ $this->load->model('finance_model');
 $g_id = $group['id'];
 $members = $this->finance_model->get_members($g_id);
 
-echo back_link('finance/my_group/'.$g_id);
+echo back_link('finance/invoices/my_group/'.$g_id);
 ?>
 
 <h2><?php echo $group['budget_name']; ?></h2>

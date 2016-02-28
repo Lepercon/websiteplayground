@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-echo back_link('finance/my_groups');?>
+echo back_link('finance/invoices/my_groups');?>
 <?php
     $this->load->view('finance/invoices/group_create_info');
 ?>
@@ -9,7 +9,7 @@ echo back_link('finance/my_groups');?>
         <div>
         <?php
             echo validation_errors('<div class="validation_errors"><span class="inline-block ui-icon ui-icon-notice"></span>', '</div><br>');
-            echo form_open(site_url('finance/create_group'), array('class'=>'jcr-form inline-block no-jsify'));
+            echo form_open(site_url('finance/claims/create_group'), array('class'=>'jcr-form inline-block no-jsify'));
             
             $this->load->view('finance/invoices/group_form');
             

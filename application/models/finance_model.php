@@ -744,6 +744,14 @@ class Finance_model extends CI_Model {
         
     }
     
+    function get_claims_by_ids($ids){
+        $this->db->where_in('finance_claims.id', $ids);
+        $this->db->join('finance_budgets', 'finance_budgets.id=finance_claims.budget_id');
+        $this->db->order_by('id');
+        $this->db->select('finance_claims.*, finance_budgets.budget_name');
+        return $this->db->get('finance_claims')->result_array();
+    }
+    
     
     function get_private_key(){
         if($this->finance_permissions() && ($this->session->userdata('finance-authorised-expire') > time())){

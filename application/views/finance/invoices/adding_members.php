@@ -4,7 +4,7 @@ $this->load->model('finance_model');
 $user_id = $this->session->userdata('id');
 $group_id = $this->uri->segment(3);
 
-echo back_link('finance/my_group/'.$group_id);
+echo back_link('finance/invoices/my_group/'.$group_id);
 ?><h2 id="Title">Adding Members</h2><?php
 
     

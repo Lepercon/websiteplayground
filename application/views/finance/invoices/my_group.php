@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-echo back_link('finance/my_groups');
+echo back_link('finance/invoices/my_groups');
 
 foreach($invoices as $i){
     $grouped[$i['member_id']][] = $i;
@@ -17,11 +17,11 @@ $totals = array('total'=>0, 'paid'=>0);
     </ul>
     <div id="tabs-1">
         <?php if($group['id'] != 'all'){ ?>
-            <a class="jcr-button inline-block no-jsify" title="Add Group Members" href="<?php echo site_url('finance/add_members/'.$group['id']); ?>">Add Members<span class="ui-icon ui-icon-plus"></span></a>
-            <a class="jcr-button inline-block" title="Add A New Invoice" href="<?php echo site_url('finance/add_invoice/'.$group['id']); ?>">New Invoice<span class="ui-icon ui-icon-pencil"></span></a>
-            <a class="jcr-button inline-block" title="Change The Group Information and Payment Information" href="<?php echo site_url('finance/edit_group/'.$group['id']); ?>">Group Info<span class="ui-icon ui-icon-note"></span></a>
+            <a class="jcr-button inline-block no-jsify" title="Add Group Members" href="<?php echo site_url('finance/invoices/add_members/'.$group['id']); ?>">Add Members<span class="ui-icon ui-icon-plus"></span></a>
+            <a class="jcr-button inline-block" title="Add A New Invoice" href="<?php echo site_url('finance/invoices/add_invoice/'.$group['id']); ?>">New Invoice<span class="ui-icon ui-icon-pencil"></span></a>
+            <a class="jcr-button inline-block" title="Change The Group Information and Payment Information" href="<?php echo site_url('finance/invoices/edit_group/'.$group['id']); ?>">Group Info<span class="ui-icon ui-icon-note"></span></a>
         <?php } ?>
-        <a class="jcr-button inline-block" href="<?php echo site_url('finance/view_expected/'.$group['id']); ?>">Expected Payments<span class="ui-icon ui-icon-script"></span></a>
+        <a class="jcr-button inline-block" href="<?php echo site_url('finance/invoices/view_expected/'.$group['id']); ?>">Expected Payments<span class="ui-icon ui-icon-script"></span></a>
         <?php
             if(!is_null($group['balance_date'])){
         ?>
