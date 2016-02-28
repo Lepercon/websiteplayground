@@ -744,6 +744,12 @@ class Finance_model extends CI_Model {
         
     }
     
+    function get_claims_by_ids($ids){
+        $this->db->where_in('id', $ids);
+        $this->db->order_by('id');
+        return $this->db->get('finance_claims')->result_array();
+    }
+    
     
     function get_private_key(){
         if($this->finance_permissions() && ($this->session->userdata('finance-authorised-expire') > time())){

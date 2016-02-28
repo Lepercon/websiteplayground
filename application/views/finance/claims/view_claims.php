@@ -7,7 +7,14 @@ $this->load->model('finance_model');
     <h2 class="wotw-day">Claims</h2>
     <div>
         <h3>Claims Awaiting Payment</h3>
-        <?php table_of_claims($claims_waiting, $admin, 'Mark Paid', 'button-mark-paid', array(1)); ?>
+        <?php 
+            table_of_claims($claims_waiting, $admin, 'Mark Paid', 'button-mark-paid', array(1), true); 
+            
+            if($admin){
+                echo '<p><input type="checkbox" class="select-all-claims"> Select All</p><p><a href="'.site_url('finance/claims/pay/').'" class="jcr-button pay-selected no-jsify">Pay Selected</a></p>';
+            }
+        ?>
+        
     </div>
 </div>
 <div class="wotw-outer jcr-box">

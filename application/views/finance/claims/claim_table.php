@@ -1,13 +1,11 @@
 <?php
 
-function table_of_claims($claims, $admin, $button_text = '', $button_class = '', $status = array()){
+function table_of_claims($claims, $admin, $button_text = '', $button_class = '', $status = array(), $checkboxes=FALSE){
     if((gettype($claims) == 'array') and (sizeof($claims) > 0)){?>
         <table class="table-of-claims"><tr>
         <?php
             if($admin){
-        ?>
-                <th>Claim ID</th>
-        <?php
+                echo ($checkboxes?'<th></th>':'').'<th>Claim ID</th>';
             }    
         ?>
         <th>Submitted By</th><th>Payment For</th><th>Payment To</th><th>Amount</th><th>Method</th><th>Budget</th><th>Budget Holder(s)</th><th>Details</th><th>Status</th><th>Files</th><?php
@@ -19,6 +17,7 @@ function table_of_claims($claims, $admin, $button_text = '', $button_class = '',
             <tr class="claims-row">
                 <?php
                     if($admin){
+                        echo ($checkboxes?'<td><input type="checkbox" class="select-claims"></td>':'');
                 ?>
                         <td><a href="<?php echo site_url('finance/claims/view_claim/'.$c['id']); ?>"><?php echo $c['id']; ?></a></td>
                 <?php
@@ -62,6 +61,8 @@ function table_of_claims($claims, $admin, $button_text = '', $button_class = '',
             </tr>
             <?php
         }?></table><?php
+        
+        
     }else{?>    
         <p>No claims found.</p><?php
     }

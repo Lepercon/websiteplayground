@@ -1855,32 +1855,66 @@ PubSub implementation
 
         events.publish('initialized');
 		
-		API.centerText = function(x, y, text) {
-			/* Use the options align property to specify desired text alignment
-			 * Param x will be ignored if desired text alignment is 'center'.
-			 * Usage of options can easily extend the function to apply different text 
-			 * styles and sizes 
-			*/
-			// Get current font size
-			var fontSize = this.internal.getFontSize();
+        API.centerText = function(x, y, text) {
+            /* Use the options align property to specify desired text alignment
+             * Param x will be ignored if desired text alignment is 'center'.
+             * Usage of options can easily extend the function to apply different text 
+             * styles and sizes 
+            */
+            // Get current font size
+            var fontSize = this.internal.getFontSize();
 
-			// Get page width
-			var pageWidth = this.internal.pageSize.width;
+            // Get page width
+            var pageWidth = this.internal.pageSize.width;
 
-			// Get the actual text's width
-			/* You multiply the unit width of your string by your font size and divide
-			 * by the internal scale factor. The division is necessary
-			 * for the case where you use units other than 'pt' in the constructor
-			 * of jsPDF.
-			*/
-			var txtWidth = this.getStringUnitWidth(text)*fontSize/this.internal.scaleFactor;
+            // Get the actual text's width
+            /* You multiply the unit width of your string by your font size and divide
+             * by the internal scale factor. The division is necessary
+             * for the case where you use units other than 'pt' in the constructor
+             * of jsPDF.
+            */
+            var txtWidth = this.getStringUnitWidth(text)*fontSize/this.internal.scaleFactor;
 
-			// Calculate text's x coordinate
-			x -= (txtWidth / 2);
+            // Calculate text's x coordinate
+            x -= (txtWidth / 2);
 
-			// Draw text at x,y
-			this.text(text,x,y);
-		}
+            // Draw text at x,y
+            this.text(text,x,y);
+        };
+
+        API.rightText = function(x, y, text) {
+            /* Use the options align property to specify desired text alignment
+             * Param x will be ignored if desired text alignment is 'center'.
+             * Usage of options can easily extend the function to apply different text 
+             * styles and sizes 
+            */
+            // Get current font size
+            var fontSize = this.internal.getFontSize();
+
+            // Get the actual text's width
+            /* You multiply the unit width of your string by your font size and divide
+             * by the internal scale factor. The division is necessary
+             * for the case where you use units other than 'pt' in the constructor
+             * of jsPDF.
+            */
+            var txtWidth = this.getStringUnitWidth(text)*fontSize/this.internal.scaleFactor;
+
+            // Calculate text's x coordinate
+            x -= txtWidth;
+
+            // Draw text at x,y
+            this.text(text,x,y);
+        };
+        
+        API.checkRemain = function(pos, height, req, bdr){
+            if((pos + req + bdr) > height){
+                this.text("Initial: ___ ___", 20, height-10);
+                this.addPage();
+                console.log(pos + "," + height + "," + req + "," + bdr);
+                return bdr;
+            }
+            return pos;
+        }
 
         return API;
     }

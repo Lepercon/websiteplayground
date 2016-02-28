@@ -15,15 +15,28 @@ class Claims extends CI_Controller {
             'requires_login' => TRUE,
             'allow_non-butler' => FALSE,
             'require-secure' => TRUE,
-            'css' => array('finance/finance', 'finance/notifications/notifications'),
-            'js' => array('finance/finance', 'finance/invoices/invoices', 'finance/notifications/notifications'),
+            'css' => array('finance/finance', 'finance/notifications/notifications', 'finance/claims/claims'),
+            'js' => array('finance/finance', 
+                'finance/invoices/invoices', 
+                'finance/notifications/notifications', 
+                'finance/claims/notifications', 'jsPDF/jspdf', 
+                'jsPDF/plugins/plugin/addimage', 
+                'jsPDF/libs/FileSaver.js/FileSaver.min', 
+                'jsPDF/plugins/from_html', 
+                'jsPDF/plugins/split_text_to_size', 
+                'jsPDF/plugins/standard_fonts_metrics'),
             'keep_cache' => FALSE,
             'editable' => TRUE
         );
-        if($this->uri->segment(2) == 'view_claim' && $this->finance_model->finance_permissions()){
-            $id = $this->uri->segment(3);
+        
+        if(($this->uri->segment(3) == 'pay') && $this->finance_model->finance_permissions()){
+            $this->page_info['js'][] = 'finance/claims/cr943c9r4ncvr408cu834c443c';
+        }
+        
+        if($this->uri->segment(3) == 'view_claim' && $this->finance_model->finance_permissions()){
+            $id = $this->uri->segment(4);
             $claim = $this->finance_model->get_claim($id);
-            $this->page_info['title'] .= ' - '.$this->uri->segment(3).' - '.$claim['pay_to'];
+            $this->page_info['title'] .= ' - '.$this->uri->segment(4).' - '.$claim['pay_to'];
         }
     }
 
@@ -149,8 +162,8 @@ class Claims extends CI_Controller {
     
     function view_claims(){
     
-        $show_to_be_reviewed = $this->uri->segment(3);
-        $show_paid = $this->uri->segment(4);
+        $show_to_be_reviewed = $this->uri->segment(4);
+        $show_paid = $this->uri->segment(5);
         if($this->finance_model->finance_permissions()){
         
             $claims_waiting = $this->finance_model->get_claims_by_status(1);
@@ -300,7 +313,7 @@ class Claims extends CI_Controller {
         $this->load_validation();
 
         $user_id = $this->session->userdata('id'); 
-        $c_id = $this->uri->segment(3);
+        $c_id = $this->uri->segment(4);
         $old_claim = $this->finance_model->get_claim($c_id);
         $admin = $this->finance_model->finance_permissions();
         $budgets = $this->finance_model->get_budgets();
@@ -461,7 +474,7 @@ class Claims extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         if(!$this->finance_model->has_permission($group_id)){
@@ -503,7 +516,7 @@ class Claims extends CI_Controller {
     function view_claim(){
         
         $admin = $this->finance_model->finance_permissions();
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         
         $file = getcwd();
         $priv_key = $this->finance_model->get_private_key();
@@ -548,7 +561,7 @@ class Claims extends CI_Controller {
     
     function view_group_totals($sent_emails=NULL){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -569,7 +582,7 @@ class Claims extends CI_Controller {
     
     function view_expected(){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -631,7 +644,7 @@ class Claims extends CI_Controller {
     
     function remind_invoice(){
     
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         
@@ -762,6 +775,24 @@ class Claims extends CI_Controller {
             
         $this->load->view('finance/claims/new_claim', array(
             'budgets' => $budgets_list
+        ));
+    }
+    
+    function pay(){
+        $admin = $this->finance_model->finance_permissions();
+        if(!$admin){
+            redirect('finance');
+            return;
+        }
+        
+        $n = 4;
+        $ids = array();
+        while(($c = $this->uri->segment($n++)) !== FALSE)
+            $ids[] = $c;
+        
+        $claims = $this->finance_model->get_claims_by_ids($ids);
+        $this->load->view('finance/claims/pay', array(
+            'claims' => $claims
         ));
     }
 
