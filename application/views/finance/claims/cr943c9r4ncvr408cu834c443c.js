@@ -4,7 +4,7 @@
             
             $('.download').click(function(){
                 $.cr943c9r4ncvr408cu834c443c.download_pdf(false);
-                //$.cr943c9r4ncvr408cu834c443c.download_pdf(true);
+                $.cr943c9r4ncvr408cu834c443c.download_pdf(true);
             });
         },
         
@@ -144,8 +144,18 @@
                 doc.setPage(i);
                 doc.rightText(pW-15, pH-10, "Page: "+i+" of "+p);
             }
-            
-            doc.save('Bank Transfer ' + $('.date').attr('alt-format')+'.pdf');
+            if(watermark){
+                doc.setFontSize(30);
+                for(i=1; i<=p; i++){
+                    doc.setPage(i);
+                    doc.centerText(pW/2, 20, 'COPY');
+                    doc.centerText(pW/2, pH-20, 'COPY');
+                }
+                doc.output('dataurlnewwindow');
+            }else{
+                doc.output('dataurlnewwindow');
+                doc.save('Bank Transfer ' + $('.date').attr('alt-format')+'.pdf');
+            }
         }
     };
 })(jQuery);
