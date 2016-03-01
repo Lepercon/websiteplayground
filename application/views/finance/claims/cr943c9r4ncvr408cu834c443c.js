@@ -15,6 +15,7 @@
             var bdr = 20;
             var re = /<[\/]*[a-zA-Z]*>/g; 
             var fontSize = 12;
+            
 
             doc.setFontSize(fontSize);
             doc.setFont('times', "normal");
@@ -144,12 +145,14 @@
                 doc.setPage(i);
                 doc.rightText(pW-15, pH-10, "Page: "+i+" of "+p);
             }
+            
             if(watermark){
                 doc.setFontSize(30);
-                for(i=1; i<=p; i++){
+                for(var i=1; i<=p; i++){
                     doc.setPage(i);
-                    doc.centerText(pW/2, 20, 'COPY');
-                    doc.centerText(pW/2, pH-20, 'COPY');
+                    for(var j=20; j < pH; j+=20){
+                        doc.centerText(pW/2, j, 'COPY');
+                    }
                 }
                 doc.output('dataurlnewwindow');
             }else{
