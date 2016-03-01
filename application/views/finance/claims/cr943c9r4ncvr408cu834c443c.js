@@ -88,17 +88,21 @@
                         doc.line(bdr+i*stp, n-4, bdr+i*stp, n+2);
                     }
                 }
-                doc.text(bdr+0*stp+1, n+=6, $(this).children().eq(0).html());
-                doc.text(bdr+1*stp+1, n, $(this).children().eq(1).html());
-                doc.text(bdr+2*stp+1, n, $(this).children().eq(2).html());
-                doc.text(bdr+3*stp+1, n, $(this).children().eq(3).html());
-                doc.setFontSize(10);
-                doc.text(bdr+4*stp+1, n, $(this).children().eq(4).html().substr(0, 18));
-                doc.setFontSize(fontSize);
+                n += 6;
+                var txt = "";
+                var max = 0;
+                for(var i = 0; i<=4; i++){
+                    txt = doc.splitTextToSize($(this).children().eq(i).html(), stp-1);
+                    max = Math.max(max, txt.length)
+                    for(var j=0; j<txt.length; j++){
+                        doc.text(bdr+i*stp+1, n+6*j, txt[j]);
+                    }
+                }
+                n += (max-1)*6;
                 
                 doc.line(bdr, n+2, pW-bdr, n+2);
                 for(var i=0; i<=5; i++){
-                    doc.line(bdr+i*stp, n-4, bdr+i*stp, n+2);
+                    doc.line(bdr+i*stp, n+2-6*max, bdr+i*stp, n+2);
                 }
                 pos = n;
                 n = doc.checkRemain(n, pH, 6, bdr);
