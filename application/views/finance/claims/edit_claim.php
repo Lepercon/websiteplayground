@@ -14,7 +14,7 @@
                     $this->load->view('finance/claims/form_errors', array('file_errors'=>$file_errors));
                 }
                 
-                $this->load->view('finance/claims/form_template', array('claim'=>$claim, 'button_name'=>'Update', 'submit_link'=>'finance/edit_claim/'.$claim['id']));
+                $this->load->view('finance/claims/form_template', array('claim'=>$claim, 'button_name'=>'Update', 'submit_link'=>'finance/claims/edit_claim/'.$claim['id']));
             ?>
         </div>
     </div>

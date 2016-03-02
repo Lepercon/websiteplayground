@@ -8,7 +8,7 @@ echo back_link('finance');?>
         <div>
             <?php
                 $this->load->view('finance/claims/form_errors');
-                $this->load->view('finance/claims/form_template', array('submit_link'=>'finance/claims_form'));
+                $this->load->view('finance/claims/form_template', array('submit_link'=>'finance/claims/claims_form'));
             ?><br>
             We recommend you save all of your receipts into one pdf, but if you need to upload multiple files you can do so on the next page.<br><br>
         </div>
