@@ -62,7 +62,7 @@ $route['photos/(:num)'] = 'photos/index/$1';
 $route['contact/(:num)'] = 'contact/user/$1';
 
 // finance
-$route['claim'] = 'finance/claims_form';
+$route['claim'] = 'finance/claims/claims_form';
 
 // details
 $route['profile'] = 'details';
