@@ -192,6 +192,8 @@ class Ballot extends CI_Controller {
     }
     
     function payments(){
+        
+        $this->load->model('finance_model');
         $id = $this->uri->segment(3);
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);

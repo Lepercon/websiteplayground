@@ -235,9 +235,10 @@ class Claims extends CI_Controller {
         $levels = $this->users_model->get_user_levels($user_id);
         $le = array();
         foreach($levels as $l){
-            $this->db->or_like('level_id', $l['level_id'], 'both');
+            //$this->db->or_like('level_id', $l['level_id'], 'both');
             $le[] = $l['level_id'];
         }
+        
         
         switch($claim['status']){
             case 0:
