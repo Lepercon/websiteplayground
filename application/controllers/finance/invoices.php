@@ -51,7 +51,7 @@ class Invoices extends CI_Controller {
 
     function my_group($group_id = NULL) {
         if(is_null($group_id)){
-            $group_id = $this->uri->segment(3);
+            $group_id = $this->uri->segment(4);
         }
         
         $user_id = $this->session->userdata('id');
@@ -95,7 +95,7 @@ class Invoices extends CI_Controller {
     }
 
     function my_invoice(){
-        $i_id = $this->uri->segment(3);
+        $i_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $invoice = $this->finance_model->get_invoice_by_id($i_id);
         $group = $this->finance_model->get_group($invoice['group_id']);
@@ -114,7 +114,7 @@ class Invoices extends CI_Controller {
         $this->form_validation->set_rules('ids', 'New Members', 'required');
         $this->form_validation->set_message('required', "You haven't selected any %s");
 
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         $this_group = $this->finance_model->get_group($group_id);
@@ -147,7 +147,7 @@ class Invoices extends CI_Controller {
         $this->form_validation->set_rules('details', 'Description', 'max_length[500]');
         $this->form_validation->set_rules('amount', 'Amount', 'required|decimal');
 
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         $users = $this->users_model->get_all_user_ids_and_names();
@@ -198,7 +198,7 @@ class Invoices extends CI_Controller {
     
     function adding_invoice(){
 
-        $group_id = $this->uri->segment(3);
+        $group_id = $this->uri->segment(4);
         $user_id = $this->session->userdata('id');
         $group = $this->finance_model->get_group_member($group_id, $user_id);
         if(!$this->finance_model->has_permission($group_id)){
@@ -211,7 +211,7 @@ class Invoices extends CI_Controller {
     }
 
     function remove_invoice() {
-        $i_id = $this->uri->segment(3);
+        $i_id = $this->uri->segment(4);
         if($i_id != FALSE) {
             $invoice = $this->finance_model->get_invoice_by_id($i_id);
             if($this->finance_model->get_permissions($invoice['group_id'], $this->session->userdata('id')) == 1) {
