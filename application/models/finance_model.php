@@ -37,7 +37,7 @@ class Finance_model extends CI_Model {
         $id = $this->db->insert_id();
         
         $message = 'A new invoicing group "'.$group_name.'" has been created';
-        $link = 'finance/my_group/'.$id;
+        $link = 'finance/invoices/my_group/'.$id;
         $this->add_notification(array(-1, $u_id), 'Invoices', $message, $link);
         
         return $id;
@@ -53,7 +53,7 @@ class Finance_model extends CI_Model {
         $this->db->update('finance_budgets', $data); 
         
         $message = 'The group "'.$group_name.'" has been updated';
-        $link = 'finance/my_group/'.$group_id;
+        $link = 'finance/invoices/my_group/'.$group_id;
         $this->add_notification(array(-1, $u_id), 'Invoices', $message, $link);
 
     }
@@ -229,7 +229,7 @@ class Finance_model extends CI_Model {
     function add_invoice($member_ids, $date, $name, $amount, $group_id, $details){
     
         $message = 'A new invoice has been added for "'.$name.'".';
-        $link = 'finance/my_invoices';
+        $link = 'finance/invoices/my_invoices';
         $this->add_notification($member_ids, 'Invoices', $message, $link);
         
         $data = array();
@@ -388,9 +388,9 @@ class Finance_model extends CI_Model {
         $d['id'] = $this->db->insert_id();
         
         $message = 'A new claim has been added: "'.$item.'" for "'.$pay_to.'".';
-        $link = 'finance/my_claims';
+        $link = 'finance/claims/my_claims';
         //$this->add_notification(explode(',', $budget['owner_ids']), 'Claims', $message, $link);
-        $link = 'finance/view_claims';
+        $link = 'finance/claims/view_claims';
         $this->add_notification(-1, 'Claims', $message, $link);
         
         return $d;
@@ -496,11 +496,11 @@ class Finance_model extends CI_Model {
         }
         
         $message = 'Claim "'.$claim['item'].'" has been updated to "'.$new.'".';
-        $link = 'finance/my_claims';
+        $link = 'finance/claims/my_claims';
         $claim['owners_ids'][] = $claim['user_id'];
         $this->add_notification($claim['owners_ids'], 'Claims', $message, $link);
 
-        $link = 'finance/view_claims';
+        $link = 'finance/claims/view_claims';
         
         
         $data['status'] = $new_status;
@@ -532,10 +532,10 @@ class Finance_model extends CI_Model {
         
         $c = $this->get_claim($claim['id']);
         $message = 'Claim "'.$c['item'].'" has been updated.';
-        $link = 'finance/my_claims';
+        $link = 'finance/claims/my_claims';
         $c['owners_ids'][] = $c['user_id'];
         $this->add_notification($c['owners_ids'], 'Claims', $message, $link);
-        $link = 'finance/view_claims';
+        $link = 'finance/claims/view_claims';
         $this->add_notification(-1, 'Claims', $message, $link);
         
         $this->db->where('id', $claim['id']);

@@ -88,7 +88,7 @@ class Invoices extends CI_Controller {
             foreach($budget['owners'] as $b){
                 $owners[] = $b['id'];
             }
-            $this->finance_model->add_notification($owners, 'Invoices', $this->session->userdata('firstname').' '.$this->session->userdata('surname').' claims to have paid for '.$invoice['name'].'.', 'finance/my_group/'.$budget['id']);
+            $this->finance_model->add_notification($owners, 'Invoices', $this->session->userdata('firstname').' '.$this->session->userdata('surname').' claims to have paid for '.$invoice['name'].'.', 'finance/invoices/my_group/'.$budget['id']);
         }
         $this->output->append_output(array('success' => FALSE));
         return false;
@@ -231,7 +231,7 @@ class Invoices extends CI_Controller {
                 $data['date_paid'] = time();
             }
             $this->db->update('invoices', $data);
-            $this->finance_model->add_notification($invoice['member_id'], 'Invoices', $_POST['status']?'Your invoice "'.$invoice['name'].'" has been marked as paid.':'Your invoice "'.$invoice['name'].'" has been marked as unpaid.', 'finance/my_invoices');
+            $this->finance_model->add_notification($invoice['member_id'], 'Invoices', $_POST['status']?'Your invoice "'.$invoice['name'].'" has been marked as paid.':'Your invoice "'.$invoice['name'].'" has been marked as unpaid.', 'finance/invoices/my_invoices');
         }else{
             log_message('error', 'Permission Denied: '.$i_id.' - '.$this->session->userdata('id'));
         }

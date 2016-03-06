@@ -635,7 +635,7 @@ class Ballot_model extends CI_Model {
             $this->db->update('ballot_people', array('invoice_id'=>$id), array('id'=>$p['id']));
             
             $message = 'A new invoice has been added for you: "'.$ballot['full_name'].'".';
-            $link = 'finance/my_invoices';
+            $link = 'finance/invoices/my_invoices';
             $this->finance_model->add_notification(array($user), 'Invoices', $message, $link);
         }
     }
