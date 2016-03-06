@@ -30,9 +30,32 @@
             break;
             
     }
-
+//var_dump($tables);
     if($show_tables){
         $i=1;
+        $sports = array(
+            0 => 'None',
+            1 => 'Badminton',
+            2 => 'Basketball',
+            3 => 'Cheerleading',
+            4 => 'Cricket',
+            5 => 'Hockey',
+            6 => 'Lacrosse',
+            7 => 'Men’s Football',
+            8 => 'Netball',
+            9 => 'Pool/Darts',
+            10 => 'Rounders',
+            11 => 'Rowing',
+            12 => 'Rugby',
+            13 => 'Squash',
+            14 => 'Table Tennis',
+            15 => 'Tennis',
+            16 => 'Ultimate Frisbee',
+            17 => 'Volleyball',
+            18 => 'Women’s Football',
+            19 => 'Women’s Rugby',
+            20 => 'Dodgeball'
+        );
 ?>
         </div>
         <div id="tables-section">
@@ -40,8 +63,13 @@
             <?php foreach($tables as $k=>$t){ ?>
                 <div>
                     <p><b><?php echo ($b['close_time'] > time())?'Group '.$i++:'Table '.$k; ?>:</b></p>
-                    <?php foreach($t as $key=>$p){  ?>
-                        <p title="<?php echo 'Signed Up By: '.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn']; ?>"><?php echo ($key+1).'. '.($p['firstname']==''?$p['name']:($p['prefname']==''?$p['firstname']:$p['prefname']).' '.$p['surname']).($p['user_id']==-1?' ('.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn'].')':''); ?></p>
+                    <?php foreach($t as $key=>$p){  
+                        if($b['id'] == 14){
+                            $op = explode(';', $p['options']);
+                            $sport = $sports[$op[2]];
+                        }
+                        ?>
+                        <p title="<?php echo 'Signed Up By: '.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn']; ?>"><?php echo ($key+1).'. '.($p['firstname']==''?$p['name']:($p['prefname']==''?$p['firstname']:$p['prefname']).' '.$p['surname']).($p['user_id']==-1?' ('.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn'].')':'').($b['id']==14?' ['.$sport.']':''); ?></p>
                     <?php } ?>
                 </div>
             <?php } ?>
@@ -50,7 +78,6 @@
 
 <?php
     }else{
-        echo '<p>We seem to have had a problem working out who to put on each table, and we want a human to check it before we publish it.</p>';
-        echo '<p>We\'re very sorry about this and we hope it get resolved soon.</p>';
+        echo '<p>We\'re really sorry but we don\'t have the result ready right now, please check back soon.</p>';
     }
 ?>
