@@ -63,6 +63,8 @@ $route['contact/(:num)'] = 'contact/user/$1';
 
 // finance
 $route['claim'] = 'finance/claims/claims_form';
+$route['finance/my_invoices'] = 'finance/invoices/my_invoices';
+
 
 // details
 $route['profile'] = 'details';
