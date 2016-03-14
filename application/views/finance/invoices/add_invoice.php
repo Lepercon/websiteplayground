@@ -7,7 +7,7 @@ echo back_link('finance/invoices/my_group/'.$this_group['id']);
 ?>
 
 <h2><?php echo 'Add Invoice - '.$this_group['budget_name']; ?></h2>
-<?php echo form_open('finance/add_invoice/'.$g_id, array('class' => 'jcr-form')); ?>
+<?php echo form_open('finance/invoices/add_invoice/'.$g_id, array('class' => 'jcr-form')); ?>
 
 <div class="content-left width-33 narrow-full">
 <h3>Select Members:</h3>
