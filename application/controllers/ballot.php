@@ -34,10 +34,6 @@ class Ballot extends CI_Controller {
             
         $id = $this->uri->segment(3);
         
-        if($id == 4 && $this->session->userdata('year_group') == 1){
-            cshow_error('Sorry, freshers are unable to sign up to this formal.', 401, 'Access denied');
-            return;
-        }
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         $_SESSION['errors'] = array();
@@ -121,11 +117,15 @@ class Ballot extends CI_Controller {
         ));
         
         $this->get_tables();
-        /*$this->load->view('ballot/view_tables', array(
-            'tables'=>$tables,
-            'u_id'=>$u_id,
-            'b'=>$ballot
-        ));*/
+        if($ballot['close_time'] > time()){
+            $tables = $this->ballot_model->get_tables($id);
+            $this->load->view('ballot/view_tables', array(
+                'tables'=>$tables,
+                'u_id'=>$u_id,
+                'b'=>$ballot
+            ));
+        }
+        /**/
         
     }
     
@@ -198,9 +198,9 @@ class Ballot extends CI_Controller {
         $u_id = $this->session->userdata('id'); 
         $ballot = $this->ballot_model->get_ballot($id, $u_id);
         
-        if($ballot['close_time'] < time()){
+        //if($ballot['close_time'] < time()){
             if($this->ballot_admin){
-                $payments = $this->ballot_model->get_payments($id);
+                $payments = $this->ballot_model->get_payments($id, $ballot['close_time'] < time());
                 
                 if(isset($_POST['send-invoices'])){
                     $this->ballot_model->send_invoices($ballot, $payments['not_sent']);
@@ -214,9 +214,9 @@ class Ballot extends CI_Controller {
             }else{
                 redirect('ballot');
             }
-        }else{
+        /*}else{
             redirect('ballot/view/'.$ballot['id']);
-        }
+        }*/
     }
     
     function payment(){

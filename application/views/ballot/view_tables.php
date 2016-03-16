@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 ?>
 <div>
 <?php
@@ -7,30 +8,32 @@
     $tab = explode(';', $b['tables']);
     
     $show_tables = false;
-    switch($b['published']){
-        case 'hidden':
-            $show_tables = false;
-            break;
-        case 'unpublished':
-            $show_tables = false;
-            break;
-        case 'check_correct':
-            $show_tables = true;
-
-            foreach($tables as $k=>$t){
-                $table_correct = ($tab[$k-1]-count($t))==0;
-                if((!$table_correct) && $this->ballot_admin){
-                    echo '<p>Error on table '.$k.'</p>';
+    if($b['close_time'] > time()){
+        $show_tables = true;
+    }else{
+        switch($b['published']){
+            case 'hidden':
+                $show_tables = false;
+                break;
+            case 'unpublished':
+                $show_tables = false;
+                break;
+            case 'check_correct':
+                $show_tables = true;
+                foreach($tables as $k=>$t){
+                    $table_correct = ($tab[$k-1]-count($t))==0;
+                    if((!$table_correct) && $this->ballot_admin){
+                        echo '<p>Error on table '.$k.'</p>';
+                    }
+                    $show_tables = $show_tables && $table_correct;
                 }
-                $show_tables = $show_tables && $table_correct;
-            }
-            break;
-        case 'published':
-            $show_tables = true;
-            break;
-            
+                break;
+            case 'published':
+                $show_tables = true;
+                break;
+        }
     }
-//var_dump($tables);
+//echo nl2br(var_export($tables, true));
     if($show_tables){
         $i=1;
         $sports = array(
@@ -63,7 +66,7 @@
             <?php foreach($tables as $k=>$t){ ?>
                 <div>
                     <p><b><?php echo ($b['close_time'] > time())?'Group '.$i++:'Table '.$k; ?>:</b></p>
-                    <?php foreach($t as $key=>$p){  
+                    <?php foreach($t as $key=>$p) { if(!is_numeric($key)) continue; 
                         if($b['id'] == 14){
                             $op = explode(';', $p['options']);
                             $sport = $sports[$op[2]];

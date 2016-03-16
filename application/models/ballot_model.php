@@ -42,7 +42,7 @@ class Ballot_model extends CI_Model {
     }
     
     function update_ballot($id, $u_id, $users){
-        $this->db->where( array('created_by' => $u_id, 'ballot_id'=>$id));
+        $this->db->where(array('created_by' => $u_id, 'ballot_id'=>$id));
         $u_ids = $this->db->get('ballot_people')->result_array();
         $this->db->delete('ballot_people', array('created_by' => $u_id, 'ballot_id'=>$id)); 
         $this->db->insert_batch('ballot_people', $users);
@@ -104,7 +104,6 @@ class Ballot_model extends CI_Model {
                 }
             }
         }else{
-            
             foreach($t as $k=>$table){
                 $tables[$k+1] = array();
             }
@@ -573,19 +572,20 @@ class Ballot_model extends CI_Model {
         return $this->db->insert_id();
     }
     
-    function get_payments($b_id){
+    function get_payments($b_id, $only_allocated=TRUE){
         $this->db->select('ballot_people.*, invoices.amount, invoices.paid, invoices.id as inv_id, invoices.payment_method, CONCAT(u2.firstname, \' \', u2.surname) as creator_name', false);
         $this->db->where('ballot_id', $b_id);
         $this->db->join('invoices', 'invoices.id = ballot_people.invoice_id');
         $this->db->join('users as u1', 'u1.id = ballot_people.user_id', 'left outer');
         $this->db->join('users as u2', 'u2.id = ballot_people.created_by', 'left outer');
         $this->db->order_by('user_id < 0, u1.surname, u1.firstname');
-        $this->db->where('table_num IS NOT NULL');
+        //$this->db->where('table_num IS NOT NULL');
         $payments['sent'] = $this->db->get('ballot_people')->result_array();
         
         $this->db->where('ballot_id', $b_id);
         $this->db->where('invoice_id IS NULL');
-        $this->db->where('table_num IS NOT NULL');
+        if($only_allocated)
+            $this->db->where('table_num IS NOT NULL');
         $payments['not_sent'] = $this->db->get('ballot_people')->result_array();
         return $payments;
     }
@@ -618,25 +618,41 @@ class Ballot_model extends CI_Model {
             }
             $options = explode(';', $p['options']);
             foreach($options as $k => $o){
-                $price += $op[$k]['options'][$o]['price'];
+                if(isset($op[$k]['options'][$o]['price'])){
+                    $price += $op[$k]['options'][$o]['price'];
+                }
             }
             
-            $data = array(
-                'date' => time(),
-                'name' => $ballot['full_name'],
-                'member_id' => $user,
-                'amount' => $price,
-                'group_id' => 1,
-                'details' => 'Attendance fee',
-            );
+            $this->db->where('member_id', $user);
+            $this->db->where('mark', 'ballot'.$ballot['id']);
+            $invoice = $this->db->get('invoices')->row_array(0);
             
-            $this->db->insert('invoices', $data);
-            $id = $this->db->insert_id();
-            $this->db->update('ballot_people', array('invoice_id'=>$id), array('id'=>$p['id']));
+            if(!empty($invoice)){
+                $this->db->update('ballot_people', array('invoice_id'=>$invoice['id']), array('id'=>$p['id']));
+                if($price != $invoice['amount']){
+                    log_message('error', 'PRICE CHANGE: '.$invoice['id'].' - '.$invoice['amount'].' - '.$price);
+                }
+                $this->db->update('invoices', array('amount'=>$price), array('id'=>$invoice['id']));                
+            }else{
             
-            $message = 'A new invoice has been added for you: "'.$ballot['full_name'].'".';
-            $link = 'finance/invoices/my_invoices';
-            $this->finance_model->add_notification(array($user), 'Invoices', $message, $link);
+                $data = array(
+                    'date' => time(),
+                    'name' => $ballot['full_name'],
+                    'member_id' => $user,
+                    'amount' => $price,
+                    'group_id' => 1,
+                    'details' => 'Attendance fee',
+                    'mark' => 'ballot'.$ballot['id']
+                );
+
+                $this->db->insert('invoices', $data);
+                $id = $this->db->insert_id();
+                $this->db->update('ballot_people', array('invoice_id'=>$id), array('id'=>$p['id']));
+
+                $message = 'A new invoice has been added for you: "'.$ballot['full_name'].'".';
+                $link = 'finance/invoices/my_invoices';
+                $this->finance_model->add_notification(array($user), 'Invoices', $message, $link);
+                }
         }
     }
     
