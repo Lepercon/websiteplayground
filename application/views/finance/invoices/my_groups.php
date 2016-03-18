@@ -5,7 +5,7 @@ echo back_link('finance/');?>
 
 <?php
 if($permissions){
-    echo anchor('finance/my_group/all', 'All Groups');
+    echo anchor('finance/invoices/my_group/all', 'All Groups');
 }
 
 if(!empty($groups)) {

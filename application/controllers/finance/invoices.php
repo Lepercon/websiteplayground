@@ -60,7 +60,7 @@ class Invoices extends CI_Controller {
         if($permissions || $this->finance_model->has_permission($group_id)){
             $this_group = $this->finance_model->get_group($group_id);
             $members = $this->finance_model->get_members($group_id);
-            $invoices = $this->finance_model->get_invoices_by_group($group_id);
+            $invoices = $this->finance_model->get_invoices_by_group($group_id, !$this->uri->segment(5));
             $inv_tot = $this->finance_model->get_sorted_invoices_by_group($group_id);
             $this->load->view('finance/invoices/my_group',array(
                 'group' => $this_group,

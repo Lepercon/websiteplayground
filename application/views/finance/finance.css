@@ -134,7 +134,7 @@ td.claim-actions{
 	content:"*";
 }
 
-.members-tables td, .members-tables th, .members-tables a, .invoice-tables td, .invoice-tables th, .invoice-tables a{
+.invoice-tables td, .invoice-tables th, .invoice-tables a{
 	padding:2px;
 	font-size:16px;
 }

@@ -36,6 +36,7 @@
 //echo nl2br(var_export($tables, true));
     if($show_tables){
         $i=1;
+        $c = 0;
         $sports = array(
             0 => 'None',
             1 => 'Badminton',
@@ -71,6 +72,7 @@
                             $op = explode(';', $p['options']);
                             $sport = $sports[$op[2]];
                         }
+                        $c++;
                         ?>
                         <p title="<?php echo 'Signed Up By: '.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn']; ?>"><?php echo ($key+1).'. '.($p['firstname']==''?$p['name']:($p['prefname']==''?$p['firstname']:$p['prefname']).' '.$p['surname']).($p['user_id']==-1?' ('.($p['pn']==''?$p['fn']:$p['pn']).' '.$p['sn'].')':'').($b['id']==14?' ['.$sport.']':''); ?></p>
                     <?php } ?>
@@ -80,6 +82,7 @@
         </div>
 
 <?php
+        echo '<p>Total: <b>'.$c.'</b></p>';
     }else{
         echo '<p>We\'re really sorry but we don\'t have the result ready right now, please check back soon.</p>';
     }

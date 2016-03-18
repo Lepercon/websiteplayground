@@ -70,7 +70,7 @@
 			}
 			
 			if(date('w') == 4){//Is it a thursday?
-				$this->finance_weekly();
+				//$this->finance_weekly();
 			}
 		
 		}else{

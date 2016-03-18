@@ -2,9 +2,18 @@
 
 echo back_link('finance/invoices/my_groups');
 
+$mem = array();
+foreach($members as $m){
+    $mem[$m['u_id']] = $m;
+}
+
 foreach($invoices as $i){
     $grouped[$i['member_id']][] = $i;
+    if(!isset($mem[$i['member_id']])){
+        $mem[$i['member_id']] = $this->finance_model->add_group_member($group['id'], $i['member_id']);
+    }
 }
+
 $totals = array('total'=>0, 'paid'=>0);
 ?>
 <span id="group-id" style="display:none"><?php echo $group['id']; ?></span>
@@ -39,50 +48,51 @@ $totals = array('total'=>0, 'paid'=>0);
         <p><?php echo $group['how_to_pay']; ?></p>
     </div>
     <div id="tabs-2" class="members-tables">
+        <?php echo anchor('finance/invoices/my_group/'.$this->uri->segment(4).'/'.(!$this->uri->segment(5)), $this->uri->segment(5)?'Hide Paid':'Show Paid'); ?>
         <div>
+            <table><th>Name</th><th>Item</th><th>Date</th><th>Amount</th><th>Details</th><th>Marked Paid?</th><th>Paid?</th><th style="min-width:145px;">Actions</th>
             <?php
-                foreach($members as $m){
-            ?>
-                    <div><p><span class="member-id" style="display:none"><?php echo $m['id']; ?></span>
-                    <span class="admin-check"><?php echo ($m['prefname']==''?$m['firstname']:$m['prefname']).' '.$m['surname'];?></span> 
-                    <a class="remove-member" title="Warning: Any Unpaid Invoices Will Be Deleted." href="#">Remove From Group</a>
-            <?php
+                $last_name = '';
+                foreach($mem as $m){
+                    $name = ($m['prefname']==''?$m['firstname']:$m['prefname']).' '.$m['surname'];
                     if(isset($grouped[$m['u_id']])){
-                        ?></p>
-                        <table><th style="min-width:120px;">Name</th><th style="min-width:120px;">Date</th><th>Amount</th><th>Details</th><th>Marked Paid?</th><th>Paid?</th><th style="min-width:145px;">Actions</th><?php
+                        
                         foreach($grouped[$m['u_id']] as $i){
                             $totals['total'] += $i['amount'];
                             if($i['paid']){
                                 $totals['paid'] += $i['amount'];
                             }
                     ?>
-                            <tr>
-                            <td><?php echo $i['name']; ?></td>
-                            <td><?php echo date('jS F Y', $i['date']); ?></td>
-                            <td>£<?php echo $i['amount']; ?></td>
-                            <td><?php echo $i['details']; ?></td>
-                            <td><?php echo ($i['paid']?'':($i['marked_paid']?'YES':'NO')); ?></td>
-                            <td class="invoice-paid"><?php echo ($i['paid']?'YES':'NO'); ?></td>
-                            <td>
-                                <span style="display:none;" class="invoice-id"><?php echo $i['id'] ?></span>
-                                <span style="display:none;" class="invoice-status"><?php echo ($i['paid']?'1':'0'); ?></span>
-                                <a class="invoice-paid no-jsify" title="<?php echo ($i['paid']?'Mark this entry as unpaid':'Mark this entry as paid'); ?>" href="#"><?php echo ($i['paid']?'Mark as unpaid':'Mark as paid'); ?></a> 
-                                <a class="" title="Edit This Entry" href="<?php echo ''; ?>">Edit</a> 
-                                <a class="invoice-remove no-jsify" title="Remove This Entry" href="#">Remove</a>
-                            </td>
+                            <tr class="<?php echo $name==$last_name?'ditto':'new-member';?>">
+                                <td><?php
+                                    ;
+                                    if($last_name != $name)
+                                        echo $name;
+                                    $last_name = $name;
+                                ?></td>
+                                <td><?php echo $i['name']; ?></td>
+                                <td><?php echo date('jS F Y', $i['date']); ?></td>
+                                <td>£<?php echo $i['amount']; ?></td>
+                                <td><?php echo $i['details']; ?></td>
+                                <td><?php echo ($i['paid']?'':($i['marked_paid']?'YES':'NO')); ?></td>
+                                <td class="invoice-paid"><?php echo ($i['paid']?'YES':'NO'); ?></td>
+                                <td>
+                                    <span style="display:none;" class="invoice-id"><?php echo $i['id'] ?></span>
+                                    <span style="display:none;" class="invoice-status"><?php echo ($i['paid']?'1':'0'); ?></span>
+                                    <a class="invoice-paid no-jsify" title="<?php echo ($i['paid']?'Mark this entry as unpaid':'Mark this entry as paid'); ?>" href="#"><?php echo ($i['paid']?'Mark as unpaid':'Mark as paid'); ?></a> 
+                                    <a class="" title="Edit This Entry" href="<?php echo ''; ?>">Edit</a> 
+                                    <a class="invoice-remove no-jsify" title="Remove This Entry" href="#">Remove</a>
+                                </td>
                             </tr>
                             <?php
                         }
-                        ?></table><?php
-                    }else{
-                    ?>
-                        </p>
-                    <?php
-                    } ?></div><?php
+                        ?><?php
+                       
                     
                 }
-            
+                }
             ?>
+            </table>
         </div>
     </div>
     

@@ -117,13 +117,15 @@ class Ballot extends CI_Controller {
         ));
         
         $this->get_tables();
-        if($ballot['close_time'] > time()){
-            $tables = $this->ballot_model->get_tables($id);
-            $this->load->view('ballot/view_tables', array(
-                'tables'=>$tables,
-                'u_id'=>$u_id,
-                'b'=>$ballot
-            ));
+        if(has_level(array(1, 2, 4, 16, 108))){
+            if($ballot['close_time'] > time()){
+                $tables = $this->ballot_model->get_tables($id, true, true);
+                $this->load->view('ballot/view_tables', array(
+                    'tables'=>$tables,
+                    'u_id'=>$u_id,
+                    'b'=>$ballot
+                ));
+            }
         }
         /**/
         

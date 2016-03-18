@@ -82,11 +82,13 @@ class Finance_model extends CI_Model {
         return $this->db->get('invoices')->result_array();
     }
 
-    function get_invoices_by_group($group_id) {
+    function get_invoices_by_group($group_id, $only_unpaid=FALSE) {
         $this->db->select('invoices.*, users.firstname, users.prefname, users.surname, users.email, users.current, users.custom_email');
         if($group_id != 'all'){
             $this->db->where('group_id', $group_id);
         }
+        if($only_unpaid)
+            $this->db->where('paid', 0);
         $this->db->order_by('users.surname');
         $this->db->join('users', 'users.id=invoices.member_id');
         return $this->db->get('invoices')->result_array();
@@ -750,6 +752,25 @@ class Finance_model extends CI_Model {
         $this->db->order_by('id');
         $this->db->select('finance_claims.*, finance_budgets.budget_name');
         return $this->db->get('finance_claims')->result_array();
+    }
+    
+    function add_group_member($group_id, $user_id, $permissions = 0){
+        $data = array(
+            'member_id' => $user_id,
+            'group_id' => $group_id,
+            'permissions' => $permissions
+        );
+        $this->db->insert('finance_members', $data);
+        $i_id = $this->db->insert_id();
+        $this->db->where('id', $user_id);
+        $user = $this->db->get('users')->row_array(0);
+        return array(
+            'id' => $i_id,
+            'u_id' => $user_id,
+            'firstname'=> $user['firstname'],
+            'prefname' => $user['prefname'],
+            'surname' => $user['surname']
+        );
     }
     
     
