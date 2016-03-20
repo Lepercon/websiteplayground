@@ -31,7 +31,7 @@
                                 continue;
                 ?>
                             <span class="poster-image profile">
-                                <div class="event-scroll-image" style="height:600px;width:400px;display:inline-block">
+                                <div class="event-scroll-image" style="height:400px;width:400px;display:inline-block">
                                     <h3>Meet Your:</h3>
                                     <h2><?php echo $p['level_name'];?></h2>
                                     <div class="user-profile" style="background-image:url(<?php echo $img; ?>)">
