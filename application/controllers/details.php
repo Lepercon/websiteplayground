@@ -193,8 +193,10 @@ class Details extends CI_Controller {
                     $img['large'] = new Imagick(VIEW_PATH.'details/img/tmp/'.$this->session->userdata('uid').'.jpg');
                     $img['medium'] = $img['large']->clone();
                     $img['x-large'] = $img['large']->clone();
+                    $img['xx-large'] = $img['large']->clone();
                     $img['small'] = $img['large']->clone();
                     $img['tiny'] = $img['large']->clone();
+                    $min['xx-large'] = 800;
                     $min['x-large'] = 500;
                     $min['large'] = 200;
                     $min['medium'] = 200;
@@ -222,7 +224,7 @@ class Details extends CI_Controller {
                     }
     
                     // crop to large, small and tiny
-                    foreach(array('x-large', 'large','medium','small','tiny') as $s) {
+                    foreach(array('xx-large', 'x-large', 'large','medium','small','tiny') as $s) {
                         if(!$img[$s]->cropImage($_POST['w-'.$s], $_POST['h-'.$s], $_POST['x-'.$s], $_POST['y-'.$s])) {
                             $this->load->view('details/crop', array('dims' => $dims, 'error' => ucfirst($s).' crop dimensions not valid.'));
                             return;

@@ -440,13 +440,16 @@ class Admin extends CI_Controller {
             $img['large'] = new Imagick(VIEW_PATH.'details/img/tmp/'.$user['uid'].'.jpg');
             $img['medium'] = $img['large']->clone();
             $img['x-large'] = $img['large']->clone();
+            $img['xx-large'] = $img['large']->clone();
             
             $img['large']->cropImage($_POST['w-large'], $_POST['h-large'], $_POST['x-large'], $_POST['y-large']);
             $img['medium']->cropImage($_POST['w-small'], $_POST['h-small'], $_POST['x-small'], $_POST['y-small']);
             $img['x-large']->cropImage($_POST['w-small'], $_POST['h-small'], $_POST['x-small'], $_POST['y-small']);
+            $img['xx-large']->cropImage($_POST['w-small'], $_POST['h-small'], $_POST['x-small'], $_POST['y-small']);
             $img['large']->resizeImage(200,0,Imagick::FILTER_LANCZOS,1);
             $img['medium']->resizeImage(200,200,Imagick::FILTER_LANCZOS,1);
             $img['x-large']->resizeImage(500,500,Imagick::FILTER_LANCZOS,1);
+            $img['xx-large']->resizeImage(800,800,Imagick::FILTER_LANCZOS,1);
             
             $img['small'] = $img['medium']->clone();
             $img['tiny'] = $img['medium']->clone();
