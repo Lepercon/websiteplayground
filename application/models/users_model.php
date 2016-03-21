@@ -329,4 +329,14 @@ class Users_model extends CI_Model {
         return $this->db->get('levels')->result_array();
     }
     
+    function get_random_people($limit=5){
+        $this->db->where('level_list.current', 1);
+        $this->db->join('users', 'users.id=level_list.user_id');
+        $this->db->join('levels', 'levels.id=level_list.level_id');
+        $this->db->select('level_list.*, users.firstname, users.prefname, users.surname, users.uid, levels.full as level_name, RAND() as sorting_col');
+        $this->db->order_by('sorting_col');
+        $this->db->limit($limit);
+        return $this->db->get('level_list')->result_array();
+    }
+    
 }

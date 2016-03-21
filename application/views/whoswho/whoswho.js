@@ -234,7 +234,7 @@
                 
                 getDataUri: function(obj) {
                     var url = obj.find('div').css('background-image').substr(4);
-                    url = url.substring(0, url.length-1);
+                    url = url.substring(1, url.length-2);
                     var image = new Image();
 
                     image.onload = function () {

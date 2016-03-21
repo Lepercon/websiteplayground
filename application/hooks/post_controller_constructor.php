@@ -282,9 +282,9 @@ class Post_controller_constructor {
             // standard include
             else {
                 if(file_exists(VIEW_PATH.$style_sheet.'.min.css')){
-                    $css_links[] = VIEW_URL.$style_sheet.'.min.css';
+                    $css_links[] = VIEW_URL.$style_sheet.'.min.css?t='.filemtime(VIEW_PATH.$style_sheet.'.min.css');
                 }elseif(file_exists(VIEW_PATH.$style_sheet.'.css')){
-                    $css_links[] = VIEW_URL.$style_sheet.'.css';
+                    $css_links[] = VIEW_URL.$style_sheet.'.css?t='.filemtime(VIEW_PATH.$style_sheet.'.css');
                 }else{
                     //log_message('error', 'File Not Found: ('.VIEW_PATH.$style_sheet.'.css)');
                 }
@@ -346,7 +346,7 @@ class Post_controller_constructor {
             // standard include
             else {
                 if(file_exists(VIEW_PATH.$script.'.js')){
-                    $js_files[] = VIEW_URL.$script.'.js';
+                    $js_files[] = VIEW_URL.$script.'.js?t='.filemtime(VIEW_PATH.$script.'.js');
                 }/*elseif(file_exists(VIEW_PATH.$script.'.js')){
                     $js_files[] = VIEW_URL.$script.'.js';
                 }*/

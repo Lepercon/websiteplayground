@@ -61,8 +61,9 @@
         $this->load->helper('html');
         $this->load->model(array('events_model', 'messages_model'));
         $this->load->view('home/banner_view', array(
-            'posters' => $this->events_model->get_event_posters(15),
-            'messages' => $this->messages_model->get_messages()
+            'posters' => $this->events_model->get_event_posters(15, TRUE),
+            'messages' => $this->messages_model->get_messages(),
+            'people' => $this->users_model->get_random_people(10)
         ));
     }
     
