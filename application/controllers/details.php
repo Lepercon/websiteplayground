@@ -76,19 +76,19 @@ class Details extends CI_Controller {
                         $this->load->library('upload', $config);
                         if($this->upload->do_upload()) {
                             $image_data = $this->upload->data();
-                            if($image_data['image_width'] > 200 && $image_data['image_height'] > 200) {
+                            if($image_data['image_width'] > 500 && $image_data['image_height'] > 500) {
                                 // resize image
                                 try{
                                     $img = new Imagick($image_data['full_path']);
                                     $geo = $img->getImageGeometry();
                                     $this->autoRotateImage($img, $image_data['full_path']);
-                                    if($geo['width'] > 800){
-                                        $img->resizeImage(800, 0, Imagick::FILTER_LANCZOS, 1);
-                                    }
+                                    //if($geo['width'] > 800){
+                                        //$img->resizeImage(800, 0, Imagick::FILTER_LANCZOS, 1);
+                                    //}
                                     $geo = $img->getImageGeometry();
                                     if(strtolower($img->getImageFormat()) != 'jpeg') {
                                         // change format to jpg if required
-                                        $img->setCompressionQuality(90);
+                                        $img->setCompressionQuality(100);
                                         $img->setImageFormat('jpeg');
                                     }
 
@@ -107,7 +107,7 @@ class Details extends CI_Controller {
                                 unlink($image_data['full_path']);
                                 // Image is below 200 x 200 pixels square
                                 $errors = TRUE;
-                                $other_errors = array('Image is too small. It must be at least 200 pixels wide by 200 pixels high');
+                                $other_errors = array('Image is too small. It must be at least 500 pixels wide by 500 pixels high');
                             }
                         }
                         else {
@@ -192,8 +192,10 @@ class Details extends CI_Controller {
                 try{
                     $img['large'] = new Imagick(VIEW_PATH.'details/img/tmp/'.$this->session->userdata('uid').'.jpg');
                     $img['medium'] = $img['large']->clone();
+                    $img['x-large'] = $img['large']->clone();
                     $img['small'] = $img['large']->clone();
                     $img['tiny'] = $img['large']->clone();
+                    $min['x-large'] = 500;
                     $min['large'] = 200;
                     $min['medium'] = 200;
                     $min['small'] = 100;
@@ -216,10 +218,11 @@ class Details extends CI_Controller {
                     foreach(array('w','h','x','y') as $l){
                         $_POST[$l.'-tiny'] = $_POST[$l.'-small'];
                         $_POST[$l.'-medium'] = $_POST[$l.'-small'];
+                        $_POST[$l.'-x-large'] = $_POST[$l.'-small'];
                     }
     
                     // crop to large, small and tiny
-                    foreach(array('large','medium','small','tiny') as $s) {
+                    foreach(array('x-large', 'large','medium','small','tiny') as $s) {
                         if(!$img[$s]->cropImage($_POST['w-'.$s], $_POST['h-'.$s], $_POST['x-'.$s], $_POST['y-'.$s])) {
                             $this->load->view('details/crop', array('dims' => $dims, 'error' => ucfirst($s).' crop dimensions not valid.'));
                             return;

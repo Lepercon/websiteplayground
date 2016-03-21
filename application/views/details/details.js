@@ -10,7 +10,7 @@
             if(crop_img.size() > 0) {
                 $.details.jcrop_large = $.Jcrop(crop_img, {
                     bgColor: 'black',
-                    minSize: [200, 200],
+                    minSize: [500, 500],
                     setSelect: [50, 50, 200, 200]
                 });
             }
@@ -20,7 +20,7 @@
                 $.details.jcrop_small = $.Jcrop(crop_img, {
                     aspectRatio: 1, // square
                     bgColor: 'black',
-                    minSize: [200, 200],
+                    minSize: [500, 500],
                     setSelect: [50, 50, 100, 100]
                 });
             }
