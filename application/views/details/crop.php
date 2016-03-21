@@ -18,7 +18,7 @@ echo back_link('details');
     <p>This is more of a 'profile icon'</p>
     <img alt="Small profile icon. If you can see this text instead of an image, then please contact the administrator." height="<?php echo $dims['height']; ?>" width="<?php echo $dims['width']; ?>" id="de-photo-small" src="<?php echo VIEW_URL; ?>details/img/tmp/<?php echo isset($uid)?$uid:$this->session->userdata('uid'); ?>.jpg" />
 </div>
-<?php echo form_open(isset($url)?$url:'details/crop', array('id' => 'de-crop', 'class' => 'no-jsify jcr-form crop-form'));
+<?php echo form_open(isset($url)?$url:'details/crop', array('id' => 'de-crop', 'class' => 'no-jsify jcr-form'));
     echo form_submit('crop', 'Crop');
     echo $token;
     if(isset($u_id)){

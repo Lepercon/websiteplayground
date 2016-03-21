@@ -74,17 +74,18 @@
                     clearInterval(window.poster_timeout_handle);
                 }else{
                     $('.poster-box').append($('.poster-box').children('.poster-image')[0].outerHTML);
-                    $('.poster-box').animate(
-                        {
-                            left: (-$('.poster-image .event-scroll-image').first().width() - 7)+'px'
-                        }, 
-                        {
-                            duration: 400,
-                            complete: function(){
-                                $('.poster-box').children('.poster-image').first().remove(); $('.poster-box').css('left','0px');
+                    //im_width = (h*parseFloat($('#image-width').html())).toFixed(0);
+                    $('.poster-box').animate({'left':(-$('.poster-image img').first().width() - 7)+'px'});
+                    setTimeout(function(){
+                        del = false;
+                        $('.poster-box').children('.poster-image').each(function(){
+                            if(!del){
+                                $(this).remove();
+                                del = true;
                             }
-                        }
-                    );
+                        });
+                        $('.poster-box').css('left','0px');
+                    }, 1000);
                 }
             }, 4000);
             if($('#redirect-link').length > 0){

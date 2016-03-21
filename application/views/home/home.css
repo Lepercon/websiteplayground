@@ -130,6 +130,7 @@ div.poster-outer-box{
     width:500px;
     display:inline-block;
     margin-right:5px;
+<<<<<<< HEAD
 }
 
 .profile h2, .profile h3{
@@ -148,4 +149,6 @@ div.poster-outer-box{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+=======
+>>>>>>> parent of d6813a8... Cropping fix, poster banner updates
 }

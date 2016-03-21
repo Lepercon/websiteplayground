@@ -452,13 +452,12 @@ class events_model extends CI_Model {
         return $range;
     }
     
-    function get_event_posters($num = 10, $hidden=FALSE){
+    function get_event_posters($num = 10){
         $this->db->select('id, event_poster, name, description');
-        if(!$hidden){
-            $this->db->where('event_poster_hidden !=', 1);
-        }
+        $this->db->where('time <', time() + 5 * 7 * 24 * 60 * 60);
         $this->db->where('time >', time() - 12 * 60 * 60);
         $this->db->where('event_poster IS NOT NULL');
+        $this->db->where('event_poster_hidden !=', 1);
 
         $this->db->from('events');
         $this->db->order_by('time');

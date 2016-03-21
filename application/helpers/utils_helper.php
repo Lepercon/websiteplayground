@@ -97,7 +97,7 @@ if( ! function_exists('print_link')) {
 }
 
 if( ! function_exists('get_usr_img_src')) {
-    function get_usr_img_src($uid, $type, $return_default=TRUE) {
+    function get_usr_img_src($uid, $type) {
         $path = 'details/img/users/';
         if(!is_array($type)){
             $type = array($type);
@@ -107,10 +107,7 @@ if( ! function_exists('get_usr_img_src')) {
                 return VIEW_URL.$path.$uid.'_'.$t.'.jpg';;
             }
         }
-        if($return_default)
-            return VIEW_URL.'common/img/default_'.$type[0].'.png';
-        else
-            return NULL;
+        return VIEW_URL.'common/img/default_'.$type[0].'.png';
     }
 }
 
