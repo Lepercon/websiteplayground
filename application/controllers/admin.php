@@ -491,7 +491,7 @@ class Admin extends CI_Controller {
                 $geo = $img->getImageGeometry();
                 if(strtolower($img->getImageFormat()) != 'jpeg') {
                     // change format to jpg if required
-                    $img->setCompressionQuality(90);
+                    $img->setCompressionQuality(100);
                     $img->setImageFormat('jpeg');
                 }
                 $user = $this->users_model->get_users($_POST['user-id']);
