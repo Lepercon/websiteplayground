@@ -26,7 +26,7 @@
                 <?php
                         if(isset($people[$k])){
                             $p = $people[$k];
-                            $img = get_usr_img_src($p['uid'], array('medium'), FALSE);
+                            $img = get_usr_img_src($p['uid'], array('xx-large', 'x-large', 'medium', 'small'), FALSE);
                             if(is_null($img))
                                 continue;
                 ?>
