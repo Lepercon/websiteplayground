@@ -76,7 +76,7 @@ $totals = array('total'=>0, 'paid'=>0);
                                 <td><?php echo $i['details']; ?></td>
                                 <td><?php echo ($i['paid']?'':($i['marked_paid']?'YES':'NO')); ?></td>
                                 <td class="invoice-paid"><?php echo ($i['paid']?'YES':'NO'); ?></td>
-                                <td style="width:160px;">
+                                <td style="width:170px;">
                                     <span style="display:none;" class="invoice-id"><?php echo $i['id'] ?></span>
                                     <span style="display:none;" class="invoice-status"><?php echo ($i['paid']?'1':'0'); ?></span>
                                     <a class="invoice-paid no-jsify jcr-button inline-block" title="<?php echo ($i['paid']?'Mark this entry as unpaid':'Mark this entry as paid'); ?>" href="#"><?php echo ($i['paid']?'Mark as unpaid':'Mark as paid'); ?></a> 
