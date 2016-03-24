@@ -18,7 +18,7 @@ $totals = array('total'=>0, 'paid'=>0);
 ?>
 <span id="group-id" style="display:none"><?php echo $group['id']; ?></span>
 
-<div id="tabs">
+<div id="tabs-2">
     <ul>
         <li><a href="#tabs-1"><?php echo $group['budget_name']; ?></a></li>
         <li><a href="#tabs-2">Group Members</a></li>

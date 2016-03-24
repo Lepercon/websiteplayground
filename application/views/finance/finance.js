@@ -9,6 +9,11 @@
 		      collapsible: true,
 		      hide: true
 		    });
+                    $("#tabs-2").tabs({
+		      collapsible: true,
+		      hide: true,
+                      active: 1
+		    });
 			
 			$('.authorise-link').click(function(event){
 				event.preventDefault();
