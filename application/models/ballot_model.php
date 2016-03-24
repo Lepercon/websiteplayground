@@ -573,7 +573,7 @@ class Ballot_model extends CI_Model {
     }
     
     function get_payments($b_id, $only_allocated=TRUE){
-        $this->db->select('ballot_people.*, invoices.amount, invoices.paid, invoices.id as inv_id, invoices.payment_method, CONCAT(u2.firstname, \' \', u2.surname) as creator_name', false);
+        $this->db->select('ballot_people.*, invoices.amount, invoices.paid, invoices.id as inv_id, invoices.payment_method, CONCAT(u2.firstname, \' \', u2.surname) as creator_name, u1.email', false);
         $this->db->where('ballot_id', $b_id);
         $this->db->join('invoices', 'invoices.id = ballot_people.invoice_id');
         $this->db->join('users as u1', 'u1.id = ballot_people.user_id', 'left outer');

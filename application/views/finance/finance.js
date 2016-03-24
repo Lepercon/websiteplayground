@@ -374,7 +374,7 @@
 						"Delete": function () {
 							$.ajax({
 								type: "POST",
-								url: script_url + 'finance/claims/remove_invoice/' + button.siblings('.invoice-id').text(),
+								url: script_url + 'finance/invoices/remove_invoice/' + button.siblings('.invoice-id').text(),
 								error: function() {
 									$.common.notify('The invoice could not be deleted');
 								},

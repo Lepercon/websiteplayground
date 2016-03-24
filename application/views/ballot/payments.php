@@ -28,10 +28,11 @@ if(!empty($payments['not_sent'])){
     echo form_close();
     
     echo '<table>';
-    echo '<tr><th>Name</th><th>Amount</th><th>Table Number</th><th>Paid</th><th class="no-print">Actions</th></th>';
+    echo '<tr><th>Name</th><th>Email</th><th>Amount</th><th>Table Number</th><th>Paid</th><th class="no-print">Actions</th></th>';
     foreach($payments['sent'] as $p){
         echo '<tr>';
         echo '<td class="name-search">'.$p['name'].($p['user_id']==-1?' ('.$p['creator_name'].')':'').'</td>';
+        echo '<td>'.$p['email'].'</td>';
         echo '<td>£'.$p['amount'].'</td>';
         echo '<td>'.$p['table_num'].'</td>';
         echo '<td>'.($p['paid']?'Yes ('.$methods[$p['payment_method']].')':'No').'</td>';
