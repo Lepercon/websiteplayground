@@ -24,3 +24,16 @@
 .members-tables .ditto td{
     border-top-style: dashed;
 }
+
+a.unpaid, a.bank-transfer, a.cheque, a.cash{
+    display: inline-block;
+}
+
+.un-paid a.unpaid, .paid a.bank-transfer, .paid a.cheque, .paid a.cash{
+    display: none;
+}
+
+
+.invoice-search-box{
+    display:block;
+}

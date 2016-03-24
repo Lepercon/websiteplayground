@@ -164,7 +164,7 @@
 				}
 			});
 			
-			console.log('a');
+
 			if($('.finance-feedback').length > 0){
 				console.log('a');
 				d = $('<div/>').html('<p>This page is still being worked on, if you have any feedback please click here</p>');
@@ -321,14 +321,19 @@
 					type:"POST",
 					url: script_url + 'finance/invoices/admin_mark_paid',
 					data: {
-						'payment_id': button.siblings('.invoice-id').text(),
-						'status': (status == '1' ? '0' : '1')
+						payment_id: button.siblings('.invoice-id').text(),
+						status: (status == '1' ? '0' : '1'),
+                                                method: button.attr('method')
 					},
 					success: function(){
-						button.text('Mark as ' + (status == '1' ? 'P':'Unp') + 'aid');
-						button.attr('title', 'Mark This Entry As ' + (status=='1' ? 'P':'Unp') + 'aid')
-						button.parent().siblings('.invoice-paid').text(status=='1'?'NO':'YES');
-						button.siblings('.invoice-status').text(status=='1'?'0':'1')
+                                                if(status == '1'){
+                                                    button.parent().removeClass('paid').addClass('un-paid');
+                                                }else{
+                                                    button.parent().removeClass('un-paid').addClass('paid');
+                                                }
+                                                button.parent().siblings('.invoice-paid').text(status=='1'?'NO':button.attr('method-name'));
+						button.siblings('.invoice-status').text(status=='1'?'0':'1');
+                                                $('.invoice-search-box').select();
 					},
 					error: function(){
 						$.common.notify('The payment status could not be updated');
@@ -417,6 +422,20 @@
 				});
 				return false;
 			});
+                        
+                        $('.invoice-search-box').keyup(function(){
+                            var term = $(this).val();
+                            if(term == '')
+                                $('.person-row').show();
+                            else{
+                                $('.person-row').each(function(){
+                                    if($(this).children('td').first().text().toLowerCase().indexOf(term.toLowerCase()) == -1)
+                                        $(this).hide();
+                                    else
+                                        $(this).show();
+                                });
+                            }
+                        });
 			
 		}
 	};

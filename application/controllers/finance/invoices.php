@@ -230,6 +230,7 @@ class Invoices extends CI_Controller {
             if($_POST['status']){
                 $data['date_paid'] = time();
                 $data['marked_by'] = $this->session->userdata('id');
+                $data['payment_method'] = $this->input->post('method');
             }
             $this->db->update('invoices', $data);
             $this->finance_model->add_notification($invoice['member_id'], 'Invoices', $_POST['status']?'Your invoice "'.$invoice['name'].'" has been marked as paid.':'Your invoice "'.$invoice['name'].'" has been marked as unpaid.', 'finance/invoices/my_invoices');
