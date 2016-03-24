@@ -76,12 +76,12 @@ $totals = array('total'=>0, 'paid'=>0);
                                 <td><?php echo $i['details']; ?></td>
                                 <td><?php echo ($i['paid']?'':($i['marked_paid']?'YES':'NO')); ?></td>
                                 <td class="invoice-paid"><?php echo ($i['paid']?'YES':'NO'); ?></td>
-                                <td>
+                                <td style="width:160px;">
                                     <span style="display:none;" class="invoice-id"><?php echo $i['id'] ?></span>
                                     <span style="display:none;" class="invoice-status"><?php echo ($i['paid']?'1':'0'); ?></span>
-                                    <a class="invoice-paid no-jsify" title="<?php echo ($i['paid']?'Mark this entry as unpaid':'Mark this entry as paid'); ?>" href="#"><?php echo ($i['paid']?'Mark as unpaid':'Mark as paid'); ?></a> 
-                                    <a class="" title="Edit This Entry" href="<?php echo ''; ?>">Edit</a> 
-                                    <a class="invoice-remove no-jsify" title="Remove This Entry" href="#">Remove</a>
+                                    <a class="invoice-paid no-jsify jcr-button inline-block" title="<?php echo ($i['paid']?'Mark this entry as unpaid':'Mark this entry as paid'); ?>" href="#"><?php echo ($i['paid']?'Mark as unpaid':'Mark as paid'); ?></a> 
+                                    <!--<a class="" title="Edit This Entry" href="">Edit</a>-->
+                                    <a class="invoice-remove no-jsify jcr-button inline-block" title="Remove This Entry" href="#">Remove</a>
                                 </td>
                             </tr>
                             <?php
