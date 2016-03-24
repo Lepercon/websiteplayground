@@ -314,7 +314,7 @@
 				var status = button.siblings('.invoice-status').text();
 				$.ajax({
 					type:"POST",
-					url: script_url + 'finance/claims/admin_mark_paid',
+					url: script_url + 'finance/invoice/admin_mark_paid',
 					data: {
 						'payment_id': button.siblings('.invoice-id').text(),
 						'status': (status == '1' ? '0' : '1')
