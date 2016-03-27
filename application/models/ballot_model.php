@@ -625,6 +625,8 @@ class Ballot_model extends CI_Model {
             
             $this->db->where('member_id', $user);
             $this->db->where('mark', 'ballot'.$ballot['id']);
+            if($p['user_id'] == -1)
+                $this->db->where('name', $ballot['full_name'].($p['user_id'] == -1?' (Guest: '.$p['name'].')':''));
             $invoice = $this->db->get('invoices')->row_array(0);
             
             if(!empty($invoice)){
@@ -637,7 +639,7 @@ class Ballot_model extends CI_Model {
             
                 $data = array(
                     'date' => time(),
-                    'name' => $ballot['full_name'],
+                    'name' => $ballot['full_name'].($p['user_id'] == -1?' (Guest: '.$p['name'].')':''),
                     'member_id' => $user,
                     'amount' => $price,
                     'group_id' => 1,
