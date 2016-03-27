@@ -29,7 +29,7 @@ a.unpaid, a.bank-transfer, a.cheque, a.cash{
     display: inline-block;
 }
 
-a.unpaid{
+a.unpaid, .paid .invoice-remove{
     background-color: green;
 }
 
