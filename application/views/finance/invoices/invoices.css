@@ -29,6 +29,10 @@ a.unpaid, a.bank-transfer, a.cheque, a.cash{
     display: inline-block;
 }
 
+a.unpaid{
+    background-color: green;
+}
+
 .un-paid a.unpaid, .paid a.bank-transfer, .paid a.cheque, .paid a.cash{
     display: none;
 }
