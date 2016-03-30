@@ -25,7 +25,7 @@ class Whoswho extends CI_Controller {
         if($method == 'history'){
             $id = $this->uri->segment(3);
             $level = $this->users_model->get_level($id);
-            $this->page_info['title'] .= ': '.$level['full'];
+            $this->page_info['title'] .= isset($level['full'])?': '.$level['full']:'';
         }
     }
     
