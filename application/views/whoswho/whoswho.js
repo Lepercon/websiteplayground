@@ -17,7 +17,6 @@
 			$.whoswho.sorting_init();
 			
 			$('.list-of-roles a').click(function(event){
-				console.log('a');
 				event.preventDefault();
 				$('.role-description').html('<div class="spacer"></div>');
 				$('<h2/>').html($(this).children().html()).appendTo('.role-description');
@@ -25,6 +24,7 @@
 				$('.role-description h3').each(function(){
 					$('<img/>').attr('src', $(this).attr('value')).insertAfter(this);
 				});
+                                document.title = 'Butler College JCR - Who\'s Who: ' + $(this).children().html();
 				$('html, body').stop().animate({
 			        'scrollTop': $('.content-right').offset().top
 			    });

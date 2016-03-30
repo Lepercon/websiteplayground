@@ -1,0 +1,24 @@
+User-agent: *
+
+Allow: /
+Disallow: /admin
+Disallow: /archive
+Disallow: /ballot
+Disallow: /bookings
+Disallow: /claim
+Disallow: /charities/dare_night
+Disallow: /details
+Disallow: /faults
+Disallow: /finance
+Disallow: /game
+Disallow: /liversout
+Disallow: /markets
+Disallow: /profile
+Disallow: /projects
+Disallow: /questionnaire
+Disallow: /signup
+Disallow: /welfare
+
+
+Sitemap: http://butlerjcr.co.uk/sitemap.xml
+

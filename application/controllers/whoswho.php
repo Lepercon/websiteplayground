@@ -20,6 +20,13 @@ class Whoswho extends CI_Controller {
             'keep_cache' => FALSE,
             'editable' => FALSE
         );
+        
+        $method = $this->uri->rsegment(2);
+        if($method == 'history'){
+            $id = $this->uri->segment(3);
+            $level = $this->users_model->get_level($id);
+            $this->page_info['title'] .= ': '.$level['full'];
+        }
     }
     
     function index() {
