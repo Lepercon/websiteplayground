@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 var_dump($ballot);
 
 echo '<p>Subject: '.$ballot['signup_name'].'</p>';
-echo '<p>'
+echo '<p>';
 
 
 /*  End of file email.php  */
