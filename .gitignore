@@ -24,3 +24,4 @@ application/views/bookings/files/*
 *.key
 *.map
 application/views/details/img/users/*
+index.php
