@@ -61,9 +61,9 @@
 				
 				$message = 'Dear '.$n['name'].','.$nl.$nl;
 				$message .= 'You have <b>'.$n['count'].'</b> new unread finance notifications.'.$nl;
-				$message .= 'To view these notifications, please visit the <a href="'.site_url('finance/view_notifications').'">butlerjcr website</a>.'.$nl.$nl;
+				$message .= 'To view these notifications, please visit the <a href="'.site_url('finance/notifications').'">butlerjcr website</a>.'.$nl.$nl;
 				$message .= 'Thank you,'.$nl.'ButlerJCR Finance'.$nl.$nl;
-				$message .= '<hr>This email was created by the Butler JCR Website (http://www.butlerjcr.com)';
+				$message .= '<hr>This email was created by the Butler JCR Website (http://www.butlerjcr.co.uk)';
 				
 				$this->scheduling_model->send_email($subject, $message, $from_email, $from_name, $to);
 				
@@ -71,6 +71,9 @@
 			
 			if(date('w') == 4){//Is it a thursday?
 				//$this->finance_weekly();
+				if((date('W') == 14) || (date('W') == 23) || (date('W') == 37)){// April, June, then September
+					$this->pictureless_people();
+				}
 			}
 		
 		}else{
@@ -89,9 +92,6 @@
 			return;		
 		}
 		
-		if((date('W') == 23) || (date('W') == 37)){// June, then September
-			$this->pictureless_people();
-		}
 		
 		$this->load->model('finance_model');
 		$invoices = $this->finance_model->get_sorted_invoices(TRUE);
@@ -179,11 +179,11 @@
 			'committees' => ' information about how to contact you is displayed in the '.$whoswho.' section of the site, along with other relevant sections of the site. Having a photo makes these parts much friendlier to other students, and may encourage them to run for your role.',
 			'support' => ' information about how to contact you is displayed in the '.$whoswho.' section of the site. Having a photo makes this part of the website much friendlier to others, which is important as part of your role is supporting students.',
 			'exec' => ' information about how to contact you is displayed in the '.$whoswho.' section of the site, along with other relevant sections of the site. Having a photo makes these parts much friendlier to other students, and may encourage them to run for your role.'
-		);
+		);//College staff have been left out here, emails may not be the best way to target them.
 		
-		$subject = 'butlerjcr.com';
+		$subject = 'butlerjcr.co.uk';
 		$from_email = 'butler.jcr@durham.ac.uk';
-		$from_name = 'butlerjcr.com';
+		$from_name = 'butlerjcr.co.uk';
 		
 		foreach($no_image as $u){
 			$to = $u['email'];
@@ -192,17 +192,9 @@
 				$email .= "We noticed that you don't have a profile image uploaded to the JCR website. ";
 				$email .= 'The site is viewed by many people every day, and having photos of people creates a more welcoming page, especially for prospective students.'.$nl.$nl;
 				if($u['type'] == 'services'){
-					if($u['full'] == 'Coffee Shop Staff'){
-						$link = 'services';
-						$section = 'Coffee Shop';
-					}elseif($u['full'] == 'Kitchen Staff'){
-						$link = 'services';
-						$section = 'Kitchen';
-					}else{//Bar Staff & Supervisors
-						$link = 'bar';
-						$section = 'Bar';
-					}
-					$email .= 'As <b>'.$u['full'].'</b>, infomation about how to contact you is displayed in the '.$whoswho.' section of the site, along with the section promoting the '.anchor($link, $section).'. Having a photo makes these parts much friendlier to other students, and may encourage them to apply for a job at the '.$section.'.'.$nl.$nl;
+					$link = 'JBs';
+					$section = 'JBs';
+					$email .= 'As <b>'.$u['full'].'</b>, infomation about how to contact you is displayed in the '.$whoswho.' section of the site, along with the section promoting '.anchor($link, $section).'. Having a photo makes these parts much friendlier to other students, and may encourage them to apply for a job at '.$section.'.'.$nl.$nl;
 				}else{
 					$email .= 'As <b>'.$u['full'].'</b>, '.$sections[$u['type']].$nl.$nl;
 				}
@@ -211,7 +203,7 @@
 				$email .= 'All the best,'.$nl.'The Butler JCR Web Team';
 				$email .= '<hr>'.$nl;
 				$email .= 'If you have any questions, feel free to reply to this email.'.$nl.$nl;
-				$this->scheduling_model->send_email($subject, $email, $from_email, $from_name, $to, array(), 'samuel.stradling@durham.ac.uk')	;		
+				$this->scheduling_model->send_email($subject, $email, $from_email, $from_name, $to, array(), 'butler.jcr-webmaster@durham.ac.uk');		
 				log_message('error', 'email sent to '.$to);
 			}else{
 				log_message('error', 'email no sent to '.$to.' ('.$u['type'].')');

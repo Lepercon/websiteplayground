@@ -30,30 +30,6 @@
 		</video:video>
 	</url>
 	<url>
-		<loc>http://butlerjcr.co.uk/home</loc>
-		<lastmod>2016-03-30T21:37:34+00:00</lastmod>
-		<priority>1.00</priority>
-		<changefreq>daily</changefreq>
-		<video:video>
-			<video:thumbnail_loc>https://i.ytimg.com/vi/A7khiZFSZKI/hqdefault.jpg</video:thumbnail_loc>
-			<video:title>Butler Frep Team Video 2015</video:title>
-			<video:description>We don't own any rights to the music in this video; for educational purposes only</video:description>
-			<video:content_loc>https://www.youtube.com/v/A7khiZFSZKI</video:content_loc>
-			<video:player_loc allow_embed="true" autoplay="ap=1">https://www.youtube.com/embed/A7khiZFSZKI</video:player_loc>
-			<video:tag>butler</video:tag>
-			<video:tag>frep</video:tag>
-			<video:tag>team</video:tag>
-			<video:tag>video</video:tag>
-			<video:tag>2015</video:tag>
-			<video:tag>don't</video:tag>
-			<video:tag>rights</video:tag>
-			<video:tag>music</video:tag>
-			<video:tag>video;</video:tag>
-			<video:tag>educational</video:tag>
-			<video:tag>purposes</video:tag>
-		</video:video>
-	</url>
-	<url>
 		<loc>http://butlerjcr.co.uk/jcr</loc>
 		<lastmod>2016-03-30T21:37:34+00:00</lastmod>
 		<priority>1.00</priority>
