@@ -850,7 +850,7 @@ jQuery.fn.jsify = function jsify() {
 					"save paste link youtube"
 				],
 				menubar: false,
-				toolbar: "save cancel | undo redo | cut copy paste | styleselect | bold italic underline | bullist numlist | link insertimage insertdoc insertcontact | youtube",
+				toolbar: "save cancel | undo redo | cut copy paste | styleselect | bold italic underline | bullist numlist | link insertimage insertdoc insertcontact",
 				style_formats: [
 					{title: "Heading 1", format: "h1"},
 					{title: "Heading 2", format: "h2"},

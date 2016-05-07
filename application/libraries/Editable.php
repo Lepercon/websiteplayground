@@ -61,6 +61,7 @@ class Editable {
 
     function save_page() {
         $self = $this;
+        log_message('error', 'Before preg_replace:'.$_POST['content']);
         $content = preg_replace_callback(
             // matches {function_name:param1,param2}
             '/\{([a-z0-9_]+):?([^\}]+)\}/i',
@@ -88,7 +89,9 @@ class Editable {
             },
             $_POST['content']
         );
+        log_message('error', 'Before clean_html:'.$content);
         $content = $this->clean_html($content);
+        log_message('error', $this->file_path.'After clean_html:'.$content);
         file_put_contents($this->file_path, $content);
         $GLOBALS['controller_json'] = json_encode(array('success' => TRUE, 'replaceWith' => $content));
     }
@@ -99,13 +102,23 @@ class Editable {
         $html = preg_replace('/\<(\/?)I\>/i','<$1em>', $html);
         // strip disallowed tags
         $allowed_tags='<p><strong><em><u><h1><h2><h3><img><a><li><ol><ul><span><div><br><ins><del>';
-        $html = strip_tags($html, $allowed_tags);
+        $html = strip_tags($html, $allowed_tags.'<iframe>');//Allow iframes for now, we'll have a look at them later
         // make all tags lower case
         $html = preg_replace_callback('/(<\/?)([^\s\/>]+)([^\/>]*\/?>)/', function($matches) { return $matches[1].strtolower($matches[2]).$matches[3]; }, $html);
         // close tags
         $html = preg_replace('/\<([bh]{1}?r)[\s]*\>/', '<$1 />', $html);
         // strip newlines and tabs
         $html = str_replace(array("\n", "\r", "\t"), '', $html);
+        
+        //check iframes are youtube links
+        $re = '/<iframe [^\0]*src="http[s]*:\/\/www\.youtube\.com\/embed\//'; 
+        preg_match($re, $html, $matches_youtube);
+        $re = "/<iframe/"; 
+        preg_match($re, $html, $matches_all);
+        if(count($matches_youtube) != count($matches_all)){
+            $html = strip_tags($html, $allowed_tags);
+        }
+        
         return $html;
     }
 

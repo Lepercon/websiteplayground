@@ -19,6 +19,7 @@
         $auth_code = md5($this->session->userdata('id').date('Y').$this->page.$_POST['file_path'].'50j05t9jk5-f59gk9fkfj8');
         $test = $this->input->post('auth');
         if($auth_code != $test){
+            log_message('error', 'Editable_c: Invalid auth code');
             return;
         }
         $this->editable->set_file_path(VIEW_PATH.$this->page.'/'.$_POST['file_path'].'.php'); // path provided
