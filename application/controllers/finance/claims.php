@@ -473,49 +473,6 @@ class Claims extends CI_Controller {
         }
     }
     
-    function edit_group(){
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        
-        $group_id = $this->uri->segment(4);
-        $user_id = $this->session->userdata('id');
-        $group = $this->finance_model->get_group_member($group_id, $user_id);
-        if(!$this->finance_model->has_permission($group_id)){
-            $this->index();
-            return;
-        }
-        
-        $this->form_validation->set_rules('name', 'Group Name', 'required|min_length[3]|max_length[50]');
-        $this->form_validation->set_rules('details', 'Description', 'required');
-        $this->form_validation->set_rules('payment', 'Payment Details', 'required');
-            
-        $messages = '';    
-            
-        if ($this->form_validation->run() !== FALSE){
-            $u_id = $this->session->userdata('id');
-            $group_name = $this->input->post('name');
-            $description = $this->input->post('details');
-            $payment = $this->input->post('payment');
-            $budget = $this->input->post('budget');
-            $this->finance_model->update_group($group_id, $group_name, $description, $payment, $budget, $u_id);
-            $messages = '<div class="validation_success">Your group has been updated.</div>';
-        }
-        $users = $this->users_model->get_all_user_ids_and_names();
-        $group_info = $this->finance_model->get_group($group_id);
-        
-        /*$budgets = $this->finance_model->get_budgets();
-        $budget_list = array();
-        foreach($budgets as $b){
-            $budget_list[$b['id']] = $b['budget_name'];
-        }*/
-        
-        $this->load->view('finance/invoices/edit_group', array(
-            'users'=>$users,
-            'group_info'=>$group_info,
-            'messages'=>$messages
-        ));
-    }
-    
     function view_claim(){
         
         $admin = $this->finance_model->finance_permissions();

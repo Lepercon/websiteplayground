@@ -25,3 +25,5 @@ application/views/bookings/files/*
 *.map
 application/views/details/img/users/*
 index.php
+.metadata/*
+RemoteSystemsTempFiles/.project
