@@ -870,11 +870,11 @@ div.smaller-header {
 
 #header-title {
   /*background-image: url(./img/logo.png?v=122013);*/
-  width: 595px;
-  padding: 10px 5px 0 10px;
+  width: 540px;
+  padding: 8px 5px 0 65px;
   float: left;
   display: inline-block;
-  font: 44px Arial, Arial MT, Helvetica, "Helvetica Neue", Geneva, sans-serif;
+  font: 54px BigNoodleTitling, Arial MT, Helvetica, "Helvetica Neue", Geneva, sans-serif;
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -3483,7 +3483,7 @@ body .ui-tooltip {
   }
 
   #header-title {
-    width: 380px;
+    width: 350px;
     padding: 10px 0 0 0;
   }
 
