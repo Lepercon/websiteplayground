@@ -235,7 +235,7 @@ class Markets extends CI_Controller {
 			$get_meal_name = $this->markets_model->get_meal_name($this->session->userdata('market_meal'));
 			$meal_name = $get_meal_name[0];
 			$message .= 'Meal pack: '.$meal_name['name']."\r\n";
-			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
+			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n";
                         $message .= 'No. of vegans: '.$data['vegans']."\r\n\r\n";
 			$message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
 
