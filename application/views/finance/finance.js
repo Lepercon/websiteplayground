@@ -425,17 +425,30 @@
                         
                         $('.invoice-search-box').keyup(function(){
                             var term = $(this).val();
-                            if(term == '')
+                            if(term == ''){
+                                $('.invoice-payment-search-box').prop('disabled',true);
                                 $('.person-row').show();
-                            else{
+                            } else {
                                 $('.person-row').each(function(){
-                                    if($(this).children('td').first().text().toLowerCase().indexOf(term.toLowerCase()) == -1)
+                                    if($(this).children('td').first().text().toLowerCase().indexOf(term.toLowerCase()) == -1) {
                                         $(this).hide();
-                                    else
+                                    } else {
                                         $(this).show();
+                                    }
                                 });
+                                var firstRowName = $($('.person-row:visible')[0]).children('td').first().text();
+                                var enablePaymentSearch=true;
+                                $('.person-row:visible').each(function(){
+                                    var rowName=$(this).children('td').first().text();
+                                    if(rowName!=firstRowName){
+                                        enablePaymentSearch=false;
+                                    }
+                                });
+                                $('.invoice-payment-search-box').prop('disabled',!enablePaymentSearch);
                             }
                         });
+                        
+                        
 			
 		}
 	};
