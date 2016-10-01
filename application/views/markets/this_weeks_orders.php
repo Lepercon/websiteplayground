@@ -28,7 +28,7 @@
 			  echo "<p>Cap: £".number_format($row["cap"], 2, '.', ',')."</p>";
 			  
 			  echo "<table>";
-			  echo "<tr><th>Item</th><th>Qty</th><th>Weeks Ordered For</th><th>No. Veggies</th></tr>";
+			  echo "<tr><th>Item</th><th>Qty</th><th>Weeks Ordered For</th><th>No. Veggies</th><th>No. Vegans</th></tr>";
 				  	foreach ($order_content[$i] as $row)
 					{
 						echo "<tr>";
@@ -36,6 +36,7 @@
 						echo "<td>".$row['qty']."</td>";
 						echo "<td>".$row['repeats']."</td>";
 						echo "<td>".$row['veg']."</td>";
+                                                echo "<td>".$row['vegans']."</td>";
 						echo "</tr>";
 					}
 				echo "</table>";
