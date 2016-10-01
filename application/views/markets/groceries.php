@@ -20,6 +20,7 @@
 		<ul class="nolist">
 			<li><?php echo $meal_name['name']; ?></li>
 			<li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
+                        <li><?php echo $this->session->userdata('market_vegans'); ?>&nbsp;Vegans</li>
 		</ul>
 	</div>
 	<div class="jcr-box narrow-hide">

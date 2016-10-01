@@ -27,12 +27,21 @@ echo form_open('markets/meals'); ?>
 		}
 	} ?>
 	<li>
-		<label>No. of Vegetarians</label><select name="vegetarians" required="required" title="Select the number of vegetarians to receive a substitute meal.">
+		<label>No. of Vegetarians</label>
+                <select name="vegetarians" required="required" title="Select the number of vegetarians to receive a substitute meal.">
 			<?php for($vegcount = 0; $vegcount <=6; $vegcount++) {
 				echo '<option value="'.$vegcount.'" '.set_select('vegetarians', $vegcount, ($vegcount==0 ? TRUE : FALSE)).'>'.$vegcount.'</option>';
 			}?>
 		</select>
 	</li>
+        <li>
+                <label>No. of Vegans</label>
+                <select name="vegans" required="required" title="Select the number of vegans to receieve a substitute meal.">
+                        <?php for($vegcount = 0; $vegcount <=6; $vegcount++) {
+                                echo '<option value="'.$vegcount.'" '.set_select('vegans', $vegcount, ($vegcount==0 ? TRUE : FALSE)).'>'.$vegcount.'</option>';
+                        }?>
+                </select>
+        </li>
 	<!--<p>
 	*Christmas meal packs include choice of meat and vegetables including potatoes, parsnips, onions and carrots for roasting.
 	</p>-->

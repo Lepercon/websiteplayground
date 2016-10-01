@@ -68,10 +68,12 @@ class Markets extends CI_Controller {
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('meal', 'Meal option', 'required|trim');
                 $this->form_validation->set_rules('vegetarians', 'Number of vegetarians', 'required|integer');
+                $this->form_validation->set_rules('vegans', 'Number of vegans', 'required|integer');
                 if($this->form_validation->run()) {
                     $this->session->set_userdata(array(
                         'market_meal' => $this->input->post('meal'),
-                        'market_vegetarians' => $this->input->post('vegetarians')
+                        'market_vegetarians' => $this->input->post('vegetarians'),
+                        'market_vegans' => $this->input->post('vegans')
                     ));
                     $this->groceries();
                     return;
@@ -95,7 +97,8 @@ class Markets extends CI_Controller {
 			$this->details();
 			return;
 		} else if($this->session->userdata('market_meal') === false or
-		$this->session->userdata('market_vegetarians') === false) {
+		$this->session->userdata('market_vegetarians') === false or
+                $this->session->userdata('market_vegans') === false) {
 			$this->meals();
 			return;
 		} else {
@@ -173,7 +176,8 @@ class Markets extends CI_Controller {
 			$this->details();
 			return;
 		} else if($this->session->userdata('market_meal') === false or
-		$this->session->userdata('market_vegetarians') === false) {
+		$this->session->userdata('market_vegetarians') === false or
+                $this->session->userdata('market_vegans') === false) {
 			$this->meals();
 			return;
 		} else if($this->session->userdata('market_spend') === false) {
@@ -194,12 +198,13 @@ class Markets extends CI_Controller {
 		$this->session->userdata('market_college') === false or
 		$this->session->userdata('market_meal') === false or
 		$this->session->userdata('market_vegetarians') === false or
+                $this->session->userdata('market_vegans') === false or
 		$this->session->userdata('market_spend') === false) {
 			$this->confirm();
 			return;
 		} else {
 			$data = array();
-			$session_variables = array('name', 'email', 'phone', 'delivery', 'college', 'meal', 'vegetarians', 'spend');
+			$session_variables = array('name', 'email', 'phone', 'delivery', 'college', 'meal', 'vegetarians','vegans', 'spend');
 			foreach($session_variables as $v) {
 				$data[$v] = $this->session->userdata('market_'.$v);
 			}
@@ -231,6 +236,7 @@ class Markets extends CI_Controller {
 			$meal_name = $get_meal_name[0];
 			$message .= 'Meal pack: '.$meal_name['name']."\r\n";
 			$message .= 'No. of vegetarians: '.$data['vegetarians']."\r\n\r\n";
+                        $message .= 'No. of vegans: '.$data['vegans']."\r\n\r\n";
 			$message .= 'Fruit and veg spending cap: '.number_format($data['spend'], 2, '.', ',')."\r\n";
 
             $this->load->library('cart');
@@ -306,6 +312,7 @@ class Markets extends CI_Controller {
 						'time' => $unix_date,
 						'meal' => 1,
 						'veg' => $data['vegetarians'],
+                                                'vegans' => $data['vegans'],
 						'cap' => $data['spend']
 						);	
 					}

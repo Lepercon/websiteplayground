@@ -28,6 +28,7 @@ $this->load->view('markets/nav', array('page_match' => 3)); ?>
 	<ul class="nolist">
 		<li><?php echo $meal_name['name']; ?></li>
 		<li><?php echo $this->session->userdata('market_vegetarians'); ?>&nbsp;Vegetarians</li>
+                <li><?php echo $this->session->userdata('market_vegans'); ?>&nbsp;Vegans</li>
 	</ul>
 	<a href="<?php echo site_url('markets/meals'); ?>" class="jcr-button inline-block" title="Edit your meal choice">
 		<span class="ui-icon ui-icon-pencil inline-block"></span>Edit
