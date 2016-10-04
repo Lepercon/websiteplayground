@@ -448,6 +448,58 @@
                             }
                         });
                         
+                        $('.invoice-payment-search-box').keyup(function(){
+                            var terms = [];
+                            var term = parseFloat($(this).val());
+                            if(term === parseFloat(term, 10)){ // Check if number
+                                var amounts = [];
+                                $('.person-row:visible').each(function(){
+                                    amounts.push(parseFloat($(this).find('td:eq(3)').text().replace("£","")));
+                                });
+                                terms = subsetSum(amounts,term);
+                                $('.person-row:visible').each(function(index, elem) {
+                                    var $elem = $(elem);
+                                    if (terms[index]===1) {
+                                        $elem.css('backgroundColor', 'yellow');   
+                                    }
+                                    else {
+                                        $elem.css('backgroundColor', ''); 
+                                    }});
+                            } else {
+                                $('.person-row:visible').each(function(index,elem){
+                                    var $elem = $(elem);
+                                    $elem.css('backgroundColor','');
+                                });
+                            }
+                        });
+                        
+                        subsetSum = function(set,sum) {
+                            var A = new Array(set.length+1).join('0').split('').map(parseFloat);
+                            return subsetSumRec(set,0,0,sum,A);
+                        }
+                        
+                        subsetSumRec = function(set, currSum, index, sum, solution){
+                            if (currSum === sum) {
+                                return solution;
+                            } else if (index === set.length) {
+                                return false;
+                            } else {
+                                var result;
+                                solution[index] = 1;// select the element
+                                currSum += set[index];
+                                result = subsetSumRec(set, currSum, index + 1, sum, solution);
+                                if (result) {
+                                    return result;
+                                }
+                                currSum -= set[index];	
+                                solution[index] = 0;// do not select the element
+                                result = subsetSumRec(set, currSum, index + 1, sum, solution);
+                                if (result) {
+                                    return result;
+                                }
+                            }
+                            return false;
+                        }
                         
 			
 		}
