@@ -50,7 +50,7 @@ $meth = array('bank_transfer' => 'Bank Transfer', 'cheque' => 'Cheque', 'cheque_
     </div>
     <div id="tabs-2" class="members-tables">
         <?php echo anchor('finance/invoices/my_group/'.$this->uri->segment(4).'/'.(!$this->uri->segment(5)), $this->uri->segment(5)?'Hide Paid':'Show Paid'); ?>
-        <input class="invoice-search-box" placeholder="Search..." onClick="this.setSelectionRange(0, this.value.length)" >
+        <input class="invoice-search-box" placeholder="Search..." onClick="this.setSelectionRange(0, this.value.length)" > <input class="invoice-payment-search-box" placeholder="Total paid..." onClick="this.setSelectionRange(0, this.value.length)" disabled >
         <div>
             <table class="big-invoice-table"><tr><th>Name</th><th>Item</th><th>Date</th><th>Amount</th><th>Details</th><th>Marked Paid?</th><th>Paid?</th><th style="min-width:145px;">Actions</th></tr>
             <?php

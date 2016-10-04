@@ -425,17 +425,82 @@
                         
                         $('.invoice-search-box').keyup(function(){
                             var term = $(this).val();
-                            if(term == '')
+                            if(term == ''){
+                                $('.invoice-payment-search-box').prop('disabled',true);
                                 $('.person-row').show();
-                            else{
+                            } else {
                                 $('.person-row').each(function(){
-                                    if($(this).children('td').first().text().toLowerCase().indexOf(term.toLowerCase()) == -1)
+                                    if($(this).children('td').first().text().toLowerCase().indexOf(term.toLowerCase()) == -1) {
                                         $(this).hide();
-                                    else
+                                    } else {
                                         $(this).show();
+                                    }
+                                });
+                                var firstRowName = $($('.person-row:visible')[0]).children('td').first().text();
+                                var enablePaymentSearch=true;
+                                $('.person-row:visible').each(function(){
+                                    var rowName=$(this).children('td').first().text();
+                                    if(rowName!=firstRowName){
+                                        enablePaymentSearch=false;
+                                    }
+                                });
+                                $('.invoice-payment-search-box').prop('disabled',!enablePaymentSearch);
+                            }
+                        });
+                        
+                        $('.invoice-payment-search-box').keyup(function(){
+                            var terms = [];
+                            var term = parseFloat($(this).val());
+                            if(term === parseFloat(term, 10)){ // Check if number
+                                var amounts = [];
+                                $('.person-row:visible').each(function(){
+                                    amounts.push(parseFloat($(this).find('td:eq(3)').text().replace("£","")));
+                                });
+                                terms = subsetSum(amounts,term);
+                                $('.person-row:visible').each(function(index, elem) {
+                                    var $elem = $(elem);
+                                    if (terms[index]===1) {
+                                        $elem.css('backgroundColor', 'yellow');   
+                                    }
+                                    else {
+                                        $elem.css('backgroundColor', ''); 
+                                    }});
+                            } else {
+                                $('.person-row:visible').each(function(index,elem){
+                                    var $elem = $(elem);
+                                    $elem.css('backgroundColor','');
                                 });
                             }
                         });
+                        
+                        subsetSum = function(set,sum) {
+                            var A = new Array(set.length+1).join('0').split('').map(parseFloat);
+                            return subsetSumRec(set,0,0,sum,A);
+                        }
+                        
+                        subsetSumRec = function(set, currSum, index, sum, solution){
+                            if (currSum === sum) {
+                                return solution;
+                            } else if (index === set.length) {
+                                return false;
+                            } else {
+                                var result;
+                                solution[index] = 1;// select the element
+                                currSum += set[index];
+                                result = subsetSumRec(set, currSum, index + 1, sum, solution);
+                                if (result) {
+                                    return result;
+                                }
+                                currSum -= set[index];	
+                                solution[index] = 0;// do not select the element
+                                result = subsetSumRec(set, currSum, index + 1, sum, solution);
+                                if (result) {
+                                    return result;
+                                }
+                            }
+                            return false;
+                        }
+                        
 			
 		}
 	};
