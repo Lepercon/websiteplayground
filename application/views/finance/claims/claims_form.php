@@ -10,7 +10,7 @@ echo back_link('finance');?>
                 $this->load->view('finance/claims/form_errors');
                 $this->load->view('finance/claims/form_template', array('submit_link'=>'finance/claims/claims_form'));
             ?><br>
-            We recommend you save all of your receipts into one pdf, but if you need to upload multiple files you can do so on the next page.<br><br>
+            We recommend you save all of your receipts into one pdf, (which must be scans if your name is Heather Smith) but if you need to upload multiple files you can do so on the next page.<br><br>
         </div>
     </div>
     <?php 
