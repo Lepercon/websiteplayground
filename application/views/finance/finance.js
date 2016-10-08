@@ -155,12 +155,12 @@
 				if($('#claim-method').val() == 2){
 					$('#transfer-details').show();
 					$('#account-number').focus();
-					$('#account-number').attr('required', 'required');
-					$('#sort-code').attr('required', 'required');
+					$('#account-number').attr('required', 'required').attr('pattern', '[0-9]{8}');
+					$('#sort-code').attr('required', 'required').attr('pattern', '[0-9]{2}-[0-9]{2}-[0-9]{2}');
 				}else{
 					$('#transfer-details').hide();
-					$('#account-number').removeAttr('required');
-					$('#sort-code').removeAttr('required');
+					$('#account-number').removeAttr('required').removeAttr('pattern');
+					$('#sort-code').removeAttr('required').removeAttr('pattern');
 				}
 			});
 			

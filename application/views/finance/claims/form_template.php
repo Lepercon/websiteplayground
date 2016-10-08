@@ -31,7 +31,7 @@
         'id'=>'account-number', 
         'value'=>($claim_set?(empty($claim['account-number'])?'':'Hidden'):''),
         'maxlength'=>8, 
-        'pattern'=>'[0-9]{8}|\Hidden',
+        'pattern'=>'[0-9]{8}',
         'placeholder'=>'Account Number'
     )).'</p>';
     
@@ -41,7 +41,7 @@
         'id'=>'sort-code', 
         'value'=>($claim_set?(empty($claim['sort-code'])?'':'Hidden'):''),
         'maxlength'=>8,
-        'pattern'=>'[0-9]{2}-[0-9]{2}-[0-9]{2}|\Hidden',
+        'pattern'=>'[0-9]{2}-[0-9]{2}-[0-9]{2}',
         'placeholder'=>'Sort Code'
     )).'</p>';
     

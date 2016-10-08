@@ -368,6 +368,9 @@ class Finance_model extends CI_Model {
         foreach($levels as $l){
             $c['owners'] = array_merge($c['owners'], $this->users_model->get_users_with_level($l, 'users.id, users.firstname, users.prefname, users.surname')); 
         }
+        foreach($c['owners'] as $o){
+            $c['owners_ids'][] = $o['id'];
+        }
         $this->db->where('claim_id', $c_id);
         $c['items'] = $this->db->get('finance_claims_items')->result_array();
         return $c;
@@ -536,6 +539,7 @@ class Finance_model extends CI_Model {
         $message = 'Claim "'.$c['item'].'" has been updated.';
         $link = 'finance/claims/my_claims';
         $c['owners_ids'][] = $c['user_id'];
+        log_message('error', 'Owner IDs: '.var_export($c, true));
         $this->add_notification($c['owners_ids'], 'Claims', $message, $link);
         $link = 'finance/claims/view_claims';
         $this->add_notification(-1, 'Claims', $message, $link);

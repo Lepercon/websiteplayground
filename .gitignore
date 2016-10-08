@@ -17,7 +17,7 @@ application/views/involved/img/*
 .htaccess
 /.htaccess
 
-application/config/constants.php
+
 *.htaccess
 index.php
 application/views/bookings/files/*

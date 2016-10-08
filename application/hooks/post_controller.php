@@ -18,8 +18,8 @@ class Post_controller {
         if(!($ci->input->is_ajax_request() || ($ci->input->post('request')==='cron') || ($seg === TRUE))) { // not ajax
             
             if($ci->input->cookie('cookiepopup') == FALSE){
-                log_message('error', var_export($ci->input->cookie('cookiepopup'), true));
-                $ci->load->view('common/cookie_popup');
+                //log_message('error', var_export($ci->input->cookie('cookiepopup'), true));
+                //$ci->load->view('common/cookie_popup');
             }
         
             $ci->load->view('common/foot', array('big_title' => (isset($ci->page_details['big_title']) ? $ci->page_details['big_title'] : 'HOME')));

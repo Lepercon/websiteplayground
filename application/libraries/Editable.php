@@ -205,6 +205,7 @@ class Editable {
         } else {
             $errors = $this->ci->upload->display_errors('<p class="editable-error">', '</p>');
             $GLOBALS['controller_json'] = $errors;
+            log_message('error', 'Editable Upload Error: '.$errors);
         }
     }
 

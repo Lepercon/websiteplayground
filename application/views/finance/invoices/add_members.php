@@ -49,7 +49,7 @@ echo back_link('finance/invoices/my_group/'.$g_id);
 <a id="invoice-add-member" title="Add the above name to the list below." class="jcr-button inline-block"><span class="inline-block ui-icon ui-icon-plus"></span>Add To List</a>
 
 <?php
-    echo form_open('finance/add_members/'.$g_id, array('class' => 'jcr-form no-jsify', 'id'=>'invoice-add-members-form'));
+    echo form_open('finance/invoices/add_members/'.$g_id, array('class' => 'jcr-form no-jsify', 'id'=>'invoice-add-members-form'));
     echo form_dropdown('newmembers[]', array(), '', 'size="8" style="width:200px;" id="namelist" multiple="yes"');
 ?>
     <br>    

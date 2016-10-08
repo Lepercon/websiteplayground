@@ -82,7 +82,7 @@ class Post_controller_constructor {
         $complete = $this->ci->input->cookie('servey-complete');
         
         $show_survey = FALSE;
-        if($complete != 'complete'){
+        /*if($complete != 'complete'){
             if($persistant == 'set'){
                 if($temp != 'set'){
                     $show_survey = TRUE;
@@ -95,7 +95,7 @@ class Post_controller_constructor {
         if(isset($_POST['surveycomplete'])){
             $this->ci->input->set_cookie('servey-temp', 'set', 60 * 60 * 24 * 7 * 2);
             $this->ci->input->set_cookie('servey-complete', 'complete', (60 * 60 * 24) * (($_POST['surveycomplete']=='done')?365:60));
-        }
+        }*/
 
         // check if ajax request
         if($this->ci->input->is_ajax_request() || ($this->ci->input->post('request')==='cron')) {

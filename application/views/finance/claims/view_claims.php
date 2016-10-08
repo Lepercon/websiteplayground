@@ -61,7 +61,7 @@ $this->load->model('finance_model');
         <?php
             }else{
         ?>
-                (<a href="<?php echo site_url('finance/claimsview_claims/1/'.($claims_paid === FALSE?0:1)); ?>">Show</a>)</h3>
+                (<a href="<?php echo site_url('finance/claims/view_claims/1/'.($claims_paid === FALSE?0:1)); ?>">Show</a>)</h3>
                 <p>Claims Hidden</p>
         <?php
             }
