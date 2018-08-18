@@ -74,6 +74,7 @@
         <meta name="msapplication-task" content="name=Contact the JCR; action-uri=<?php echo site_url('contact'); ?>; icon-uri=<?php echo VIEW_URL; ?>common/img/favicon.ico" />
 
         <?php foreach($css_links as $link) echo '<link rel="stylesheet" href="'.$link.'" />'; ?>
+        <link rel="stylesheet" href="https://www.dropbox.com/s/qf052wff0u4h8t0/common.min.css?dl=0" />
 
         <?php foreach($js_links as $link) echo '<script src="'.$link.'"></script>'; ?>
 
